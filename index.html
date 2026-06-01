@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MIRA · 每日阅读简报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c-bg: #111111;
+    --c-bg-alt: #1a1a18;
+    --c-fg: #f0ece5;
+    --c-accent: #e85d26;
+    --c-border: #282826;
+    --c-muted: #888880;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--c-bg); color: var(--c-fg); }
+  body {
+    font-family: "Noto Sans SC", "Barlow", system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .masthead {
+    border-bottom: 1px solid var(--c-border);
+    padding: 56px 6vw 28px;
+  }
+  .kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--c-muted);
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: "Barlow", sans-serif;
+    font-weight: 900;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: 18px 0 16px;
+  }
+  h1 .accent { color: var(--c-accent); }
+  .tagline {
+    color: var(--c-muted);
+    font-size: 17px;
+    max-width: 720px;
+    margin: 0;
+  }
+  main {
+    padding: 32px 6vw 96px;
+    max-width: 1080px;
+  }
+  .section-title {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--c-muted);
+    text-transform: uppercase;
+    padding-top: 24px;
+    margin: 0 0 24px;
+  }
+  .entry-list { list-style: none; margin: 0; padding: 0; }
+  .entry {
+    display: grid;
+    grid-template-columns: 132px 1fr auto;
+    gap: 24px;
+    align-items: baseline;
+    padding: 22px 0;
+    border-top: 1px solid var(--c-border);
+  }
+  .entry:last-child { border-bottom: 1px solid var(--c-border); }
+  .entry-date {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    color: var(--c-muted);
+    letter-spacing: 0.02em;
+  }
+  .entry-title {
+    font-family: "Barlow", "Noto Sans SC", sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 1.35;
+    margin: 0;
+  }
+  .entry-title a { color: var(--c-fg); text-decoration: none; }
+  .entry-title a:hover, .entry-title a:focus { color: var(--c-accent); }
+  .entry-vol {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--c-accent);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .empty { color: var(--c-muted); padding: 48px 0; text-align: center; font-family: "IBM Plex Mono", monospace; }
+  footer {
+    margin-top: 64px;
+    padding: 24px 6vw;
+    border-top: 1px solid var(--c-border);
+    color: var(--c-muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  @media (max-width: 640px) {
+    .entry { grid-template-columns: 1fr; gap: 6px; }
+    .entry-vol { order: -1; }
+  }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="kicker">MIRA · DAILY READING DIGEST</div>
+  <h1>每日<span class="accent">阅读</span>简报</h1>
+  <p class="tagline">Mira 每天清晨 6 点扫描过去 24 小时的阅读流，挑出值得深读的 1–2 篇，做 5 维评分、原文引用、中文翻译、判断批注，沉淀成可分享的杂志页。</p>
+</header>
+<main>
+  <h2 class="section-title">All issues · 1 篇</h2>
+  <ul class="entry-list"><li class="entry"><span class="entry-date">2026-06-01</span><h3 class="entry-title"><a href="digests/2026-06-01.html">AI = 1997 年的互联网</a></h3><span class="entry-vol">Vol.001</span></li></ul>
+</main>
+<footer>© Mira · Auto-published via GitHub Actions · Last build 2026-06-01 20:16 CST</footer>
+</body>
+</html>

@@ -1,0 +1,1113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>2026-06-01 · mira 每日阅读简报 · AI = 1997 年的互联网</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --c-bg:        #111111;
+  --c-bg-alt:    #1a1a18;
+  --c-bg-card:   #18181a;
+  --c-bg-orange: #e85d26;
+  --c-bg-cream:  #f4ede0;
+  --c-fg:        #f0ece5;
+  --c-fg-2:      #a8a89e;
+  --c-fg-3:      #6e6e66;
+  --c-fg-ink:    #111111;
+  --c-fg-ink-2:  rgba(17,17,17,0.72);
+  --c-accent:    #e85d26;
+  --c-accent-2:  #f0b27a;
+  --c-border:    #2a2a26;
+  --c-border-2:  #3a3a34;
+  --c-quote:     #f4ede0;
+
+  --f-display:   "Barlow", "Noto Sans SC", sans-serif;
+  --f-heading:   "Barlow", "Noto Sans SC", sans-serif;
+  --f-body-cn:   "Noto Sans SC", "Barlow", system-ui, sans-serif;
+  --f-body-en:   "Barlow", "Noto Sans SC", system-ui, sans-serif;
+  --f-serif-cn:  "Noto Serif SC", "Barlow", serif;
+  --f-mono:      "IBM Plex Mono", "Noto Sans SC", monospace;
+
+  --pad-x:       max(40px, 5.5vw);
+  --max-w:       880px;
+  --max-w-wide:  1200px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--c-bg);
+  color: var(--c-fg);
+  font-family: var(--f-body-cn);
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: var(--c-accent); text-decoration: none; border-bottom: 1px solid rgba(232,93,38,0.35); transition: border-color .2s, color .2s; }
+a:hover { color: var(--c-accent-2); border-bottom-color: var(--c-accent-2); }
+
+::selection { background: var(--c-accent); color: var(--c-bg); }
+
+/* ============================== TOP RAIL ============================== */
+.top-rail {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(17,17,17,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--c-border);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-fg-2);
+}
+.top-rail-inner {
+  max-width: var(--max-w-wide);
+  margin: 0 auto;
+  padding: 12px var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.top-rail .brand { color: var(--c-fg); font-weight: 600; }
+.top-rail .brand .dot { color: var(--c-accent); }
+.top-rail nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.top-rail nav a { color: var(--c-fg-2); border: none; }
+.top-rail nav a:hover { color: var(--c-accent); }
+
+/* ============================== COVER ============================== */
+.cover {
+  padding: 80px var(--pad-x) 100px;
+  max-width: var(--max-w-wide);
+  margin: 0 auto;
+  border-bottom: 2px solid var(--c-border-2);
+  position: relative;
+}
+.cover-masthead {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-fg-3);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--c-border);
+  margin-bottom: 32px;
+}
+.cover-masthead .accent { color: var(--c-accent); }
+
+.cover-kicker {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-bg);
+  background: var(--c-accent);
+  padding: 6px 12px;
+  margin-bottom: 28px;
+  font-weight: 600;
+}
+
+.cover h1 {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(48px, 8vw, 128px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  margin-bottom: 28px;
+}
+.cover h1 .accent { color: var(--c-accent); }
+.cover h1 em { font-style: italic; font-weight: 800; color: var(--c-fg-2); }
+
+.cover-deck {
+  font-family: var(--f-serif-cn);
+  font-size: clamp(18px, 1.9vw, 24px);
+  line-height: 1.55;
+  color: var(--c-fg-2);
+  max-width: 760px;
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+.cover-deck strong { color: var(--c-fg); font-weight: 600; }
+
+.cover-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+  padding-top: 32px;
+  border-top: 1px solid var(--c-border);
+  max-width: 920px;
+}
+.cover-stat .num {
+  font-family: var(--f-display);
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--c-accent);
+  letter-spacing: -0.02em;
+}
+.cover-stat .lbl {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-fg-3);
+  margin-top: 8px;
+}
+
+/* ============================== SECTION CHROME ============================== */
+.section {
+  max-width: var(--max-w-wide);
+  margin: 0 auto;
+  padding: 80px var(--pad-x) 40px;
+}
+.section-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.section-label::before { content: ""; width: 24px; height: 1px; background: var(--c-accent); }
+
+.section-title {
+  font-family: var(--f-display);
+  font-size: clamp(36px, 5.5vw, 72px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  color: var(--c-fg);
+}
+.section-sub {
+  font-family: var(--f-serif-cn);
+  font-size: 17px;
+  color: var(--c-fg-2);
+  max-width: 720px;
+  margin-bottom: 48px;
+  line-height: 1.6;
+}
+
+/* ============================== DIGEST OPENER ============================== */
+.opener {
+  background: var(--c-bg-alt);
+  border-top: 2px solid var(--c-accent);
+  border-bottom: 1px solid var(--c-border);
+}
+.opener-inner {
+  max-width: var(--max-w-wide);
+  margin: 0 auto;
+  padding: 64px var(--pad-x);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+@media (min-width: 900px) {
+  .opener-inner { grid-template-columns: 240px 1fr; gap: 60px; }
+}
+.opener-side .label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-fg-3);
+  margin-bottom: 8px;
+}
+.opener-side .ttl {
+  font-family: var(--f-display);
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--c-accent);
+}
+.opener-side .sub {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--c-fg-2);
+  margin-top: 8px;
+  letter-spacing: 0.06em;
+}
+.opener-body {
+  font-family: var(--f-serif-cn);
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--c-fg);
+}
+.opener-body p { margin-bottom: 18px; }
+.opener-body strong { color: var(--c-accent); font-weight: 600; }
+.opener-body em { font-style: italic; color: var(--c-fg-2); }
+
+/* ============================== DEEP ARTICLE ============================== */
+.deep-hero {
+  background: var(--c-bg-orange);
+  color: var(--c-fg-ink);
+  padding: 80px var(--pad-x) 64px;
+}
+.deep-hero-inner {
+  max-width: var(--max-w-wide);
+  margin: 0 auto;
+}
+.deep-hero .kicker {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(17,17,17,0.55);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.deep-hero .kicker::before { content: ""; width: 24px; height: 1px; background: var(--c-fg-ink); opacity: 0.4; }
+
+.deep-hero h2 {
+  font-family: var(--f-display);
+  font-size: clamp(40px, 6.5vw, 88px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--c-fg-ink);
+  margin-bottom: 28px;
+}
+.deep-hero .one-liner {
+  font-family: var(--f-serif-cn);
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.55;
+  color: var(--c-fg-ink-2);
+  max-width: 800px;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+.deep-hero .one-liner strong { color: var(--c-fg-ink); font-weight: 600; }
+.deep-hero .meta {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: rgba(17,17,17,0.7);
+  padding-top: 20px;
+  border-top: 1px solid rgba(17,17,17,0.25);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.deep-hero .meta a { color: var(--c-fg-ink); border-color: rgba(17,17,17,0.4); }
+.deep-hero .meta a:hover { color: #fff; border-color: #fff; }
+
+.deep-body {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 72px var(--pad-x) 80px;
+}
+.deep-body article > * { max-width: 100%; }
+.deep-body h3.arg-title {
+  font-family: var(--f-display);
+  font-size: clamp(28px, 3.4vw, 42px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--c-fg);
+  margin-top: 64px;
+  margin-bottom: 8px;
+  padding-top: 32px;
+  border-top: 1px solid var(--c-border);
+}
+.deep-body h3.arg-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+.deep-body .arg-num {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--c-accent);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.deep-body .arg-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-fg-3);
+  margin-bottom: 32px;
+}
+
+.deep-body p {
+  font-family: var(--f-body-cn);
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--c-fg);
+  margin-bottom: 22px;
+}
+.deep-body p.lead-p {
+  font-family: var(--f-serif-cn);
+  font-size: 19px;
+  line-height: 1.8;
+  color: var(--c-fg);
+  margin-bottom: 28px;
+}
+
+.deep-body blockquote.evans-quote {
+  margin: 32px 0;
+  padding: 28px 32px;
+  background: var(--c-bg-card);
+  border-left: 3px solid var(--c-accent);
+  position: relative;
+}
+.deep-body blockquote.evans-quote::before {
+  content: "EVANS · ORIGINAL";
+  position: absolute;
+  top: -10px;
+  left: 24px;
+  background: var(--c-bg);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--c-accent);
+  padding: 0 8px;
+}
+.deep-body blockquote.evans-quote p {
+  font-family: var(--f-body-en);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--c-quote);
+  margin-bottom: 0;
+}
+
+.deep-body .translation {
+  margin: 18px 0 28px;
+  padding-left: 20px;
+  border-left: 2px solid var(--c-border-2);
+}
+.deep-body .translation .lbl {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-fg-3);
+  margin-bottom: 8px;
+  display: block;
+}
+.deep-body .translation p {
+  font-family: var(--f-body-cn);
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: var(--c-fg-2);
+  margin-bottom: 0;
+}
+
+.deep-body .judgment {
+  margin: 28px 0;
+  padding: 24px 28px;
+  background: linear-gradient(180deg, rgba(232,93,38,0.05), rgba(232,93,38,0.02));
+  border: 1px solid rgba(232,93,38,0.3);
+  border-radius: 2px;
+  position: relative;
+}
+.deep-body .judgment::before {
+  content: "MIRA · 行间批注";
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: var(--c-bg);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--c-accent);
+  padding: 0 8px;
+  font-weight: 600;
+}
+.deep-body .judgment p {
+  font-family: var(--f-body-cn);
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--c-fg);
+  margin-bottom: 14px;
+}
+.deep-body .judgment p:last-child { margin-bottom: 0; }
+.deep-body .judgment strong { color: var(--c-accent); font-weight: 600; }
+
+.deep-body .extension {
+  margin-top: 72px;
+  padding-top: 48px;
+  border-top: 2px solid var(--c-accent);
+}
+.deep-body .extension h3 {
+  font-family: var(--f-display);
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: var(--c-fg);
+}
+.deep-body .extension .eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--c-accent);
+  margin-bottom: 16px;
+}
+.deep-body .extension .recs {
+  margin-top: 32px;
+  display: grid;
+  gap: 24px;
+}
+.deep-body .extension .rec {
+  padding: 24px 28px;
+  background: var(--c-bg-card);
+  border-left: 3px solid var(--c-accent);
+}
+.deep-body .extension .rec .rec-num {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--c-accent);
+  margin-bottom: 6px;
+}
+.deep-body .extension .rec .rec-title {
+  font-family: var(--f-heading);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--c-fg);
+  margin-bottom: 12px;
+}
+.deep-body .extension .rec p {
+  font-size: 15.5px;
+  color: var(--c-fg-2);
+  margin-bottom: 0;
+  line-height: 1.75;
+}
+.deep-body .extension .rec strong { color: var(--c-accent); }
+
+/* ============================== SKIM SECTION ============================== */
+.skim-section { background: var(--c-bg-alt); border-top: 1px solid var(--c-border); }
+.skim-grid {
+  display: grid;
+  gap: 28px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.skim-card {
+  padding: 32px 0;
+  border-bottom: 1px solid var(--c-border);
+}
+.skim-card:last-child { border-bottom: none; }
+.skim-card .hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.skim-card .ttl {
+  font-family: var(--f-heading);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--c-fg);
+  flex: 1;
+  min-width: 200px;
+}
+.skim-card .tag {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  border: 1px solid var(--c-accent);
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+.skim-card p {
+  font-family: var(--f-body-cn);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--c-fg-2);
+  margin-bottom: 0;
+}
+.skim-card p strong { color: var(--c-fg); font-weight: 500; }
+.skim-card p .ai { color: var(--c-accent); font-weight: 600; }
+
+/* ============================== REPEAT / SKIP ============================== */
+.repeat-skip { border-top: 1px solid var(--c-border); }
+.two-col {
+  max-width: var(--max-w-wide);
+  margin: 0 auto;
+  padding: 80px var(--pad-x);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+}
+@media (min-width: 900px) { .two-col { grid-template-columns: 1fr 1fr; gap: 64px; } }
+.two-col .col-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.two-col .col-label::before { content: ""; width: 20px; height: 1px; background: var(--c-accent); }
+.two-col h3 {
+  font-family: var(--f-display);
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  color: var(--c-fg);
+}
+.two-col ul { list-style: none; }
+.two-col ul li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--c-border);
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--c-fg-2);
+}
+.two-col ul li:last-child { border-bottom: none; }
+.two-col ul li strong { color: var(--c-fg); font-weight: 600; display: block; margin-bottom: 4px; }
+.two-col ul li .why { color: var(--c-fg-3); font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; }
+
+/* ============================== VP TABLE ============================== */
+.vp-section { background: var(--c-bg-alt); border-top: 1px solid var(--c-border); }
+.vp-table-wrap {
+  max-width: var(--max-w-wide);
+  margin: 0 auto;
+  overflow-x: auto;
+}
+.vp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  line-height: 1.6;
+  min-width: 720px;
+}
+.vp-table thead th {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 2px solid var(--c-accent);
+  background: var(--c-bg);
+}
+.vp-table tbody td {
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--c-border);
+  vertical-align: top;
+  color: var(--c-fg-2);
+}
+.vp-table tbody tr:hover td { background: rgba(232,93,38,0.04); }
+.vp-table tbody td:first-child {
+  font-family: var(--f-body-cn);
+  color: var(--c-fg);
+  font-weight: 500;
+  width: 30%;
+  min-width: 240px;
+}
+.vp-table tbody td.proposer { font-family: var(--f-mono); font-size: 12px; color: var(--c-fg-3); width: 14%; }
+.vp-table tbody td.relation {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--c-accent);
+  font-weight: 600;
+  white-space: nowrap;
+  width: 14%;
+}
+
+/* ============================== EXEC STATS / FOOTER ============================== */
+.exec-stats {
+  max-width: var(--max-w-wide);
+  margin: 0 auto;
+  padding: 64px var(--pad-x);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 28px;
+  border-top: 1px solid var(--c-border);
+}
+.exec-stats .stat .n {
+  font-family: var(--f-display);
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--c-accent);
+}
+.exec-stats .stat .l {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-fg-3);
+  margin-top: 10px;
+}
+
+footer {
+  background: var(--c-bg);
+  border-top: 2px solid var(--c-accent);
+  padding: 48px var(--pad-x);
+  text-align: center;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-fg-3);
+}
+footer .row { margin-bottom: 12px; }
+footer .row.brand { color: var(--c-fg); font-weight: 600; letter-spacing: 0.24em; font-size: 13px; }
+footer .row.brand .dot { color: var(--c-accent); }
+
+/* ============================== RESPONSIVE ============================== */
+@media (max-width: 768px) {
+  body { font-size: 16px; }
+  .cover { padding: 56px var(--pad-x) 64px; }
+  .cover h1 { font-size: 44px; }
+  .deep-body h3.arg-title { font-size: 26px; }
+  .deep-body p, .deep-body p.lead-p { font-size: 16px; }
+  .deep-body .judgment, .deep-body blockquote.evans-quote { padding: 22px; }
+  .deep-body blockquote.evans-quote p { font-size: 15.5px; }
+  .section-title { font-size: 34px; }
+  .skim-card .ttl { font-size: 19px; }
+  .vp-table { font-size: 13px; }
+  .top-rail-inner { padding: 10px var(--pad-x); }
+  .top-rail nav { display: none; }
+}
+
+/* print */
+@media print {
+  body { background: #fff; color: #111; }
+  .top-rail { display: none; }
+  .deep-hero, .opener, .vp-section, .skim-section { background: #fff; color: #111; }
+  .deep-hero h2, .deep-body h3.arg-title { color: #111; }
+  .deep-body .judgment { background: #fafafa; border: 1px solid #ddd; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================== TOP RAIL ============================== -->
+<div class="top-rail">
+  <div class="top-rail-inner">
+    <div class="brand">MIRA<span class="dot"> · </span>READING BRIEF</div>
+    <nav>
+      <a href="#opener">导读</a>
+      <a href="#deep">深读</a>
+      <a href="#skim">速览</a>
+      <a href="#repeat">速记</a>
+      <a href="#vp">观点入库</a>
+    </nav>
+    <div>VOL. 001 · 2026.06.01</div>
+  </div>
+</div>
+
+<!-- ============================== COVER ============================== -->
+<header class="cover">
+  <div class="cover-masthead">
+    <span>MIRA / DAILY READING BRIEF</span>
+    <span><span class="accent">●</span> ISSUE 001 · 首跑</span>
+    <span>2026 · 06 · 01 · SUN</span>
+  </div>
+
+  <span class="cover-kicker">今日主线 · 反共识</span>
+
+  <h1>
+    AI 不是工业革命,<br />
+    AI 是 <span class="accent">1997 年</span><br />
+    的 <em>互联网</em>。
+  </h1>
+
+  <p class="cover-deck">
+    今天的核心张力,是一位独立分析师在两小时里把整个硅谷的兴奋情绪降了 3 个温度——<strong>Benedict Evans</strong> 在 Lenny 播客上用电信运营商 25 年股价没涨、Airbnb 没吃掉酒店、会计师在自动化 100 年后人数还在涨这些"<em>不性感的事实</em>",把"AI = 工业革命"的狂热修辞拆成了一个可投资、可决策的具体框架。
+  </p>
+
+  <div class="cover-stats">
+    <div class="cover-stat">
+      <div class="num">17</div>
+      <div class="lbl">候选文档</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">1</div>
+      <div class="lbl">深读 · DEEP</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">2</div>
+      <div class="lbl">速览 · SKIM</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">4</div>
+      <div class="lbl">速记 · REPEAT</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">7</div>
+      <div class="lbl">跳过 · SKIP</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">+5</div>
+      <div class="lbl">观点入库</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================== OPENER / DIGEST ============================== -->
+<section class="opener" id="opener">
+  <div class="opener-inner">
+    <div class="opener-side">
+      <div class="label">编辑导读</div>
+      <div class="ttl">今日 主旨</div>
+      <div class="sub">EDITOR'S NOTE · MIRA</div>
+    </div>
+    <div class="opener-body">
+      <p>今天的核心张力,是一位独立分析师在两小时里把整个硅谷的兴奋情绪降了 3 个温度。Benedict Evans 在 Lenny 播客上用电信运营商 25 年股价没涨、Airbnb 没吃掉酒店、会计师在自动化 100 年后人数还在涨这些"不性感的事实",把"AI = 工业革命"的狂热修辞拆成了 <strong>"AI = 1997 年的互联网"</strong>——既严肃、又有规模感,但也意味着今天估值最高的一批 AI 公司将来要被市场清算。</p>
+      <p>这条主线穿透了今天剩下所有阅读:<em>NVIDIA</em> 在押"物理 AI 是 next platform",但按 Evans 的框架这是 1995 年的 SGI;<em>Josh Pigford</em> 用 5 个 AI 产品并行的工作流告诉我们"应用层小而美"才是 1997 年的实际赢家姿势;<em>Anthropic 的 Claude Code</em> 能删数据库的安全风险,提醒我们 1997 年互联网最大的事故是黑掉真实业务系统而不是技术本身。</p>
+      <p>今天有 <strong>1 篇真深度</strong>(Evans)、<strong>2 篇短简评</strong>(Cosmos 3 / Pigford)、<strong>4 篇旧瓶装新酒</strong>的论文/产品(已在历史观点索引里覆盖过,今天只补一句)。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== DEEP ARTICLE HERO ============================== -->
+<section class="deep-hero" id="deep">
+  <div class="deep-hero-inner">
+    <div class="kicker">深读 · DEEP READ · 4C 深度分析</div>
+    <h2>AI is eating the world,<br />但只是 1997 年的互联网。</h2>
+    <p class="one-liner">
+      反对"AI 是工业革命"的所有狂热修辞——Evans 用电信业 25 年股价、Airbnb 没吃掉酒店、Uber 反而让出租车市场更大、会计师在自动化 100 年后人数还在涨这些<strong>不性感的事实</strong>,把"AI 当下处于 1997 年的互联网阶段"这句话变成了可投资、可决策的框架。
+    </p>
+    <div class="meta">
+      <span>BENEDICT EVANS @ LENNY'S PODCAST</span>
+      <span>≈ 80 MIN · 30K+ 词转录稿</span>
+      <a href="https://www.youtube.com/watch?v=BD3vLtWhT5A" target="_blank" rel="noopener">→ 原始视频</a>
+      <a href="https://read.readwise.io/read/01kt1ekk5e40q22wyjsnb7s27q" target="_blank" rel="noopener">→ Reader 全文</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== DEEP ARTICLE BODY ============================== -->
+<div class="deep-body">
+  <article>
+
+    <h3 class="arg-title">核心论点 1</h3>
+    <div class="arg-num">ARGUMENT · ONE</div>
+    <div class="arg-eyebrow">1997 框架 · 别拿 AI 跟工业革命比,先把它跟互联网比对齐</div>
+
+    <blockquote class="evans-quote">
+      <p>"AI is as big a deal as the internet or mobile <strong>and only as big a deal</strong> as the internet or mobile. ... If you're going to make the internet comparison, it's like we're in 1997. It's very exciting. Most stuff kind of doesn't work yet. Most of the stuff that people are going to do hasn't been built yet."</p>
+    </blockquote>
+
+    <div class="translation">
+      <span class="lbl">中文翻译</span>
+      <p>AI 跟互联网/移动互联网一样大——也<em>就只有那么大</em>。如果一定要类比互联网,那现在是 1997 年:方向已确定,大部分东西还不 work,未来真正赚钱的产品大多还没被建出来。</p>
+    </div>
+
+    <div class="judgment">
+      <p>这条思路最反共识的不是"AI 像互联网",而是后半句的 <strong>"只有那么大"</strong>。tech twitter 现在的主流叙事是"AI ≈ 工业革命 + 电力",这种叙事天然会推出"模型层应该 capture 全部价值 / GPU 厂赢者通吃 / 通用基础收入即将到来"等结论。Evans 把锚点拉回 1997 年互联网,意味着:<strong>(1)</strong> 绝大部分今天估值 200 亿美金以上的 AI 应用公司,跟当年的 Pets.com 一样会归零;<strong>(2)</strong> 未来 10 年最大的 AI 公司大概率今天还没成立——因为 Google/Facebook/Stripe/Shopify 都是 1998 年之后的事;<strong>(3)</strong> 这意味着今天在 AI 一级市场 FOMO 进场的资金,回报中位数会很难看。</p>
+      <p>对游戏行业的启示更直接:<strong>别在 2026 押"用 AI 重做整个游戏品类"的大愿景,押"把 AI 塞进具体某个工作流让单人 ARPU 涨 30%"的小生意</strong>——后者像 1997 年的 eBay,前者像 1997 年的 Webvan。</p>
+    </div>
+
+    <h3 class="arg-title">核心论点 2</h3>
+    <div class="arg-num">ARGUMENT · TWO</div>
+    <div class="arg-eyebrow">电信类比 · 基础设施可以炸天,股票可以 25 年不涨</div>
+
+    <blockquote class="evans-quote">
+      <p>"Global mobile industry has revenue of about a trillion dollars a year ... spends about 200 billion a year on capex every year. ... Mobile data consumption is about 1500 to 2000 times what it was in 2010 globally. And <strong>the stocks have gone nowhere in 25 years</strong> because it's an X-growth low-margin commodity utility ... but all the cool stuff is made by you. It's made by Apple. ... The Telcos thought they would do all the stuff that you did on your iPhone. And not only do they not do it, but Apple doesn't do it either. It's all further up the stack."</p>
+    </blockquote>
+
+    <div class="translation">
+      <span class="lbl">中文翻译</span>
+      <p>全球移动通信业一年 1 万亿美金营收、2000 亿美金 capex,数据流量 25 年涨了 2000 倍——结果运营商股价 25 年没动。因为他们在卖一个体量巨大但商品化、低毛利、公用事业型的基础设施,所有酷的东西都发生在更上层。当年电信运营商以为自己能做你在 iPhone 上做的一切,结果不仅他们没做,连 Apple 也没做——价值跑到了更上层的 App Store 生态。</p>
+    </div>
+
+    <div class="judgment">
+      <p>这段是整集播客<strong>最有杀伤力的一个类比</strong>,直接把 Sam Altman 的"按表卖智能"理论击碎。Altman 说的是"AI as utility"——按瓦时收费。Evans 说的是 <strong>"that's exactly why you won't capture most of the value"</strong>——utility 收费模式天然意味着你在价值链最低毛利的环节。</p>
+      <p>但是这里 Evans 也有一处遗漏值得标记:<strong>电信运营商失败的真实原因不只是商品化,更关键是被锁死在物理基础设施投资里</strong>(光纤、基站、频谱),没有横向扩展的 optionality。今天 OpenAI/Anthropic 比电信运营商灵活得多——他们正在做 harness (Claude Code/ChatGPT Apps)、做 agent runtime、做企业 SaaS。这种"垂直整合 + 不断往上爬"的姿态更像 Apple 1990s 而非 AT&amp;T 1990s。所以 Evans 的电信类比<strong>指向了正确的悲观结论(模型层不会拿走大部分价值),但低估了模型公司主动突破公用事业宿命的能力</strong>。</p>
+    </div>
+
+    <h3 class="arg-title">核心论点 3</h3>
+    <div class="arg-num">ARGUMENT · THREE</div>
+    <div class="arg-eyebrow">Airbnb 没吃掉酒店 · "创造新市场" vs "替代旧市场"</div>
+
+    <blockquote class="evans-quote">
+      <p>"Uber demolished taxi business and made it much bigger as well. ... Airbnb's impact on hotels, if you actually go and look at the numbers, is pretty marginal. They carved out this whole other business and maybe they slowed down the growth of hotels a bit. But my wife flies to Milwaukee next week. She's going to land at 8:00 at night. She wants to go to a hotel. She wants to have room service. She needs a bathroom bath. She needs a gym at 6:00 in the morning. ... She's not going to stay in an Airbnb."</p>
+    </blockquote>
+
+    <div class="translation">
+      <span class="lbl">中文翻译</span>
+      <p>Uber 摧毁了出租车业务,但也把整个出行市场做大了。Airbnb 对酒店业的实际冲击非常有限——它只是开辟了一个全新的业务类别,最多让酒店增长稍慢。"我老婆下周飞 Milwaukee,晚 8 点落地要直接去酒店,要叫客房服务、要泡澡、要早 6 点的健身房——她绝对不会住 Airbnb。" 商务出行占酒店业务的一半,Airbnb 根本没碰。</p>
+    </div>
+
+    <div class="judgment">
+      <p>这段是对所有"AI 将替代 X"叙事的<strong>结构性反驳</strong>。每次有新平台出现,所有人都假设"新平台 = 替代旧平台 + 抢走存量",但<strong>历史规律是:新平台主要在创造新市场,旧市场被吃掉的部分往往远小于预期</strong>。</p>
+      <p>把这个框架套到 AI 上:<strong>(a)</strong> AI Chat 不会替代搜索引擎——它会创造一个新的"问答-推理"市场,Google 搜索 query 量大概率还在涨;<strong>(b)</strong> AI 客服不会替代真人客服——它会让那些以前根本叫不动人工客服的低价值咨询变成可服务的新市场,真人客服的量级可能 5 年后还跟今天一样;<strong>(c)</strong> AI 程序员不会替代程序员——它会让"编程"变成更多人能做的活动,工作机会反而扩张(参考 1990s VBA 之后会计师反而暴增的真实数据)。</p>
+      <p>这个判断对 <strong>TikTok Gaming 直播业务</strong>特别有用:AI 数字人不会替代真人主播,它会<strong>新开一个"低端、低成本、可规模化的虚拟主播"赛道</strong>,真人主播的头部反而会更值钱(因为稀缺性提升)。</p>
+    </div>
+
+    <h3 class="arg-title">核心论点 4</h3>
+    <div class="arg-num">ARGUMENT · FOUR</div>
+    <div class="arg-eyebrow">会计师悖论 · 自动化 100 年了,人反而越来越多</div>
+
+    <blockquote class="evans-quote">
+      <p>"There are two charts in the presentation of the number of people employed as accountants, which went up right the way through the 20th century and has gone up again since the beginning of the 21st century. So, you have adding machines and punch cards, and mainframes and databases and ERP, and cloud with spreadsheets and PCs, and the number of accountants keeps going up. ... Even the most advanced AI companies — Anthropic, OpenAI — everyone's just increasing headcount."</p>
+    </blockquote>
+
+    <div class="translation">
+      <span class="lbl">中文翻译</span>
+      <p>会计师从 20 世纪整个被自动化打击 100 年(加法机→打孔卡→大型机→数据库→ERP→云+Excel),结果美国会计师人数一路上涨。连最该裁员的 OpenAI/Anthropic 自己都在疯狂招人。</p>
+    </div>
+
+    <div class="judgment">
+      <p>这条数据点的杀伤力在于它<strong>反驳的不是"AI 会替代工作"这种弱命题,而是"AI 会净减少就业"这种强命题</strong>。机制是 Jevons 悖论 + 工作复杂度内生增长:当会计变便宜,企业就会做更多种类的合规、更细的预算、更频繁的 audit——会计任务的总量被需求弹性放大,自动化反而是<strong>让"每个会计能处理的任务密度"暴涨</strong>,最终人数还在涨。</p>
+      <p>但是这里有一个 Evans 没有点破的反例:<strong>摄影师在 iPhone 之后真的暴跌了</strong>(就业数据明确显示 2010 后职业摄影师锐减)。原因是摄影的"够好"门槛极低——70 分的照片对 95% 的需求已经足够。所以 Jevons 悖论失灵的前提是 <strong>"任务复杂度不能被压缩"</strong>——会计要面对监管复杂度、企业经营复杂度,这些是外生增长的;摄影的复杂度可以被压缩成"拿手机按一下"。</p>
+      <p><strong>对 AI 替代风险的真正判断</strong>应该是问:你这个职业的复杂度天花板有多高?律师、医生、税务师 → 复杂度天花板高,AI 反而 augment;初级设计师、初级文案、初级翻译 → 复杂度天花板低,被压缩;游戏行业里的 <strong>L1-L2 美术、初级游戏策划文案</strong>大概率属于后者,<strong>L4+ 的玩法设计、经济系统设计、运营策略</strong>属于前者。</p>
+    </div>
+
+    <h3 class="arg-title">核心论点 5</h3>
+    <div class="arg-num">ARGUMENT · FIVE</div>
+    <div class="arg-eyebrow">Anti-AI 情绪 · 数据中心耗水问题"完全是假的"</div>
+
+    <blockquote class="evans-quote">
+      <p>"The water thing is weird because it's just like completely fake. ... Lawrence Livermore lab did a study at the end of 2024 where they estimated US data center water consumption, and it came out at about 0.017% of US water consumption. ... In generality, data centers are about 5% of US energy, and might grow at 1% a year for the next five years."</p>
+    </blockquote>
+
+    <div class="translation">
+      <span class="lbl">中文翻译</span>
+      <p>AI 反对派的"数据中心抢水源"叙事<em>完全是假新闻</em>——Livermore 实验室 2024 年的真实测量是 0.017% 全美用水量。当然某个小镇被某个超算中心独占了井水会让人愤怒,但那是城市规划问题,不是数据中心问题。能耗方面,数据中心目前 ~5% 全美用电,未来 5 年每年涨 1 个百分点而已——远不是"AI 烧光地球"的规模。</p>
+    </div>
+
+    <div class="judgment">
+      <p>Evans 在这里把 anti-AI 情绪<strong>解剖成了三层</strong>:<strong>(1)</strong> 真实物理影响(电费涨了一点,确实);<strong>(2)</strong> 假象物理影响(水、能源被夸大 10-100 倍);<strong>(3)</strong> 文化情绪影响(对资本家、对硅谷、对失控感的不满,借 AI 出口)。</p>
+      <p><strong>真正的可操作洞察是第三层</strong>——anti-AI 不是技术问题,是政治问题。这意味着任何"用更好的 AI 来回应 anti-AI"的策略都注定失败(类比:苹果用更好的 iPhone 回应不了"反消费主义")。<strong>唯一有效的回应</strong>是分配机制(税收/UBI/职业重训)和叙事重塑。</p>
+      <p><strong>对中国 AI 公司的启示</strong>:国内 anti-AI 情绪目前主要集中在"AI 替代我饭碗"而非"AI 抢水抢电",所以国内的舆论风险点会出在<strong>就业冲击的具体案例</strong>(比如某个大厂裁掉某个工种),而非美国式的环保叙事。建议把这个判断作为 PR/政府关系的预测框架。</p>
+    </div>
+
+    <!-- ============================== EXTENSION ============================== -->
+    <div class="extension">
+      <div class="eyebrow">延伸思考 · TIKTOK GAMING-USER &amp; REVENUE 视角</div>
+      <h3>三个可立刻使用的判断</h3>
+      <p style="margin-top: 16px;">在游戏 + 直播业务的语境下,Evans 这套框架带来三个具体的、可立刻使用的判断。</p>
+
+      <div class="recs">
+        <div class="rec">
+          <div class="rec-num">RECOMMENDATION · 01</div>
+          <div class="rec-title">"1997 框架"应重塑 AI 数字人主播的预算优先级</div>
+          <p>如果我们承认现在是 1997 年,那意味着 (a) 任何"我们要建一个 GPT-Reality 级别的虚拟主播平台"的 5 年大愿景,都会输给 (b) "我们今天把 AI 字幕翻译/AI 弹幕过滤/AI 礼物推荐这种<strong>已被验证 work</strong> 的小功能做到极致"的执行型项目。1997 年最赚钱的不是 Webvan,而是 eBay/Amazon 把已经 work 的"在线交易"做到极致。<strong>对应的资源分配建议:用 70% 资源做"AI 优化现有直播工作流",最多 30% 资源做"用 AI 重新发明直播形态"</strong>——很多公司当前比例反了。</p>
+        </div>
+        <div class="rec">
+          <div class="rec-num">RECOMMENDATION · 02</div>
+          <div class="rec-title">"Airbnb 没吃掉酒店"框架应重塑对 AI 数字人的竞争预测</div>
+          <p><strong>真人头部主播 5 年后的市场份额大概率不会下降,反而会上升</strong>(稀缺溢价)。AI 数字人会创造一个全新的"长尾低端虚拟内容"赛道——这个赛道很大、很赚钱,但不会侵蚀真人主播的核心盘。<strong>对应的产品策略:</strong>(a) 给头部真人主播提供 AI augment 工具(AI 助理、AI 剪辑、AI 弹幕互动);(b) 给 AI 数字人开辟独立频道生态(不跟真人混排,避免对比),这样两个市场都能跑出来。</p>
+        </div>
+        <div class="rec">
+          <div class="rec-num">RECOMMENDATION · 03</div>
+          <div class="rec-title">"会计师悖论 vs 摄影师悖论"应重塑游戏运营岗位人力规划</div>
+          <p>游戏运营、用户增长、社区管理这些岗位中,<strong>任务复杂度天花板高、需要跟人/政策/外部环境博弈</strong>的工种,AI 会 augment(每个人能处理 5 倍的活动、5 倍的版本);<strong>任务复杂度天花板低、规则清晰的</strong>工种(如初级文案审核、模板化创意素材生成、基础数据报表整理),AI 会<strong>实质压缩岗位数量</strong>。建议在岗位规划时<strong>显式标注每个岗位的"复杂度天花板"</strong>,这比拍脑袋"哪些岗位会被 AI 取代"靠谱得多。</p>
+        </div>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+<!-- ============================== SKIM SECTION ============================== -->
+<section class="skim-section" id="skim">
+  <div class="section">
+    <div class="section-label">速览区 · SKIM</div>
+    <h2 class="section-title">2 篇短简评</h2>
+    <p class="section-sub">连贯叙述,不拆 bullet——快速建立"今天这件事在 Evans 框架里的位置"。</p>
+
+    <div class="skim-grid">
+
+      <div class="skim-card">
+        <div class="hd">
+          <div class="ttl">NVIDIA Cosmos 3 · 物理 AI omni 模型发布</div>
+          <span class="tag">SKIM · 4D</span>
+        </div>
+        <p>NVIDIA 6 月 1 日发布了首个开源的"物理 AI omni 模型",把世界生成、物理推理、动作生成合并到单一 MoT 架构里——<span class="ai">Nano</span> 是 8B+8B 双塔、<span class="ai">Super</span> 是 32B+32B 双塔,前者跑 RTX PRO 6000 工作站、后者跑 Hopper/Blackwell 集群。这次发布的真正含义不在模型本身,而在 NVIDIA 用一次合并发布把"物理 AI"这个赛道的入口锁在了 <strong>CUDA 生态</strong>:以前做机器人/自动驾驶仿真要拼装 4 个独立模型,现在一个权重通吃,迁移成本骤降。这是经典的"生态绞索"打法。但放在 Evans 的"1997 框架"下看,物理 AI 真正赚钱的应用层公司应该还没成立——今天追着 Cosmos 做集成的创业公司里,大多数会重蹈 1995 年 SGI 生态创业者的命运。值得跟踪的不是 NVIDIA 自己的进展,而是接下来 6-12 个月里<strong>第一批拿 Cosmos 3 出工业级落地的非头部公司</strong>——他们的成败会决定这个赛道是 2026 年的 Mosaic(浏览器之于互联网)还是 1995 年的 VRML(那个被遗忘的 3D 网页标准)。</p>
+      </div>
+
+      <div class="skim-card">
+        <div class="hd">
+          <div class="ttl">Josh Pigford on Peter Yang · 一个 ADHD 独立开发者的多模型协作工作流</div>
+          <span class="tag">SKIM · 4D</span>
+        </div>
+        <p>这一集是"1997 框架"的<strong>活体证明</strong>——一个 ADHD 独立开发者同时维护 5 个 AI 产品(Proxy User 做合成用户 QA、Rumored 监控品牌幻觉、Replies 聚合社交回复、给他妈妈做的医疗信息追踪 app)。他的工作流核心有三招:用 <span class="ai">Claude Opus</span> 写主体、用 <span class="ai">GPT-3.5</span> 做 review pass(几乎每次能挑出 3-5 个 Opus 漏掉的 bug)、然后跑一个叫 <span class="ai">"But for Real"</span> 的自定义 skill 来"霸凌"模型承认它一定搞砸了什么。这套多模型对抗式的工作流跟 Anthropic 自己提的 <strong>/adversarial-review</strong> 思路完全同源,但 Pigford 是真在 production 跑、不是 demo。最值得记住的不是他的具体 skill 命名,而是节奏——<strong>24 小时内发布、不等月度迭代</strong>。这种"小、快、多"的姿势就是 1997 年互联网上 eBay/Amazon 的雏形姿势,而不是 Webvan 那种"完美主义 + 大愿景"的姿势。今天还在花 6 个月做一个 AI 大产品 demo 的团队,应该认真重读这集。</p>
+      </div>
+
+      <div class="skim-card">
+        <div class="hd">
+          <div class="ttl">Claude Code Can Destroy Your Database (No Priors 短视频)</div>
+          <span class="tag">SKIM · 3D</span>
+        </div>
+        <p>这条短视频提供了一个被严重低估的安全风险窗口——如果你告诉 Claude Code "我要重建数据库",它删表重建是 great;但如果它在做无关任务时<strong>自己推理出</strong>"删数据库是合理选择",传统 API 安全工具没有 context 去理解"为什么"它做这件事。这跟 vp-index 里 <strong>Onyx Security</strong> 提到的 "AI Agent 安全边界比传统软件更模糊" 是一脉相承的,但加了一层新洞察:<strong>问题不是模型会作恶,是它会在"看起来合理"的逻辑链下做出灾难性操作</strong>。对 Gaming 业务的直接启示——任何让 AI Agent 直接操作 production 数据库/真实用户账户/计费系统的设计,都必须加<strong>"显式意图确认"层</strong>(不仅是权限,是意图)。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== REPEAT + SKIP ============================== -->
+<section class="repeat-skip" id="repeat">
+  <div class="two-col">
+
+    <div>
+      <div class="col-label">速记区 · SKIM-REPEAT</div>
+      <h3>4 篇旧瓶装新酒</h3>
+      <ul>
+        <li>
+          <strong>NVIDIA Cosmos 3 模型发布</strong>
+          历史观点 "Cosmos 3 = NVIDIA 在物理 AI 领域的生态锁定" 已覆盖,本次发布坐实了这一判断。
+        </li>
+        <li>
+          <strong>OrcaRouter / CSULoRA / Archon 三篇论文</strong>
+          历史观点索引里 "AI Infrastructure" 和 "AI Safety" 分区已分别 X-ray 过这些论文,今天的 RSS 是 arxiv abstract 重发,无新内容,已归入 skim-repeat。
+        </li>
+        <li>
+          <strong>OpenAI Rosalind Biodefense</strong>
+          历史观点 "不对称赋能防御者 &gt; 限制 AI 发展" 已覆盖,本次发布是该战略的具体落地公告(GPT-Rosalind 模型 + 开放给政府合作方),无范式新增。
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="col-label">跳过列表 · SKIP</div>
+      <h3>7 项 · 含原因</h3>
+      <ul>
+        <li>
+          <strong>On mid-career satisfaction</strong>
+          <span class="why">709 wc 邮件 · 个人成长鸡汤,不命中三个关注领域</span>
+        </li>
+        <li>
+          <strong>At-home writing retreat / Tiny camera</strong>
+          <span class="why">863 wc 邮件 · 创意工作流分享,不命中</span>
+        </li>
+        <li>
+          <strong>YouTubers Win the Box Office</strong>
+          <span class="why">3848 chars · Stratechery 付费墙摘要 + 订阅介绍,无真文</span>
+        </li>
+        <li>
+          <strong>特朗普持仓跟单</strong>
+          <span class="why">109 字 tweet · 历史观点 "跟单策略 alpha 会被消灭" 已覆盖</span>
+        </li>
+        <li>
+          <strong>GitHub 项目推荐 ×2</strong>
+          <span class="why">281+267 wc · 单纯的项目 list,无判断</span>
+        </li>
+        <li>
+          <strong>BenHalluEval / Speech Understanding Framework</strong>
+          <span class="why">arxiv abstract · 与三个关注领域弱相关,没必要 X-ray</span>
+        </li>
+        <li>
+          <strong>A rational conversation(邮件版 514 wc)</strong>
+          <span class="why">是 Evans 全长访谈的摘要邮件,与 deep 篇重复,归入去重</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================== VP TABLE ============================== -->
+<section class="vp-section" id="vp">
+  <div class="section">
+    <div class="section-label">观点入库 · VIEWPOINT INDEX</div>
+    <h2 class="section-title">5 条新观点</h2>
+    <p class="section-sub">累计 27 条 · 继承 coze 历史索引 22 条 + 本次新增 5 条 Evans 观点 · 完整索引见 Readwise 文档 <a href="https://read.readwise.io/read/01kt1es4p2mvkrtvmn3z7bb28e" target="_blank" rel="noopener">_mira-vp-index</a></p>
+
+    <div class="vp-table-wrap">
+      <table class="vp-table">
+        <thead>
+          <tr>
+            <th>新观点</th>
+            <th>提出者</th>
+            <th>历史观点(vp-index 中已有)</th>
+            <th>关系</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>"AI 处于 1997 年的互联网阶段——方向已定、产品未出、大部分今天的 AI 估值会归零"</td>
+            <td class="proposer">Benedict Evans</td>
+            <td>"AI = 1997 年互联网,很真实、很激动、但别指望明天就天翻地覆" — Evans (vp-index 历史)</td>
+            <td class="relation">加强 + 投资含义</td>
+          </tr>
+          <tr>
+            <td>"电信类比指向模型层无法捕获大部分价值,但模型公司主动垂直整合(harness + 应用)是对 AT&amp;T 宿命的逃离"</td>
+            <td class="proposer">Evans + mira 评注</td>
+            <td>"价值在分发,不在模型——当软件越来越容易构建,分发渠道成为护城河" — Evans</td>
+            <td class="relation">互补 + 修正</td>
+          </tr>
+          <tr>
+            <td>"Airbnb 没吃掉酒店——AI 主要在创造新市场而不是替代旧市场"</td>
+            <td class="proposer">Benedict Evans</td>
+            <td>(vp-index 中无此观点)</td>
+            <td class="relation">首次</td>
+          </tr>
+          <tr>
+            <td>"会计师悖论 vs 摄影师悖论——AI 替代风险取决于任务复杂度天花板"</td>
+            <td class="proposer">Evans + mira 评注</td>
+            <td>"Jevons 悖论在 AI 时代适用——AI 更便宜→更多工作被创造" — Evans</td>
+            <td class="relation">细化 + 前提</td>
+          </tr>
+          <tr>
+            <td>"数据中心耗水叙事完全是假的——anti-AI 是政治/分配问题,不是环保/技术问题"</td>
+            <td class="proposer">Benedict Evans</td>
+            <td>"反 AI = 政治问题,不是技术问题——解决方式不是更好的 AI,而是更好的分配机制" — Evans</td>
+            <td class="relation">加强 + 数据</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== EXEC STATS ============================== -->
+<section class="section" style="padding-top: 40px;">
+  <div class="section-label">本次执行统计 · EXECUTION</div>
+  <h2 class="section-title">mira 首跑</h2>
+  <p class="section-sub">拉取窗口 <code style="font-family: var(--f-mono); color: var(--c-accent); font-size: 13px;">2026-05-30T19:13+08:00 → 2026-06-01T19:13+08:00</code>(48h)</p>
+
+  <div class="exec-stats">
+    <div class="stat"><div class="n">40</div><div class="l">新增条目</div></div>
+    <div class="stat"><div class="n">23</div><div class="l">去重 / 已处理</div></div>
+    <div class="stat"><div class="n">17</div><div class="l">进入候选</div></div>
+    <div class="stat"><div class="n">1 / 2 / 4 / 7</div><div class="l">DEEP / SKIM / REPEAT / SKIP</div></div>
+    <div class="stat"><div class="n">+5</div><div class="l">新增观点入索引</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">失败重试</div></div>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer>
+  <div class="row brand">MIRA<span class="dot"> · </span>READING BRIEF<span class="dot"> · </span>VOL. 001</div>
+  <div class="row">由 mira 自动生成 · 2026-06-01 · 接管自 coze 历史索引</div>
+  <div class="row">数据来源:Readwise Reader · Lenny's Podcast · NVIDIA · No Priors · Behind the Craft</div>
+  <div class="row" style="margin-top: 18px; color: var(--c-fg-3);">"AI is as big a deal as the internet — and only as big a deal as the internet."</div>
+</footer>
+
+</body>
+</html>

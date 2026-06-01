@@ -1,0 +1,106 @@
+name: Publish Daily Digest
+
+on:
+  # Triggered by Mira via repository_dispatch
+  repository_dispatch:
+    types: [new-digest]
+
+  # Allow manual trigger from Actions UI for debugging
+  workflow_dispatch:
+
+  # Re-publish index when digests/ changes by hand
+  push:
+    branches: [main]
+    paths:
+      - 'digests/**'
+      - 'index.html'
+      - '.github/workflows/publish.yml'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  receive-and-commit:
+    if: github.event_name == 'repository_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Decode and write digest file
+        env:
+          DIGEST_DATE: ${{ github.event.client_payload.date }}
+          DIGEST_VOL:  ${{ github.event.client_payload.vol }}
+          DIGEST_TITLE: ${{ github.event.client_payload.title }}
+          DIGEST_HTML_B64: ${{ github.event.client_payload.html_b64 }}
+        run: |
+          set -euo pipefail
+          if [ -z "${DIGEST_DATE:-}" ] || [ -z "${DIGEST_HTML_B64:-}" ]; then
+            echo "Missing required client_payload fields: date / html_b64"
+            exit 1
+          fi
+          mkdir -p digests
+          echo "$DIGEST_HTML_B64" | base64 -d > "digests/${DIGEST_DATE}.html"
+          echo "Wrote digests/${DIGEST_DATE}.html ($(wc -c < digests/${DIGEST_DATE}.html) bytes)"
+          # Stash metadata for index regeneration
+          mkdir -p .meta
+          jq -n \
+            --arg date  "$DIGEST_DATE" \
+            --arg vol   "$DIGEST_VOL" \
+            --arg title "$DIGEST_TITLE" \
+            '{date:$date, vol:$vol, title:$title}' \
+            > ".meta/${DIGEST_DATE}.json"
+
+      - name: Regenerate index.html
+        run: python3 scripts/build_index.py
+
+      - name: Commit and push
+        run: |
+          git config user.name  "mira-bot"
+          git config user.email "mira-bot@users.noreply.github.com"
+          git add digests/ .meta/ index.html
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "digest: ${{ github.event.client_payload.date }} Vol.${{ github.event.client_payload.vol }}"
+          git push
+
+  deploy-pages:
+    needs: [receive-and-commit]
+    if: always() && (github.event_name != 'repository_dispatch' || needs.receive-and-commit.result == 'success')
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout (latest after commit)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Regenerate index (push path only)
+        if: github.event_name != 'repository_dispatch'
+        run: python3 scripts/build_index.py
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
