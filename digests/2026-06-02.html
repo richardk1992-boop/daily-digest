@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vol.002 · Video Agent 与 Token 经济 · MIRA 每日阅读简报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c-bg: #111111;
+    --c-bg-alt: #1a1a18;
+    --c-bg-warm: #1f1a14;
+    --c-fg: #f0ece5;
+    --c-fg-dim: #c8c2b6;
+    --c-accent: #e85d26;
+    --c-accent-soft: #f4a06a;
+    --c-border: #2a2a26;
+    --c-border-soft: #1f1f1c;
+    --c-muted: #8a8a82;
+    --c-mark: #f6d24a;
+    --c-success: #6dbf78;
+    --c-warn: #d97757;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--c-bg); color: var(--c-fg); }
+  body {
+    font-family: "Noto Sans SC", "Barlow", system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.78;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--c-accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border .15s; }
+  a:hover { border-bottom-color: var(--c-accent); }
+
+  /* ===== Masthead ===== */
+  .masthead {
+    border-bottom: 1px solid var(--c-border);
+    padding: 64px 7vw 36px;
+    background: linear-gradient(180deg, #181814 0%, var(--c-bg) 100%);
+  }
+  .kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--c-muted);
+    text-transform: uppercase;
+  }
+  .kicker .accent { color: var(--c-accent); }
+  h1.cover-h1 {
+    font-family: "Barlow", sans-serif;
+    font-weight: 900;
+    font-size: clamp(40px, 6.4vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 18px 0 14px;
+    max-width: 16ch;
+  }
+  h1 .accent { color: var(--c-accent); }
+  .cover-sub {
+    font-family: "Noto Serif SC", "Barlow", serif;
+    font-weight: 400;
+    font-size: clamp(17px, 1.6vw, 21px);
+    color: var(--c-fg-dim);
+    max-width: 720px;
+    margin: 8px 0 24px;
+    line-height: 1.7;
+  }
+  .meta-strip {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    border-top: 1px solid var(--c-border);
+    padding-top: 18px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--c-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .meta-strip strong { color: var(--c-accent); font-weight: 500; }
+
+  /* ===== Layout ===== */
+  main { max-width: 920px; padding: 48px 7vw 80px; }
+  section { margin-bottom: 72px; }
+  .section-rule {
+    border: 0;
+    border-top: 1px solid var(--c-border);
+    margin: 64px 0 0;
+  }
+  .section-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--c-accent);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 28px 0 6px;
+  }
+  .section-label::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--c-accent);
+  }
+  h2.sec-h2 {
+    font-family: "Barlow", "Noto Sans SC", sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 3.6vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 6px 0 28px;
+  }
+
+  /* ===== Editorial intro ===== */
+  .editorial {
+    background: var(--c-bg-warm);
+    border-left: 3px solid var(--c-accent);
+    padding: 28px 32px;
+    font-family: "Noto Serif SC", serif;
+    color: var(--c-fg-dim);
+    font-size: 16.5px;
+    line-height: 1.85;
+  }
+  .editorial p { margin: 0 0 14px; }
+  .editorial p:last-child { margin-bottom: 0; }
+  .editorial em { color: var(--c-accent-soft); font-style: normal; font-weight: 500; }
+  .editorial-sig {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--c-muted);
+    letter-spacing: 0.14em;
+    margin-top: 18px;
+    text-transform: uppercase;
+  }
+
+  /* ===== Deep-dive article ===== */
+  .article {
+    border-top: 1px solid var(--c-border);
+    padding-top: 36px;
+    margin-top: 36px;
+  }
+  .article:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+  .article-head {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 24px;
+    margin-bottom: 18px;
+  }
+  .article-num {
+    font-family: "Barlow", sans-serif;
+    font-weight: 900;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--c-accent);
+    letter-spacing: -0.04em;
+  }
+  .article-tag-row {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--c-muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .article-tag-row .tag {
+    display: inline-block; padding: 2px 8px;
+    border: 1px solid var(--c-border);
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+  .article-tag-row .tag.hot { color: var(--c-accent); border-color: var(--c-accent); }
+  h3.art-title {
+    font-family: "Barlow", "Noto Sans SC", sans-serif;
+    font-weight: 800;
+    font-size: clamp(22px, 2.6vw, 30px);
+    line-height: 1.25;
+    margin: 0 0 8px;
+    color: var(--c-fg);
+  }
+  .art-meta {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--c-muted);
+    margin-bottom: 18px;
+    letter-spacing: 0.04em;
+  }
+  .art-meta .dot { margin: 0 8px; color: var(--c-border); }
+
+  /* ===== 5-axis score ===== */
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-border);
+    margin: 0 0 24px;
+  }
+  .score-cell { text-align: center; }
+  .score-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    color: var(--c-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .score-val {
+    font-family: "Barlow", sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: var(--c-fg);
+    line-height: 1;
+  }
+  .score-val .max { font-size: 11px; color: var(--c-muted); font-weight: 500; }
+  .score-bar {
+    height: 3px;
+    background: var(--c-border);
+    margin-top: 6px;
+    position: relative;
+  }
+  .score-bar::after {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--c-accent);
+  }
+  .s-1::after { width: 20%; } .s-2::after { width: 40%; }
+  .s-3::after { width: 60%; } .s-4::after { width: 80%; }
+  .s-5::after { width: 100%; }
+
+  /* ===== Article body ===== */
+  .art-body { color: var(--c-fg-dim); }
+  .art-body h4 {
+    font-family: "Barlow", "Noto Sans SC", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--c-fg);
+    letter-spacing: 0.02em;
+    margin: 28px 0 8px;
+    padding-left: 14px;
+    border-left: 3px solid var(--c-accent);
+  }
+  .art-body p { margin: 0 0 14px; }
+  .art-body .quote {
+    border-left: 2px solid var(--c-border);
+    padding: 4px 0 4px 18px;
+    margin: 14px 0;
+    color: var(--c-fg);
+    font-family: "Noto Serif SC", serif;
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+  .art-body .quote .src {
+    display: block;
+    margin-top: 6px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    color: var(--c-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .annot {
+    background: var(--c-bg-warm);
+    border: 1px dashed var(--c-border);
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14.5px;
+    color: var(--c-fg);
+    line-height: 1.7;
+  }
+  .annot .annot-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--c-accent);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  mark.hl {
+    background: transparent;
+    color: var(--c-mark);
+    box-shadow: inset 0 -8px 0 rgba(246,210,74,0.12);
+    padding: 0 2px;
+  }
+  .takeaway {
+    margin-top: 22px;
+    padding: 18px 22px;
+    border: 1px solid var(--c-accent);
+    background: rgba(232,93,38,0.06);
+  }
+  .takeaway-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--c-accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .takeaway-body {
+    color: var(--c-fg);
+    font-family: "Noto Sans SC", "Barlow", sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .takeaway-body ul { margin: 6px 0; padding-left: 20px; }
+  .takeaway-body li { margin-bottom: 4px; }
+
+  /* ===== Brief cards ===== */
+  .brief-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 20px;
+  }
+  .brief {
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-border);
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .brief-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--c-accent);
+    margin-bottom: 6px;
+  }
+  .brief h4 {
+    font-family: "Barlow", "Noto Sans SC", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.3;
+    margin: 0 0 10px;
+    color: var(--c-fg);
+  }
+  .brief-meta {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--c-muted);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+  .brief-body { font-size: 14.5px; color: var(--c-fg-dim); line-height: 1.7; flex: 1; }
+  .brief-key {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--c-border);
+    font-size: 13px;
+    color: var(--c-mark);
+    font-family: "Noto Sans SC", sans-serif;
+    line-height: 1.6;
+  }
+  .brief-key::before { content: "▸ "; color: var(--c-accent); }
+
+  /* ===== Skim list ===== */
+  .skim-list { list-style: none; margin: 0; padding: 0; }
+  .skim {
+    display: grid;
+    grid-template-columns: 60px 1fr 140px;
+    gap: 18px;
+    align-items: baseline;
+    padding: 16px 0;
+    border-top: 1px solid var(--c-border-soft);
+  }
+  .skim:last-child { border-bottom: 1px solid var(--c-border-soft); }
+  .skim-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--c-muted);
+    letter-spacing: 0.08em;
+  }
+  .skim-text { color: var(--c-fg); font-size: 15px; }
+  .skim-text .src { color: var(--c-muted); font-size: 13px; }
+  .skim-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--c-accent-soft);
+    letter-spacing: 0.08em;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  /* ===== Skip list ===== */
+  .skip-list { list-style: none; margin: 0; padding: 0; color: var(--c-muted); font-size: 13.5px; line-height: 1.8; }
+  .skip-list li::before { content: "✕ "; color: var(--c-border); margin-right: 4px; }
+
+  /* ===== Insight ledger ===== */
+  table.ledger {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  table.ledger th {
+    text-align: left;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--c-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    background: var(--c-bg-alt);
+    border-bottom: 1px solid var(--c-border);
+  }
+  table.ledger td {
+    padding: 14px;
+    border-bottom: 1px solid var(--c-border-soft);
+    vertical-align: top;
+    color: var(--c-fg-dim);
+    line-height: 1.65;
+  }
+  table.ledger td.who { color: var(--c-accent); font-family: "IBM Plex Mono", monospace; font-size: 12px; white-space: nowrap; }
+  table.ledger td.thesis { color: var(--c-fg); font-weight: 500; }
+  table.ledger tr:hover td { background: rgba(232,93,38,0.03); }
+
+  /* ===== Footer ===== */
+  footer {
+    border-top: 1px solid var(--c-border);
+    margin-top: 80px;
+    padding: 32px 7vw 56px;
+    color: var(--c-muted);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+  footer .accent { color: var(--c-accent); }
+
+  @media (max-width: 680px) {
+    .article-head { grid-template-columns: 1fr; gap: 8px; }
+    .article-num { font-size: 36px; }
+    .score-grid { grid-template-columns: repeat(2, 1fr); }
+    .skim { grid-template-columns: 1fr; gap: 4px; }
+    .skim-tag { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="kicker">MIRA · DAILY READING DIGEST · <span class="accent">VOL.002</span></div>
+  <h1 class="cover-h1">视频 Agent，<br>与一场关于 <span class="accent">Token</span> 的<br>无声涨价</h1>
+  <p class="cover-sub">本期主旨：当视频模型不再被算法定义、而被"调度"定义；当 SaaS 的计价单位从座位变成 Token——AI 产品的边界正在被两条隐线悄悄重画。给做内容平台与 PMF 的人。</p>
+  <div class="meta-strip">
+    <span><strong>2026.06.02</strong> · 周二</span>
+    <span><strong>13 篇</strong> 入围 · <strong>8 篇</strong> 深读 · <strong>5 篇</strong> 速览</span>
+    <span>过去 24h · 39 条 Readwise 流入</span>
+    <span>读者：<strong>TikTok Gaming 产品高管</strong></span>
+  </div>
+</header>
+
+<main>
+
+<!-- ========== Editorial ========== -->
+<section>
+  <div class="section-label">EDITORIAL · 卷首语</div>
+  <h2 class="sec-h2">两个错位，组成了今天 AI 行业的真实地图</h2>
+  <div class="editorial">
+    <p>过去 24 小时的阅读流，最值得记住的不是哪条单点新闻，而是<em>两个错位</em>同时被放大：</p>
+    <p><strong>第一个错位</strong>，是视频模型的"智能源头"被搬错了位置——Ethan He 在 Latent Space 那期长达近 2 万字的访谈里给了一个反共识结论：<em>视频模型的"理解"不来自视频数据，来自 LLM</em>。所以下一个 Sora 不会是"更好的视频模型"，而是"视频 Agent"。这件事如果成立，TikTok / 抖音过去十年沉淀的"短视频内容护城河"，可能不在 GPU、不在版权、不在创作者激励，而在<em>是否有一个真正会"调度"内容生成与剪辑的语言模型大脑</em>。</p>
+    <p><strong>第二个错位</strong>，是 AI 的计价单位悄悄从"座位"变成了"Token"。AI Daily Brief 用一个个人案例点破：一个个人项目六周烧掉 5000 美元 API 费用，等于过去两年 Claude Max 的月费。当订阅 → API 的迁移完成，整个 SaaS 行业的"用户数 × 单价"估值模型会失灵——重新计价的不是 OpenAI 和 Anthropic，而是它们下游的所有应用层。</p>
+    <p>这两件事看似无关，本质都是同一句话：<em>真正决定行业格局的，是"调度层"位于哪一侧。</em>视频领域是 LLM 调度生成模型；订阅领域是 API 消费调度座位收入。下面 8 篇深读和 5 篇速览，是围绕这个判断的横切面。</p>
+    <div class="editorial-sig">— MIRA · 2026.06.02 morning</div>
+  </div>
+</section>
+
+<hr class="section-rule">
+
+<!-- ========== Deep dives ========== -->
+<section>
+  <div class="section-label">DEEP DIVE · 深度分析（8 篇）</div>
+  <h2 class="sec-h2">值得放在你今天思考里的 8 件事</h2>
+
+  <!-- ========== DEEP 01: Ethan He / Grok Imagine ========== -->
+  <article class="article">
+    <div class="article-head">
+      <div class="article-num">01</div>
+      <div>
+        <div class="article-tag-row">
+          <span class="tag hot">★ 本期重点</span>
+          <span class="tag">VIDEO AGENT</span>
+          <span class="tag">WORLD MODEL</span>
+          <span class="tag">XAI</span>
+        </div>
+        <h3 class="art-title">下一个 Sora 不会是模型，而是 Agent — Ethan He 在 Latent Space 的 2 万字访谈</h3>
+        <div class="art-meta">Latent Space Podcast · Swyx & Vibhu × Ethan He（前 NVIDIA Cosmos / xAI Grok Imagine 负责人）<span class="dot">·</span>17,674 字 · 约 100 min<span class="dot">·</span><a href="https://www.latent.space/p/video-agents" target="_blank">latent.space/p/video-agents</a></div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-cell"><div class="score-label">信息密度</div><div class="score-val">5<span class="max">/5</span></div><div class="score-bar s-5"></div></div>
+      <div class="score-cell"><div class="score-label">论证强度</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">反共识</div><div class="score-val">5<span class="max">/5</span></div><div class="score-bar s-5"></div></div>
+      <div class="score-cell"><div class="score-label">决策可用</div><div class="score-val">5<span class="max">/5</span></div><div class="score-bar s-5"></div></div>
+      <div class="score-cell"><div class="score-label">岗位相关</div><div class="score-val">5<span class="max">/5</span></div><div class="score-bar s-5"></div></div>
+    </div>
+
+    <div class="art-body">
+
+      <h4>论点 1：视频模型的"理解力"，其实来自 LLM</h4>
+      <p>Ethan 给了一个被严重低估的判断：互联网上的视频<strong>本质上和文本是不相关的</strong>——YouTube 的标题"我今天很开心"与画面里的山脉景物没有任何因果联系。所以训练视频模型的第一步，不是堆视频数据，而是<mark class="hl">用 VLM 给视频生成 100% 合成的"语言-画面"配对描述</mark>。</p>
+      <div class="quote">"The data you need is a hundred percent synthetic pair of language and image or language to video. Because on the internet, the videos don't naturally associate with text."<span class="src">— Ethan He</span></div>
+      <div class="annot">
+        <span class="annot-label">MIRA 批注</span>
+        这条意味着：<strong>视频模型的"上限"不是由视频数据上限决定的，而是由 VLM/LLM 的描述能力决定的</strong>。TikTok 沉淀的几十亿短视频在没有强 caption 之前，本身并不是"AI 资产"——是"AI 原料"。谁能把这些视频用最贵的 VLM caption 一遍，谁就先把数据变成资产。这是一个 capex 题，不是技术题。
+      </div>
+
+      <h4>论点 2：迭代速度 &gt; 算法新意</h4>
+      <p>三个月从零做到 Grok Imagine v1.0，Ethan 的解释里几乎没有提到新算法，反复强调的是<strong>"每天能跑多少轮 iteration"</strong>。最大的模型质量提升，来自<mark class="hl">在 data pipeline 和 training pipeline 里发现并修复小 bug</mark>——不是新点子。</p>
+      <div class="quote">"A lot of the improvements does not come from new algorithms. It comes from finding small bugs here and there in the data pipeline, in the model training pipeline. Those give the biggest boost to the model quality."<span class="src">— Ethan He</span></div>
+      <div class="annot">
+        <span class="annot-label">MIRA 批注</span>
+        对产品团队的反讽是：在 AI 时代，"工程纪律"重新比"算法品味"值钱。这与你团队应该招什么人直接相关——一个能每天 ship 三次的 infra 工程师，对模型质量的贡献可能高于一个写新 paper 的研究员。
+      </div>
+
+      <h4>论点 3：编码模型变强后，<strong>compute 重新成为瓶颈</strong></h4>
+      <p>过去写一个新算法要几周——这段时间里你的 GPU 是闲的。现在 Codex / Claude Code 几小时写完，你的瓶颈立刻回到"我有没有足够 GPU 把这个 idea 跑完"。Ethan 形容：<mark class="hl">"现在你必须把每一个想法都跑一遍，否则就是没有做好你的工作"</mark>——研究员的心理压力大幅升高。</p>
+      <div class="annot">
+        <span class="annot-label">MIRA 批注</span>
+        这给"AI 编程让算力需求下降"的论调一记反手。事实可能相反：<strong>AI 让"想法 → 实验"周期从周缩到小时，未消耗的算力被立刻补满</strong>。对中国大厂的启示——储备 H 系列 GPU 不是 2025 那种 FOMO，是 2026 真实的 compute 饥饿。
+      </div>
+
+      <h4>论点 4：视频是 AI 的下一种"前端"——Flipbook / Neural OS / Generative UI</h4>
+      <p>当推理成本继续下降，视频模型可能成为 AI 的<strong>实际显示层</strong>——不再是 HTML/CSS，而是"用户意图直接生成像素"。Flipbook 项目今年小爆，被大多数人当作 demo，Ethan 认真把它视为下一代 UI 的入口。</p>
+      <div class="quote">"Video gen models may become the front end of AI ... generative UI could replace traditional HTML/CSS ... future interfaces may go from user intent to pixels."<span class="src">— Latent Space 编辑摘要</span></div>
+      <div class="annot">
+        <span class="annot-label">MIRA 批注 · 对你最相关</span>
+        如果这条成立，TikTok Gaming 的<strong>试玩广告 / 互动 mini-game</strong>赛道会被冲击：不再需要 SDK 适配，不再需要美术资源，<strong>玩家发一句"我想试 Clash of Clans 类型"就能即时生成可玩 demo</strong>。短期内是噱头，3 年内可能成为获客的实际竞品形态。值得在年度规划里留一个 watchlist 名额。
+      </div>
+
+      <h4>论点 5：xAI 的速度秘诀——会议少 / 通信带宽低 / "daddy Elon" 的 GPU</h4>
+      <p>Ethan 直说：xAI 文化是"一天一次 sync，剩下全是 build"。Vibhu 半开玩笑："压力还在于你每小时烧几千颗 GPU。"——补充了一个少有人提的细节：<mark class="hl">即便有 Elon，GPU 也是有限的，研究员之间是在竞争 compute 配额</mark>。</p>
+      <div class="annot">
+        <span class="annot-label">MIRA 批注</span>
+        给中国大厂组织设计的启示：<strong>"研究员小队 + 极少会议 + 内部 GPU 配额市场"</strong> 是一个比"大组织 + Roadmap 评审"更适合 AI infra 团队的形态。值得对照看你团队当前的 sync 频率。
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-label">TAKE-HOME · 你可以今天就做的三件事</div>
+        <div class="takeaway-body">
+          <ul>
+            <li><strong>问 infra 团队</strong>：我们对存量短视频做过"高质量 caption 重生成"的成本估算吗？这是数据→资产的第一笔账。</li>
+            <li><strong>给团队设一个 watchlist</strong>：Flipbook / Genie 3 / Grok Imagine Agent 这条 generative UI 线，每周更新一次进度。</li>
+            <li><strong>反问招聘标准</strong>：下一个 staff+ 名额，是"算法品味"还是"日 ship 三次"？答案会决定团队明年的速度。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ========== DEEP 02: Token Shortage ========== -->
+  <article class="article">
+    <div class="article-head">
+      <div class="article-num">02</div>
+      <div>
+        <div class="article-tag-row">
+          <span class="tag hot">★ 本期重点</span>
+          <span class="tag">商业模式</span>
+          <span class="tag">DEFINING SHIFT</span>
+        </div>
+        <h3 class="art-title">"Token 短缺时代"开始了——SaaS 的座位定价正在被悄悄废弃</h3>
+        <div class="art-meta">The AI Daily Brief · Nathaniel Whittemore<span class="dot">·</span>2026 年 5 月月度总结<span class="dot">·</span><a href="https://www.youtube.com/watch?v=ex6abzvzaIo" target="_blank">YouTube</a></div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-cell"><div class="score-label">信息密度</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">论证强度</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">反共识</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">决策可用</div><div class="score-val">5<span class="max">/5</span></div><div class="score-bar s-5"></div></div>
+      <div class="score-cell"><div class="score-label">岗位相关</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+    </div>
+
+    <div class="art-body">
+
+      <h4>核心断言：从"座位"到"Token"的迁移已经完成</h4>
+      <p>Nathaniel 用一个亲身案例打底：他做的 contextportfolio.ai 小项目，<strong>六周烧掉 5000 美元 API 费用</strong>，相当于他过去两年的 Claude Max 月费总和。这个数字反向定义了 AI 行业的新经济单位：<mark class="hl">"OpenAI / Anthropic 的收入瓶颈，不再是付费用户转化率，而是用户消耗的 Token 量"</mark>。</p>
+      <div class="quote">"The most relevant economic unit for AI companies ceased to be the seat and instead shifted to the token."<span class="src">— Nathaniel Whittemore</span></div>
+
+      <h4>为什么 2026 年 5 月是个分水岭</h4>
+      <p>三件事在 5 月叠加，把"座位经济"推下悬崖：</p>
+      <ol style="color:var(--c-fg-dim);padding-left:24px;line-height:1.85;">
+        <li><strong>Agentic harness 普及</strong>：Claude Code / Codex / OpenClaw / Hermes 让"vibe coder"开始向生产环境推代码。</li>
+        <li><strong>开发模式从 prompt → 多轮 agent</strong>：单次调用变成"plan → implement → verify → debug → submit"，token 消耗指数级膨胀。</li>
+        <li><strong>非技术人用 AI 造产品</strong>（参见本期 Deep 04，Bryce 用 Replit + Claude 三月做出 App Store 上的 iPhone 应用），消费 API 的人不再仅限工程师。</li>
+      </ol>
+
+      <h4>对 SaaS 定价的二阶冲击</h4>
+      <div class="annot">
+        <span class="annot-label">MIRA 批注</span>
+        如果你公司里任何一条产品线还在用<strong>"月活 × 客单价"</strong>给商业前景建模，那个模型可能 12 个月内就过时。<mark class="hl">新的单位是"用户日均消耗 Token 数"</mark>——这决定了你需要付给上游的 API 成本、能向用户收的弹性溢价、以及竞品能不能用更便宜的 token 把你挤死。<br><br>
+        TikTok Gaming 直接相关：游戏内 NPC 对话、剧情生成、玩家 UGC 翻译——这些原本"边际成本接近 0"的 feature，在 token 经济下会成为<strong>每个 DAU 都在烧钱的成本中心</strong>。这是 PD 必须做财务模型的事情，不是研发 owner 的事情。
+      </div>
+
+      <div class="takeaway">
+        <div class="takeaway-label">TAKE-HOME</div>
+        <div class="takeaway-body">
+          下次产品评审，要求商业 PD 给所有 LLM-enabled feature 提供 <strong>"token-per-DAU"</strong> 而不是 "GMV per DAU" 估算。建立一个内部 dashboard，每周看这个数字的趋势。这是 2026 年 H2 产品经理的必备指标。
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ========== DEEP 03: Cursor ========== -->
+  <article class="article">
+    <div class="article-head">
+      <div class="article-num">03</div>
+      <div>
+        <div class="article-tag-row">
+          <span class="tag">INFRA TRICK</span>
+          <span class="tag">RL</span>
+        </div>
+        <h3 class="art-title">Cursor 怎么把 1TB 模型"跨洲热传"——只 ship delta，不 ship 权重</h3>
+        <div class="art-meta">Sequoia Capital · Dmytro Dzhulgakov（Cursor RL Infra）<span class="dot">·</span>视频短片<span class="dot">·</span><a href="https://www.youtube.com/shorts/dQVq3tEfZ58" target="_blank">YouTube Shorts</a></div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-cell"><div class="score-label">信息密度</div><div class="score-val">5<span class="max">/5</span></div><div class="score-bar s-5"></div></div>
+      <div class="score-cell"><div class="score-label">论证强度</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">反共识</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">决策可用</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">岗位相关</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+    </div>
+
+    <div class="art-body">
+      <h4>问题：1TB 模型怎么在 RL 训练中实时跨集群同步？</h4>
+      <p>RL 训练对"模型新鲜度"敏感——actor 拿到的权重越旧，policy 越 stale，训练就越发散。但全模型 1TB，跨大洲传一次是几十分钟级。Cursor 团队发现：<mark class="hl">虽然全模型是 1TB，但 RL 的每一步训练只会精确改一小撮权重，权重的变化有非常规律的稀疏模式</mark>。</p>
+      <h4>解法：delta 压缩 + 数据库式快照系统</h4>
+      <p>把"全量权重"分解成"基础快照 + delta 链"，传输 delta 只需 1/20 的带宽。再加快照存储、增量恢复、reconciliation——本质上是把模型权重当成<strong>分布式数据库</strong>来管。Dmytro 说："we were able to build it in lossless fashion"——两端 byte-equivalent。</p>
+      <div class="annot">
+        <span class="annot-label">MIRA 批注</span>
+        这条看似 infra 八卦，但揭示了一个范式：<strong>"AI 模型作为数据资产"——它的存储、传输、版本管理，需要的不是 ML 工程师，而是分布式数据库工程师</strong>。下一代大厂 AI infra 团队的招聘画像会向这个方向偏移。
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">TAKE-HOME</div>
+        <div class="takeaway-body">
+          如果你团队在跑任何 online RL / 持续训练 pipeline，建议明天就问 infra：<strong>"我们的权重同步带宽，是不是被全量传输浪费了？delta 模式能省多少？"</strong>——这是个一周可以做出 POC 的优化。
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ========== DEEP 04: How I AI / Bryce ========== -->
+  <article class="article">
+    <div class="article-head">
+      <div class="article-num">04</div>
+      <div>
+        <div class="article-tag-row">
+          <span class="tag">NO-CODE</span>
+          <span class="tag">PM 视角</span>
+        </div>
+        <h3 class="art-title">没写过一行代码的 HR 把 AI 健身 App 推上 App Store —— Bryce 的"三步舞"工作流</h3>
+        <div class="art-meta">Lenny's Newsletter / How I AI · Bryce Rattner Keithley<span class="dot">·</span>1,635 字邮件<span class="dot">·</span><a href="https://www.lennysnewsletter.com" target="_blank">lennysnewsletter.com</a></div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-cell"><div class="score-label">信息密度</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">论证强度</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">反共识</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">决策可用</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">岗位相关</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+    </div>
+
+    <div class="art-body">
+      <h4>方法：Claude 当架构师，Claude Code 当工程师，Terminal 当执行器</h4>
+      <p>Bryce 的工作流被她总结为"plan → execute → deploy 三步舞"：</p>
+      <ul style="color:var(--c-fg-dim);padding-left:22px;">
+        <li><strong>Plan</strong>：用常规 Claude（聊天版）讨论怎么做，Claude 会告诉她什么时候该切到 Claude Code 写真实代码。</li>
+        <li><strong>Execute</strong>：把代码贴回 Claude 让它 review，确认无误。</li>
+        <li><strong>Deploy</strong>：Claude 告诉她该粘什么命令到 Terminal。</li>
+      </ul>
+
+      <h4>调试技巧：截图 + 重启 prompt，不要"接着改"</h4>
+      <p>当 AI 没听懂，她的策略不是反复 follow-up，而是<mark class="hl">完全重启 prompt 或者发截图、甚至手画一张图</mark>。她说："关键是换方法，不要陷在同一个失败模式里。"</p>
+
+      <h4>金句：技术面试逻辑变了</h4>
+      <div class="quote">"工程师如果只是想'最快找到 working solution'，那就是搞错了点。Robot 比他们更快。人的角色变成了'理解整套工具栈，知道何时用 AI，何时不用'。"<span class="src">— Bryce</span></div>
+
+      <div class="annot">
+        <span class="annot-label">MIRA 批注 · 给你的产品团队</span>
+        这篇值得发给每一个还在用"会不会 Python"作为 PM 招聘门槛的 leader。<strong>现在的门槛不是技术力，是"工具栈调度力"</strong>——和上面 Ethan He 那条"视频模型 = LLM 调度生成模型"是同一个隐喻在不同领域的复现。
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">TAKE-HOME</div>
+        <div class="takeaway-body">
+          团队内推动一个"PM 自建工具周"——每个 PM 用 Replit/Claude Code 做出一个解决自己日常问题的小工具（数据看板、自动化脚本、试玩 demo），跑通"plan-execute-deploy"流程。这是 2026 PM 最低能力线。
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ========== DEEP 05: Demis biographer ========== -->
+  <article class="article">
+    <div class="article-head">
+      <div class="article-num">05</div>
+      <div>
+        <div class="article-tag-row">
+          <span class="tag">行业人物</span>
+          <span class="tag">DEEPMIND</span>
+        </div>
+        <h3 class="art-title">Demis Hassabis 传记作者：30 小时酒馆访谈，关于 AGI、Sam、Elon、上帝</h3>
+        <div class="art-meta">Unsupervised Learning · Jacob Effron × Sebastian Mallaby<span class="dot">·</span><em>The Infinity Machine</em> 作者<span class="dot">·</span><a href="https://www.youtube.com/watch?v=WC_embCiwgU" target="_blank">YouTube</a></div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-cell"><div class="score-label">信息密度</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">论证强度</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">反共识</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">决策可用</div><div class="score-val">2<span class="max">/5</span></div><div class="score-bar s-2"></div></div>
+      <div class="score-cell"><div class="score-label">岗位相关</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+    </div>
+
+    <div class="art-body">
+      <h4>三个值得记下的细节</h4>
+      <ul style="color:var(--c-fg-dim);padding-left:22px;line-height:1.85;">
+        <li><strong>Reid Hoffman 曾出价 10 亿美元</strong>劝 Demis 把 DeepMind 从 Google 拆出来——Demis 拒绝，证据是他把"控制 Google 的算力底座"看得比独立更重。</li>
+        <li><strong>Demis 看 Sam 的视角</strong>：Sebastian 直接说"Demis 有诺贝尔奖，Sam 没读完本科——Demis 因此不太把 Sam 当回事"。这种"科学正统性 vs 产品野心"的张力，决定了未来 18 个月两家公司在公关上的位置差异。</li>
+        <li><strong>Demis 偶尔会"砸桌子"</strong>：会激动地说"如果我们用正确的方式做科学，我们也许会更接近某种我们可以称之为'上帝'的东西"——Sebastian 用这个细节定义 Demis 是"宗教科学家"，不是工程师。</li>
+      </ul>
+      <div class="annot">
+        <span class="annot-label">MIRA 批注</span>
+        对中国读者最有用的一条：<strong>"Demis 不会成为一个 Sam-style 的公众人物"</strong>——Sebastian 用 "Demis is too sensible" 来概括。这给国内做 AI 战略的人一个信号：<mark class="hl">Google/DeepMind 的对外姿态会一直偏低调，但在政策、安全、监管议题上影响力远大于声量</mark>——别只盯着 OpenAI 的推特看竞争格局。
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">TAKE-HOME</div>
+        <div class="takeaway-body">
+          有时间的话推荐读 <em>The Infinity Machine</em> 全书。它对理解 Google 内部为什么做 Gemini 这样而不是那样，有不可替代的视角。但不是"决策必需"的——可以放周末再读。
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ========== DEEP 06: Baseten ========== -->
+  <article class="article">
+    <div class="article-head">
+      <div class="article-num">06</div>
+      <div>
+        <div class="article-tag-row">
+          <span class="tag">INFRA 商业</span>
+          <span class="tag">NDR 400%</span>
+        </div>
+        <h3 class="art-title">"我们从没失去过头部客户"——Baseten 谈推理软件层的护城河</h3>
+        <div class="art-meta">No Priors Podcast · Tuhin Srivastava（Baseten CEO）<span class="dot">·</span>视频短片<span class="dot">·</span><a href="https://www.youtube.com/shorts/lYZJZMqgSjI" target="_blank">YouTube Shorts</a></div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-cell"><div class="score-label">信息密度</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">论证强度</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">反共识</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">决策可用</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">岗位相关</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+    </div>
+
+    <div class="art-body">
+      <h4>三句话核心</h4>
+      <div class="quote">"GPU as a service is not sticky. Customers see it as a commodity. <strong>Inference with the software layer included is incredibly sticky.</strong> None of our top 30 customers have ever churned. We're talking like 400% annual NDR."<span class="src">— Tuhin Srivastava, Baseten CEO</span></div>
+      <h4>为什么这条值得记</h4>
+      <p>Cursor、Abridge、Clay、OpenEvidence——这些 2026 增长最快的 AI 公司全跑在 Baseten 上，且<mark class="hl">没有一家迁走</mark>。Tuhin 把它归因为"软件层"——监控、autoscaling、推理优化、模型路由这些<strong>"无聊但必须的工程"</strong>构成了真护城河。</p>
+      <div class="annot">
+        <span class="annot-label">MIRA 批注</span>
+        这条与 Deep 02（Token 短缺）是<strong>同一硬币的两面</strong>：当 AI 经济单位变成 token，谁能把 token 跑得最便宜+最稳定，谁就能锁定客户。<strong>"infra 软件层"的估值溢价，会持续比"GPU 出租"高一个数量级</strong>。中国对标——硅基流动、潞晨、Together AI 国内版——是值得跟踪的赛道。
+      </div>
+    </div>
+  </article>
+
+  <!-- ========== DEEP 07: Peter Yang But For Real ========== -->
+  <article class="article">
+    <div class="article-head">
+      <div class="article-num">07</div>
+      <div>
+        <div class="article-tag-row">
+          <span class="tag">PROMPT 技巧</span>
+          <span class="tag">即用即走</span>
+        </div>
+        <h3 class="art-title">"But For Real" —— 用一个 prompt 让 AI 自查 3-5 个 bug</h3>
+        <div class="art-meta">Peter Yang · 视频短片<span class="dot">·</span><a href="https://www.youtube.com/shorts/OlPnb9HhQKc" target="_blank">YouTube Shorts</a></div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-cell"><div class="score-label">信息密度</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">论证强度</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">反共识</div><div class="score-val">2<span class="max">/5</span></div><div class="score-bar s-2"></div></div>
+      <div class="score-cell"><div class="score-label">决策可用</div><div class="score-val">5<span class="max">/5</span></div><div class="score-bar s-5"></div></div>
+      <div class="score-cell"><div class="score-label">岗位相关</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+    </div>
+
+    <div class="art-body">
+      <h4>做法</h4>
+      <p>当 AI 写完一个 plan、实现完代码，再追加一个"But For Real" skill / prompt——本质是<mark class="hl">告诉 LLM "你几乎肯定搞砸了什么，回头再看一遍"</mark>。Peter 的实证：每次都能找出 3-5 个 bug。</p>
+      <h4>类比</h4>
+      <p>"在一个 5-10 人的工程团队里，你提 PR，必然有另一个开发 review 你，并且说'诶这块我不会这么写'。让 AI 扮演那个 reviewer。"</p>
+      <div class="annot">
+        <span class="annot-label">MIRA 批注 · 即用</span>
+        把这条加入你自己用 AI 写文档/代码的 default checklist。一行 prompt，零成本，长期复利。同样适用于 PRD、code review、PR 描述——任何"AI 一次性输出"的场景。
+      </div>
+    </div>
+  </article>
+
+  <!-- ========== DEEP 08: Ben Thompson cover ========== -->
+  <article class="article">
+    <div class="article-head">
+      <div class="article-num">08</div>
+      <div>
+        <div class="article-tag-row">
+          <span class="tag">封面引文</span>
+          <span class="tag">付费墙</span>
+        </div>
+        <h3 class="art-title">YouTube 已经赢了票房 — Ben Thompson 一句话，足以定调本期</h3>
+        <div class="art-meta">Stratechery · Ben Thompson<span class="dot">·</span>付费文章（仅可见首段）<span class="dot">·</span><a href="https://stratechery.com/2026/youtubers-win-the-box-office-goodbye-gatekeepers-the-youtube-bar/" target="_blank">stratechery.com</a></div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-cell"><div class="score-label">信息密度</div><div class="score-val">2<span class="max">/5</span></div><div class="score-bar s-2"></div></div>
+      <div class="score-cell"><div class="score-label">论证强度</div><div class="score-val">3<span class="max">/5</span></div><div class="score-bar s-3"></div></div>
+      <div class="score-cell"><div class="score-label">反共识</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">决策可用</div><div class="score-val">4<span class="max">/5</span></div><div class="score-bar s-4"></div></div>
+      <div class="score-cell"><div class="score-label">岗位相关</div><div class="score-val">5<span class="max">/5</span></div><div class="score-bar s-5"></div></div>
+    </div>
+
+    <div class="art-body">
+      <div class="quote">"YouTubers are ruling the box office, and it shouldn't be a surprise: <strong>succeeding on YouTube is a much higher bar than the gates that currently govern Hollywood.</strong>"<span class="src">— Ben Thompson, Stratechery 2026-06-01</span></div>
+
+      <h4>仅基于这句论点的延伸推理</h4>
+      <p>Ben 给的反共识是：YouTube 的<strong>算法 + 用户投票</strong>是比好莱坞工作室 + 投资人评审更严酷的内容筛选机制。能在 YouTube 上跑出 1000 万订阅的人，已经穿越了一个比"找一家 studio 投资我"难得多的过滤器。当这些人入侵传统院线赛道，他们带的不是"草根 luck"，是<mark class="hl">十年被算法磨砺出的产品直觉</mark>。</p>
+
+      <div class="annot">
+        <span class="annot-label">MIRA 批注 · 给 TikTok Gaming</span>
+        反向类比：<strong>TikTok 上跑出来的小游戏 / 试玩广告 / IP 联动 creator，已经是一个比"传统手游发行"更严苛筛选环境下的赢家</strong>。如果你团队还在用"传统手游发行视角"评估这些 creator，正在错过下一代赢家。<br><br>
+        具体动作：在 TikTok 内部 list 出"过去 12 个月单条游戏视频破 500 万播放的 creator"，把他们当成"准发行商"接触，而不是"达人"接触。这是 Vol.002 给你最直接的一条 action。
+      </div>
+      <div class="takeaway">
+        <div class="takeaway-label">TAKE-HOME</div>
+        <div class="takeaway-body">
+          原文付费，建议直接订阅 Stratechery（年费约 $150）——Ben Thompson 一年的洞见量级远高于这个价。或至少订阅 Dithering（他和 John Gruber 的 15 分钟双周播客）。<br>
+          <strong>本期标题"goodbye gatekeepers"已经够你拿去和团队开一次会。</strong>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<hr class="section-rule">
+
+<!-- ========== Brief cards ========== -->
+<section>
+  <div class="section-label">QUICK READ · 速览（5 篇）</div>
+  <h2 class="sec-h2">值得 30 秒过一眼的</h2>
+
+  <div class="brief-grid">
+
+    <div class="brief">
+      <div class="brief-num">QR · 01</div>
+      <h4>NVIDIA Cosmos 3：第一个"物理 AI"全开源 omni-model</h4>
+      <div class="brief-meta">Hugging Face Blog · NVIDIA · 1,663 字</div>
+      <div class="brief-body">Cosmos 3 把 video + 3D + 物理推理整合进单一开源模型，定位是机器人 / 自动驾驶 / 数字孪生的"世界模型基座"。完全开源、可商用。是 Ethan He 在 NVIDIA 做的那条线的最新一代。</div>
+      <div class="brief-key">值得跟踪的开源世界模型基座，3 年内会成为机器人创业的事实标准。</div>
+    </div>
+
+    <div class="brief">
+      <div class="brief-num">QR · 02</div>
+      <h4>JetBrains 发布 Mellum2：12B MoE 编码模型</h4>
+      <div class="brief-meta">Hugging Face Blog · JetBrains · 474 字</div>
+      <div class="brief-body">JetBrains 自研开源 MoE 编码模型，专为 IDE 内 inline completion 优化。性价比对标 Codestral / DeepSeek-Coder，活跃参数小、延迟低。</div>
+      <div class="brief-key">本地 / 私有部署的编码模型选项又多一个，对企业内代码安全场景有用。</div>
+    </div>
+
+    <div class="brief">
+      <div class="brief-num">QR · 03</div>
+      <h4>IBM：企业级 AI 需要"Agent Logic"层，不只是 LLM</h4>
+      <div class="brief-meta">Hugging Face Blog · IBM Research · 2,074 字</div>
+      <div class="brief-body">IBM 提出"Beyond LLMs"框架：企业落地 AI 真正缺的不是更强的模型，是"业务逻辑 → agent 行为"的中间表达层。强调可审计、可回滚、可合规。</div>
+      <div class="brief-key">大企业内推 AI 落地的 buzzword 迭代信号，对 toB 团队有参考价值。</div>
+    </div>
+
+    <div class="brief">
+      <div class="brief-num">QR · 04</div>
+      <h4>OpenAI 在密歇根破土 1GW 数据中心（Stargate 项目）</h4>
+      <div class="brief-meta">OpenAI News · 1,093 字</div>
+      <div class="brief-body">Stargate 在密歇根新增一个 1GW 集群项目，强调本地就业、能源合作、AI 基础设施扩张。属于"AI = 国家基础设施"叙事的标配新闻。</div>
+      <div class="brief-key">不影响近期决策，但能感受到 OpenAI 在政策叙事上的稳态推进节奏。</div>
+    </div>
+
+    <div class="brief">
+      <div class="brief-num">QR · 05</div>
+      <h4>Readwise / Reader 5 月 29 日更新：更好的全库搜索 + AI Ghostreader 升级</h4>
+      <div class="brief-meta">Readwise Changelog · 447 字</div>
+      <div class="brief-body">Reader 搜索从"已同步到设备"升级为"覆盖全库"。还有几个小的 Ghostreader / 高亮 UX 优化。</div>
+      <div class="brief-key">对你这种重度 Readwise 用户：可以试试新的全库搜索替代旧 workflow。</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-rule">
+
+<!-- ========== Skim list ========== -->
+<section>
+  <div class="section-label">SKIM REPEAT · 速记（论文 / 工具速过）</div>
+  <h2 class="sec-h2">归档级别，知道有就够了</h2>
+
+  <ul class="skim-list">
+    <li class="skim">
+      <span class="skim-num">SR · 01</span>
+      <span class="skim-text"><strong>Archon</strong>：统一多模态数字人生成模型 — 文 / 音 / 动作 / 视觉一体化生成。<span class="src">Hugging Face 论文 feed</span></span>
+      <span class="skim-tag">PAPER · 数字人</span>
+    </li>
+    <li class="skim">
+      <span class="skim-num">SR · 02</span>
+      <span class="skim-text"><strong>CSULoRA</strong>：低秩适配做安全微调，缓解 LoRA 后的安全退化。<span class="src">Hugging Face 论文 feed</span></span>
+      <span class="skim-tag">PAPER · 安全</span>
+    </li>
+    <li class="skim">
+      <span class="skim-num">SR · 03</span>
+      <span class="skim-text"><strong>OrcaRouter</strong>：生产级 LLM router，offline+online 混合学习做路由决策。<span class="src">Hugging Face 论文 feed</span></span>
+      <span class="skim-tag">PAPER · 路由</span>
+    </li>
+    <li class="skim">
+      <span class="skim-num">SR · 04</span>
+      <span class="skim-text"><strong>BenHalluEval</strong>：孟加拉语幻觉评估框架（小语种第一个系统评测）。<span class="src">Hugging Face 论文 feed</span></span>
+      <span class="skim-tag">PAPER · 评测</span>
+    </li>
+    <li class="skim">
+      <span class="skim-num">SR · 05</span>
+      <span class="skim-text"><strong>Speech Understanding Framework</strong>：统一可复现的 Speech LLM 评测工具。<span class="src">Hugging Face 论文 feed</span></span>
+      <span class="skim-tag">PAPER · 评测</span>
+    </li>
+    <li class="skim">
+      <span class="skim-num">SR · 06</span>
+      <span class="skim-text"><strong>逛逛 GitHub</strong>：本周 7 个小众 / 新开源项目推荐（两期合并）。<span class="src">公众号</span></span>
+      <span class="skim-tag">TOOL · GitHub</span>
+    </li>
+    <li class="skim">
+      <span class="skim-num">SR · 07</span>
+      <span class="skim-text"><strong>OpenAI Rosalind Biodefense</strong>：前沿 AI 赋能生物防御（OpenAI 政策新方向）。<span class="src">RSS</span></span>
+      <span class="skim-tag">POLICY · OPENAI</span>
+    </li>
+  </ul>
+</section>
+
+<hr class="section-rule">
+
+<!-- ========== Skip list ========== -->
+<section>
+  <div class="section-label">SKIPPED · 跳过列表</div>
+  <h2 class="sec-h2">看过、判断不必读</h2>
+  <ul class="skip-list">
+    <li><strong>OpenAI - Our views on AI policy and political advocacy</strong>（500 字，立场重申，无新信息量）</li>
+    <li><strong>Tom's Marketing Ideas - The worst marketing ideas I've ever seen</strong>（核心内容付费墙后）</li>
+    <li><strong>IBM Agent Logic 文章重复出现（#13 + #14）</strong>，已并为速览 QR-03</li>
+    <li><strong>Vol.001 的归档文章（mira / coze / Claudian 自产），共 13 篇</strong>，已计入昨日</li>
+    <li><strong>Ethan He 访谈的视频片段（#6）</strong>，已并入 Deep-01 长文分析</li>
+  </ul>
+</section>
+
+<hr class="section-rule">
+
+<!-- ========== Insight ledger ========== -->
+<section>
+  <div class="section-label">INSIGHT LEDGER · 观点入库</div>
+  <h2 class="sec-h2">本期沉淀进知识库的 6 条判断</h2>
+
+  <table class="ledger">
+    <thead>
+      <tr>
+        <th>提出者</th>
+        <th>核心论点</th>
+        <th>对你（TikTok Gaming）的可操作动作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="who">Ethan He / xAI</td>
+        <td class="thesis">视频模型的"理解力"来自 LLM，不是视频数据本身。下一个 Sora 是"video agent"。</td>
+        <td>评估存量短视频"高质量重 caption"的成本曲线；watchlist Flipbook / generative UI 路线。</td>
+      </tr>
+      <tr>
+        <td class="who">Nathaniel Whittemore</td>
+        <td class="thesis">AI 经济单位已从"座位"变为"Token"。SaaS 估值模型需重写。</td>
+        <td>下个季度产品评审强制要求 token-per-DAU 而非 GMV-per-DAU 估算。</td>
+      </tr>
+      <tr>
+        <td class="who">Dmytro / Cursor</td>
+        <td class="thesis">RL 训练里模型权重变化稀疏，跨集群同步只 ship delta 即可省 20x 带宽。</td>
+        <td>检查内部 RL pipeline 是否在浪费带宽，1 周可做 POC。</td>
+      </tr>
+      <tr>
+        <td class="who">Tuhin / Baseten</td>
+        <td class="thesis">"卖 GPU"不 sticky，"卖带软件层的推理"超 sticky（400% NDR）。软件层是真护城河。</td>
+        <td>评估内部推理服务是否在做"软件层"投入，避免被纯 GPU 思路拖死。</td>
+      </tr>
+      <tr>
+        <td class="who">Bryce Keithley</td>
+        <td class="thesis">没写过代码的 HR 用"plan-execute-deploy"三步舞，三月做出上架 App Store 的 iPhone 应用。</td>
+        <td>团队内办"PM 自建工具周"。这是 2026 PM 最低能力线。</td>
+      </tr>
+      <tr>
+        <td class="who">Ben Thompson</td>
+        <td class="thesis">YouTube 算法是比 Hollywood gatekeeper 更严苛的内容筛选器，赢家迁入主流赛道是必然。</td>
+        <td>把"过去 12 月 TikTok 单条游戏视频 &gt; 500 万播放的 creator"按"准发行商"对接，不再按"达人"。</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  © MIRA · <span class="accent">Vol.002</span> · 2026.06.02<br>
+  来源：Readwise 过去 24h 阅读流 · 39 条原始 · 13 条入围 · 8 深读 + 5 速览 + 7 速记 + 5 跳过<br>
+  下期约 06.03 06:00 · 自动推送 · feedback → MIRA P2P
+</footer>
+
+</body>
+</html>
