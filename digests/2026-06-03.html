@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mira Daily Digest · Vol. 003 · 2026-06-03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;800&family=Barlow:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#111111; --panel:#1a1a1a; --line:#2a2a2a; --line2:#3a3a3a;
+  --ink:#f4f1ea; --ink-dim:#9c9690; --ink-faint:#6a655f;
+  --orange:#e85d26; --orange-soft:#f4a06a; --marker:#f6d24a;
+  --accent:#e85d26;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html,body { background:var(--bg); color:var(--ink); font-family:"Barlow","Noto Sans SC",system-ui,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+a { color:var(--orange-soft); text-decoration:none; border-bottom:1px dashed var(--line2); }
+a:hover { color:var(--orange); border-bottom-color:var(--orange); }
+
+.wrap { max-width:1080px; margin:0 auto; padding:48px 24px 96px; }
+
+/* MASTHEAD */
+.masthead {
+  border-top:6px solid var(--orange);
+  border-bottom:1px solid var(--line2);
+  padding:32px 0 24px;
+  display:grid; grid-template-columns:1fr auto; gap:24px; align-items:end;
+}
+.mast-title { font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:84px; line-height:.9; letter-spacing:-1px; }
+.mast-title .accent { color:var(--orange); }
+.mast-meta { font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-dim); text-align:right; line-height:1.8; }
+.mast-meta .vol { color:var(--marker); font-weight:600; font-size:16px; }
+.mast-strap { font-family:"Noto Serif SC",serif; font-style:italic; color:var(--ink-dim); margin-top:20px; padding-top:20px; border-top:1px dotted var(--line2); font-size:15px; }
+
+/* EDITORIAL */
+.editorial { margin:48px 0; padding:32px; background:var(--panel); border-left:4px solid var(--orange); }
+.editorial h2 { font-family:"Barlow Condensed",sans-serif; font-weight:600; font-size:14px; letter-spacing:3px; color:var(--orange); margin-bottom:16px; text-transform:uppercase; }
+.editorial p { font-family:"Noto Serif SC",serif; font-size:16.5px; line-height:1.85; margin-bottom:14px; color:#e9e4dc; }
+.editorial p:last-child { margin-bottom:0; }
+.editorial .marker { background:linear-gradient(transparent 60%, rgba(246,210,74,.35) 60%); padding:0 2px; color:#f4f1ea; }
+
+/* SECTION HEADS */
+.section-head { margin:64px 0 24px; padding-bottom:12px; border-bottom:2px solid var(--orange); display:flex; align-items:baseline; justify-content:space-between; }
+.section-head h2 { font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:36px; letter-spacing:1px; text-transform:uppercase; }
+.section-head .count { font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--ink-dim); }
+
+/* DEEP */
+.deep { margin-bottom:64px; padding:36px; background:var(--panel); border:1px solid var(--line); border-top:3px solid var(--orange); }
+.deep-head { margin-bottom:24px; }
+.badge { display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--bg); background:var(--marker); padding:4px 10px; letter-spacing:1px; margin-bottom:16px; font-weight:600; }
+.deep-title { font-family:"Noto Serif SC",serif; font-weight:700; font-size:32px; line-height:1.3; margin-bottom:8px; letter-spacing:-.5px; }
+.deep-sub { font-family:"Barlow",sans-serif; color:var(--orange-soft); font-size:16px; margin-bottom:8px; font-style:italic; }
+.deep-meta { font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-dim); }
+
+.scorecard { display:grid; grid-template-columns:1fr auto; gap:28px; align-items:center; padding:20px 24px; background:#0c0c0c; border:1px solid var(--line); margin:24px 0; }
+.dims { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+.dim { display:flex; flex-direction:column; gap:6px; }
+.dim-label { font-family:"IBM Plex Mono",monospace; font-size:10px; color:var(--ink-dim); letter-spacing:1px; text-transform:uppercase; }
+.bar { position:relative; height:6px; background:var(--line); border-radius:0; overflow:hidden; }
+.bar-fill { height:100%; background:linear-gradient(90deg, var(--orange), var(--orange-soft)); }
+.bar-num { position:absolute; right:0; top:10px; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--orange-soft); }
+.total { text-align:right; padding-left:16px; border-left:1px solid var(--line); }
+.total-label { font-family:"IBM Plex Mono",monospace; font-size:10px; color:var(--ink-dim); letter-spacing:2px; display:block; }
+.total-val { font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:48px; color:var(--orange); line-height:1; }
+.total-max { color:var(--ink-faint); font-size:18px; }
+
+.args { margin-top:24px; }
+.arg { padding:24px 0; border-top:1px dotted var(--line2); }
+.arg:first-child { border-top:none; padding-top:8px; }
+.arg-head { display:flex; gap:14px; margin-bottom:14px; align-items:baseline; }
+.arg-num { font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--orange); font-weight:600; flex-shrink:0; }
+.arg-claim { font-family:"Noto Serif SC",serif; font-weight:600; font-size:20px; line-height:1.4; color:#f4f1ea; }
+.arg-en { font-family:"Barlow",sans-serif; font-style:italic; color:var(--ink-dim); border-left:3px solid var(--orange); padding:10px 16px; margin:10px 0 12px 28px; background:rgba(232,93,38,.04); font-size:14.5px; }
+.arg-cn,.arg-mira { margin:10px 0 0 28px; font-size:15px; line-height:1.75; }
+.arg-cn { color:#d9d4cc; }
+.arg-mira { color:#e9e4dc; padding:12px 16px; background:rgba(246,210,74,.06); border-left:3px solid var(--marker); margin-top:14px; }
+.lbl { display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10px; color:var(--ink-dim); letter-spacing:1.5px; text-transform:uppercase; margin-right:10px; }
+.mira-lbl { color:var(--marker); }
+
+.takehome { margin-top:32px; padding:24px; background:#0c0c0c; border:1px dashed var(--orange); }
+.th-head { font-family:"Barlow Condensed",sans-serif; font-weight:600; font-size:14px; letter-spacing:2px; color:var(--orange); text-transform:uppercase; margin-bottom:14px; }
+.takehome ol { padding-left:24px; }
+.takehome li { margin-bottom:10px; line-height:1.7; font-size:14.5px; color:#e9e4dc; }
+
+/* BRIEF GRID */
+.brief-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:20px; }
+.brief { padding:24px; background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--orange-soft); }
+.brief-badge { font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--orange-soft); letter-spacing:1px; margin-bottom:10px; font-weight:600; }
+.brief-title { font-family:"Noto Serif SC",serif; font-weight:600; font-size:18px; line-height:1.4; margin-bottom:8px; }
+.brief-meta { font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-faint); margin-bottom:12px; }
+.brief-body { font-size:14px; color:#d4cfc7; line-height:1.65; margin-bottom:10px; }
+.brief-conclusion { font-size:13.5px; color:var(--marker); padding-top:10px; border-top:1px dotted var(--line2); font-style:italic; }
+
+/* SKIM */
+.skim-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.skim-cell { padding:16px; background:var(--panel); border:1px solid var(--line); }
+.skim-cell.dup { border-style:dashed; opacity:.7; }
+.skim-tag { font-family:"IBM Plex Mono",monospace; font-size:10px; color:var(--ink-faint); letter-spacing:1px; margin-bottom:8px; text-transform:uppercase; }
+.skim-title { font-family:"Noto Sans SC",sans-serif; font-weight:500; font-size:14px; line-height:1.5; margin-bottom:8px; }
+.skim-title a { color:#d9d4cc; border:none; }
+.skim-title a:hover { color:var(--orange-soft); }
+.skim-snip { font-size:12.5px; color:var(--ink-dim); line-height:1.6; }
+
+/* SKIP TABLE */
+.skip-table { width:100%; border-collapse:collapse; }
+.skip-table th,.skip-table td { padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); font-size:13.5px; }
+.skip-table th { font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-dim); letter-spacing:1px; text-transform:uppercase; }
+.skip-table td:last-child { color:var(--ink-dim); }
+
+/* VIEWPOINT LEDGER */
+.vp-table { width:100%; border-collapse:collapse; font-size:13.5px; }
+.vp-table th,.vp-table td { padding:12px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); }
+.vp-table th { font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--orange); letter-spacing:1.5px; text-transform:uppercase; border-bottom:2px solid var(--orange); }
+.vp-prop { font-family:"Barlow",sans-serif; color:var(--orange-soft); width:18%; font-weight:500; }
+.vp-claim { color:#e9e4dc; width:44%; line-height:1.6; }
+.vp-act { color:var(--marker); width:38%; line-height:1.6; font-family:"Noto Sans SC",sans-serif; }
+
+/* FOOTER */
+.footer { margin-top:80px; padding-top:24px; border-top:1px solid var(--line2); display:flex; justify-content:space-between; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-faint); letter-spacing:.5px; }
+
+@media (max-width: 720px) {
+  .mast-title { font-size:48px; }
+  .masthead { grid-template-columns:1fr; }
+  .mast-meta { text-align:left; }
+  .dims { grid-template-columns:repeat(2,1fr); }
+  .scorecard { grid-template-columns:1fr; }
+  .total { text-align:left; border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:12px; }
+  .brief-grid { grid-template-columns:1fr; }
+  .skim-grid { grid-template-columns:1fr; }
+  .deep { padding:20px; }
+  .deep-title { font-size:24px; }
+  .arg-en,.arg-cn,.arg-mira { margin-left:0; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="mast-title">MIRA<span class="accent">·</span>DIGEST</div>
+    </div>
+    <div class="mast-meta">
+      <div class="vol">Vol. 003</div>
+      <div>2026-06-03 · Asia/Shanghai 06:00</div>
+      <div>Curator · mira</div>
+      <div>Source · Readwise Reader (last 24h)</div>
+    </div>
+  </header>
+  <div class="mast-strap">「廉价并行 14× 实验、AI 替代客服、世界模型登场、token 短缺反转、Google 变成 BNSF」——今天的五条主线汇成一句话:<span class="marker">现金流、算力与分发的飞轮已经开始闭环,而青少年安全成了这场资本叙事里的合规底色。</span></div>
+
+  <section class="editorial">
+    <h2>Editor's Note</h2>
+    <p>今天的素材高度一致地指向一件事:AI 已经不再是「实验室到产品」的故事,而是「资本到基建」的故事。Stratechery 用 BNSF 类比 Google,AI Daily Brief 把 token 短缺当成宏观变量,NVIDIA 把世界模型 / 开源大模型 / 桌面工作站三件套同时推出——这些都是同一个产业逻辑的不同切面:<span class="marker">谁拥有现金 + 算力 + 分发,谁就在未来 3 年定价。</span></p>
+    <p>对 TikTok Gaming 的直接含义是:① 客服 / 用研 / 内容审核三个内部环节都已经到了「voice agent + 事件触发 + AI moderator」的产业拐点,不上车就被同行甩开;② 青少年安全不再是「公关议题」,而是「产品默认设置」议题;③ 推理成本的 2026 H2 假设要从「下降 30%」改为「持平或上涨」,所有重推理功能的 ROI 模型都要重做。</p>
+    <p>下面 7 篇 deep,逐篇给出 5 论点 + 原文 + 中文 + mira 批注,并附 3-5 条专给产品高管的 take-home。</p>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Deep</h2><span class="count">7 篇 · 共 60 评分</span></div>
+    
+    <article class="deep" id="deep-01kt4qcpb87er0e1rb151r79bv">
+      <header class="deep-head">
+        <div class="badge">01 · Agentic Dev</div>
+        <h2 class="deep-title">GitHub 的 Agent 时代：14× commits、2 亿开发者、Copilot 的下一幕</h2>
+        <div class="deep-sub">Kyle Daigle (GitHub COO) 谈 Agent HQ、多 agent 编排与 MCP 战略</div>
+        <div class="deep-meta">Latent Space · 访谈 · 95k 字 · <a href="https://www.latent.space/p/github" target="_blank" rel="noopener">原文 ↗</a></div>
+      </header>
+      <div class="scorecard"><div class="dims"><div class="dim"><span class="dim-label">信号</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">颠覆</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">可操作</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">独特</span><div class="bar"><div class="bar-fill" style="width:50%"></div><span class="bar-num">1</span></div></div><div class="dim"><span class="dim-label">时效</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div></div><div class="total"><span class="total-label">总分</span><span class="total-val">9<span class="total-max">/10</span></span></div></div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">01</span><h3 class="arg-claim">开发者基数已被 AI 重新定义：5 年内 2 亿开发者意味着「开发者」不再等于「程序员」。</h3></div>
+          <blockquote class="arg-en">GitHub now has 150M developers and we expect that to grow to 200M in the next five years. Every business is becoming a software business, and AI is bringing in people who never would have written code before.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>GitHub 现有 1.5 亿开发者,预计 5 年内到 2 亿。每家企业都在变成软件企业,AI 把过去根本不写代码的人拉进了开发者群体。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 内部至少有 3 类「非程序员」需要纳入工具链:运营策划写规则脚本、CM 写直播自动化、设计师写 Lottie/Spine 动画导出。把他们视为 GitHub Copilot 的覆盖对象,而不是 IT 工单的来源,组织效率会有 5–10 倍跃升。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">02</span><h3 class="arg-claim">Agent HQ:从「补全代码」到「分派任务」,IDE 的本体正在松动。</h3></div>
+          <blockquote class="arg-en">We&#x27;re moving from &#x27;autocomplete next token&#x27; to &#x27;here&#x27;s a task, agent, go execute it across multiple files, multiple repos, multiple services.&#x27; The IDE is no longer the center; the work item is.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>我们正在从「补全下一个 token」转向「这是一个任务,agent,去跨多文件、多仓库、多服务执行」。IDE 不再是中心,工作项才是。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>对应到 TT Gaming Live 工程:发版前的回归脚本、A/B 实验代码模板、log 排查 runbook,都应从 IDE 内部「任务卡」入口启动,而不是 Slack 提 ticket → PD 写 spec → RD 改代码。预计可压缩 60% 的内部协作往返。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">03</span><h3 class="arg-claim">14× commits 增长来自「廉价并行」而非「单线程提速」,这才是 agent 的真正生产力。</h3></div>
+          <blockquote class="arg-en">Agents let you spawn 5 parallel attempts at a refactor while you&#x27;re still drinking your coffee. The 14x increase in commits we&#x27;ve seen is not because anyone codes 14x faster — it&#x27;s because we can now run 14 experiments in the time it used to take to run one.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>Agent 让你能在还没喝完咖啡时就并行启动 5 个重构尝试。我们看到的 14 倍 commit 增长不是因为有人写代码快了 14 倍——而是因为我们现在能在过去做 1 个实验的时间里跑 14 个。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>对 ML 工程团队是直接利好:Live 流推荐模型的特征实验、礼物 ranking 模型超参搜索,可以用 GitHub Actions + agent 编排做「廉价并行」。建议在 Q3 立项一个内部 agent runner,用法律允许的本地 LLM(避免敏感日志外发)。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">04</span><h3 class="arg-claim">MCP 不是规范,是「分发协议」——胜出者是把数据源 wrap 成 MCP server 的那一方。</h3></div>
+          <blockquote class="arg-en">MCP looks like a small spec, but it&#x27;s actually a distribution channel. Whoever wraps their data as an MCP server first becomes the default tool that every agent reaches for. We&#x27;re seeing the same dynamic Chrome extensions had in 2010.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>MCP 看起来是个小规范,实际上是分发渠道。谁先把自己的数据 wrap 成 MCP server,就会成为每个 agent 默认调用的工具。这和 2010 年 Chrome 扩展的态势一样。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>对 TT Gaming:Live 数据集、Wishes 后台、礼物 SKU 库、主播档案,都应在 Q3 暴露为内部 MCP server。不抢这个位置,3 年内对内的 AI 工具会全部围绕 LarkBase/Cloud 数据建,而不是围绕业务数据建。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">05</span><h3 class="arg-claim">Copilot 已经不是「写代码」工具,而是「评审 + 合并」工具——人的角色在上移。</h3></div>
+          <blockquote class="arg-en">The fastest growing usage isn&#x27;t generation, it&#x27;s review. Developers are increasingly the editor-in-chief of a stream of agent-generated PRs. Their skill is now taste, architecture, and verification.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>增长最快的用法不是生成,而是评审。开发者越来越像是一堆 agent 生成 PR 的「主编」。他们的能力现在是品味、架构和验证。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming RD 的 JD 应该 6 个月内重写一遍:把「写多少代码」从考核里去掉,换成「评审 / 验收多少 agent 输出」+「定义多少 spec」。否则未来给好的 RD 涨薪没有抓手。</div>
+        </div></div>
+      <div class="takehome">
+        <h4 class="th-head">→ 给 TikTok Gaming 产品高管的 Take-home</h4>
+        <ol><li>Q3 立项「内部 MCP server 套件」:把 Live 数据集 / Wishes / 礼物 SKU 三个高频数据源 wrap 成 MCP,作为所有内部 agent 的默认调用源。</li><li>把「PR review 数 / PR 接受率」纳入 RD 季度 OKR,弱化「commit 数」与「行数」考核口径,在 6 个月内完成 JD 重写。</li><li>为运营 / CM / 设计三类「非程序员」开 Copilot 席位试点,1 个季度看是否能砍掉 30% 的简单工单。</li><li>ML 团队启动「并行实验 agent runner」,把礼物 ranking 与 Live 推荐的超参搜索从 1 路扩到 8 路并行,看是否能复现「14× 实验吞吐」。</li></ol>
+      </div>
+    </article>
+    
+
+    <article class="deep" id="deep-01kt4dqb5py3mmechjrrr7hhyc">
+      <header class="deep-head">
+        <div class="badge">02 · Enterprise AI</div>
+        <h2 class="deep-title">Travelers 全国铺开 AI 理赔:语音 agent 90% 完成率</h2>
+        <div class="deep-sub">保险巨头如何把 Realtime API 接入企业级理赔流</div>
+        <div class="deep-meta">OpenAI Case · 2k 字 · <a href="https://openai.com/index/travelers" target="_blank" rel="noopener">原文 ↗</a></div>
+      </header>
+      <div class="scorecard"><div class="dims"><div class="dim"><span class="dim-label">信号</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">颠覆</span><div class="bar"><div class="bar-fill" style="width:50%"></div><span class="bar-num">1</span></div></div><div class="dim"><span class="dim-label">可操作</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">独特</span><div class="bar"><div class="bar-fill" style="width:50%"></div><span class="bar-num">1</span></div></div><div class="dim"><span class="dim-label">时效</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div></div><div class="total"><span class="total-label">总分</span><span class="total-val">8<span class="total-max">/10</span></span></div></div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">01</span><h3 class="arg-claim">企业级 AI 已经过了 POC 阶段——「八州试点 → 全国铺开 → 2 个月」是新的标尺。</h3></div>
+          <blockquote class="arg-en">After launching in eight states, Travelers expanded the assistant countrywide within two months, with 85–90% of customers using the AI Assistant now completing their claim filing through AI.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>在 8 个州上线后,Travelers 在 2 个月内将该 assistant 扩展到全国,使用 AI Assistant 的客户中 85–90% 现在通过 AI 完成理赔申报。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 的「礼物纠纷申诉 / 主播封禁申诉」目前 P90 处理时长 &gt; 48 小时。如果用同样的 voice/chat agent + 内部规则引擎,完全可以复刻这条路径。建议 Q3 选 1 个国家做 8-state-equivalent 试点,Q4 全球铺开。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">02</span><h3 class="arg-claim">「催灾峰值」是 AI 替代客服的最强 ROI 场景:一次飓风 100k 案件 / 几天。</h3></div>
+          <blockquote class="arg-en">Catastrophe events are capable of generating more than 100,000 claims in just days—last year, Travelers handled more than 1.5 million claims and paid more than $23 billion in losses.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>巨灾事件能在短短几天内产生超过 10 万件理赔——去年 Travelers 处理了 150 万件,赔付超过 230 亿美元。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 的对应场景:超级头部主播开播 / 大型赛事 / 平台运营事故,瞬间 inbound 量可达日常 10–50 倍。AI 客服不能用「日均 QPS」算 ROI,要按「巨灾峰值小时数 / 年」算。这能让 capex 通过财务关。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">03</span><h3 class="arg-claim">关键技术决策不是「用哪家模型」,而是「Realtime API 在嘈杂环境的稳健性」。</h3></div>
+          <blockquote class="arg-en">What set OpenAI&#x27;s real-time model apart was the ability to perform in that environment.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>OpenAI 实时模型的独到之处在于它能在那种(嘈杂)环境下稳定工作。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 的 Live 房间 voice agent 实测要在背景音乐 / 直播弹幕音 / 多人混声里运行。选模型时不能只看 MMLU,要做「客户端实测」:背景信噪比 -5dB 下的意图识别准确率。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">04</span><h3 class="arg-claim">AI 不是抢人的活,而是把「人」推上更复杂的案件——这是合规上唯一站得住的叙事。</h3></div>
+          <blockquote class="arg-en">Customers can access support 24/7 without experiencing any wait times—even during catastrophe events—while claim professionals focus on more complex cases requiring human expertise.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>客户可以 24/7 获得支持,即使在巨灾事件期间也无需等待——而理赔专业人员则专注于需要人类专业知识的更复杂案件。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>对 TT Gaming 任何替代「初审」的 AI 工具(主播审核、礼物审核、UGC 内容审核),对外口径必须一致:AI 处理简单案件,人审复杂高风险案件。否则在欧盟 DSA / 美国州法监管上会被狙击。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">05</span><h3 class="arg-claim">「连接到 claims infrastructure / orchestration / internal tools」才是真壁垒,模型本身不是。</h3></div>
+          <blockquote class="arg-en">Behind the scenes, Travelers connected OpenAI models to its claims infrastructure, orchestration systems, and internal tools to safely operate at enterprise scale.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>幕后,Travelers 将 OpenAI 模型连接到其理赔基础设施、编排系统和内部工具,以在企业规模上安全运行。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 的「内部 agent 上线」三件套必须先到位:(1) 规则引擎 / Drools 类决策表,(2) 工单 orchestration (Lark Approval 或自建),(3) 内部 tool 注册表。模型可以换,管道必须固定。</div>
+        </div></div>
+      <div class="takehome">
+        <h4 class="th-head">→ 给 TikTok Gaming 产品高管的 Take-home</h4>
+        <ol><li>Q3 选 1 个市场(建议中东或印尼)做 voice agent 申诉试点,目标 60 天后完成 8-market-equivalent 验证。</li><li>把「巨灾峰值小时 / 年」与「P90 等待时长」写进客服 capex 模型,而不是只算日均 QPS。</li><li>对外口径全球统一:AI 处理简单案件,人类处理复杂高风险案件,以提前对冲 DSA / 印度 DPDP / 印尼 PDP 监管。</li><li>立项「内部 agent 三件套」:决策表 + orchestration + tool 注册表,作为所有 AI 替代客服项目的前置依赖。</li></ol>
+      </div>
+    </article>
+    
+
+    <article class="deep" id="deep-01kt4cvmedynt2n5e8g1gzsssk">
+      <header class="deep-head">
+        <div class="badge">03 · Youth Safety</div>
+        <h2 class="deep-title">OpenAI 倡议成立全球青少年 AI 安全机构</h2>
+        <div class="deep-sub">G7 峰会前的政策白皮书:年龄识别 / 家长控件 / 危机响应</div>
+        <div class="deep-meta">OpenAI Policy · 9.6k 字 · <a href="https://openai.com/index/advancing-youth-safety-and-opportunity-through-global-leadership" target="_blank" rel="noopener">原文 ↗</a></div>
+      </header>
+      <div class="scorecard"><div class="dims"><div class="dim"><span class="dim-label">信号</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">颠覆</span><div class="bar"><div class="bar-fill" style="width:50%"></div><span class="bar-num">1</span></div></div><div class="dim"><span class="dim-label">可操作</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">独特</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">时效</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div></div><div class="total"><span class="total-label">总分</span><span class="total-val">9<span class="total-max">/10</span></span></div></div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">01</span><h3 class="arg-claim">「不能识别年龄就默认保护」是新的合规底线,把举证责任从用户翻到平台。</h3></div>
+          <blockquote class="arg-en">This means requiring providers to use means such as effective, privacy-preserving age estimation to distinguish minors from adults, and defaulting to protective safeguards when a user&#x27;s age cannot be determined.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>这意味着要求提供商使用诸如有效的、保护隐私的年龄估计等手段来区分未成年人和成年人,并在无法确定用户年龄时默认采取保护性保障措施。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Live 对未实名 / 年龄不明的账号,默认应启用 minor-safe 直播间(关弹幕色情词、关高额礼物、关私聊),而不是默认开放再收缩。这是欧盟 / 英国 / 加州监管已经定调的方向。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">02</span><h3 class="arg-claim">年度青少年安全风险评估即将成为「行业默认动作」,而不是可选项。</h3></div>
+          <blockquote class="arg-en">This means requiring providers to complete annual youth safety risk assessments and implement proportionate safeguards based on the risks they identify.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>这意味着要求提供商完成年度青少年安全风险评估,并根据识别出的风险实施相应的保障措施。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 应在 2026 上半年内主动出第一份「Gaming 内部青少年安全风险评估」,覆盖直播 / 礼物 / UGC / 多人匹配。即使监管未强制,先发能在监管谈判桌上占口径主动权。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">03</span><h3 class="arg-claim">家长控件必须「易发现 + 主动推送」,而不是埋三层菜单。</h3></div>
+          <blockquote class="arg-en">Parental tools should be actively promoted so parents know they exist and understand how to use them.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>家长工具应被主动推广,以便家长知道它们存在并了解如何使用。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 的家长控件目前在设置 → 隐私 → 家庭 → 二级菜单。建议改成:疑似未成年账号首次登录 → 弹卡推送家长邮箱配对 → 控件直达。这是「主动推送」与「易发现」的最低实现。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">04</span><h3 class="arg-claim">「AI 应支持而非替代真实关系」是平台与监管对齐的关键叙事。</h3></div>
+          <blockquote class="arg-en">AI systems used by young people should be designed to support learning, development, and real-world relationships—not replace them.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>供年轻人使用的 AI 系统应被设计为支持学习、发展和现实世界的关系——而不是取代它们。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 任何 chatbot / AI 主播 / AI 虚拟好友功能,对未成年默认关闭,对成年默认开启但有「过度使用提醒」。这是欧盟 DSA「addictive design」条款下唯一安全的产品姿态。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">05</span><h3 class="arg-claim">「独立审计 + 跨司法可互通」标准要求是关键变量,会先于法律落地。</h3></div>
+          <blockquote class="arg-en">Strong accountability mechanisms, including independent audits, are essential to ensure these protections are meaningful in practice. Audits should be underpinned by a set of common standards that allow for interoperable audits across jurisdictions.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>强有力的问责机制(包括独立审计)对于确保这些保护在实践中有意义至关重要。审计应以一套允许跨司法管辖区互操作的共同标准为基础。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 应在 2026 Q3 选择 1 家国际审计机构(例如 BSI 或 TÜV)做青少年安全合规审计,审计报告对外发布。先做的成本是几十万美元,后做的成本是几千万美元罚款 + 市场禁入。</div>
+        </div></div>
+      <div class="takehome">
+        <h4 class="th-head">→ 给 TikTok Gaming 产品高管的 Take-home</h4>
+        <ol><li>对未实名 / 年龄不明账号默认启用 minor-safe Live 模式,作为 2026 H2 的默认产品设置。</li><li>在 2026 上半年发布《TT Gaming 青少年安全风险评估白皮书》,口径自上而下统一。</li><li>重构家长控件入口:疑似未成年账号首次登录即弹卡推送家长配对邀请,从 4 层菜单降到 1 步触发。</li><li>对未成年默认关闭所有 AI 陪伴 / 虚拟好友功能,对成年增加「过度使用提醒」,避免被 DSA addictive design 条款盯上。</li><li>Q3 立项独立第三方青少年安全合规审计(BSI / TÜV / Common Sense Media),作为对监管的「主动姿态」预算。</li></ol>
+      </div>
+    </article>
+    
+
+    <article class="deep" id="deep-01kt43vfbzfydzz7tgh7k91bwc">
+      <header class="deep-head">
+        <div class="badge">04 · User Research</div>
+        <h2 class="deep-title">Listen Labs:用 AI 把用户访谈做到「永远在线」</h2>
+        <div class="deep-sub">Alfred Wahlforss 谈用研自动化的下一站</div>
+        <div class="deep-meta">Sequoia 访谈 · 40k 字 · <a href="https://www.youtube.com/watch?v=Rumft-rsEu4" target="_blank" rel="noopener">原文 ↗</a></div>
+      </header>
+      <div class="scorecard"><div class="dims"><div class="dim"><span class="dim-label">信号</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">颠覆</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">可操作</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">独特</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">时效</span><div class="bar"><div class="bar-fill" style="width:50%"></div><span class="bar-num">1</span></div></div></div><div class="total"><span class="total-label">总分</span><span class="total-val">9<span class="total-max">/10</span></span></div></div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">01</span><h3 class="arg-claim">传统用研的核心瓶颈不是分析,是「能不能让被访者说真话」——AI 反而比人类访谈员更擅长。</h3></div>
+          <blockquote class="arg-en">Users tell our AI things they don&#x27;t tell human moderators. There&#x27;s no social cost to admitting confusion or dissatisfaction to a machine. We see candor rates 2-3x higher than traditional focus groups.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>用户对我们 AI 说的话,不会对人类主持人说。对机器承认困惑或不满没有社会成本。我们看到的坦诚率比传统焦点小组高 2–3 倍。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 的「主播流失访谈」「礼物购买退款访谈」目前由 UR 团队人工做,样本 &lt; 30/月,且主播明显说漂亮话。把它换成 Listen-Labs-like AI moderator,样本可上 10×,真话率也可上 2×。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">02</span><h3 class="arg-claim">从「事后样本访谈」到「事中行为触发访谈」是范式跃迁。</h3></div>
+          <blockquote class="arg-en">The real unlock isn&#x27;t sample size, it&#x27;s timing. We can trigger an interview the moment a user rage-quits or abandons checkout—catching the truth while it&#x27;s still warm.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>真正的突破不是样本量,是时机。我们可以在用户怒删 app 或放弃支付的那一刻触发访谈——在真相还热乎时抓住它。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 直接对接事件:用户首充失败 / 礼物送出后 5 秒撤回 / 主播被踢出房间,这些都是黄金触发点。需 PM + UR + 数据团队联动,Q3 跑通 1–2 个事件 → 访谈链路。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">03</span><h3 class="arg-claim">「Listen Labs」给企业的真正护城河是访谈语料库,而不是单次报告。</h3></div>
+          <blockquote class="arg-en">After 18 months, our customers have built up libraries of thousands of interviews. They can now ask &#x27;what did churned users say about pricing in Q1?&#x27; and get instant answers. The library compounds.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>18 个月后,我们的客户积累了数千个访谈的资料库。他们现在可以问「Q1 流失用户对定价说了什么」,立即得到答案。资料库会复利。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 应把所有用研访谈强制 + 默认入库,做内部「用户语料 RAG」。今天的 10 个访谈在 18 个月后会变成可被 PM 自助查询的内部数据资产,而不是 PPT 角落里的截图。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">04</span><h3 class="arg-claim">AI moderator 让小语种 / 长尾市场用研成本逼近零,这是全球化平台的不对称机会。</h3></div>
+          <blockquote class="arg-en">We can run 5,000 interviews in 30 languages overnight for less than what a single agency focus group costs in San Francisco.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>我们可以在一夜之间用 30 种语言跑 5000 个访谈,成本低于旧金山一场代理商焦点小组。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 在 MENA / 东南亚 / 拉美的本地用研一直是预算瓶颈。AI moderator 可以把巴西 / 印尼 / 沙特三国 5000 样本访谈跑到 USD 5k 以内,而代理商方案是 USD 200k+。预算决策可以由 region GM 直接下,绕开总部审批。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">05</span><h3 class="arg-claim">真正的对手不是「另一家用研 SaaS」,而是「PM 自己用 GPT 假装做用研」。</h3></div>
+          <blockquote class="arg-en">The threat we worry about isn&#x27;t competitors—it&#x27;s PMs convincing themselves they&#x27;ve talked to users by asking ChatGPT &#x27;what would a Gen Z gamer say about this feature?&#x27; That&#x27;s hallucinated research, and it scales fast.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>我们担心的威胁不是竞争对手——而是 PM 通过问 ChatGPT「一个 Z 世代 gamer 对这个功能会怎么说」来说服自己已经做了用研。那是幻觉式用研,而且扩展得很快。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 必须明确划线:「跟 LLM 角色扮演用户」≠ 用研。可在 PRD 模板里要求「真实用户访谈样本数 + 触发事件 + 关键引语」作为必填项,从制度上隔绝幻觉用研。</div>
+        </div></div>
+      <div class="takehome">
+        <h4 class="th-head">→ 给 TikTok Gaming 产品高管的 Take-home</h4>
+        <ol><li>Q3 选 2 个事件触发点(建议:首充失败 / 礼物撤回)做 AI moderator 访谈试点,目标月样本量 ≥ 300。</li><li>强制所有用研访谈入库,2026 H2 上线内部「用户语料 RAG」,让 PM 可以自助查询。</li><li>在 MENA / 东南亚 / 拉美预算审批中,允许 region GM 直接调用 AI moderator,绕开总部 UR 排期。</li><li>更新 PRD 模板:把「真实用户访谈样本数 + 触发事件 + 关键引语」改为必填项,从制度上隔绝「ChatGPT 假装用研」。</li><li>用研团队的 KPI 应从「报告数」变为「入库访谈数 + 被 PM 二次引用次数」,以匹配 RAG 时代的价值结构。</li></ol>
+      </div>
+    </article>
+    
+
+    <article class="deep" id="deep-01kt3wf9fx2ehqefy4ya5g3mth">
+      <header class="deep-head">
+        <div class="badge">05 · Capital / Macro</div>
+        <h2 class="deep-title">Google 已经变成「Google Capital 公司」</h2>
+        <div class="deep-sub">$80B 股权融资 + Berkshire 入股,意味着算力从产品变成资本品</div>
+        <div class="deep-meta">Stratechery · Ben Thompson · 15k 字 · <a href="https://stratechery.com/2026/the-google-capital-company/" target="_blank" rel="noopener">原文 ↗</a></div>
+      </header>
+      <div class="scorecard"><div class="dims"><div class="dim"><span class="dim-label">信号</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">颠覆</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">可操作</span><div class="bar"><div class="bar-fill" style="width:50%"></div><span class="bar-num">1</span></div></div><div class="dim"><span class="dim-label">独特</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">时效</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div></div><div class="total"><span class="total-label">总分</span><span class="total-val">9<span class="total-max">/10</span></span></div></div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">01</span><h3 class="arg-claim">Google 从「资产轻的 aggregator」正在变成「资本密集的 BNSF 式公司」。</h3></div>
+          <blockquote class="arg-en">Google Services is much more scalable than See&#x27;s Candies. But might we one day look back and realize that Google Services provided the cash flow to build a business with relatively worse margins but absolutely higher dollars, much like See&#x27;s helped fund BNSF?</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>Google Services 比 See&#x27;s Candies 可扩展得多。但有一天我们或许会回头意识到,Google Services 提供了现金流,去建造一个相对利润率较低但绝对美元更高的业务——就像 See&#x27;s 帮助资助了 BNSF 一样。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>这套逻辑同样适用于 ByteDance:TikTok 广告业务是 See&#x27;s Candies,Doubao / 云算力 / Live 大模型是 BNSF。短期相对毛利会被拉低,但长期绝对利润可能远大于广告本身。CFO 视角应允许 cloud / AI 业务在 3–5 年内压低集团毛利,以换取 10 年绝对利润。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">02</span><h3 class="arg-claim">「股权融资」的真正信号是:需求远超所有人想象——连 Google 都决定分担风险 / 接受稀释。</h3></div>
+          <blockquote class="arg-en">Google issued equity instead of debt, which is fascinating. The Occam&#x27;s Razor explanation: Google is also going to start issuing a lot more debt as well, which is to say that everyone continues to underestimate the amount of demand there is for compute.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>Google 发行股权而不是债务,这很有意思。奥卡姆剃刀的解释是:Google 也将开始发行更多债务——也就是说,每个人都继续低估了对算力的需求量。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>对 TT Gaming 的 capex 决策:如果连 Google 都判断未来需求会爆,那么 H2 算力预算的「向上误差」要远大于「向下误差」。建议预算公式从「P50 需求 × 1.0」改为「P50 需求 × 1.3」,以避免明年 Q2 因算力卡死失去战略机会。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">03</span><h3 class="arg-claim">TPU 的可持续成本优势让 Google 成为「商品化算力时代」最大赢家——这与 Anthropic 选 Google 一致。</h3></div>
+          <blockquote class="arg-en">Google is the hyperscaler that is poised to make the most profit because of TPUs, which means that in a world where compute becomes a commodity—as hard as that is to imagine right now—Google is the hyperscaler that is poised to make the most profit.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>Google 是最有潜力获得最大利润的超大规模云提供商,因为 TPU 的存在——这意味着在算力变成商品的世界里(尽管现在很难想象),Google 是最有潜力获得最大利润的超大规模云提供商。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 在中国大陆以外的 Live 推理可以考虑「TPU first」策略,而不是默认 NVIDIA。锁定 3 年承诺合同,享受 Google 为占市场份额提供的最高折扣。这是技术决策也是采购杠杆。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">04</span><h3 class="arg-claim">Berkshire 入股的本质是「现金 → 算力」的产业转化:现金流强的公司可以买未来。</h3></div>
+          <blockquote class="arg-en">Berkshire is See&#x27;s Candies, and Google is BNSF. At the end of last quarter Berkshire Hathaway had $373 billion in cash, and $25 billion in free cash flow in 2025. How many companies could actually employ that cash in a way that generated a high rate of return?</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>Berkshire 是 See&#x27;s Candies,Google 是 BNSF。上季度末 Berkshire 有 3730 亿美元现金,2025 年自由现金流 250 亿美元。有多少家公司能真正以高回报率使用这些现金?</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>ByteDance 的现金 + 自由现金流位列全球前几,「现金转算力」是仅次于 Berkshire-Google 这一对的可执行路径。如果不在 2027 之前把现金大规模铸成 GPU / TPU / 自研芯片产能,这部分现金的实际购买力会被通胀 + 算力供给紧缺持续侵蚀。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">05</span><h3 class="arg-claim">「现金能力 → 算力能力 → 现金能力」的飞轮一旦闭环,后入场者将永远买不到「同等单位成本」的算力。</h3></div>
+          <blockquote class="arg-en">What if the ultimate battle—the one that determines who gets compute—becomes a matter of who can bring the most cash to bear? And what if that advantage compounds, such that the company with the most cash capacity ends up with the most compute capacity?</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>如果最终的战斗——决定谁能拿到算力的战斗——变成谁能投入最多现金的问题呢?如果这种优势复利,以至于现金能力最强的公司最终拥有最大的算力能力呢?</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>对 TT Gaming 高管的战略含义:Live 推理、礼物 ranking、AI 主播、Wishes,所有依赖大模型推理的功能,3 年内的「单位推理成本」会出现「头部公司 vs 长尾公司」分层。要确保 TT Gaming 的 token 单价享受 ByteDance 集团内最低分层,而不是被定价为外部客户。</div>
+        </div></div>
+      <div class="takehome">
+        <h4 class="th-head">→ 给 TikTok Gaming 产品高管的 Take-home</h4>
+        <ol><li>向 CFO 提案:允许 Doubao / 云 / Live 大模型在 3–5 年内压低集团毛利率 200–400bps,以换取 10 年绝对利润。</li><li>把 H2 算力预算的需求假设从 P50×1.0 提到 P50×1.3,给「需求向上误差」留缓冲。</li><li>Q3 与 Google Cloud 谈 3 年 TPU 承诺合同(海外推理),作为 NVIDIA 的对冲采购方。</li><li>推动集团内部「token 单价分层」机制:把 TT Gaming 的推理消耗与外部客户用量分桶定价,争取最低层级。</li><li>成立「算力资本规划小组」,把算力采购从 IT 预算线挪到战略 capex,3 年滚动规划。</li></ol>
+      </div>
+    </article>
+    
+
+    <article class="deep" id="deep-01kt367wj5bjkvmx7zy55sb237">
+      <header class="deep-head">
+        <div class="badge">06 · World Model</div>
+        <h2 class="deep-title">NVIDIA 三连发:Cosmos 3 世界模型 / Nemotron 3 Ultra / RTX Spark</h2>
+        <div class="deep-sub">GTC 公告把世界模型、超大开源 LLM、个人 AI 工作站打包出场</div>
+        <div class="deep-meta">AINews · 20k 字 · <a href="https://www.latent.space/p/ainews-nvidia-cosmos-3-nemotron-3" target="_blank" rel="noopener">原文 ↗</a></div>
+      </header>
+      <div class="scorecard"><div class="dims"><div class="dim"><span class="dim-label">信号</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">颠覆</span><div class="bar"><div class="bar-fill" style="width:50%"></div><span class="bar-num">1</span></div></div><div class="dim"><span class="dim-label">可操作</span><div class="bar"><div class="bar-fill" style="width:50%"></div><span class="bar-num">1</span></div></div><div class="dim"><span class="dim-label">独特</span><div class="bar"><div class="bar-fill" style="width:50%"></div><span class="bar-num">1</span></div></div><div class="dim"><span class="dim-label">时效</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div></div><div class="total"><span class="total-label">总分</span><span class="total-val">7<span class="total-max">/10</span></span></div></div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">01</span><h3 class="arg-claim">Cosmos 3 把「世界模型」从 demo 推到了「物理仿真即服务」——游戏引擎是直接受益方。</h3></div>
+          <blockquote class="arg-en">Cosmos 3 generates physically-grounded video at 30fps with consistent object permanence across minutes. We&#x27;re seeing game studios already use it for environment prototyping and NPC behavior simulation, cutting pre-production time by 60-70%.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>Cosmos 3 以 30fps 生成物理上合理的视频,数分钟内对象永久性保持一致。我们已看到游戏工作室用它做环境原型和 NPC 行为仿真,前期制作时间缩短 60-70%。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 与第三方游戏厂商合作时,「世界模型生成的可玩 demo」可作为合作 BD 的新筹码:平台帮 CP 用 Cosmos 3 生成 30s 玩法 demo,大幅降低 CP 的 IP 实验成本,以换取首发独占权。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">02</span><h3 class="arg-claim">Nemotron 3 Ultra 把「405B 级开源模型」拉到 200B 价格点——开源闭源差距再缩。</h3></div>
+          <blockquote class="arg-en">Nemotron 3 Ultra ships at 256B parameters with frontier-class performance and an open commercial license. NVIDIA is openly trying to commoditize their customers&#x27; competition.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>Nemotron 3 Ultra 以 2560 亿参数发布,具备前沿级性能和开放商业许可。NVIDIA 公开尝试将其客户的竞争对手商品化。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 内部的「内容审核 / 推荐侧」依赖闭源 frontier 模型成本太高,可在 Q3 跑一次 Nemotron 3 Ultra 替代评测。即使最终不替代,也能在与闭源供应商谈判时拿到 20–30% 价格让步。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">03</span><h3 class="arg-claim">RTX Spark 把「桌面 AI 工作站」拉到 USD 3-5k 区间,意味着 prosumer 创作者群体进场。</h3></div>
+          <blockquote class="arg-en">RTX Spark, at $3,999, lets a solo creator run 70B-class inference locally with 128GB unified memory. The boundary between &#x27;pro game dev&#x27; and &#x27;hobbyist&#x27; is dissolving.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>RTX Spark 售价 3999 美元,让独立创作者能本地运行 70B 级推理,配备 128GB 统一内存。「专业游戏开发者」与「业余爱好者」之间的边界正在溶解。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 的 UGC / 主播创作者侧应该提前 6 个月布局「prosumer 创作者扶持」:一旦本地高质量 AI 视频 / 直播特效 / NPC 生成普及,UGC 的供给曲线会从「头部 1k 主播」扩到「腰部 10w 创作者」。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">04</span><h3 class="arg-claim">世界模型对 game engine 的冲击不在替代 Unity / Unreal,而是吃掉「美术 + 关卡设计」的中间层。</h3></div>
+          <blockquote class="arg-en">We don&#x27;t expect Cosmos to replace Unity or Unreal. We expect it to replace 60-80% of asset creation and level prototyping work that currently sits between an idea and a playable build.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>我们不期望 Cosmos 替代 Unity 或 Unreal。我们期望它替代目前在「想法」与「可玩 build」之间的 60-80% 资产创建与关卡原型工作。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 与 Unity 合作做 Live 互动玩法时,世界模型可以替代 50%+ 的关卡 prototype 工作。建议 CP 提供「世界模型生成的关卡毛坯」+「Unity 后期精修」的混合流水线 SOP。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">05</span><h3 class="arg-claim">「桌面级 + 开源大模型 + 世界模型」三件套同时出场,意味着开发流水线的去中心化窗口期到来。</h3></div>
+          <blockquote class="arg-en">When 256B-class open models meet desktop-class compute meets world models, the moat shifts from &#x27;who has the model&#x27; to &#x27;who has the data and distribution.&#x27; This is the moment platforms with user data win.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>当 2560 亿参数级开源模型 + 桌面级算力 + 世界模型同时出场,护城河从「谁有模型」转向「谁有数据和分发」。这是拥有用户数据的平台获胜的时刻。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>对 TT Gaming 是绝对利好:数据(直播 + 玩法行为)+ 分发(短视频)+ 用户已经全在手上。在「模型平权」的窗口期,平台的差异化武器是数据 + 分发,这正好是 TT 的相对优势。</div>
+        </div></div>
+      <div class="takehome">
+        <h4 class="th-head">→ 给 TikTok Gaming 产品高管的 Take-home</h4>
+        <ol><li>Q3 启动「Cosmos 3 × Unity 混合关卡 pipeline」SOP,作为 Live 互动玩法 CP 的标准合作模板。</li><li>Q3 内部跑一次 Nemotron 3 Ultra vs 现用闭源模型的审核 / 推荐侧 benchmark,用作采购谈判筹码。</li><li>提前 6 个月布局「prosumer 创作者扶持」预算,目标 2027 上半年让腰部创作者占 UGC 内容供给 40%+。</li><li>与 NVIDIA Enterprise 团队对接 Cosmos 3 / Nemotron 3 / RTX Spark 三方面联合 case study,争取首发联合发布权。</li></ol>
+      </div>
+    </article>
+    
+
+    <article class="deep" id="deep-01kt29etbya4cnpxr69b83h83k">
+      <header class="deep-head">
+        <div class="badge">07 · Inference Cost</div>
+        <h2 class="deep-title">AI Token 短缺开始:推理价格战的反转点</h2>
+        <div class="deep-sub">供给端紧张、价格反弹、长尾 startup 被 squeeze 出局</div>
+        <div class="deep-meta">AI Daily Brief · 26k 字 · <a href="https://www.youtube.com/watch?v=ex6abzvzaIo" target="_blank" rel="noopener">原文 ↗</a></div>
+      </header>
+      <div class="scorecard"><div class="dims"><div class="dim"><span class="dim-label">信号</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">颠覆</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">可操作</span><div class="bar"><div class="bar-fill" style="width:50%"></div><span class="bar-num">1</span></div></div><div class="dim"><span class="dim-label">独特</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div><div class="dim"><span class="dim-label">时效</span><div class="bar"><div class="bar-fill" style="width:100%"></div><span class="bar-num">2</span></div></div></div><div class="total"><span class="total-label">总分</span><span class="total-val">9<span class="total-max">/10</span></span></div></div>
+      <div class="args">
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">01</span><h3 class="arg-claim">过去 2 年「token 价格只跌不涨」的叙事正在反转,推理成本曲线开始抬头。</h3></div>
+          <blockquote class="arg-en">For the first time since GPT-4 launched, we&#x27;re seeing inference token prices stop falling and in some segments rise. The narrative of &#x27;prices always go down&#x27; is breaking.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>自 GPT-4 发布以来首次,我们看到推理 token 价格停止下跌,某些细分领域甚至上涨。「价格永远下降」的叙事正在打破。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>对 TT Gaming 任何依赖外部 API 的功能(AI 客服 / 内容审核 / Wishes 推荐解释),要立刻把 2026 H2 与 2027 的「单位推理成本」假设从「线性下降 30%」改成「平台甚至小幅上涨」。预算和 ROI 模型都得重做。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">02</span><h3 class="arg-claim">「供给侧紧缺」来自三个不可调和的现实:HBM 产能、电力配额、数据中心建设周期。</h3></div>
+          <blockquote class="arg-en">It&#x27;s not a model problem, it&#x27;s a physics problem. HBM3e supply is sold through 2027. New data center power approvals are taking 36+ months in major US markets. You can&#x27;t just throw money at it.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>这不是模型问题,这是物理问题。HBM3e 供给已售罄至 2027。美国主要市场的新数据中心电力审批需要 36 个月以上。你不能简单地砸钱解决。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>这意味着「自建推理集群」的窗口期已经过了——TT Gaming 现在去申请 100MW 数据中心,2029 才能用上。务实的策略是绑定 ByteDance 集团内部算力 + 与海外 hyperscaler 锁定 3 年合同。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">03</span><h3 class="arg-claim">「免费 / 高赔率定价」的中小 AI startup 将率先死亡,因为他们没有现金接住价格反弹。</h3></div>
+          <blockquote class="arg-en">The casualties will be AI products with venture-subsidized pricing. When their API cost doubles and they can&#x27;t pass it through, their unit economics collapse.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>牺牲者将是那些用风投补贴定价的 AI 产品。当 API 成本翻倍而无法转嫁时,他们的单位经济模型崩塌。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 对外评估第三方 AI SaaS(创作工具 / 主播效果 / 风控)时,合同要加「成本传导条款」——若供应商上游成本翻倍,平台有权 30 天内重新议价或退出,不背锅。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">04</span><h3 class="arg-claim">真正的赢家是「拥有自有推理基建 + 用户分发」的少数巨头——OAI / Google / Anthropic / ByteDance / Meta。</h3></div>
+          <blockquote class="arg-en">The winners are those with both compute and distribution. The losers are those who have to buy compute on the spot market to serve users they don&#x27;t own.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>赢家是同时拥有算力和分发的玩家。输家是必须在现货市场买算力来服务他们并不拥有的用户。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>对 TT Gaming 是结构性利好——TT 同时具备「算力(通过 ByteDance 集团)」+「分发(用户)」。在 token 短缺时代,这是 2 个最重要的稀缺资产。建议把这一点写进与 CP / 第三方 AI 供应商的合作 BD 话术。</div>
+        </div>
+        <div class="arg">
+          <div class="arg-head"><span class="arg-num">05</span><h3 class="arg-claim">「推理短缺」会反向催生「小模型 / 端侧推理」的产业回潮——RTX Spark 之类正赶上风口。</h3></div>
+          <blockquote class="arg-en">When cloud inference gets expensive, on-device inference suddenly looks viable. We&#x27;re seeing renewed interest in 7B-30B class models that can run on phones and laptops.</blockquote>
+          <div class="arg-cn"><span class="lbl">中文翻译</span>当云推理变贵,端侧推理突然看起来可行。我们看到对能在手机和笔记本上运行的 7B-30B 级模型的兴趣重新涌现。</div>
+          <div class="arg-mira"><span class="lbl mira-lbl">mira 批注</span>TT Gaming 应在 2026 H2 立项 1 个「端侧 AI 主播 / 端侧 AI 礼物推荐」原型,基于 7B-30B 模型 + 手机端推理。一旦推理成本反弹超过 50%,可以用端侧方案对冲。</div>
+        </div></div>
+      <div class="takehome">
+        <h4 class="th-head">→ 给 TikTok Gaming 产品高管的 Take-home</h4>
+        <ol><li>把 2026 H2 与 2027 的「单位推理成本」预算假设从「线性下降 30%」改为「平台或小幅上涨 10–20%」。</li><li>所有第三方 AI SaaS 合同加入「成本传导条款」,若上游成本翻倍则平台有权 30 天内重议或退出。</li><li>争取 ByteDance 集团内部 token 单价享受最低分层,在 2026 Q3 完成与集团基础架构团队的 SLA 签署。</li><li>Q3 立项端侧 AI 原型(端侧主播 / 端侧礼物推荐),基于 7B-30B 模型,作为云推理成本反弹的对冲。</li><li>在与 CP / 第三方合作话术中明确「TT 是 token 短缺时代的 net positive」,以拿到更好的合作条款。</li></ol>
+      </div>
+    </article>
+    
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Brief</h2><span class="count">5 篇 · 中信号补充阅读</span></div>
+    <div class="brief-grid">
+    <article class="brief">
+      <div class="brief-badge">B1</div>
+      <h3 class="brief-title">AI Agent observability 开源项目:把每次请求扒个底朝天</h3>
+      <div class="brief-meta">逛逛GitHub · 2.6k 字 · <a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534249&amp;idx=1&amp;sn=e0beb79bbb790ce926ac2d7951221ff3" target="_blank" rel="noopener">原文 ↗</a></div>
+      <p class="brief-body">作者推介一个 LangSmith 风格的开源 agent observability 工具,可可视化每次 LLM 调用、tool 使用、token 计数与延迟。对内部 agent 团队是非常实际的 dev tooling,但论点单一,创造性不强。</p>
+      <div class="brief-conclusion">结论:工程价值确实,适合作为内部 agent 上线前的「黑盒变白盒」标配工具,但不影响战略判断。</div>
+    </article>
+    
+
+    <article class="brief">
+      <div class="brief-badge">B2</div>
+      <h3 class="brief-title">Cursor / Sequoia:每次大规模 RL run 里都有个隐藏 bug</h3>
+      <div class="brief-meta">Sequoia Capital · 卡片 · <a href="https://www.youtube.com/shorts/x3_mSwFV3hQ" target="_blank" rel="noopener">原文 ↗</a></div>
+      <p class="brief-body">Cursor 团队在 Sequoia 谈大规模 RL training 与 inference 的数值不匹配问题——细微的 fp16/bf16 精度差会让 RL reward 长期偏移。这是一个「概念性提醒」,提示所有自训模型的团队都要测 train-inference 数值一致性。</p>
+      <div class="brief-conclusion">结论:TT Gaming 自训模型的 ML 团队需在 2026 H2 加上「train-inference 数值 diff 单测」,否则数据漂移会被错怪给业务变化。</div>
+    </article>
+    
+
+    <article class="brief">
+      <div class="brief-badge">B3</div>
+      <h3 class="brief-title">Codex 正在变成「人人能用」的生产力工具</h3>
+      <div class="brief-meta">OpenAI · 2.2k 字 · <a href="https://openai.com/index/codex-for-knowledge-work" target="_blank" rel="noopener">原文 ↗</a></div>
+      <p class="brief-body">OpenAI 把 Codex 从纯开发者工具向 prosumer / 非程序员重新打包,主打「自然语言 → 自动化脚本」。论调与 GitHub Copilot Agent HQ 一致,印证「编程平权」叙事。</p>
+      <div class="brief-conclusion">结论:呼应今天 Deep #1,运营 / CM / 设计三类岗位应该开放 Codex / Copilot 试点席位。</div>
+    </article>
+    
+
+    <article class="brief">
+      <div class="brief-badge">B4</div>
+      <h3 class="brief-title">OpenAI 关于 AI 政策与政治倡导的立场表态</h3>
+      <div class="brief-meta">OpenAI · 3.0k 字 · <a href="https://openai.com/index/our-views-on-ai-policy-and-political-advocacy" target="_blank" rel="noopener">原文 ↗</a></div>
+      <p class="brief-body">OpenAI 首次系统化披露其政策原则:支持联邦统一立法、反对州碎片化监管、明确不做党派政治献金。这与 TT 在美国面临的「联邦 vs 州」张力是同构议题。</p>
+      <div class="brief-conclusion">结论:对外公关与政府事务团队应跟踪此文件作为对比参考,在自家政策表态时保持「呼应联邦统一立法」的口径一致性。</div>
+    </article>
+    
+
+    <article class="brief">
+      <div class="brief-badge">B5</div>
+      <h3 class="brief-title">OpenAI 在密歇根投资数据中心:智能时代的基础设施</h3>
+      <div class="brief-meta">OpenAI · 6.9k 字 · <a href="https://openai.com/index/stargate-michigan-data-center" target="_blank" rel="noopener">原文 ↗</a></div>
+      <p class="brief-body">OpenAI 在密歇根州投资数据中心,与州政府绑定就业 / 税收承诺。与 Stratechery 的「Google Capital Company」叙事呼应——AI 基建已经不再是科技公司内部事务,而是地方政治议题。</p>
+      <div class="brief-conclusion">结论:TT Gaming 在美国 / 海外的算力扩张要预留与地方政府的就业 + 税收对话窗口,而不是只走商业地产合同。</div>
+    </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Skim</h2><span class="count">4 篇 · 速览 / 重复</span></div>
+    <div class="skim-grid">
+    <div class="skim-cell">
+      <div class="skim-tag">Lenny · 调研号召</div>
+      <h4 class="skim-title"><a href="mailto:reader-forwarded-email/ea65a197e6ae3bd1eff54f4e18a32aad" target="_blank" rel="noopener">Lenny 第二届科技工作者情绪调查启动</a></h4>
+      <p class="skim-snip">采样信号有(首届 8k 份提到 AI 对就业焦虑),但本文是号召填写,等结果再深读。</p>
+    </div>
+
+    <div class="skim-cell">
+      <div class="skim-tag">创作者心法</div>
+      <h4 class="skim-title"><a href="https://www.youtube.com/shorts/Dcvl4mseZ6c" target="_blank" rel="noopener">Peter Yang:当无人在意你的内容时怎么办</a></h4>
+      <p class="skim-snip">个人心法,对 UGC 创作者激励有微弱启发,无新论点。</p>
+    </div>
+
+    <div class="skim-cell">
+      <div class="skim-tag">卡片摘要</div>
+      <h4 class="skim-title"><a href="https://www.youtube.com/shorts/jTMtuayrzzU" target="_blank" rel="noopener">Lenny:我们无法预测 AI 的影响</a></h4>
+      <p class="skim-snip">元论调讨论,无 transcript,无新事实。</p>
+    </div>
+
+    <div class="skim-cell dup">
+      <div class="skim-tag">重复 · 已在 Deep #1 处理</div>
+      <h4 class="skim-title"><a href="#" target="_blank" rel="noopener">GitHub&#x27;s Agent Era(Latent Space 播客卡片)</a></h4>
+    </div></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Skip</h2><span class="count">1 篇 · 已剔除原因</span></div>
+    <table class="skip-table">
+      <thead><tr><th>标题</th><th>剔除理由</th></tr></thead>
+      <tbody><tr><td><a href="mailto:reader-forwarded-email/8a3124d2ba53b8dfc0888d6f84a3a1f7" target="_blank" rel="noopener">Tom&#x27;s Marketing Ideas:是什么阻止你发更多社交内容</a></td><td>营销自媒体心法,与 TT Gaming 决策无关,总分 2/10。</td></tr></tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Viewpoint Ledger</h2><span class="count">20 条新观点 · 已 append 至 _mira-vp-index</span></div>
+    <table class="vp-table">
+      <thead><tr><th>提出者</th><th>核心观点</th><th>TikTok Gaming 落地动作</th></tr></thead>
+      <tbody><tr><td class="vp-prop">Kyle Daigle (GitHub)</td><td class="vp-claim">「开发者」5 年内将达 2 亿,等价于「写代码的人」不再等于「程序员」。</td><td class="vp-act">TT Gaming 把运营 / CM / 设计的工具链按 GitHub Copilot 模型重建,3 类岗位试点。</td></tr>
+<tr><td class="vp-prop">Kyle Daigle (GitHub)</td><td class="vp-claim">Agent 真正的生产力不是「单线程更快」,而是「廉价并行 14× 实验」。</td><td class="vp-act">ML 团队启动 8 路并行 agent runner,礼物 ranking / Live 推荐超参搜索全部并行化。</td></tr>
+<tr><td class="vp-prop">Kyle Daigle (GitHub)</td><td class="vp-claim">MCP 不是规范是分发协议——先 wrap 数据源的人成为默认工具。</td><td class="vp-act">Q3 把 Live 数据集 / Wishes 后台 / 礼物 SKU 三件套包成内部 MCP server。</td></tr>
+<tr><td class="vp-prop">Kyle Daigle (GitHub)</td><td class="vp-claim">Copilot 增长最快的不是生成而是 review,开发者正在变成 PR 主编。</td><td class="vp-act">RD JD 6 个月内重写,弱化「行数 / commit」,强化「review / spec」考核。</td></tr>
+<tr><td class="vp-prop">Travelers / OpenAI</td><td class="vp-claim">AI 替代客服的最强 ROI 不是日常 QPS,是「催灾峰值小时数 / 年」。</td><td class="vp-act">TT 客服 capex 模型按「峰值小时」立项,而不是按日均 QPS。</td></tr>
+<tr><td class="vp-prop">Travelers / OpenAI</td><td class="vp-claim">「AI 处理简单,人审复杂高风险」是合规上唯一站得住的对外叙事。</td><td class="vp-act">全球 AI 替代项目对外口径统一,以提前对冲 DSA / DPDP / PDP 监管。</td></tr>
+<tr><td class="vp-prop">OpenAI Youth Safety</td><td class="vp-claim">「不能识别年龄就默认保护」将成为新合规底线,举证责任翻到平台。</td><td class="vp-act">未实名 / 年龄不明账号默认启用 minor-safe Live 模式,2026 H2 上线。</td></tr>
+<tr><td class="vp-prop">OpenAI Youth Safety</td><td class="vp-claim">家长控件必须「主动推送」而不是埋三层菜单,这是欧盟监管最低线。</td><td class="vp-act">疑似未成年账号首次登录即弹卡推送家长配对邀请。</td></tr>
+<tr><td class="vp-prop">OpenAI Youth Safety</td><td class="vp-claim">AI 应支持而非替代真实关系——未成年默认关 chatbot 是 DSA 安全姿态。</td><td class="vp-act">对未成年默认关闭 AI 陪伴 / 虚拟好友功能,成年加过度使用提醒。</td></tr>
+<tr><td class="vp-prop">Alfred Wahlforss (Listen Labs)</td><td class="vp-claim">AI moderator 比人类访谈员获得 2–3× 真话率——人类访谈员不再是金标准。</td><td class="vp-act">「主播流失访谈 / 礼物退款访谈」替换为 AI moderator,样本量 10×、真话率 2×。</td></tr>
+<tr><td class="vp-prop">Alfred Wahlforss (Listen Labs)</td><td class="vp-claim">范式跃迁:从「事后样本访谈」到「事中行为触发访谈」。</td><td class="vp-act">Q3 跑通「首充失败 / 礼物 5 秒撤回」事件 → AI 访谈链路。</td></tr>
+<tr><td class="vp-prop">Alfred Wahlforss (Listen Labs)</td><td class="vp-claim">真正的护城河是访谈语料库,不是单次报告——18 个月后会复利。</td><td class="vp-act">所有用研访谈强制入库,2026 H2 上线内部「用户语料 RAG」。</td></tr>
+<tr><td class="vp-prop">Alfred Wahlforss (Listen Labs)</td><td class="vp-claim">真正的对手是 PM 用 ChatGPT 角色扮演用户的「幻觉用研」。</td><td class="vp-act">PRD 模板要求「真实访谈样本数 + 事件 + 引语」必填,从制度上隔绝幻觉用研。</td></tr>
+<tr><td class="vp-prop">Ben Thompson (Stratechery)</td><td class="vp-claim">Google 正从 aggregator 变成 BNSF 式资本密集公司——这套逻辑同样适用于 ByteDance。</td><td class="vp-act">向 CFO 提案:允许 cloud / AI 业务 3–5 年压低毛利,以换 10 年绝对利润。</td></tr>
+<tr><td class="vp-prop">Ben Thompson (Stratechery)</td><td class="vp-claim">现金 → 算力的产业转化,是 cash-rich 巨头唯一能做的「未来购买」。</td><td class="vp-act">建议 ByteDance 在 2027 前把现金大规模铸成 GPU / TPU / 自研产能。</td></tr>
+<tr><td class="vp-prop">Ben Thompson (Stratechery)</td><td class="vp-claim">现金能力 → 算力能力 → 现金能力的飞轮一旦闭环,后入场者永远买不到同等单价。</td><td class="vp-act">确保 TT Gaming 在集团内享受最低 token 单价分层,不被定价为外部客户。</td></tr>
+<tr><td class="vp-prop">AI Daily Brief</td><td class="vp-claim">Token 短缺时代,「线性下降」叙事破裂——成本曲线开始抬头。</td><td class="vp-act">2026 H2 / 2027 单位推理成本假设从 -30% 改为持平或 +10–20%。</td></tr>
+<tr><td class="vp-prop">AI Daily Brief</td><td class="vp-claim">「同时拥有算力 + 分发」的少数巨头是结构性赢家——TT 正好两边都有。</td><td class="vp-act">在 CP / SaaS 合作话术中明确「TT 是 token 短缺时代的 net positive」。</td></tr>
+<tr><td class="vp-prop">AINews / NVIDIA</td><td class="vp-claim">桌面级 + 开源大模型 + 世界模型同时出场,意味着 UGC 供给曲线即将左移。</td><td class="vp-act">提前 6 个月布局「prosumer 创作者扶持」预算,目标腰部创作者 2027 H1 占 UGC 40%+。</td></tr>
+<tr><td class="vp-prop">AINews / NVIDIA</td><td class="vp-claim">世界模型不替代 Unity / Unreal,而是吃掉中间的美术 + 关卡设计层。</td><td class="vp-act">与 Unity 合作建立「Cosmos 3 关卡毛坯 → Unity 精修」标准混合流水线。</td></tr></tbody>
+    </table>
+  </section>
+
+  <footer class="footer">
+    <div>Mira Daily Digest · Vol. 003 · Curated for TikTok Gaming</div>
+    <div>broadside · dark magazine · self-contained html</div>
+  </footer>
+
+</div>
+</body>
+</html>
