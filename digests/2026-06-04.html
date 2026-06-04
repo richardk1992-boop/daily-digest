@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vol.004 · Microsoft Build 2026 特辑 — Frontier Intelligence Platform、MAI 七连发、形式化数学 AI · 2026-06-04</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;800;900&family=Noto+Sans+SC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#111111; --bg2:#1a1a1a; --bg3:#222222; --line:#2a2a2a;
+  --fg:#e8e6e1; --fg2:#a8a59f; --fg3:#6b6862;
+  --orange:#e85d26; --peach:#f4a06a; --yellow:#f6d24a; --green:#7fb069;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html,body { background:var(--bg); color:var(--fg); }
+body {
+  font-family:'Noto Sans SC','Barlow',sans-serif;
+  font-size:15px; line-height:1.7; max-width:1100px; margin:0 auto; padding:48px 36px 80px;
+}
+a { color:var(--peach); text-decoration:none; border-bottom:1px dashed var(--fg3); }
+a:hover { color:var(--yellow); border-color:var(--yellow); }
+
+/* masthead */
+.mast { border-top:6px solid var(--orange); padding-top:24px; margin-bottom:48px; }
+.kicker { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.3em; color:var(--orange); text-transform:uppercase; margin-bottom:18px; }
+.mast h1 { font-family:'Barlow','Noto Serif SC',serif; font-weight:900; font-size:42px; line-height:1.15; letter-spacing:-.02em; margin-bottom:14px; color:var(--fg); }
+.mast h1 em { font-style:normal; color:var(--orange); }
+.subt { font-size:17px; color:var(--fg2); font-weight:400; max-width:900px; }
+.meta-strip { display:flex; gap:32px; margin-top:24px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--fg3); flex-wrap:wrap; }
+.meta-strip span b { color:var(--yellow); }
+
+/* TOC */
+.toc { background:var(--bg2); border-left:3px solid var(--orange); padding:18px 24px; margin-bottom:42px; }
+.toc h3 { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.3em; color:var(--orange); text-transform:uppercase; margin-bottom:12px; }
+.toc ol { list-style:none; columns:2; column-gap:32px; }
+.toc li { padding:4px 0; font-size:13px; border-bottom:1px dotted var(--line); break-inside:avoid; }
+.toc a { border:none; color:var(--fg2); }
+.toc a:hover { color:var(--yellow); }
+.toc .tnum { color:var(--orange); font-family:'IBM Plex Mono',monospace; font-weight:600; margin-right:8px; }
+
+/* clusters */
+.cluster { margin-bottom:64px; padding-top:24px; border-top:2px solid var(--line); }
+.cluster-head { margin-bottom:32px; }
+.tag { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.25em; padding:4px 10px; background:var(--orange); color:#111; text-transform:uppercase; margin-bottom:14px; }
+.cluster h2 { font-family:'Barlow','Noto Serif SC',serif; font-weight:900; font-size:28px; line-height:1.25; color:var(--fg); letter-spacing:-.01em; }
+
+/* deep item */
+.deep-item { background:var(--bg2); padding:32px; margin-bottom:32px; border:1px solid var(--line); position:relative; }
+.deep-head { margin-bottom:24px; padding-bottom:18px; border-bottom:1px solid var(--line); }
+.deep-id { position:absolute; top:-12px; left:-12px; background:var(--orange); color:#111; font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:14px; padding:6px 12px; }
+.deep-head h3 { font-family:'Noto Serif SC',serif; font-weight:800; font-size:22px; line-height:1.35; color:var(--fg); margin:8px 0 10px; }
+.src { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--fg3); letter-spacing:.05em; }
+.src a { color:var(--peach); border:none; }
+
+/* scorecard */
+.score { width:100%; margin:14px 0 22px; border:1px solid var(--line); }
+.score td { padding:6px 12px; font-family:'IBM Plex Mono',monospace; font-size:12px; vertical-align:middle; }
+.score .lbl { width:80px; color:var(--fg2); }
+.score .val { width:60px; color:var(--yellow); font-weight:600; }
+.score .b { }
+.score .tot { background:var(--bg3); }
+.score .tot .val { color:var(--orange); }
+.bar { display:inline-block; width:100%; height:8px; background:var(--bg3); position:relative; }
+.bar .fill { display:block; height:100%; background:linear-gradient(90deg,var(--orange),var(--yellow)); }
+
+.sum { font-size:15px; color:var(--fg); padding:14px 16px; background:var(--bg3); border-left:3px solid var(--yellow); margin-bottom:24px; }
+
+/* arguments */
+.args { margin-bottom:24px; }
+.arg { margin-bottom:22px; padding-bottom:18px; border-bottom:1px dashed var(--line); }
+.arg:last-child { border-bottom:none; padding-bottom:0; }
+.arg-h { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.25em; color:var(--orange); text-transform:uppercase; margin-bottom:10px; }
+.arg .en { font-family:'Barlow',serif; font-style:italic; font-size:15px; color:var(--peach); border-left:2px solid var(--peach); padding:6px 14px; margin-bottom:10px; line-height:1.55; }
+.arg .cn { font-size:14px; color:var(--fg); margin-bottom:8px; }
+.arg .cn b { color:var(--yellow); }
+.arg .mira { font-size:14px; color:var(--fg2); padding:10px 14px; background:rgba(232,93,38,0.07); border-left:2px solid var(--orange); }
+.arg .mira b { color:var(--orange); }
+
+/* take-home */
+.take { margin-top:24px; padding:18px 22px; background:#1c2118; border-left:3px solid var(--green); }
+.take-h { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; color:var(--green); text-transform:uppercase; margin-bottom:10px; }
+.take ol { list-style:decimal inside; }
+.take li { padding:5px 0; font-size:14px; color:var(--fg); }
+
+/* briefs */
+.briefs-wrap { margin-top:64px; padding-top:24px; border-top:2px solid var(--line); }
+.briefs-wrap > h2 { font-family:'Barlow','Noto Serif SC',serif; font-weight:900; font-size:24px; color:var(--fg); margin-bottom:24px; }
+.brief { background:var(--bg2); padding:20px 24px; margin-bottom:18px; border-left:3px solid var(--peach); }
+.brief-h { display:flex; gap:12px; align-items:baseline; margin-bottom:6px; }
+.bid { font-family:'IBM Plex Mono',monospace; color:var(--orange); font-size:13px; font-weight:700; }
+.brief h4 { font-family:'Noto Serif SC',serif; font-size:17px; font-weight:700; color:var(--fg); }
+.brief-meta { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--fg3); margin-bottom:8px; }
+.brief-meta .tot-tag { color:var(--yellow); font-weight:600; }
+.brief p { font-size:14px; color:var(--fg2); }
+
+/* minor */
+.minor { margin-top:36px; padding-top:18px; border-top:1px dashed var(--line); }
+.minor h3 { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.3em; color:var(--fg3); text-transform:uppercase; margin-bottom:14px; }
+.minor ul { list-style:none; }
+.minor li { padding:10px 0; border-bottom:1px dotted var(--line); font-size:13px; }
+.minor .mid { font-family:'IBM Plex Mono',monospace; color:var(--orange); font-weight:600; margin-right:6px; }
+.minor .msrc { color:var(--fg3); }
+.minor .mnote { font-size:12px; color:var(--fg3); margin-top:4px; padding-left:14px; }
+
+/* VPs */
+.vps { margin-top:64px; padding:32px; background:var(--bg2); border:1px dashed var(--orange); }
+.vps h2 { font-family:'Barlow','Noto Serif SC',serif; font-weight:900; font-size:22px; color:var(--fg); margin-bottom:6px; }
+.vp-note { font-size:12px; color:var(--fg3); margin-bottom:24px; font-style:italic; }
+.vp-cat { margin-bottom:24px; }
+.vp-cat h4 { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.2em; color:var(--orange); text-transform:uppercase; margin-bottom:8px; padding-bottom:4px; border-bottom:1px solid var(--line); }
+.vp-cat ul { list-style:none; }
+.vp-cat li { padding:6px 0; font-size:13px; color:var(--fg); border-bottom:1px dotted var(--line); }
+
+/* foot */
+.foot { margin-top:64px; padding-top:24px; border-top:6px solid var(--orange); font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--fg3); line-height:1.8; }
+.foot b { color:var(--yellow); }
+
+@media (max-width:720px) {
+  body { padding:32px 20px; font-size:14px; }
+  .mast h1 { font-size:32px; }
+  .toc ol { columns:1; }
+  .deep-item { padding:24px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="kicker">Mira × Readwise · 每日深度阅读简报 · 2026-06-04 · Vol.004</div>
+  <h1>Microsoft Build 2026 特辑 <em>—</em> Frontier Intelligence Platform、MAI 七连发、形式化数学 AI</h1>
+  <p class="subt">Satya 首登 Latent Space · MAI 100 页技术报告 + 自研芯片 30% perf/$ · Axiom $200M Series A · Figma 不死论 · OpenAI 政策三件套 · Peter Yang 可进化 Skill</p>
+  <div class="meta-strip">
+    <span>📚 处理 <b>16</b> 篇</span>
+    <span>🔬 深读 <b>7</b></span>
+    <span>📝 简报 <b>5</b></span>
+    <span>👁 略读 <b>2</b></span>
+    <span>♻ 去重 <b>1</b></span>
+    <span>⏭ 跳过 <b>1</b></span>
+    <span>🧠 新增观点 <b>33</b> 条</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h3>🧭 本卷导览</h3>
+  <ol>
+    <li><span class="tnum">[c1]</span><a href="#c-satya_build">Microsoft Build 三连击(Satya / MAI / Stratechery)</a></li>
+    <li><span class="tnum">[c2]</span><a href="#c-axiom">Verified AI = Scaling Brilliance(Axiom Math)</a></li>
+    <li><span class="tnum">[c3]</span><a href="#c-figma">SaaS Apocalypse 反方(Figma 不死论)</a></li>
+    <li><span class="tnum">[c4]</span><a href="#c-oai_policy">OpenAI 政策三件套</a></li>
+    <li><span class="tnum">[c5]</span><a href="#c-skills">Skill-as-Knowledge-Encoding(Peter Yang)</a></li>
+    <li><span class="tnum">[B]</span><a href="#briefs">简报(5 篇 brief)</a></li>
+    <li><span class="tnum">[V]</span><a href="#new-vps">本卷新增观点 → _mira-vp-index</a></li>
+  </ol>
+</nav>
+
+<section class="cluster" id="c-satya_build">
+  <div class="cluster-head">
+    <span class="tag">深读 · 集群头条</span>
+    <h2>Cluster · Microsoft Build 2026 三连击 — Satya / MAI / Stratechery 评注</h2>
+  </div>
+  <article class="deep-item" id="d-05">
+  <header class="deep-head">
+    <div class="deep-id">#05</div>
+    <h3>Satya Nadella @ No Priors × Latent Space Crossover</h3>
+    <div class="src"><span>Latent Space + No Priors</span> · <a href="https://www.latent.space/p/satya-2026" target="_blank" rel="noopener">原文</a></div>
+  </header>
+  <table class="score"><tbody><tr><td class="lbl">信号</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">颠覆</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">可操作</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">独特</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">时效</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr class="tot"><td class="lbl">合计</td><td class="val">10/10</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr></tbody></table>
+  <p class="sum">Satya 首次上 Latent Space,把 Microsoft 重定位为「Frontier Intelligence Platform」:把 Bill Gates Line 改写,把 Work IQ / Token IP 提到战略层,公开承认 SaaS 经济正在被 Build vs Buy 重算。</p>
+  <section class="args"><div class="arg">
+  <div class="arg-h">论点 #1</div>
+  <blockquote class="en">customers must gain much more value from the Microsoft ecosystem than Microsoft itself, by building on multi-model harnesses like OpenClaw and Scout, drawing on the full enterprise context exposed by context layers like Work IQ, and building up private evals and traces as a new form of Token IP</blockquote>
+  <div class="cn"><b>译/释</b> · Satya 把 Bill Gates Line 改写为 Frontier Intelligence Platform:客户必须从微软生态里拿到的价值,远大于微软自己拿到的;靠 OpenClaw/Scout 这种多模型 harness、Work IQ 这类企业上下文层,以及把企业自己的 evals + traces 沉淀为新的「Token IP」。</div>
+  <div class="mira"><b>mira 批注</b> · 这是把「平台 vs 聚合器」之争搬到 AI 时代的第一份产品级宣言。关键变量从「谁的模型最强」迁到「谁的上下文 + 评测 + 轨迹最不可替代」。对 TikTok Gaming 的直接对照:我们手里真正的 Token IP 不是模型,而是 LiveOps + 充值 + 创作者激励的多年 trace,这才是 evaluator 永远绕不过去的护城河。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #2</div>
+  <blockquote class="en">On one hand, enterprises are having difficult conversations around Tokenmaxxing and Layoffs, and on the other hand, there are serious re-evaluations of the End of SaaS since the Build vs Buy equation has changed so much</blockquote>
+  <div class="cn"><b>译/释</b> · Satya 罕见地直接承认:企业内部一边在做「Tokenmaxxing + 裁员」的难判断;另一边在严肃重估「End of SaaS」,因为 Build vs Buy 公式被 AI 改写。</div>
+  <div class="mira"><b>mira 批注</b> · 微软作为 ur-SaaS 巨头自己说 SaaS 不再天然成立,这比任何 VC 唱衰都更具杀伤力。Vol.004 的 Figma 那篇是反方,要对读。游戏侧的对照:很多内部用的中小 SaaS(BI、CRM、客服)在 12 个月内都有被 Skill/Agent 内化的风险,产品中台应该提前对工具栈做「Build vs Replace」决策表。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #3</div>
+  <blockquote class="en">Work IQ (heavily dogfooded by his C-suite)</blockquote>
+  <div class="cn"><b>译/释</b> · Work IQ 被 Satya 高管班子自己重度 dogfood —— 即微软 C-suite 已经把企业上下文层当作日常工作环境在用。</div>
+  <div class="mira"><b>mira 批注</b> · 「高管 dogfood」是衡量一个 AI 战略产品是否真信的最强信号。对照我们自己:Mira 在 TikTok Gaming 内部如果没有进入 C-level 周报/决策循环,就不算真正落地;Skill 必须做到「副总裁离不开」级别的粘度。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #4</div>
+  <blockquote class="en">the most ambitious version of applying AI and technology at large to business and social problems, like education and social impact</blockquote>
+  <div class="cn"><b>译/释</b> · Kevin Scott提出 AI 应用的最雄心版本应该是 social impact —— 教育、医疗、社会赋能,而不是仅仅做 enterprise productivity。</div>
+  <div class="mira"><b>mira 批注</b> · 这是回到「Making the Impossible Possible」叙事。对游戏行业的隐含信号:监管/政策窗口在收紧,头部公司必须把 AI 的「正向社会叙事」前置(青少年保护、创作者经济、文化出海),这是合规缓冲带。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #5</div>
+  <blockquote class="en">multi-model harnesses like OpenClaw and Scout</blockquote>
+  <div class="cn"><b>译/释</b> · 微软同时上 OpenClaw 和 Scout 两个 harness —— 即微软不再赌单一模型,而是把模型路由/编排层做成自己的核心产品。</div>
+  <div class="mira"><b>mira 批注</b> · 和 Vol.003 的「Harness 与模型融合」论点形成对照:微软选了反方向 —— harness 与模型解耦,留路由权给自己。这意味着 OpenAI vs Microsoft 的张力从「合作伙伴」走向「平台 vs 模型」的结构性博弈。游戏侧启示:任何长期采购合同必须做 multi-vendor harness 的退路设计。</div>
+</div></section>
+  <div class="take"><div class="take-h">🎮 TikTok Gaming Take-home</div><ol><li>把「内部 evals + traces」立项为 Token IP 资产,纳入数据安全和资产负债表口径管理 —— 评测集本身就是护城河。</li>
+<li>做一张「Build vs Replace」工具栈决策表,把所有 SaaS 按 12/24/36 个月窗口划分,主动选哪些用 Skill/Agent 内化、哪些保留外采。</li>
+<li>在 TikTok Live 体系内试点 Work IQ 模式 —— 主播经营行为的全量上下文层,而不是孤立的运营仪表盘,目标是让运营 GM 离不开。</li>
+<li>对所有第三方 LLM 合同做 multi-vendor harness 退路条款,锁定模型/路由层切换的合理 SLA。</li>
+<li>C-level dogfood 作为下一季度内部 AI 推广的硬指标 —— 没有 SVP 在用的产品不算上线。</li></ol></div>
+</article>
+<article class="deep-item" id="d-15">
+  <header class="deep-head">
+    <div class="deep-id">#15</div>
+    <h3>[AINews] Microsoft Build: MAI-Thinking-1 与 MAI 全家桶</h3>
+    <div class="src"><span>Latent Space AINews</span> · <a href="https://www.latent.space/p/ainews-microsoft-build-mai-thinking" target="_blank" rel="noopener">原文</a></div>
+  </header>
+  <table class="score"><tbody><tr><td class="lbl">信号</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">颠覆</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">可操作</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">独特</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">时效</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr class="tot"><td class="lbl">合计</td><td class="val">9/10</td><td class="b"><span class="bar"><span class="fill" style="width:90%"></span></span></td></tr></tbody></table>
+  <p class="sum">MAI 一口气发 7 个 from-scratch pretrain 模型 + 100+ 页技术报告(零合成数据零蒸馏),并配 MAIA 200 自研芯片 30% perf-per-dollar。tier 2 neolab 实锤,而且承诺继续支持 finetuning(与多数 frontier lab 砍 finetune 反向)。</p>
+  <section class="args"><div class="arg">
+  <div class="arg-h">论点 #1</div>
+  <blockquote class="en">this model uses zero synthetic data or distillation from previous models. this means reasoning, agentic behavior, tool use are all learned fully during post-training with no cold start. bold choice that makes it harder and requires more iterations to reach sota, but you get FULL control over your model series</blockquote>
+  <div class="cn"><b>译/释</b> · MAI-Thinking-1 零合成数据零蒸馏,reasoning/agent/tool use 全部在 post-training 中冷启动 —— 故意走更难的路,换取对模型系列的 FULL control,证明微软认真要做 frontier lab。</div>
+  <div class="mira"><b>mira 批注</b> · 这是 Sovereign AI 战略的最技术表达 —— 拒绝 distillation 是为了拒绝路径依赖。对照中国市场:这条路 DeepSeek/月之暗面也在走,zero-distill 正在成为「主权 AI」的技术标志。Gaming 角度:未来内部模型必须可以做版权干净的 finetune,这条线决定我们能不能上自研 NPC 模型。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #2</div>
+  <blockquote class="en">it is a good tier 2 neolab with obvious incentives to support domain specific finetunes (as opposed to the frontier labs who have ~all killed finetuning)</blockquote>
+  <div class="cn"><b>译/释</b> · MAI 是有强动力支持领域 finetune 的 tier 2 neolab —— 这恰恰与几乎所有 frontier lab 砍掉 finetuning 形成对比。</div>
+  <div class="mira"><b>mira 批注</b> · 这是企业 AI 市场被重新切分的信号:OpenAI/Anthropic 走「黑盒 + 完整产品」路线,MAI/Mistral/DeepSeek 抢「白盒 + 可微调」生态位。游戏侧规划:NPC 对话、UGC moderation、本地化这些任务的下游模型,2026 年应该开始系统转向 tier 2 可微调家族,降低对 frontier lab 的政策依赖。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #3</div>
+  <blockquote class="en">35B active parameter MoE with a 256K context window. Independent human raters on Surge prefer it for overall quality</blockquote>
+  <div class="cn"><b>译/释</b> · MAI-Thinking-1 是 35B 激活的 MoE + 256K 上下文,Surge 的独立 human rater 在整体质量上偏好它。</div>
+  <div class="mira"><b>mira 批注</b> · 256K 上下文 + MoE + 第三方盲评偏好,意味着「足够好 + 足够便宜 + 可控」组合 —— 这就是 Satya 嘴里 Token IP 战略真正的底层硬件。Gaming 推演:25-35B MoE 是 2026-2027 年所有「玩家伴随式 AI」(陪玩、客服、剧情)的甜区,不需要追 200B。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #4</div>
+  <blockquote class="en">MAIA 200 自研芯片 30% perf-per-dollar</blockquote>
+  <div class="cn"><b>译/释</b> · MAIA 200 自研推理芯片相对外购方案 perf-per-dollar 提升 30%。</div>
+  <div class="mira"><b>mira 批注</b> · 30% perf/$ 是「足够大到把 OpenAI 推理迁过来」的临界值。Sovereign Compute = Sovereign Model 战略闭环。游戏侧:任何 AI 产品的两年 TCO 测算必须把「主权芯片版本可用」作为基础假设,不要锁死在 H100 价格曲线上。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #5</div>
+  <blockquote class="en">to give an example, they give the exact MFU across all the iterations of the model, with the exact changes etc. they also share the full scaling ladder recipe, to my knowledge this is the first time i've seen this in a tech report at this scale</blockquote>
+  <div class="cn"><b>译/释</b> · MAI 技术报告精确披露每一轮迭代的 MFU 和变更点,以及完整 scaling ladder 配方 —— Elie 评价是这种规模下「前所未见的透明度」。</div>
+  <div class="mira"><b>mira 批注</b> · 这是「开放权重」之外的第二条开放战线 —— 流程开放。对企业采购方:相当于把 model risk 公开化,买家可以做风险定价。对我们自己 AI 工程团队:有完整公开的训练日志可以学,内部预训练计划成本/风险评估应该立刻刷新一次。</div>
+</div></section>
+  <div class="take"><div class="take-h">🎮 TikTok Gaming Take-home</div><ol><li>把 25-35B MoE 列为「玩家伴随式 AI」默认架构,放弃追超大模型的路径依赖。</li>
+<li>Gaming 内部所有依赖 finetune 的下游任务(NPC、客服、本地化),启动「tier 2 + 可微调」家族评估,降低对 frontier lab 政策风险敞口。</li>
+<li>两年 TCO 测算引入「主权芯片可用」基础假设(类 MAIA / GB200 二线方案),不锁死单一硬件价格曲线。</li>
+<li>把 MAI 这份 100 页技术报告纳入下季度内部 AI eng 团队学习清单,做一次内部 scaling ladder 复盘。</li>
+<li>为内部 model card 引入「distill / synthetic data 比例」字段 —— 这正在成为合规 + 主权 AI 的关键审计维度。</li></ol></div>
+</article>
+<article class="deep-item" id="d-14">
+  <header class="deep-head">
+    <div class="deep-id">#14</div>
+    <h3>Stratechery · The Nvidia AI PC, Project Solara, Microsoft AI</h3>
+    <div class="src"><span>Ben Thompson · Stratechery</span> · <a href="https://stratechery.com/2026/the-nvidia-ai-pc-project-solara-microsoft-ai/" target="_blank" rel="noopener">原文</a></div>
+  </header>
+  <table class="score"><tbody><tr><td class="lbl">信号</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">颠覆</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">可操作</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr><td class="lbl">独特</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">时效</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr class="tot"><td class="lbl">合计</td><td class="val">9/10</td><td class="b"><span class="bar"><span class="fill" style="width:90%"></span></span></td></tr></tbody></table>
+  <p class="sum">Ben Thompson 现场看 Build:Nvidia RTX Spark / N1X PC 像「旧 AI 时代」的遗物,微软 Project Solara + Work IQ 才指向真正的下一代 IT。Aggregator vs Platform 框架第一次明确套用到 AI 时代。</p>
+  <section class="args"><div class="arg">
+  <div class="arg-h">论点 #1</div>
+  <blockquote class="en">Nvidia has emerged as the world's most valuable company by dominating the market for artificial intelligence chips in the data center. Now the company is expanding its prowess to chips that will serve as the main processor for personal computers</blockquote>
+  <div class="cn"><b>译/释</b> · Nvidia 从数据中心 AI 芯片霸主,转头进 PC 主控芯片市场,RTX Spark / N1X 在秋季落地一系列 Windows PC。</div>
+  <div class="mira"><b>mira 批注</b> · Ben 的关键判断是这反而像「往回走」 —— 在 AI 推理快速向云端集中、Agent 越来越异步的时代,押注本地强算力 PC 是一个时代错位赌注。Gaming 侧:本地端侧 AI(端侧 NPC、端侧反作弊)不要被这条叙事带偏,云端 + edge 协同仍是主线。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #2</div>
+  <blockquote class="en">Microsoft Solara / Work IQ 才是 IT 的未来</blockquote>
+  <div class="cn"><b>译/释</b> · Ben 认为 Microsoft 的 Project Solara + Work IQ 才是 IT 的未来 —— 即把 OS 重新拆为「上下文层 + Agent 层 + 工具层」。</div>
+  <div class="mira"><b>mira 批注</b> · 这是 OS 二次拆分的重大叙事 —— 操作系统的真正下一站不是「更智能的 Windows」,而是「以企业全量上下文为底座的 agent runtime」。游戏侧映射:玩家 OS = 游戏内 + 创作 + 社交 + 电商的统一上下文层,谁能聚合谁就有「游戏版 Work IQ」机会。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #3</div>
+  <blockquote class="en">Aggregator vs Platform 的最新框架</blockquote>
+  <div class="cn"><b>译/释</b> · Ben 把自己长期使用的 Aggregator vs Platform 框架显式套用到 AI 时代 —— Nvidia 想当 platform(开发者依赖、生态锁定),Microsoft 选择当 aggregator(用户/企业数据聚合、需求侧规模)。</div>
+  <div class="mira"><b>mira 批注</b> · 重要的是 Ben 暗示 aggregator 的杠杆比 platform 长 —— 在 AI 时代「需求侧规模」依然击败「供应侧规模」。对 TikTok Gaming 启示极强:我们天然是需求侧聚合器,要避免被「自建 platform」(自研引擎/自研模型)叙事绑架,核心仍然是把用户上下文资产做厚。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #4</div>
+  <blockquote class="en">Edge vs Cloud + Aggregator vs Platform 的最新框架</blockquote>
+  <div class="cn"><b>译/释</b> · Ben 用 Edge vs Cloud 维度做新切分:Nvidia 押 Edge(PC + 本地 GPU),Microsoft 押 Cloud(Azure + Work IQ);两者叠加 Aggregator vs Platform,形成 2×2 战略图。</div>
+  <div class="mira"><b>mira 批注</b> · 对 Gaming 高管的实战意义:做战略复盘时不要把 AI 只看作「能力」,要拆成 Cloud/Edge × Aggregator/Platform 四象限,我们 TikTok Live 在「Cloud + Aggregator」象限有结构优势,不要被同行往 Edge / Platform 拉。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #5</div>
+  <blockquote class="en">I came to the opinions below during the keynote, and before the interview</blockquote>
+  <div class="cn"><b>译/释</b> · Ben 罕见地选择在 Satya 专访之前先公开自己结论,即「先观点后求证」 —— 这本身是对自己框架自信的最强信号。</div>
+  <div class="mira"><b>mira 批注</b> · Ben 自己也在测试一种「框架先于事实」的内容方法 —— 这是高信号分析师在 AI 加速时代的工作方式:先把框架 prove out,再让事实进来校准。Gaming 内部分析师可借鉴 —— Mira 助你「先立框架、再调数据」。</div>
+</div></section>
+  <div class="take"><div class="take-h">🎮 TikTok Gaming Take-home</div><ol><li>用 Cloud/Edge × Aggregator/Platform 四象限做下一次战略评审的统一图,把所有 AI 项目落位。</li>
+<li>拒绝「自建 Platform」叙事绑架 —— TikTok Gaming 本质是需求侧聚合器,资源继续向用户上下文资产倾斜。</li>
+<li>本地端侧 AI 不放主线,避免被 Nvidia AI PC 叙事拉偏 —— 端云协同仍是主航道。</li>
+<li>构思 Gaming 版 Work IQ:统一玩家 + 创作 + 直播 + 电商上下文层,作为内部下一个旗舰产品的战略空白。</li>
+<li>内部分析师培训「框架先于事实」工作法 —— Mira 协助先立框架后调数据,提升分析周期速度。</li></ol></div>
+</article>
+</section>
+<section class="cluster" id="c-axiom">
+  <div class="cluster-head">
+    <span class="tag">深读 · 形式化数学</span>
+    <h2>Cluster · Verified AI = Scaling Brilliance</h2>
+  </div>
+  <article class="deep-item" id="d-02">
+  <header class="deep-head">
+    <div class="deep-id">#02</div>
+    <h3>Carina Hong · Axiom Math · Scaling Past Informal AI</h3>
+    <div class="src"><span>Latent Space AI for Science</span> · <a href="https://www.youtube.com/watch?v=abYcV5LHMG4" target="_blank" rel="noopener">原文</a></div>
+  </header>
+  <table class="score"><tbody><tr><td class="lbl">信号</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">颠覆</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">可操作</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">独特</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">时效</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr class="tot"><td class="lbl">合计</td><td class="val">9/10</td><td class="b"><span class="bar"><span class="fill" style="width:90%"></span></span></td></tr></tbody></table>
+  <p class="sum">Carina Hong 创立的 Axiom Math 7 个月内完成 Putnam 12/12 + 拿到 $200M Series A(几乎相当于美国一年数学研究预算)。核心论点:Verified AI 不是补幻觉漏洞,而是放大 brilliance —— 形式化方法作为人类-AI、AI-AI 协作的统一抽象层。</p>
+  <section class="args"><div class="arg">
+  <div class="arg-h">论点 #1</div>
+  <blockquote class="en">Verification to me is not about lousiness. Verification to me is about scaling brilliance, compounding brilliance</blockquote>
+  <div class="cn"><b>译/释</b> · Carina:验证不是为了对付垃圾输出,验证是为了 scaling brilliance、compounding brilliance —— 放大并复利顶级思考。</div>
+  <div class="mira"><b>mira 批注</b> · 这是对「AI 幻觉」叙事的最优雅反驳。对 Gaming 高管的意义:不要把内部 AI 路线全押在「降低人力成本/补漏洞」上,真正的 ROI 在「让顶级创意人员效率 10×」 —— 形式化/可验证只是手段。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #2</div>
+  <blockquote class="en">verified AI is to open up collaboration either it's human AI collaboration … or future AI agent agent agent like collaboration</blockquote>
+  <div class="cn"><b>译/释</b> · Verified AI 是为了打开协作 —— 人机协作 / 未来 agent-agent-agent 协作,本质是为协作建立一个共享的可验证基座。</div>
+  <div class="mira"><b>mira 批注</b> · 「形式化语言 = 协作的语言」这个抽象非常深 —— 它解释了为什么数学/电路/分子设计是同一类问题。Gaming 启示:多 agent 在 LiveOps、活动策划、反作弊里要协同,缺的就是一个内部 DSL,这是 2026-2027 年我们需要立项的「内部 Lean for Gaming Ops」。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #3</div>
+  <blockquote class="en">$250 million is our apparently the annual US math budget</blockquote>
+  <div class="cn"><b>译/释</b> · $200M Series A,几乎等于美国全年数学研究预算 —— 单家公司一次拿了全国数学界一年的钱。</div>
+  <div class="mira"><b>mira 批注</b> · 资本结构在重写:基础科学的资本主导权正在从政府 → 私人 AI 公司转移。短期对学术界是冲击,长期会让最强的形式化人才聚集在私部门 —— 对 Gaming 公司的人才战略启示是,数学/形式化背景的人才在未来 5 年溢价会显著上升。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #4</div>
+  <blockquote class="en">first AI to prove research conjectures using formal verification</blockquote>
+  <div class="cn"><b>译/释</b> · Axiom 是第一个用形式化验证证明研究级猜想的 AI —— 不是奥赛题,是研究级猜想。</div>
+  <div class="mira"><b>mira 批注</b> · 「研究级」是关键修饰词 —— 它意味着 AI 已经在边界上做创造性数学。对游戏行业的次生意义:「研究级 game balance」「研究级 economy design」这种以前需要资深数学家手工打的工作,在 24-36 个月内会有 AI 协作版本出现。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #5</div>
+  <blockquote class="en">数学/物理/电路/分子设计的统一抽象</blockquote>
+  <div class="cn"><b>译/释</b> · Carina 提出形式化方法可以同时覆盖数学、物理、电路设计、分子设计 —— 这些领域底层都是「形式化的对象 + 验证规则」,可以共享一个 AI 基座。</div>
+  <div class="mira"><b>mira 批注</b> · 这是 vertical AI 路线的最强一击 —— 不要被 horizontal LLM 叙事垄断,在「可形式化的垂直领域」里专门构建 AI 才是 frontier。Gaming 内部:游戏经济、关卡设计、技能树平衡也具备「可形式化」属性,值得做实验性立项。</div>
+</div></section>
+  <div class="take"><div class="take-h">🎮 TikTok Gaming Take-home</div><ol><li>在 2026-2027 立项「内部 Gaming Ops DSL」 —— 把活动配置、经济参数、LiveOps 决策结构化为可验证表达,为后续多 agent 协作打底。</li>
+<li>数学/形式化背景人才的招聘溢价正在拉开,游戏数值/balance 团队下半年开始预留 senior 招聘窗口。</li>
+<li>把「Verified AI = Scaling Brilliance」作为内部 AI 叙事,把 ROI 从「降本」改写为「放大头部产出 10×」 —— 这能驱动高管资源投入意愿。</li>
+<li>盯紧 Axiom Math 在 12 个月内是否推出企业 API,如果出现可对接到内部经济/关卡平衡试点。</li>
+<li>在 game balance / economy design 试做一个形式化 prototype,验证「研究级数学 AI」对游戏数值的 ROI。</li></ol></div>
+</article>
+</section>
+<section class="cluster" id="c-figma">
+  <div class="cluster-head">
+    <span class="tag">深读 · 产品战略</span>
+    <h2>Cluster · SaaS Apocalypse 的反方 — Figma 不死论</h2>
+  </div>
+  <article class="deep-item" id="d-09">
+  <header class="deep-head">
+    <div class="deep-id">#09</div>
+    <h3>Figma · Matt Colyer · The SaaS Apocalypse Is a Goldmine</h3>
+    <div class="src"><span>Every (Dan Shipper Podcast)</span> · <a href="https://www.youtube.com/watch?v=kYKebKB3-d0" target="_blank" rel="noopener">原文</a></div>
+  </header>
+  <table class="score"><tbody><tr><td class="lbl">信号</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">颠覆</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr><td class="lbl">可操作</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">独特</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">时效</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr class="tot"><td class="lbl">合计</td><td class="val">8/10</td><td class="b"><span class="bar"><span class="fill" style="width:80%"></span></span></td></tr></tbody></table>
+  <p class="sum">Figma 的开发者产品 PM 总监正面回应 SaaS Apocalypse 叙事:diamond 设计流程不是 text-to-app 能颠覆的;developer base 从 40M 涨到 1B 是 SaaS 的金矿不是坟墓;Figma 同时下注 Figma Agent + Figma MCP 双轨。</p>
+  <section class="args"><div class="arg">
+  <div class="arg-h">论点 #1</div>
+  <blockquote class="en">the estimate of like number of developers worldwide was like 25 million, 30 million, 40 million … I think it's going to be like a billion, maybe even more than that</blockquote>
+  <div class="cn"><b>译/释</b> · 全球开发者从 25-40M 量级正在被 AI 推到 1B 量级 —— 这是 25× 的放大。</div>
+  <div class="mira"><b>mira 批注</b> · Matt 选了一个最反共识的姿态:不是「开发者会消失」,而是「开发者会被放大 25 倍」 —— 这与 Vol.003 Cline/LangChain 那种「Agent 才是开发者」的叙事互补。Gaming 推演:游戏开发者 + 创作者将从「百万级」涨到「亿级」,内部工具/SDK/创作平台需要在 12-18 个月内做容量 + UX 重构,赌「亿级业余创作者」这个新池子。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #2</div>
+  <blockquote class="en">If you're in that space, it means it's a gold mine</blockquote>
+  <div class="cn"><b>译/释</b> · 对处在开发者工具赛道的 SaaS 来说,这不是末日,是金矿。</div>
+  <div class="mira"><b>mira 批注</b> · Matt 这句话隐含的是「需求放大 + 平均付费下降」会被「人数指数级增长」补偿,新 SaaS 的单位经济会重算 —— 量大 + 单价低 + AI 边际成本接近零。对内部 LiveOps SaaS 的启示:把目标用户从「专业策划」放大到「业余创作者」,做 freemium 漏斗。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #3</div>
+  <blockquote class="en">diamond 设计流程不是 text-to-app 能颠覆的</blockquote>
+  <div class="cn"><b>译/释</b> · Matt 把设计描述为「diamond shape」流程(发散 → 收敛 → 再发散 → 再收敛),text-to-app 是把 diamond 压成一个点,无法替代设计本身的高维探索过程。</div>
+  <div class="mira"><b>mira 批注</b> · 这是 Figma 对「text-to-app」叙事最有力的反驳:design space 的探索不可绕过。对游戏行业等价物:level design / system design / live event design 都是 diamond 形,任何「prompt-to-game」工具至少在头部产品上是辅助而不是替代,内部研发不要为 prompt-to-game 焦虑过度调整组织。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #4</div>
+  <blockquote class="en">Figma Agent + MCP 双线下注</blockquote>
+  <div class="cn"><b>译/释</b> · Figma 同时上 Figma Agent(产品内嵌 agent)和 Figma MCP(让 Figma 对外开放 MCP 接口),拒绝单一路线。</div>
+  <div class="mira"><b>mira 批注</b> · 这是产品对冲教科书 —— 既不放弃产品端的 agent 体验,也不放弃成为别人 agent 调用的「能力供应方」。Gaming 内部 SaaS 都应该问自己同样的问题:我是要做带 agent 的产品,还是要被别人 agent 调用,还是两条腿都走?Figma 选择两条腿走。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #5</div>
+  <blockquote class="en">Developer base 从 40M 涨到 1B</blockquote>
+  <div class="cn"><b>译/释</b> · Matt 把 25× 放大解释为 AI 让「人人可成开发者」,Figma 的目标用户也从 design pro 扩到 design-curious。</div>
+  <div class="mira"><b>mira 批注</b> · 「能力民主化 → 用户基数 25×」是这一轮 AI 真正的市场增量来源。对游戏行业:UGC / AI 工具 / AI 创作 = 大幅扩大「创作者池」,头部公司未来 24 个月最值钱的不是更强的 IP,而是更友好的 AI 创作工具栈,谁能接住「亿级游戏创作者」,谁拿到下一轮平台红利。</div>
+</div></section>
+  <div class="take"><div class="take-h">🎮 TikTok Gaming Take-home</div><ol><li>对内部 LiveOps / 活动配置 / UGC 工具做 freemium 重构,目标用户从「专业策划」扩到「业余创作者」,押注 25× 池子放大。</li>
+<li>建立「产品内嵌 agent + 对外开放 MCP」双轨标准,所有内部 SaaS 立项默认两条腿走,拒绝单一路线。</li>
+<li>level design / system design / live event design 团队不要为「prompt-to-game」过度焦虑,把 AI 作为 diamond 流程里的「发散 + 收敛加速器」。</li>
+<li>把「亿级游戏创作者」作为下一个三年战略叙事核心,内部 SDK/创作平台启动容量 + UX 重构 roadmap。</li>
+<li>锁定 Figma Agent + MCP 双线的产品演化路径,作为内部下一代生产力 SaaS 的标杆 case study。</li></ol></div>
+</article>
+</section>
+<section class="cluster" id="c-oai_policy">
+  <div class="cluster-head">
+    <span class="tag">深读 · 监管/政策</span>
+    <h2>Cluster · OpenAI 政策三件套</h2>
+  </div>
+  <article class="deep-item" id="d-07">
+  <header class="deep-head">
+    <div class="deep-id">#07</div>
+    <h3>OpenAI Public Policy Agenda</h3>
+    <div class="src"><span>OpenAI Global Affairs</span> · <a href="https://openai.com/index/public-policy-agenda" target="_blank" rel="noopener">原文</a></div>
+  </header>
+  <table class="score"><tbody><tr><td class="lbl">信号</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">颠覆</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr><td class="lbl">可操作</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr><td class="lbl">独特</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr><td class="lbl">时效</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr class="tot"><td class="lbl">合计</td><td class="val">7/10</td><td class="b"><span class="bar"><span class="fill" style="width:70%"></span></span></td></tr></tbody></table>
+  <p class="sum">OpenAI 罕见一次性把政策立场体系化:民主化 / 赋能 / 普惠 / 韧性 / 适应性 五原则 + 政策优先级清单,显著向「公共关系新阶段」转身。配合 #08 民主治理 blueprint + #16 Michigan Stargate 三件套联读。</p>
+  <section class="args"><div class="arg">
+  <div class="arg-h">论点 #1</div>
+  <blockquote class="en">Democratization. We will resist the potential of this technology to consolidate power in the hands of the few</blockquote>
+  <div class="cn"><b>译/释</b> · 民主化:OpenAI 公开承诺会主动抵抗本技术「集中权力到少数人手中」的潜能。</div>
+  <div class="mira"><b>mira 批注</b> · 考虑到 OpenAI 本身被指控正是这种集中本身,这一条更像是「先公开承诺、再用合规结构包裹自己」的政治姿态。对监管敏感行业(游戏 + 直播 + 未成年人)而言,这种 phrasing 模板值得 copy:任何 AI 产品宣发都需要内置「反集中、护多元」叙事。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #2</div>
+  <blockquote class="en">we have as many women as men using our tools, more users both under and over age 30 than any other AI platform, and more users earning under $100,000 than over $100,000—mirroring the broader global workforce</blockquote>
+  <div class="cn"><b>译/释</b> · OpenAI 直接公开用户基数的人口结构:男女均衡、年龄段全覆盖、收入 &lt; $100K 多于 &gt; $100K —— 在反垄断 + 公平性叙事里抢占数据制高点。</div>
+  <div class="mira"><b>mira 批注</b> · 「人口结构公平」是 2026 年 AI 公司向监管释放的新型 KPI。Gaming 行业的等价物:玩家结构公平、女性主播比例、低线城市覆盖率,这些数据应主动 publish,作为合规叙事的弹药。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #3</div>
+  <blockquote class="en">ensure people have real agency to shape the AI future they want</blockquote>
+  <div class="cn"><b>译/释</b> · 确保用户对 AI 未来有「真实的能动性」 —— 用户控制 AI 而不是被 AI 控制。</div>
+  <div class="mira"><b>mira 批注</b> · 「Agency」正在取代「Safety」成为新的政策关键词。差别在于:Safety 是被动避免伤害,Agency 是主动赋权用户决策。游戏侧的等价物:充值意愿干预、推荐流可解释、AI NPC 对话可控,都是 Agency 叙事的产品锚点。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #4</div>
+  <blockquote class="en">improve how governments function and deliver value to their constituents</blockquote>
+  <div class="cn"><b>译/释</b> · OpenAI 明确把「帮助政府运转更高效、给选民交付价值」列入官方目标 —— 即直接进入 GovTech 战场。</div>
+  <div class="mira"><b>mira 批注</b> · 这是过去 OpenAI 一直回避的领域,现在主动入场,意味着 GovTech 在未来 18 个月会是 OpenAI / Anthropic / Microsoft 三方主战场。对中国海外业务的间接影响:在欧盟/中东/东南亚的政府关系窗口正在被关闭,要抢在窗口期内把合作锁住。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #5</div>
+  <blockquote class="en">Adaptability. We continue to believe the only way to meet the challenges of a very unpredictable future is to be prepared to update our positions as we learn more</blockquote>
+  <div class="cn"><b>译/释</b> · 适应性:OpenAI 公开承诺会随时根据新信息更新自己的政策立场 —— 即「我们保留政策反复」的合法性。</div>
+  <div class="mira"><b>mira 批注</b> · 这是非常精明的「政策反悔权」预埋 —— 比如未来如果在版权/AGI 时间线上突然转向,可以引用此条。Gaming 公司在向监管承诺时,可以学习这种「立场可更新」的措辞,避免被锁死。</div>
+</div></section>
+  <div class="take"><div class="take-h">🎮 TikTok Gaming Take-home</div><ol><li>所有 AI 产品宣发模板加入「反集中 + 护多元」叙事段落,贴合 2026 监管语境。</li>
+<li>公开 TikTok Live 的「玩家结构公平」数据(性别、年龄、城市层级),作为合规弹药主动 publish。</li>
+<li>把「Agency」(用户能动性)作为内部 AI 产品评审的新维度,跟 Safety/Performance 并列。</li>
+<li>盯紧 GovTech 窗口期 —— 海外政府合作机会 12-18 个月内抢锁。</li>
+<li>在政策/合规承诺文本中预埋「立场可更新」措辞,避免被未来叙事反转锁死。</li></ol></div>
+</article>
+</section>
+<section class="cluster" id="c-skills">
+  <div class="cluster-head">
+    <span class="tag">深读 · Agent Skill</span>
+    <h2>Cluster · Skill-as-Knowledge-Encoding 创作者经济样板</h2>
+  </div>
+  <article class="deep-item" id="d-06">
+  <header class="deep-head">
+    <div class="deep-id">#06</div>
+    <h3>Peter Yang · The Only Claude Skills Tutorial You Need</h3>
+    <div class="src"><span>Peter Yang (Creator Economy)</span> · <a href="https://www.youtube.com/watch?v=uT3EQPVIEb0" target="_blank" rel="noopener">原文</a></div>
+  </header>
+  <table class="score"><tbody><tr><td class="lbl">信号</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr><td class="lbl">颠覆</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr><td class="lbl">可操作</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">独特</td><td class="val">2/2</td><td class="b"><span class="bar"><span class="fill" style="width:100%"></span></span></td></tr><tr><td class="lbl">时效</td><td class="val">1/2</td><td class="b"><span class="bar"><span class="fill" style="width:50%"></span></span></td></tr><tr class="tot"><td class="lbl">合计</td><td class="val">7/10</td><td class="b"><span class="bar"><span class="fill" style="width:70%"></span></span></td></tr></tbody></table>
+  <p class="sum">Peter Yang 给创作者经济侧的「5 步建可进化 Skill」实操样板:个人语境 + 触发条件 + 自带 eval + memory.md + 自我优化器。把 Skill 从「prompt 模板」推进到「可进化的知识资产」。</p>
+  <section class="args"><div class="arg">
+  <div class="arg-h">论点 #1</div>
+  <blockquote class="en">a skill is just a folder with instructions that AI can trigger for a given task</blockquote>
+  <div class="cn"><b>译/释</b> · Skill 的本质就是一个「带说明的文件夹」,AI 在特定任务上自动 trigger。</div>
+  <div class="mira"><b>mira 批注</b> · 这是 Skill 最朴素也最关键的抽象 —— 「文件夹 = 可移交的知识容器」。对 Gaming 内部 SOP 的迁移路径非常直接:把所有运营/客服/创作 SOP 重写为 Skill,既能给 AI 用,也能给新人看,知识资产 + 人才培训二合一。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #2</div>
+  <blockquote class="en">be explicit about when the skill should trigger</blockquote>
+  <div class="cn"><b>译/释</b> · 明确告诉系统「这个 Skill 该在什么场景被触发」是 Skill 工程化的第二步。</div>
+  <div class="mira"><b>mira 批注</b> · 触发条件 = 路由策略,这是 Skill 体系真正变成「公司级 AI 操作系统」的关键 —— 类比 Linux man page 的 SYNOPSIS。Gaming 内部如果做 Skill 平台,先把 trigger taxonomy 立起来比 prompt 写得好更重要。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #3</div>
+  <blockquote class="en">we are going to test the skill manually and build an eval so that it can actually check its own work and improve its own output without us even being there</blockquote>
+  <div class="cn"><b>译/释</b> · 为每个 Skill 配套 eval —— 让 Skill 能自检自改,不需要人在场。</div>
+  <div class="mira"><b>mira 批注</b> · 「Skill 自带 eval」是把 Skill 推到资产化最关键一跳 —— 没有 eval 的 Skill = 没有单元测试的代码。Gaming 内部从今天起所有立项 Skill 必须强制 eval-first,先写 eval 再写 Skill,这是质量底线。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #4</div>
+  <blockquote class="en">we are going to build a memory MD. So the skill has memory of our past conversations and can actually improve itself over time</blockquote>
+  <div class="cn"><b>译/释</b> · Skill 配套 memory.md,让它跨会话记得历史交互、长期改进自己。</div>
+  <div class="mira"><b>mira 批注</b> · memory.md = 私有 fine-tune 替代品 —— 用文本+检索做出近似微调效果,对中小团队/创作者经济极友好。Gaming 内部小团队 Skill 不需要等模型团队排期,memory.md + eval 就能跑起「准微调」循环。</div>
+</div>
+<div class="arg">
+  <div class="arg-h">论点 #5</div>
+  <blockquote class="en">a skill that can help you improve all of your skills by removing AI slop, making things more concise and clear</blockquote>
+  <div class="cn"><b>译/释</b> · Peter 最后给一个 meta-skill:专门用来改进其它所有 Skill —— 删 AI slop、增清晰度。</div>
+  <div class="mira"><b>mira 批注</b> · Meta-skill = 自我优化器,这是 Skill 体系的最高阶形态。对 Gaming 内部启示:Skill 平台第二阶段必须有「Skill of Skills」 —— 内置 Skill 审计员 + 优化员,否则 Skill 数量上千之后会熵增。</div>
+</div></section>
+  <div class="take"><div class="take-h">🎮 TikTok Gaming Take-home</div><ol><li>把所有运营/客服/创作 SOP 改写为 Skill 文件夹格式,知识资产 + 新人培训二合一。</li>
+<li>Skill 立项默认 eval-first —— 先写测试用例再写 Skill,质量底线刚性化。</li>
+<li>为每个 Skill 配 memory.md,做「准微调」循环,避免依赖模型团队排期。</li>
+<li>Skill 平台第二阶段立项 meta-skill(「Skill of Skills」) —— 专做 Skill 审计 + 优化,对抗熵增。</li>
+<li>建一张内部 Skill trigger taxonomy 表,作为路由策略的底座,跑通后再上 Skill marketplace 内部版。</li></ol></div>
+</article>
+</section>
+
+<section class="briefs-wrap" id="briefs">
+  <h2>📝 简报 · Brief</h2>
+  <div class="brief" id="b-08">
+  <div class="brief-h"><span class="bid">#08</span> <h4>A Blueprint for Democratic Governance of Frontier AI</h4></div>
+  <div class="brief-meta"><span>OpenAI</span> · <a href="https://openai.com/index/democratic-governance-blueprint" target="_blank" rel="noopener">原文</a> · <span class="tot-tag">5/10</span></div>
+  <p>OpenAI 提出联邦治理三件套:state law harmonize + CAISI 加固 + cross-gov resilience,配合 #07 政策 agenda 一起读。take-home:Gaming 公司在多州/多国合规框架谈判中,可借用 OpenAI 的「联邦协调」语言模板,降低被分裂监管打散的成本。</p>
+</div>
+<div class="brief" id="b-16">
+  <div class="brief-h"><span class="bid">#16</span> <h4>Stargate Michigan — Intelligence Age Infrastructure</h4></div>
+  <div class="brief-meta"><span>OpenAI</span> · <a href="https://openai.com/index/building-the-infrastructure-for-the-intelligence-age-in-michigan/" target="_blank" rel="noopener">原文</a> · <span class="tot-tag">5/10</span></div>
+  <p>Stargate Michigan 1GW 数据中心:$1B 税收 + 2500 工会建造岗 + $45M Codex credits 投向社区。这是「AI 基建包邮社区」模板。take-home:海外大基建落地时,把「税收 + 工会岗位 + 本地 AI credits」做成标准化三件套,可以大幅降低政商阻力。</p>
+</div>
+<div class="brief" id="b-04">
+  <div class="brief-h"><span class="bid">#04</span> <h4>BrowserAct + Skill 替代 Playwright</h4></div>
+  <div class="brief-meta"><span>Twitter / 开源社区</span> · <a href="https://x.com/i/web/status/1932049238001623040" target="_blank" rel="noopener">原文</a> · <span class="tot-tag">4/10</span></div>
+  <p>Stealth 浏览器 + 动态代理 + 多账号隔离 —— Agent 浏览器自动化基础设施在 2026 已成 commodity。take-home:Gaming 反作弊/反爬团队应即刻评估 BrowserAct 类工具是否被对抗方使用,提前升级人机识别基线。</p>
+</div>
+<div class="brief" id="b-10">
+  <div class="brief-h"><span class="bid">#10</span> <h4>Cursor · Why Online RL Is Just the Cherry on Top</h4></div>
+  <div class="brief-meta"><span>Cursor Eng Blog</span> · <a href="https://cursor.com/blog/online-rl" target="_blank" rel="noopener">原文</a> · <span class="tot-tag">4/10</span></div>
+  <p>Cursor RL 实操:offline RL 教推理和 tool call,online RL 仅最后调味 —— 「用户不会陪烂模型试错」是关键约束。take-home:任何在线 RL 优化设计,必须先确保 offline baseline 足够好,生产线上的 RL 优化不能拿用户当试验品。</p>
+</div>
+<div class="brief" id="b-13">
+  <div class="brief-h"><span class="bid">#13</span> <h4>AI Won't Move As Fast As You Think — Lenny's Podcast</h4></div>
+  <div class="brief-meta"><span>Lenny Rachitsky × Benedict Evans</span> · <a href="https://www.lennysnewsletter.com/p/ai-wont-move-as-fast-as-you-think" target="_blank" rel="noopener">原文</a> · <span class="tot-tag">3/10</span></div>
+  <p>反 AI 加速主义视角:200 年技术替代周期的现实约束,人类组织变迁不可压缩。take-home:做 3-5 年战略 roadmap 时,把「加速派 vs 减速派」两套时间线都画一遍,中间值更接近真实组织变迁速度。</p>
+</div>
+  <section class="minor skim"><h3>略读 (skim)</h3><ul><li><span class="mid">#11</span> <a href="https://www.youtube.com/watch?v=BCYNUW8tNiU" target="_blank" rel="noopener">AI Research Legend's Honest Assessment (Lukasz Kaiser) — no transcript</a> <span class="msrc">— YouTube</span><div class="mnote">YouTube 视频无字幕,只能凭 summary 略读:Kaiser 讨论 transformer 极限 + 是否将被替代。</div></li>
+<li><span class="mid">#03</span> <a href="https://www.latent.space/p/axiom" target="_blank" rel="noopener">🔬 Scaling Past Informal AI — Axiom Math (substack 文章版)</a> <span class="msrc">— Latent Space substack</span><div class="mnote">#02 播客的文章版本,论点子集,作 reference 用。</div></li></ul></section>
+  <section class="minor dup"><h3>去重 (duplicate)</h3><ul><li><span class="mid">#12</span> <a href="https://www.youtube.com/watch?v=Y8N6E4qy3lA" target="_blank" rel="noopener">Satya Nadella video — duplicate of #5</a> <span class="msrc">— YouTube</span><div class="mnote">与 #05 同一对谈的 YouTube 视频版本,去重。</div></li></ul></section>
+  <section class="minor skip"><h3>跳过 (skip)</h3><ul><li><span class="mid">#01</span> <a href="https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind" target="_blank" rel="noopener">Introducing new capabilities to GPT-Rosalind</a> <span class="msrc">— OpenAI</span><div class="mnote">全文为空(text_len=0),summary 显示是 OpenAI 生命科学版,信息量不足,跳过。</div></li></ul></section>
+</section>
+
+<section class="vps" id="new-vps">
+  <h2>🧠 本卷新增观点 → 待 append 至 _mira-vp-index</h2>
+  <p class="vp-note">本卷在 append 到 _mira-vp-index 时,同步补回 Vol.003 因 GitHub PAT 卡壳未写入的 20 条观点(参见 vp_mira_meta.json 与 Vol.003 HTML)。</p>
+  <div class="vp-cat"><h4>Frontier Lab / Sovereign AI</h4><ul><li>"[NEW 2026-06-04] Frontier Intelligence Platform 改写 Bill Gates Line —— 平台价值 = 客户从生态拿走的 &gt;&gt; 平台自己拿走的;Token IP = 企业私有 evals + traces" — Satya Nadella · Latent Space × No Priors</li>
+<li>"[NEW 2026-06-04] Tier 2 neolab 形成战略生态位 —— frontier lab 砍 finetune,tier 2 (MAI/Mistral/DeepSeek)主动支持 finetune,企业市场被分裂为「黑盒完整」vs「白盒可微调」两条主路" — AINews × MAI · Microsoft Build</li>
+<li>"[NEW 2026-06-04] Zero-distill / zero-synthetic 成为 Sovereign AI 技术标志 —— from-scratch pretrain 拒绝路径依赖换 FULL control" — Microsoft MAI Tech Report (100p)</li>
+<li>"[NEW 2026-06-04] MAIA 200 自研推理芯片 30% perf-per-dollar = Sovereign Compute → Sovereign Model 战略闭环临界值" — Microsoft Build</li>
+<li>"[NEW 2026-06-04] 35B MoE + 256K context 是 2026-2027 「玩家伴随式 AI」甜区,不必追 200B" — MAI-Thinking-1 · Surge human eval</li></ul></div><div class="vp-cat"><h4>Agentic / Harness</h4><ul><li>"[NEW 2026-06-04] 微软选 multi-model harness (OpenClaw + Scout) —— 与 Vol.003「harness 与模型融合」对立,即 harness 与模型解耦留路由权;企业采购应锁 multi-vendor 退路条款" — Satya Nadella · Latent Space</li></ul></div><div class="vp-cat"><h4>Verified AI / Formal Methods</h4><ul><li>"[NEW 2026-06-04] Verified AI 是 Scaling Brilliance,不是补幻觉漏洞 —— 验证 = 协作的统一语言" — Carina Hong (Axiom Math) · Latent Space AI for Science</li>
+<li>"[NEW 2026-06-04] 数学/物理/电路/分子设计共享形式化基座,vertical AI 在「可形式化垂直领域」是真正 frontier" — Carina Hong · Axiom Math</li>
+<li>"[NEW 2026-06-04] $200M Series A ≈ 美国全年数学研究预算 —— 基础科学资本主导权从政府转向私人 AI 公司,数学/形式化人才 5 年内显著溢价" — Axiom Math 融资事件</li>
+<li>"[NEW 2026-06-04] AI 已在「研究级猜想」边界做创造性数学 —— 「研究级 game balance」「研究级 economy design」可期 24-36 个月" — Axiom Math</li></ul></div><div class="vp-cat"><h4>AI Business Model</h4><ul><li>"[NEW 2026-06-04] Build vs Buy 公式被 AI 改写 —— Satya 作为 ur-SaaS titan 公开承认 SaaS 不再天然成立,内部所有中小 SaaS 在 12 个月内有被 Skill/Agent 内化风险" — Satya Nadella · Latent Space</li>
+<li>"[NEW 2026-06-04] Developer base 40M → 1B(25× 放大) —— 「能力民主化」才是 AI 真正的市场增量,SaaS 单位经济在量级 + 边际成本双重重算后是金矿不是坟墓" — Matt Colyer (Figma) · Every Podcast</li>
+<li>"[NEW 2026-06-04] Diamond design 流程不可绕过 —— text-to-app / prompt-to-game 是把 diamond 压成一个点,头部产品上仍是辅助而非替代" — Matt Colyer · Figma</li>
+<li>"[NEW 2026-06-04] 「产品内嵌 Agent + 对外开放 MCP」双轨是 SaaS 在 AI 时代的标准对冲,任何内部 SaaS 立项默认两条腿走" — Figma Agent + Figma MCP</li></ul></div><div class="vp-cat"><h4>Product &amp; Growth</h4><ul><li>"[NEW 2026-06-04] Cloud/Edge × Aggregator/Platform 四象限 —— 在 AI 时代仍是需求侧规模击败供应侧规模,需求侧聚合器(TikTok Gaming)不要被自建 platform 叙事绑架" — Ben Thompson · Stratechery</li>
+<li>"[NEW 2026-06-04] Project Solara + Work IQ 暗示 OS 二次拆分 —— 下一站 OS = 上下文层 + Agent 层 + 工具层,游戏侧等价物 = 玩家 OS(游戏内 + 创作 + 社交 + 电商)" — Ben Thompson · Stratechery</li>
+<li>"[NEW 2026-06-04] C-level dogfood 是 AI 战略产品是否真信的最强信号 —— 没有 SVP 在用的内部 AI 产品不算上线" — Satya × Work IQ</li>
+<li>"[NEW 2026-06-04] Skill = 「文件夹 = 可移交的知识容器」 —— SOP 重写为 Skill,知识资产 + 新人培训二合一;Skill 立项默认 eval-first" — Peter Yang · Claude Skills Tutorial</li>
+<li>"[NEW 2026-06-04] memory.md = 私有 fine-tune 替代品 —— 文本 + 检索做近似微调,中小团队不必等模型团队排期" — Peter Yang · Claude Skills</li>
+<li>"[NEW 2026-06-04] Skill 平台第二阶段必须有 meta-skill(「Skill of Skills」) —— Skill 数量过千后熵增不可避免,必须内置审计 + 优化员" — Peter Yang · Claude Skills</li></ul></div><div class="vp-cat"><h4>Policy / Regulation</h4><ul><li>"[NEW 2026-06-04] 「Agency」(用户能动性)取代「Safety」成为 2026 政策关键词 —— Safety 被动避害,Agency 主动赋权,游戏侧锚点 = 充值意愿干预 + 推荐流可解释 + AI NPC 可控" — OpenAI Public Policy Agenda</li>
+<li>"[NEW 2026-06-04] 「人口结构公平」(性别 / 年龄 / 收入)成为 AI 公司向监管释放的新型 KPI —— Gaming 等价物 = 玩家结构公平 + 女性主播比例 + 低线城市覆盖率,应主动 publish" — OpenAI Public Policy Agenda</li>
+<li>"[NEW 2026-06-04] OpenAI 主动进入 GovTech —— 未来 18 个月是 OpenAI/Anthropic/Microsoft 三方主战场,海外政府关系窗口期 12-18 个月内抢锁" — OpenAI Public Policy Agenda</li>
+<li>"[NEW 2026-06-04] 政策承诺中预埋「立场可更新」(Adaptability)条款 —— 给未来叙事反转留合法性窗口,Gaming 公司向监管承诺时可借用措辞" — OpenAI Public Policy Agenda</li>
+<li>"[NEW 2026-06-04] 「AI 基建包邮社区」三件套模板 = 税收 + 工会建造岗 + 本地 AI credits,海外大基建落地标准化阻力削减方案" — Stargate Michigan</li></ul></div><div class="vp-cat"><h4>Gaming &amp; Live-streaming</h4><ul><li>"[NEW 2026-06-04] 「亿级游戏创作者」 = 下一个三年战略叙事核心 —— 头部公司未来 24 个月最值钱的不是更强 IP,而是更友好的 AI 创作工具栈,谁接住谁拿下平台红利" — mira 综合 Figma + Satya</li>
+<li>"[NEW 2026-06-04] 内部 Gaming Ops DSL = 把活动配置 / 经济参数 / LiveOps 决策结构化为可验证表达,为多 agent 协作打底,对照 Axiom 形式化范式" — mira 综合 Axiom × Cognition</li>
+<li>"[NEW 2026-06-04] 25-35B MoE + 长上下文 + 可微调,是「玩家伴随式 AI」(陪玩 / 客服 / 剧情 NPC)的产业甜区" — mira 综合 MAI</li></ul></div><div class="vp-cat"><h4>Investment &amp; Macro</h4><ul><li>"[NEW 2026-06-04] Nvidia RTX Spark / N1X PC 是「时代错位赌注」 —— 在 AI 推理向云端集中、Agent 越来越异步的时代押本地强算力 PC,信号是「往回走」" — Ben Thompson · Stratechery</li>
+<li>"[NEW 2026-06-04] AI 真正的 ROI 在「让顶级创意人员效率 10×」,不是「降低人力成本/补漏洞」 —— 高管资源投入意愿叙事应切换" — mira 综合 Axiom × Figma</li></ul></div><div class="vp-cat"><h4>Other</h4><ul><li>"[NEW 2026-06-04] 「框架先于事实」工作法 —— Ben Thompson 在采访 Satya 之前先 publish 自己结论;高信号分析师在 AI 加速时代的内容方法论" — Ben Thompson · Stratechery</li>
+<li>"[NEW 2026-06-04] Cursor RL 实操:offline RL 教推理 + tool call,online RL 仅最后调味 —— 「用户不会陪烂模型试错」是任何在线 RL 设计的硬约束" — Cursor Engineering Blog</li>
+<li>"[NEW 2026-06-04] 反加速主义校正:做 3-5 年 AI 战略 roadmap 时,把「加速派 vs 减速派」时间线都画一遍,中间值更接近真实组织变迁速度" — Benedict Evans · Lenny's Podcast</li></ul></div>
+</section>
+
+<footer class="foot">
+  <p><b>Generated</b> 2026-06-04 06:00 Asia/Shanghai · Vol.004 · <b>by</b> Mira × Readwise pipeline v2</p>
+  <p><b>评分体系</b> 5 维 × 0-2 分:信号 / 颠覆 / 可操作 / 独特 / 时效 · ≥6 → deep,3-5 → brief,&lt;3 → skim/skip</p>
+  <p><b>下游</b> 本卷新增观点累计 append 到 Readwise 文档 <code>_mira-vp-index</code>(id 01kt1es4p2mvkrtvmn3z7bb28e),read-only 继承自 <code>_claudian-vp-index</code>(id 01kt01w7c7xbvj8eyx7kasa8w9)</p>
+  <p><b>反馈</b> 飞书 → 王瑞成 · Token IP / Verified AI / SaaS Apocalypse 三条主线请勾选优先级</p>
+</footer>
+
+</body>
+</html>
