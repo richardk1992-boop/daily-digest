@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-04",
+  "vol": "004",
+  "title": "Microsoft Build 2026 特辑 — Frontier Intelligence Platform、MAI 七连发、形式化数学 AI",
+  "subtitle": "Satya × Latent Space / MAI 自研芯片 30% perf-per-dollar / Axiom $200M Series A / Figma 不死论 / OpenAI 政策三连发 / Peter Yang 可进化 Skill",
+  "deep_count": 7,
+  "brief_count": 5,
+  "skim_count": 2,
+  "skip_count": 1,
+  "dup_count": 1,
+  "new_viewpoints": 29,
+  "clusters": ["satya_build", "axiom", "figma", "oai_policy", "skills"],
+  "curator": "mira"
+}
