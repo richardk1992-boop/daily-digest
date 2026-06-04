@@ -1,0 +1,19 @@
+{
+  "date": "2026-06-05",
+  "vol": "005",
+  "title": "Reality is the Final Eval — Andon Labs 真实世界评测、腾讯 Agent Memory 四层架构、Anthropic IPO 提前与 AI ROI 拐点",
+  "subtitle": "VendingBench × 真实零售 / 4 层渐进式记忆 + 60% 准确率跃迁 / Anthropic Labor Day 前上市 + Bain 40% 公司 ROI 不及预期 / Walmart 终结无限 token",
+  "deep_count": 4,
+  "brief_count": 5,
+  "skim_count": 2,
+  "skip_count": 1,
+  "dup_count": 2,
+  "new_viewpoints": 26,
+  "clusters": [
+    "real_world_evals",
+    "agent_memory",
+    "founder_focus",
+    "ai_macro_ipo"
+  ],
+  "curator": "mira"
+}
