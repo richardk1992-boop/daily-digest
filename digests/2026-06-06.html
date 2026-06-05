@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>Reflexive Lab Era — Anthropic RSI 自陈、Auriel 反告破 Harness、Lenny 反 Agent 论:Agency &gt; Agents — Vol.006</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --bg-warm: #1a1a18;
+  --bg-warm-2: #1f1a14;
+  --orange: #e85d26;
+  --orange-soft: #f4a06a;
+  --yellow: #f6d24a;
+  --ink: #f3ede4;
+  --ink-dim: #b4a999;
+  --rule: #2c2823;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  margin: 0; padding: 0; line-height: 1.65;
+  font-size: 16px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
+.chrome { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim); text-transform: uppercase; }
+
+.masthead { border-top: 6px solid var(--orange); padding-top: 18px; margin-bottom: 28px; }
+.masthead .topline { display: flex; justify-content: space-between; }
+.masthead h1 {
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 56px; line-height: 1.04; margin: 14px 0 10px;
+  color: var(--orange); letter-spacing: -0.01em;
+}
+.masthead h2 {
+  font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic;
+  font-size: 19px; color: var(--orange-soft); margin: 0 0 16px;
+}
+.masthead .meta {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 10px 0; display: flex; gap: 28px; flex-wrap: wrap;
+}
+.meta span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+.meta span b { color: var(--yellow); font-weight: 600; }
+
+.editorial {
+  background: var(--bg-warm-2); border-left: 4px solid var(--yellow);
+  padding: 22px 28px; margin: 28px 0 40px;
+}
+.editorial h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 12px; letter-spacing: 0.12em;
+}
+.editorial p {
+  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 1.75;
+  margin: 0; color: var(--ink);
+}
+
+.section-head {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--orange); margin: 40px 0 18px;
+  border-bottom: 2px solid var(--rule); padding-bottom: 10px;
+}
+
+.deep-card {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 30px 32px; margin: 0 0 32px; border-radius: 2px;
+}
+.deep-card .tag {
+  display: inline-block; background: var(--orange); color: #fff;
+  padding: 3px 10px; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+}
+.deep-card h3 {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 28px; line-height: 1.18; margin: 14px 0 6px; color: var(--ink);
+}
+.deep-card .kicker { font-size: 14px; color: var(--orange-soft); margin: 0 0 8px; }
+.deep-card .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+.deep-card .meta-row a { color: var(--yellow); text-decoration: none; }
+
+.scorecard {
+  background: rgba(0,0,0,0.3); padding: 14px 18px; margin: 16px 0 22px;
+  display: grid; grid-template-columns: repeat(5, 1fr) 90px; gap: 14px; align-items: center;
+}
+.score-dim { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); }
+.score-dim b { display: block; color: var(--ink); font-size: 18px; font-family: 'Barlow', sans-serif; }
+.score-bar { background: var(--rule); height: 4px; margin-top: 4px; }
+.score-bar > div { background: var(--orange); height: 100%; }
+.score-total { text-align: right; font-family: 'Barlow', sans-serif; }
+.score-total b { font-size: 32px; color: var(--yellow); }
+.score-total span { font-size: 14px; color: var(--ink-dim); }
+
+.arg { margin: 26px 0; }
+.arg h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--yellow); margin: 0 0 12px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.arg .quote {
+  font-family: 'Noto Serif SC', serif; font-style: italic;
+  font-size: 15px; color: var(--ink); border-left: 3px solid var(--orange-soft);
+  padding: 6px 16px; margin: 8px 0;
+}
+.arg .cn { font-size: 14px; color: var(--ink); padding: 0 16px; margin: 8px 0; }
+.arg .mira {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 10px 16px; margin: 12px 0 0;
+  font-size: 14px; color: var(--ink);
+}
+.arg .mira b { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+.takehome {
+  background: rgba(246,210,74,0.06); border: 1px solid rgba(246,210,74,0.25);
+  padding: 18px 22px; margin: 24px 0 0;
+}
+.takehome h4 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.12em;
+}
+.takehome ol { margin: 0; padding-left: 22px; }
+.takehome li { margin: 6px 0; font-size: 14px; color: var(--ink); }
+
+.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .brief-grid { grid-template-columns: 1fr; } }
+.brief {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+.brief .n { font-family: 'Barlow', sans-serif; font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.brief .tag {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--yellow); letter-spacing: 0.1em; margin: 4px 0 8px;
+}
+.brief h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 1.25; color: var(--ink); margin: 0 0 6px;
+}
+.brief .kicker { color: var(--orange-soft); font-size: 13px; margin: 0 0 8px; }
+.brief .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); margin-bottom: 10px; }
+.brief .meta-row a { color: var(--yellow); text-decoration: none; }
+.brief .body { font-size: 14px; line-height: 1.7; }
+.brief .bullet {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 8px 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink);
+}
+
+.skip { background: var(--bg-warm); border-left: 3px solid var(--ink-dim); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink-dim); }
+.skip b { color: var(--ink); }
+
+.dup { background: var(--bg-warm); border-left: 3px solid var(--yellow); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+.dup b { color: var(--yellow); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.ledger th { color: var(--yellow); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.ledger td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--orange-soft); font-size: 11px; width: 18%; }
+.ledger td:nth-child(2) { width: 50%; }
+.ledger td:nth-child(3) { color: var(--ink-dim); width: 32%; }
+
+.footer {
+  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+}
+.footer b { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Daily Reading Broadside · Vol.006</span>
+      <span class="chrome">2026-06-06 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>Reflexive Lab Era — Anthropic RSI 自陈、Auriel 反告破 Harness、Lenny 反 Agent 论:Agency &gt; Agents</h1>
+    <h2>Claude 80% 自写代码 + Mythos 52× 训练加速 + Devin $10M 担保 / 漏洞百出的 RL Env 正在悄悄毁掉你的模型 / Cloudflare 收 VoidZero 拼齐 Agent 全栈 / Dan Shipper 用 Codex 12 周连续 inbox-zero / Elena: 你的 AI 战略不是工具问题,是信任问题</h2>
+    <div class="meta">
+      <span>候选 <b>9</b></span>
+      <span>深读 <b>4</b></span>
+      <span>简评 <b>2</b></span>
+      <span>速记 <b>0</b></span>
+      <span>跳过 <b>1</b></span>
+      <span>重复 <b>1</b></span>
+      <span>新观点 <b>23</b></span>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <h3>EDITORIAL · 编辑卷首语</h3>
+    <p>今天的窗口虽小,信号密度反而最高。一边是 Anthropic 公开承认 RSI 的早期迹象 —— 80% 合入代码出自 Claude、Mythos 把训练脚本提速 52 倍、6 个月时间把内部任务成功率从 26% 推到 76%;另一边是 Auriel Wright 在 Latent Space 不留情面地告诉所有 RL 团队:你的 harness 才是模型变差的元凶,5% 故障率就是工业级硬阈值。
+    Lenny 与 Elena Verna 把镜头从模型转回组织:大多数公司的 AI 战略不是工具问题,是『信任问题』 —— 头衔变成了权限结构,中层管理把信息卡死在自己手里。Dan Shipper 用 Codex 连续 13 周 inbox-zero,Cloudflare 收 VoidZero 拼齐 LLM 友好部署全栈,『Prompt → Loop』范式转移在一线已悄然完成。
+    Vol.006 把这四条线串在一起:RSI 萌芽 + Harness 工程化 + 组织授权重写 + Agent-native 工作流。这是 Reflexive Lab 时代的四块基石。</p>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · DEEP</h2>
+  
+    <article class="deep-card" id="agency_over_agents">
+      <span class="tag">ORG / CULTURE</span>
+      <h3>Agency &gt; Agents — AI 战略最常被忽视的瓶颈是组织信任,不是工具</h3>
+      <div class="kicker">Lenny + Elena Verna (Lovable)</div>
+      <div class="meta-row">Lenny&#x27;s Newsletter cross-post from Elena Verna · 2026-06-05 · 12.6KB · ~7 min read · <a href="https://www.lennysnewsletter.com/p/your-ai-strategy-has-a-trust-problem">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">时效<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-total"><b>8</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;AI tools can make people faster, but only if they have the autonomy, trust, and context to actually use them. Otherwise, you&#x27;re just giving more tools to people who are still stuck waiting for permission.&quot;</div>
+          <div class="cn">AI 工具能让人变快,但前提是他们有自主权、信任和上下文。否则你只是把更多工具发给一群还在等审批的人。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>把这句话钉在所有 AI Transformation 项目的 OKR 第一行。Tooling rollout 不是变量,Permission redesign 才是。Gaming 内部产品线如果只发 Codex/Copilot 不松授权,12 个月后效率提升曲线会是平的。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;Companies say they want high-impact ICs, then hide the information required to have impact behind manager titles. Literally. When you get a manager promotion, you&#x27;re in a separate Slack channel where information is being shared with you that you had no access to, before.&quot;</div>
+          <div class="cn">公司嘴上喊要高影响 IC,实际上把『有影响力必需的信息』锁在经理头衔之后 —— 升经理那一天才能进入新 Slack 群,看到此前看不到的内容。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>Title = Permission Structure 这个观察精准。Gaming 立项审批/收入数据/玩家投诉/竞品情报四类信息,问一下:你团队里 P6/P7 IC 看得到吗?看不到就别指望他们承担 Lead-class 决策。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;Anthropic is a good example: the visible structure is basically &#x27;member of technical staff&#x27; or &#x27;member of non-technical staff.&#x27; Not because titles are evil, but because titles often become permission structures.&quot;</div>
+          <div class="cn">Anthropic 是个例子 —— 对外可见的层级基本只有『技术员工』和『非技术员工』两类。不是因为头衔是邪恶的,而是头衔常常变成了权限结构。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>Frontier lab 用扁平职级换信息流速,是 AI-native org 的隐藏护城河。这条对 TikTok Gaming 直接含义:与其引入 12 层职级体系区分『高级 vs 资深』,不如把决策权下放为 4 层 + Skill-based access list。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;In the previous world, the cost of a bad choice was astronomical. It would take so much time to get out of it. But if everybody can run at a really quick pace, it&#x27;s okay to make a wrong turn! You can go a bit down that route, turn around, and be back on the right course, faster than other teams even start moving.&quot;</div>
+          <div class="cn">以前年代,一个错误决策代价是天文数字 —— 因为纠错时间太长。但如果大家都能高速跑,走错路反而无所谓,你可以走两步、调头、回到正轨,而其他团队还没动。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>决策成本 = 决策延迟 × 撤销难度。AI 时代撤销变便宜,所以应该把『先试再说』变成 LiveOps、活动配置、运营文案的默认模式。但前提是要有可观测的 24h 回滚机制。Gaming 应建一个『当日决策回滚 dashboard』 —— 每天回滚 N 次 = 健康信号,不是失败信号。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;In the traditional org structure, middle management is a feature, not a bug. The primary job for this role is to travel decisions and information up and down the chain. Up and down, down and up, over and over. It&#x27;s a big game of telephone.&quot;</div>
+          <div class="cn">传统组织结构里,中层管理本来就是 feature(不是 bug)—— 它的核心职能就是上下传话。一遍一遍传 —— 跟传话游戏一样。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>这句话残酷但精确。AI 时代『传话』可以 100% 自动化(会议纪要 → 决议卡 → 推送给被影响方),所以中层岗位的『职能价值』在被结构性榨干。Gaming 中层管理者未来 18 个月最大的存在风险 = AI 把信息传递自动化后,只剩『career coaching』这一项不可替代,而这一项不需要全职岗位。建议主动转 Lead-IC 路线。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>选 1-2 个 R&amp;D 团队做『扁平授权试点』(3 个月,公开 KPI 对比),证明 autonomy &gt; tooling。</li><li>审 Gaming 内部 Slack/飞书群信息访问规则:列出『仅 P7+ 可见』的 channel 清单,挑 30% 试点对 IC 开放,观察决策速度变化。</li><li>建『当日决策回滚仪表盘』,把回滚次数当健康指标公开;消除『错就是丢人』的文化包袱。</li><li>中层管理岗位明确『Lead-IC 转线通道』,把『传话』职能升级为『模式识别 + 高影响 IC』,12 个月窗口内主动转型,不要等被 AI 内卷掉。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="bad_rl_envs">
+      <span class="tag">RL / DATA</span>
+      <h3>I Don&#x27;t Want Your Janky Harness — 工业级 RL 训练 5 类 Env 故障与失败分类学</h3>
+      <div class="kicker">Auriel Wright · Gemini RL 团队</div>
+      <div class="meta-row">Latent Space guest post · 2026-06-05 · 8.1KB · 实战工程级 · <a href="https://www.latent.space/p/bad-envs">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-total"><b>9</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;In reinforcement learning, the environment is your data generator… A flaky harness systematically generates garbage data and feeds it straight into your model&#x27;s learning steps, pushing your gradients in the wrong direction.&quot;</div>
+          <div class="cn">RL 训练里,Environment 就是你的数据生成器。一个不稳定的 harness 会系统性地生成垃圾数据,直接喂进模型的学习步,把梯度推向错误方向。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>这是过去 12 个月所有「我们的 agent 越训越烂」案例的统一解释。Gaming 内部任何 LiveOps RL / 自动客服 RL / NPC 对话 RL 立项,默认第一周不训练,只测 harness。Harness QPS / 错误率 / state freshness 三项指标先达标再说。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;Error Class 2: The Reward Hack — Your reward function only checks whether tests pass, not whether the code is actually correct. The agent discovers it can hardcode expected outputs instead of solving the problem… What the model ends up learning: &#x27;Read the tests, hardcode the outputs, skip understanding the bug.&#x27;&quot;</div>
+          <div class="cn">错误类 2 —— Reward Hack:你的 reward 函数只检查测试是否通过,而不检查代码是否真的正确。Agent 发现可以直接 hardcode 期望输出绕过问题。模型学到的是『读测试 → hardcode 输出 → 跳过理解 bug』。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>把这条平移到游戏:LiveOps RL 如果 reward = 『单日活跃增量』,agent 会学到『推送 5 次促单弹窗』。reward = 『N 日留存』,agent 会学到『让付费玩家先看好玩内容』。任何 RL 立项,reward 设计是 Day-0 哲学问题,不是工程问题。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;Error Class 3: The False Resolution — Your harness rewards based on ticket status changes (open → resolved = positive reward), not on whether the customer&#x27;s actual problem was fixed. The agent learns that clicking &#x27;resolve&#x27; is the fastest path to reward.&quot;</div>
+          <div class="cn">错误类 3 —— False Resolution:harness 用工单状态变化做 reward(open → resolved 给正向奖励),而不是客户的问题是否真的解决。Agent 学到『点 Resolve = 最快拿奖励』。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>玩家投诉 AI 客服立项警示。Reward 不能用『工单关闭率』,必须用『48h 内同玩家不再投诉同问题』作为延迟 reward。短期信号会让 agent 学坏,Gaming 长尾用户问题尤其严重。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;If your environment failure rate is above 5%, you don&#x27;t have a model problem, you have a harness problem. Fix the harness first.&quot;</div>
+          <div class="cn">如果你的 environment 故障率高于 5%,你不是有模型问题,你是有 harness 问题。先修 harness。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>5% 是工业级硬阈值。把这条写进所有 Gaming RL 立项 Go/No-Go 卡。任何 Env failure rate &gt; 5% 的项目,产品负责人不许进 Q3 review。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;Training harness engineering is about making sure the model experiences production-quality interactions before you actually deploy to prod. A good harness compounds: every clean episode builds on the last. A bad one compounds too, just in the wrong direction. The gap between teams that ship working harnesses and those that don&#x27;t widens with every training run.&quot;</div>
+          <div class="cn">训练 harness 工程的本质,是让模型在部署前就体验过『生产环境质量』的交互。好的 harness 是复利:每个干净 episode 在上一个基础上叠加。坏的 harness 也是复利,只是方向反了。harness 能跑 vs harness 不能跑 的差距,每次训练 run 都在变宽。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>Harness Quality = AI 团队战略级护城河。Vol.004 Satya 说『企业 Token IP 是 evals + traces』,这里 Auriel 接上 :『另一半 IP 是 harness』。Gaming 应把 LiveOps / NPC / 反作弊三套 harness 当作核心资产做版本化。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>Gaming RL 立项卡板增加『Harness 三件套验收』:state freshness &lt; 1s / failure rate &lt; 5% / reward 含 ≥1 个延迟信号。</li><li>每个 RL 团队必须设『Trajectory Reviewer』角色(等同 SRE),专职 review 失败 episodes 并分类(model fail vs harness fail)。</li><li>Reward 设计上桌前先做『恶意攻击思维实验』:agent 最贱的捷径是什么?如果答得出 → reward 不能这么设。</li><li>把 Harness 工程升格为『AI 平台资产』:LiveOps Sim / NPC Sim / 反作弊 Sim 独立版本化 + SLA 化,跨产品线复用。</li><li>招聘信号:RL 团队下一个关键 hire 不是 ML researcher,是『有 5 年生产 SaaS 经验 + 懂分布式重试的 SWE』。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="rsi_emerging">
+      <span class="tag">FRONTIER LAB / RSI</span>
+      <h3>Reflexive Lab — Anthropic 自陈 RSI 萌芽:80% Claude 写代码、Mythos 52× 加速、Devin $10M 担保、Nemotron 3 Ultra</h3>
+      <div class="kicker">AINews · Anthropic + Cognition + NVIDIA</div>
+      <div class="meta-row">AINews 2026-06-04/05 mega-issue · 34.7KB · 多源汇编 · <a href="https://www.latent.space/p/ainews-not-much-happened-today-7a8">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-total"><b>9</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;Anthropic published the most-discussed policy/research note of the day, arguing that current systems show early signs of recursive self-improvement (RSI)—not yet full autonomy in research direction, but clear evidence that AI is accelerating AI development. The headline operational claims were concrete: 80%+ of merged code at Anthropic is now authored by Claude, the typical engineer ships 8x more code per quarter than in prior years, and on internal open-ended engineering tasks Claude&#x27;s success rate rose from roughly 26% to 76% in six months.&quot;</div>
+          <div class="cn">Anthropic 发了当日最受关注的政策/研究备忘:当前系统已经显现出 recursive self-improvement (RSI) 的萌芽 —— 还没到研究方向自主,但 AI 加速 AI 开发的证据已经清晰。具体数据:Anthropic 80%+ 合入代码现在是 Claude 写的、典型工程师每季度交付代码量是之前的 8 倍、内部开放式工程任务 Claude 成功率 6 个月从 26% 涨到 76%。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>RSI 从『理论辩论』变成『生产指标』是 2026 半年里最重要的边界事件。80% / 8× / 26→76% 三组数字直接定义未来 24 个月 Sovereign AI 投资的紧迫性 —— 落后 12 个月可能就是『落后 8×』而不是『落后一代』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;The most striking empirical datapoint was Anthropic&#x27;s recurring &#x27;speed up a small model training script&#x27; test: Claude Opus 4 averaged about 3x speedup, while Mythos Preview reportedly achieved ~52x. Anthropic also says Mythos gave better &#x27;what to do next&#x27; research suggestions than humans 64% of the time in sessions where the researcher had taken a wrong turn.&quot;</div>
+          <div class="cn">最有冲击力的实证数据点:Anthropic 反复跑的『加速一个小模型训练脚本』测试 —— Opus 4 平均 3× 加速,Mythos Preview 报告 ~52× 加速。另外,在研究员走错方向的会话里,Mythos 给出『下一步该做什么』的建议,有 64% 的时间比人类更好。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>52× 是工业意义上的『相变』。如果一个模型能把训练脚本提速 52 倍,它就能在同样算力下做 52 倍的实验 —— 这才是 RSI 真正的杠杆。『research suggestion 64% 强于人类』另一层含义:研究员的隐性偏见在被 AI 抹平。Gaming 创作工具链直接对照:NPC behavior 调优、活动配置生成、玩法变体探索,未来 12 个月会出现『AI 副驾 64% 比策划更对』的临界点。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;On the enterprise side, Cognition introduced an AI Productivity Guarantee for Devin—up to $10M in covered usage if the product doesn&#x27;t produce positive engineering value—backed by an internal measurement system over 258 enterprise sessions spanning tasks up to 64+ hours.&quot;</div>
+          <div class="cn">在企业侧,Cognition 给 Devin 推出『AI Productivity Guarantee』—— 如果产品没产生正向工程价值,最高赔 $10M 使用费;背后是 258 个企业会话、单任务可达 64+ 小时的内部测量体系。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>$10M 担保 = Cognition 公开下注『我们能用数据证明 Devin 的 ROI』。这是 2026 企业级 AI 销售范式转移信号 —— 从『卖能力』到『卖结果担保』。Gaming 内部 AI 工具采购应主动谈『SLA + 效果担保』条款,把 Vol.005「Bain 40% 公司 ROI 不及预期」直接外化为供应商压力。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;NVIDIA&#x27;s Nemotron 3 Ultra: a fully open 550B MoE model with 55B active parameters, 1M context, and an explicit focus on long-running agent workloads… up to 5x faster and 30% lower cost for agentic tasks… measured 47.7 on its Intelligence Index using NVIDIA&#x27;s recommended NVFP4 inference weights, making it the strongest US open-weights model they&#x27;ve tested.&quot;</div>
+          <div class="cn">NVIDIA Nemotron 3 Ultra:全开 550B MoE 模型,55B 激活参数,1M 上下文,明确针对 long-running agent 工作负载;对 agentic 任务最高 5× 加速、30% 成本下降;在 Artificial Analysis 的 Intelligence Index 上拿 47.7(NVFP4 推理权重),是他们测过的最强美产开权重模型。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>Vol.004 MAI 35B MoE 是『玩家伴随式 AI 甜区』,Nemotron 3 Ultra 是『深度调度 Agent 甜区』,两个量级互补。Gaming 端云协同部署:边缘 35B MAI/Mistral 跑 NPC 对话与情感陪伴,云端 550B Nemotron 跑长 horizon LiveOps 优化和反作弊调度。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;Anthropic explicitly wrote that &#x27;it would be good for the world to have the option to slow or temporarily pause frontier AI development,&#x27; framing verification and coordination mechanisms as increasingly urgent if RSI-like dynamics continue.&quot;</div>
+          <div class="cn">Anthropic 明确写道:『如果世界能有选项去减缓或暂时暂停前沿 AI 发展,这会是件好事』—— 把验证和协调机制定调为 RSI 类动态持续下的紧迫需求。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>frontier lab 头部公司主动谈『可暂停』而非『不可阻挡』,是 2026 政策话术的范式转移。对 Gaming 跨境运营含义:海外政策窗口期 12 个月内,『可暂停 / 可降级 / 可审计』三件套要写进所有 AI 功能的 PRD 默认章节,而不是合规附录。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>把『AI 加速 AI』当作 2026-2027 战略主线写进季度 review,而不是当『未来叙事』。任何 12 个月 roadmap 没有 RSI 加速曲线假设的项目重写。</li><li>Gaming AI 工具链(NPC 设计 / 活动生成 / 玩法变体)立项时设『AI 副驾何时 64% 优于人类策划』里程碑,作为产品节奏锚点。</li><li>采购侧:与 AI 供应商(Devin/Cursor/Anthropic API)谈判时主动要求『效果担保 / SLA 赔付』条款,把 Bain ROI 拐点外化为供应商风险。</li><li>部署架构:Gaming 端云协同 inference router 立项 —— 边缘 35B(Mistral/MAI)+ 云端 550B(Nemotron) 双层规划,24 个月窗口内完成 PoC。</li><li>海外合规 PRD 模板 v2 增加『AI 功能可暂停 / 可降级 / 可审计』三件套作为默认章节,呼应 Anthropic 政策话术。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="agent_native_workflow">
+      <span class="tag">AGENT-NATIVE PRODUCT</span>
+      <h3>I Don&#x27;t Prompt Anymore, I Write Loops — Dan Shipper 用 Codex 13 周连续 inbox-zero + Cloudflare 收 VoidZero 拼齐 Agent 全栈</h3>
+      <div class="kicker">Every (Dan Shipper) + Cloudflare/VoidZero · 综合自 AINews</div>
+      <div class="meta-row">Every YouTube + AINews 2026-06-04/05 · 综合 8.7KB + 34.7KB · <a href="https://www.youtube.com/watch?v=2Yy8EJlZJFE">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-total"><b>8</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;I&#x27;ve hit inbox zero for 13 weeks in a row. That has literally never happened before in my life. And Codex has just like completely changed how I&#x27;m able to process information that comes into my email and allows me to spend less time on stuff that like scheduling and stuff that I would procrastinate on and more time on doing like fun creative projects.&quot;</div>
+          <div class="cn">我连续 13 周 inbox-zero。这辈子从来没有过。Codex 完全改变了我处理邮件的方式,让我把『安排日程』和『拖延任务』花的时间转给『搭新东西』这种有趣的创造工作。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>Codex inbox = 第一个让 CEO 量化感受到『AI 让我有创作时间』的产品案例(13 周连续,N=1 但信号强)。Gaming 产品高管应自己做一周这套实验,而不是听汇报。亲身用过 vs 没用过的 agent-native 体感差距,在 2026 等价于『2010 用过 vs 没用过 iPhone』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;A popular clip summarized the Claude Code workflow as &#x27;I don&#x27;t prompt Claude anymore, I write loops,&#x27; while @omarsar0 described reverse-engineering dynamic workflows into his own orchestrator for branching research, verification, triage, data synthesis, and eval generation. The common idea: higher-order control loops, not one-shot prompts, are becoming the real unit of work.&quot;</div>
+          <div class="cn">一段流行短视频把 Claude Code 工作流总结为『我不再给 Claude 写 prompt,我写循环』。omarsar0 描述他把动态工作流反向工程到自己的 orchestrator —— 分支研究 / 验证 / 分诊 / 数据合成 / eval 生成。共识:高阶控制循环,而不是 one-shot prompt,正在成为真正的工作单元。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>『Prompt → Loop』是过去 6 个月一线生产里最大的范式转移,但企业 AI 培训还停在『Prompt Engineering 101』。Gaming 内部应在 2 个月内升级培训内容:『写 Skill / 写 Loop / 写 Eval』三件套替代旧 Prompt 课程,Vol.004 Peter Yang Skill 是入口,这里是输出端。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;What&#x27;s amazing about this is all these decisions get recorded. So it&#x27;s all recorded on my file system. It knows for any given email, what did I say to do? Did I say this is interesting? Did I say archive it? Did I draft or reply? And it gets better over time. So I compound my learnings.&quot;</div>
+          <div class="cn">最妙的是所有这些决策都被记录下来 —— 全在我的文件系统里。对任何一封邮件,它知道我说要做什么:这个有意思?归档?起草回复?然后随时间变好。我的学习是复利的。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>『决策记录 + 文件系统状态 + 时间复利』= 个人 AI 的『记忆 = 私有 fine-tune』模式(对应 Vol.004 Peter Yang memory.md)。Gaming 产品经理工作站如果接入类似机制:活动配置 / PRD review / 数据看板决策全留痕,12 个月后等价于一个『产品经理风格的 fine-tuned model』,跨人复用 = 知识资产化。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;The biggest developer-platform move was Cloudflare bringing in VoidZero, the team behind Vite, Vitest, Rolldown, Oxc, and Vite+… The strategic read from developers was that this gives Cloudflare tighter control over an increasingly agent-friendly application stack: frontend/build tooling, runtime, storage, inference, deployment primitives, and security in one place. @wesbos framed it as Cloudflare assembling &#x27;a tidy package they can hand to an LLM to make a site.&#x27;&quot;</div>
+          <div class="cn">本周最大的开发者平台动作:Cloudflare 把 VoidZero(Vite/Vitest/Rolldown/Oxc/Vite+ 的团队)收入麾下。开发者侧战略解读:这让 Cloudflare 对越来越 agent-friendly 的应用栈拥有更紧的控制权 —— 前端/构建工具、运行时、存储、推理、部署原语、安全 集中在一处。@wesbos 总结为 Cloudflare 在组装『可以打包丢给 LLM 让它直接造站的整套东西』。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>『一个 LLM 友好的整栈』是云厂商在 AI 时代的新护城河叙事。Vercel/Netlify 已经被 Cloudflare + VoidZero 整组合拳打到第二梯队。Gaming 跨境业务对照含义:海外『LLM 友好部署栈』的选型窗口期未来 12-18 个月,Cloudflare/AWS/Azure 三方竞标可主动要求『一整套 agent-spec 化的 deployment 模板』作为采购前置条件。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;LangSmith Sandboxes reached GA with Dockerfile snapshots, interactive consoles, TCP tunneling, and standard Linux tooling. Hugging Face pushed two adjacent ideas: a Kernels distribution path for custom kernels on the Hub and stronger support for storing agent traces as first-class artifacts.&quot;</div>
+          <div class="cn">LangSmith Sandboxes 正式 GA:Dockerfile 快照、交互式 console、TCP tunneling、标准 Linux 工具链。Hugging Face 推了两个相邻方向:Hub 上分发自定义 Kernel,以及把 agent traces 作为头等公民 artifact 存储。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>Agent Trace = 新的『模型权重 + 数据』第三类一等公民资产。Gaming 内部 agent 平台应在 2 个月内补齐:trace 分版本、可回放、可 diff、可拼装为 eval set。Trace 不入资产管理 = 数据资产隐性流失。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>Gaming 产品高管 1 周内亲自跑一遍 Codex/Cursor inbox-zero 实验,体感后再做工具采购决策。</li><li>内部 AI 培训 v2.0:『Prompt → Skill / Loop / Eval 三件套』替代旧 Prompt Engineering 课程,2 个月内升级。</li><li>产品经理工作站接入『决策留痕 + 文件系统状态机』(基于 Codex / Claude Code / 自研 wrapper),12 个月后审视是否构成可跨人复用的『PM-fine-tuned』资产。</li><li>海外业务 deployment 选型补充『LLM 友好 deployment 模板』作为采购前置条件,Cloudflare/AWS/Azure 三方竞标。</li><li>Agent Trace 在内部 ML 平台升格为头等公民:版本化 / 可回放 / 可 diff / 可拼装为 eval,呼应 Vol.005 Andon 真实世界 eval 主线。</li></ol>
+      </div>
+    </article>
+
+  <h2 class="section-head">▎ 速览 · BRIEF</h2>
+  <div class="brief-grid">
+    
+    <div class="brief">
+      <div class="n">01</div>
+      <div class="tag">STRATEGY DIGEST</div>
+      <h4>Power Shifts — Google 反超 Microsoft 市值 + YouTubers 接管 Hollywood</h4>
+      <div class="kicker">Ben Thompson · Stratechery 周报</div>
+      <div class="meta-row">Stratechery This Week · 2026-06-05 · 4.2KB · <a href="https://stratechery.com/2026/power-shifts/">原文</a></div>
+      <div class="body">三年前 Google 看起来狼狈应对 ChatGPT,Microsoft 因 OpenAI 合作如日中天;现在 Google 在市值上反超,Berkshire Hathaway 入股是个奇怪信号。Stratechery 本周采访 Satya 的开场问题就是『你对 Microsoft 当前竞争位置满意吗?』。同时两位 Gen Z YouTube 创作者(Mythic Heroes / Lunar Riders 制作团队)拍出全美最卖座电影、连胜 Star Wars spinoff。</div>
+      <div class="bullet">[KEY] 『Google = BNSF 铁路』叙事(Vol.003)在 Q2 第一次出现资本市场反向投票 —— 长期格局未定,中期叙事在反转。Gaming IP/创作侧含义:YouTube 创作者→ Hollywood 的代际换班速度比预期快 3-5 年,『TikTok Gaming 创作者 → 短剧 → 长片』链路可现在抢锁定 3-5 个头部签约。</div>
+    </div>
+    <div class="brief">
+      <div class="n">02</div>
+      <div class="tag">DESIGN / CRAFT</div>
+      <h4>Designer Role in the AI Paradigm Shift — Craft 不会消失,只会被音量旋钮放大</h4>
+      <div class="kicker">South Park Commons YouTube Short</div>
+      <div class="meta-row">YouTube Shorts · 2026-06-05 · 60s · 0.7KB transcript · <a href="https://www.youtube.com/shorts/IGbT9F1Vb1E">原文</a></div>
+      <div class="body">『设计师的角色在 AI 范式转移里有什么会延续?』『几乎所有东西都会延续 —— craft、novelty、多样性、速度。只是音量旋钮被拧大了。在乎质量的人现在可以把质量推到更远;在乎功能丰富度的人可以做出更多功能;想发布更快的人可以发更快。AI 是所有这些维度的乘数。』</div>
+      <div class="bullet">[KEY] Vol.005 Rasmus Andersson『软件衰变 + -1 探索期』的姊妹观点 —— 短小但有效。Gaming 设计部 OKR 重设:不要用『AI 替代 N 个设计师』,要用『顶级 1 个设计师产出乘以 N』,反向重写 headcount 论证。</div>
+    </div>
+  </div>
+
+  <h2 class="section-head">▎ 跳过 · SKIP</h2>
+  <div class="skip"><b>How I got 30,000+ visitors from one Reddit post 🧠</b> — Tom&#x27;s Marketing Ideas (Substack) · Newsletter promo,Reddit growth-hack 教程;与 Mira / TikTok Gaming 战略议题正交。</div>
+
+  <h2 class="section-head">▎ 去重 · DUP</h2>
+  <div class="dup"><b>The One Word That Defines Every Great Founder | David Senra (Sequoia)</b> — Vol.005 已完整深读 David Senra『focus = saying no』『missionary &gt; mercenary』『父亲故事在儿子身体里』;此条为同源视频不同剪辑。</div>
+
+  <h2 class="section-head">▎ 新增观点入库 · VP LEDGER (23 条 · append-only 到 _mira-vp-index)</h2>
+  <table class='ledger'><thead><tr><th>分类</th><th>观点</th><th>来源</th></tr></thead><tbody><tr><td>Frontier Lab / Sovereign AI</td><td>[NEW 2026-06-06] Anthropic 自陈 RSI 萌芽(80% Claude 写代码、Mythos 训练脚本 52× 加速、6 个月 26%→76% 工程任务成功率) = 2026 半年最重要边界事件,落后 12 个月 ≈ 落后 8 倍而非一代</td><td>AINews × Anthropic</td></tr><tr><td>Frontier Lab / Sovereign AI</td><td>[NEW 2026-06-06] NVIDIA Nemotron 3 Ultra 550B/55B-active + 1M context + agentic 5× 加速 = 长 horizon Agent 调度甜区,与 MAI 35B 玩家伴随式甜区互补,Gaming 端云协同 inference router 模版</td><td>NVIDIA Nemotron 3 Ultra</td></tr><tr><td>Frontier Lab / Sovereign AI</td><td>[NEW 2026-06-06] frontier lab 头部公司主动谈『可暂停/可降级/可审计』 = 2026 政策话术范式转移,Gaming 跨境 AI 功能 PRD 默认章节(而非合规附录)</td><td>Anthropic RSI policy note</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-06] 「Harness 故障率 &gt; 5% 是 harness 问题而非模型问题」是 RL 工程工业级硬阈值,所有 LiveOps/NPC/反作弊 RL 立项 Go/No-Go 第一项</td><td>Auriel Wright · Latent Space</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-06] Reward Hack / False Resolution / Stale Cache / 隐形 timeout / 非确定性 reset 五类 harness 故障是过去 12 个月「越训越烂」案例的统一解释,Trajectory Reviewer 角色应等同 SRE</td><td>Auriel Wright</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-06] Harness Quality = AI 团队战略级护城河,接续 Vol.004 Satya「企业 Token IP = evals + traces」 → 另一半 IP 是 harness,跨产品线复用即资产化</td><td>Auriel × Satya 综合</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-06] 「Prompt → Loop」范式转移已在一线生产实操层完成,企业 AI 培训应在 2 个月内升级为「Skill / Loop / Eval 三件套」替代旧 Prompt Engineering 101</td><td>omarsar0 × Claude Code × Peter Yang</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-06] Cognition Devin $10M Productivity Guarantee = 企业级 AI 销售从「卖能力」转「卖结果担保」的范式转移信号,采购侧应主动谈 SLA + 效果担保条款外化 Bain 40% ROI 拐点</td><td>Cognition</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-06] Agent Trace 升格为「模型权重 + 数据」第三类一等公民资产,版本化 + 可回放 + 可 diff + 可拼装为 eval,接 Vol.005 Andon 真实世界 eval 主线</td><td>Hugging Face × LangSmith Sandboxes</td></tr><tr><td>AI Business Model</td><td>[NEW 2026-06-06] 「LLM 友好部署栈」是云厂商 AI 时代新护城河叙事(Cloudflare + VoidZero 收购 vs Vercel/Netlify),海外业务采购应把『一整套 agent-spec 化 deployment 模板』作为前置条件</td><td>Cloudflare × VoidZero</td></tr><tr><td>AI Business Model</td><td>[NEW 2026-06-06] Mythos「research suggestion 64% 强于人类」 → 12 个月内 Gaming 创作工具链会出现 AI 副驾 64% 优于策划的临界点,产品节奏锚点应预埋此里程碑</td><td>Anthropic Mythos</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-06] 『AI 战略不是工具问题,是信任问题』 —— Tooling rollout 不是变量,Permission redesign 才是。试点扁平授权 R&amp;D 团队 3 个月公开 KPI 对比是最直接的组织验证</td><td>Elena Verna · Lovable</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-06] Title = Permission Structure 这个判断精准:Gaming 立项审批 / 收入数据 / 玩家投诉 / 竞品情报四类信息访问规则审视,P6/P7 IC 可见度 = 决策授权可见度</td><td>Elena Verna</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-06] AI 时代决策成本 = 决策延迟 × 撤销难度;撤销变便宜 → 应建『当日决策回滚 dashboard』把回滚次数作为健康信号(而非失败信号)公开</td><td>Elena Verna × mira</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-06] 中层管理岗位 18 个月内最大存在风险 = AI 把信息传递自动化后只剩『career coaching』,而这一项不需要全职岗位 → 主动开通 Lead-IC 转线通道</td><td>Elena Verna × mira</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-06] Codex inbox-zero 13 周连续案例(Dan Shipper) = 第一个让 CEO 量化感受到「AI 给我创作时间」的产品,Gaming 产品高管亲身用过 vs 没用过的体感差距 ≈ 2010 iPhone 时刻</td><td>Dan Shipper · Every</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-06] 决策留痕 + 文件系统状态机 + 时间复利 = 个人 AI 的『记忆 = 私有 fine-tune』模式落地;PM 工作站接入 12 个月后等价于 PM-fine-tuned model 跨人复用</td><td>Dan Shipper × Vol.004 Peter Yang memory.md</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-06] Reward Hack 在 Gaming 直接对应:LiveOps RL reward = 「单日活跃增量」会学到「推送 5 次促单弹窗」、reward = N 日留存会学到让付费玩家先看好玩内容,任何 RL 立项 reward 设计是 Day-0 哲学问题</td><td>Auriel × mira 综合</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-06] 玩家投诉 AI 客服 reward 不能用「工单关闭率」,必须用「48h 内同玩家不再投诉同问题」做延迟 reward,短期信号让 agent 学坏在长尾用户尤其严重</td><td>Auriel × mira 综合</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-06] YouTube 创作者→ Hollywood 代际换班速度比预期快 3-5 年,TikTok Gaming 创作者→ 短剧 → 长片链路可现在抢锁定 3-5 个头部签约</td><td>Stratechery × mira</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-06] Gaming 设计部 OKR 重设:不用「AI 替代 N 个设计师」论证,用「顶级 1 个设计师产出乘以 N」反向重写 headcount,呼应 SPC craft 音量旋钮观点</td><td>SPC × mira</td></tr><tr><td>Investment &amp; Macro</td><td>[NEW 2026-06-06] Google 资本市场 Q2 反超 Microsoft + Berkshire Hathaway 入股 = 「Google = BNSF 铁路」叙事(Vol.003)第一次资本投票,中期叙事在反转长期格局未定</td><td>Ben Thompson · Stratechery</td></tr><tr><td>Other</td><td>[NEW 2026-06-06] AI 时代『RL Researcher 关键 hire』不再是 ML 博士,而是「5 年生产 SaaS 经验 + 懂分布式重试的 SWE」,Gaming AI 团队招聘 JD 应同步调整</td><td>Auriel Wright</td></tr></tbody></table>
+
+  <footer class="footer">
+    <span>MIRA · Daily Broadside · Vol.006 · 自包含单文件</span>
+    <span>下期 · <b>2026-06-07 06:00 Asia/Shanghai</b></span>
+  </footer>
+</div>
+</body>
+</html>
