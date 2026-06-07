@@ -1,0 +1,12 @@
+{
+  "date": "2026-06-08",
+  "vol": "008",
+  "title": "The Don't-Surrender Issue — Tony Fadell 警告别向机器认知投降、Kun Chen 一天 40 PR 的具体打法、Build Small Hackathon 6 周交出的小作业",
+  "subtitle": "iPod / iPhone / Nest 之父在 AI 时代重提 Taste:你在 crusty foundation 上盖楼、屏幕不会消失、marketing 才是用户唯一的镜片 · 前 Meta L8 用 plan→code→validate + 自建 Lavish/No Mistakes 工具链把单兵产出推到 20-40 PR/天 · HF Build Small Hackathon 三个 Demo 报告(Room360 视频转 3D / Mythograph Atelier 抽象画 / Amazing Digital Dentures 失败复盘)+ Her detective 把 Claude Code 的 .jsonl trace 变成可查看证据链",
+  "deep_count": 3,
+  "brief_count": 3,
+  "skim_count": 0,
+  "skip_count": 1,
+  "dup_count": 0,
+  "new_viewpoints": 21
+}
