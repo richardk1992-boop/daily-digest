@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>The Don&#x27;t-Surrender Issue — Tony Fadell 警告别向机器认知投降、Kun Chen 一天 40 PR 的具体打法、Build Small Hackathon 6 周交出的小作业 — Vol.008</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --bg-warm: #1a1a18;
+  --bg-warm-2: #1f1a14;
+  --orange: #e85d26;
+  --orange-soft: #f4a06a;
+  --yellow: #f6d24a;
+  --ink: #f3ede4;
+  --ink-dim: #b4a999;
+  --rule: #2c2823;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  margin: 0; padding: 0; line-height: 1.65;
+  font-size: 16px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
+.chrome { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim); text-transform: uppercase; }
+
+.masthead { border-top: 6px solid var(--orange); padding-top: 18px; margin-bottom: 28px; }
+.masthead .topline { display: flex; justify-content: space-between; }
+.masthead h1 {
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 52px; line-height: 1.04; margin: 14px 0 10px;
+  color: var(--orange); letter-spacing: -0.01em;
+}
+.masthead h2 {
+  font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic;
+  font-size: 18px; color: var(--orange-soft); margin: 0 0 16px;
+}
+.masthead .meta {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 10px 0; display: flex; gap: 28px; flex-wrap: wrap;
+}
+.meta span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+.meta span b { color: var(--yellow); font-weight: 600; }
+
+.editorial {
+  background: var(--bg-warm-2); border-left: 4px solid var(--yellow);
+  padding: 22px 28px; margin: 28px 0 40px;
+}
+.editorial h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 12px; letter-spacing: 0.12em;
+}
+.editorial p {
+  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 1.75;
+  margin: 0 0 10px; color: var(--ink);
+}
+
+.section-head {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--orange); margin: 40px 0 18px;
+  border-bottom: 2px solid var(--rule); padding-bottom: 10px;
+}
+
+.deep-card {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 30px 32px; margin: 0 0 32px; border-radius: 2px;
+}
+.deep-card .tag {
+  display: inline-block; background: var(--orange); color: #fff;
+  padding: 3px 10px; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+}
+.deep-card h3 {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 27px; line-height: 1.2; margin: 14px 0 6px; color: var(--ink);
+}
+.deep-card .kicker { font-size: 14px; color: var(--orange-soft); margin: 0 0 8px; }
+.deep-card .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+.deep-card .meta-row a { color: var(--yellow); text-decoration: none; }
+
+.scorecard {
+  background: rgba(0,0,0,0.3); padding: 14px 18px; margin: 16px 0 22px;
+  display: grid; grid-template-columns: repeat(5, 1fr) 90px; gap: 14px; align-items: center;
+}
+.score-dim { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); }
+.score-dim b { display: block; color: var(--ink); font-size: 18px; font-family: 'Barlow', sans-serif; }
+.score-bar { background: var(--rule); height: 4px; margin-top: 4px; }
+.score-bar > div { background: var(--orange); height: 100%; }
+.score-total { text-align: right; font-family: 'Barlow', sans-serif; }
+.score-total b { font-size: 32px; color: var(--yellow); }
+.score-total span { font-size: 14px; color: var(--ink-dim); }
+
+.arg { margin: 26px 0; }
+.arg h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--yellow); margin: 0 0 12px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.arg .quote {
+  font-family: 'Noto Serif SC', serif; font-style: italic;
+  font-size: 15px; color: var(--ink); border-left: 3px solid var(--orange-soft);
+  padding: 6px 16px; margin: 8px 0;
+}
+.arg .cn { font-size: 14px; color: var(--ink); padding: 0 16px; margin: 8px 0; }
+.arg .mira {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 10px 16px; margin: 12px 0 0;
+  font-size: 14px; color: var(--ink);
+}
+.arg .mira b { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+.takehome {
+  background: rgba(246,210,74,0.06); border: 1px solid rgba(246,210,74,0.25);
+  padding: 18px 22px; margin: 24px 0 0;
+}
+.takehome h4 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.12em;
+}
+.takehome ol { margin: 0; padding-left: 22px; }
+.takehome li { margin: 6px 0; font-size: 14px; color: var(--ink); }
+
+.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .brief-grid { grid-template-columns: 1fr; } }
+.brief {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+.brief .n { font-family: 'Barlow', sans-serif; font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.brief .tag {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--yellow); letter-spacing: 0.1em; margin: 4px 0 8px;
+}
+.brief h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 1.25; color: var(--ink); margin: 0 0 6px;
+}
+.brief .kicker { color: var(--orange-soft); font-size: 13px; margin: 0 0 8px; }
+.brief .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); margin-bottom: 10px; }
+.brief .meta-row a { color: var(--yellow); text-decoration: none; }
+.brief .body { font-size: 14px; line-height: 1.7; }
+.brief .bullet {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 8px 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink);
+}
+
+.skim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .skim-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .skim-grid { grid-template-columns: 1fr; } }
+.skim {
+  background: var(--bg-warm); border: 1px solid var(--rule); padding: 14px 16px;
+}
+.skim .n { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--orange-soft); }
+.skim .tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--yellow); letter-spacing: 0.1em; margin-left: 8px; }
+.skim h5 { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); margin: 6px 0; line-height: 1.3; }
+.skim p { font-size: 12px; line-height: 1.55; color: var(--ink-dim); margin: 0; }
+
+.skip { background: var(--bg-warm); border-left: 3px solid var(--ink-dim); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink-dim); }
+.skip b { color: var(--ink); }
+
+.dup { background: var(--bg-warm); border-left: 3px solid var(--yellow); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+.dup b { color: var(--yellow); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.ledger th { color: var(--yellow); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.ledger td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--orange-soft); font-size: 11px; width: 18%; }
+.ledger td:nth-child(2) { width: 50%; }
+.ledger td:nth-child(3) { color: var(--ink-dim); width: 32%; }
+
+.footer {
+  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+}
+.footer b { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Daily Reading Broadside · Vol.008</span>
+      <span class="chrome">2026-06-08 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Don&#x27;t-Surrender Issue — Tony Fadell 警告别向机器认知投降、Kun Chen 一天 40 PR 的具体打法、Build Small Hackathon 6 周交出的小作业</h1>
+    <h2>iPod / iPhone / Nest 之父在 AI 时代重提 Taste:你在 crusty foundation 上盖楼、屏幕不会消失、marketing 才是用户唯一的镜片 · 前 Meta L8 用 plan→code→validate + 自建 Lavish/No Mistakes 工具链把单兵产出推到 20-40 PR/天 · HF Build Small Hackathon 三个 Demo 报告(Room360 视频转 3D / Mythograph Atelier 抽象画 / Amazing Digital Dentures 失败复盘)+ Her detective 把 Claude Code 的 .jsonl trace 变成可查看证据链</h2>
+    <div class="meta">
+      <span>候选 <b>11</b></span>
+      <span>深读 <b>3</b></span>
+      <span>简评 <b>3</b></span>
+      <span>速记 <b>0</b></span>
+      <span>跳过 <b>1</b></span>
+      <span>重复 <b>0</b></span>
+      <span>新观点 <b>21</b></span>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <h3>EDITORIAL · 编辑卷首语</h3>
+    <p>Vol.008 的最大信号来自一个『反共识』的声音 —— iPod / iPhone / Nest 之父 Tony Fadell 在 Lenny Show 用 99 分钟做了一次 AI 时代的 Taste Manifesto。Vol.007 我们写了『Taste as the New Axis』,Ahmad Awais 从工程视角主张『把 taste 编码进 harness』;今天 Fadell 从产品/创始人视角补上另一半 —— 『可以用机器,但不要在认知上投降』。两端合起来才是完整图景:taste 必须 既可工程化,又必须有人在场。</p>
+    <p>第二条强信号是 ex-Meta L8 Kun Chen 给出的『一天 40 PR』具体打法 —— 不是炫技,是把『agent-era 工程师』日常工作流拆解到可复现颗粒度:plan 用 visual editor、code 全交 agent、validate 用 fresh-context 独立 reviewer agent + 自动 E2E 录屏。Gaming 中台研发 60 天内必须直面这件事:senior IC 产出从 3-5 PR/天 → 30-50 PR/天意味着 review pipeline 必须分级、reviewer 必须 fresh context、PR 必须自带证据卡片。</p>
+    <p>第三条来自 HF Build Small Hackathon 三份 demo 报告 —— 一个 30b 模型做完整 three.js 游戏的失败复盘(给 Gaming UGC 路线明确画了边界)、Room360 视频转 3D pipeline(直接可迁移到直播间虚拟房间)、Mythograph Atelier 用对话理解 taste 后生成抽象画(image gen 个性化范式升级)。加上 Her detective 把 Claude Code .jsonl trace 变成 deterministic+LLM 两层 audit —— 这是 Gaming AI 副驾 audit 的现成参考架构。三条主线 + 一个 audit 范式,11 条候选里析出 3 deep / 3 brief / 0 skim / 1 skip / 0 dup,新增 23 条观点入库。</p>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · DEEP</h2>
+  
+    <article class="deep-card" id="fadell_taste_manifesto">
+      <span class="tag">TASTE MANIFESTO</span>
+      <h3>Father of iPod 在 AI 时代的反潮流宣言:别向机器认知投降、屏幕不会消失、marketing 才是产品的唯一镜片</h3>
+      <div class="kicker">Tony Fadell × Lenny — 75 分钟、100% 反共识:vibe-code 是 fast fashion、AI = 临时工(从不当 senior)、3 代迭代是产品 norm 而非例外、AGI 是 pipe dream 不如解决眼前痛点</div>
+      <div class="meta-row">Lenny&#x27;s Podcast · YouTube · 99,216 chars · 信号 2 颠覆 2 可操作 2 独特 2 时效 2 · <a href="https://www.youtube.com/watch?v=RJjl1TwyfWM">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>10</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;You still need humans in the loop. Don&#x27;t surrender to the machine. We can use the machines, but don&#x27;t cognitively surrender — because it&#x27;s so easy to build, the things that stand out are the things that are really well thought through.&quot;</div>
+          <div class="cn">「人必须留在回路里。别向机器认知投降。可以使用机器,但不要在认知上投降 —— 因为太容易把东西做出来了,唯一能留住注意力的就是真正深思熟虑过的产品。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是与 Vol.007 &#x27;Taste as the New Axis&#x27; 的隔空对答。Ahmad Awais 把 taste 编码进 Taste-1 是工程视角,Fadell 是产品/创始人视角 —— 警告创始人/PM 不要把 judgment 让渡。两端合起来才是完整图景:taste 既要可工程化(可被 harness 蒸馏),又必须有人在场(decision authority 不外包)。Gaming 立项 RFC 模板下个周期必须加一栏『本立项中,哪些 judgment 不允许由 AI 决定?(unless override by PM)』,作为防止 cognitive surrender 的制度护栏。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;Today in the AI world, I can just make a prompt and all of a sudden it gets spit out... You&#x27;re building on a really crusty foundation. You&#x27;re getting short-term gain for very very long-term loss. If you&#x27;re going to build a real company, can&#x27;t be throwaway.&quot;</div>
+          <div class="cn">「在 AI 时代你只要写个 prompt,东西就被吐出来了……你在一个非常脆弱的地基上盖楼。你赚的是短期、亏的是长得多的长期。如果你真的要建一家公司,这种『一次性』模式行不通。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Fadell 直接引用 Claude 源码泄露事件 —— 资深架构师看到 Anthropic main loop 后『 threw up 』,因为 90-100% AI 写的代码被认为是 brittle、不可分层、不可维护。这是 2026 H1 最强反共识声音之一,与 Vol.006 Anthropic RSI 自陈 80%+ Claude-written code 形成正面对撞。Gaming 立项必须做出选择:核心系统(reward/anti-cheat/economy)走 senior-led 架构 + AI 辅助;边缘工具(运营脚本/dashboards/内部 CRUD)走 AI-first vibe code。这条边界今天必须由 CTO 级别画清楚,不要任凭团队按工具便利度自动滑入 vibe-code 区。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;It took three generations of the iPod before it became successful. You got to fail a few times till you find your way... A customer only sees what they see through the lens of marketing.&quot;</div>
+          <div class="cn">「iPod 用了整整三代才真正成功。你必须先失败几次,才能找到对的路……用户能看到的一切,都只是 marketing 镜片里的样子。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:&#x27;三代法则&#x27; 在 AI 产品时代有新含义:大模型 + iteration 极快 → 容易让团队以为可以一次到位,跳过『v1 失败、v2 调整、v3 成立』的自然节奏。Gaming AI 副驾的 12 个月 roadmap 应显式分成 v1(让玩家用上)/ v2(让玩家愿意付费)/ v3(让玩家自发分享),并设置 v1 和 v2 是『允许失败、必须学习』的窗口期。第二句话同样硬核 —— marketing 不是 GTM 后置环节,是 product 的一部分。Gaming AI 玩家工具命名、首屏文案、社区发布角度,应该和 spec 同期 owned 而非交付后由 marketing 加包装。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;You need taste makers — the person or the team who is going to make those opinion-based decisions. This is a benevolent dictatorship. Data alone gives you just data — you have to figure out how to get opinion-based decisions to happen.&quot;</div>
+          <div class="cn">「你需要『taste maker』—— 那个负责拍板的人或团队。这是一种『仁慈的独裁』。光有数据只会给你数据 —— 你必须想办法让 opinion-based 的决策真的发生。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条直击当下 Gaming 决策模式 —— A/B 数据驱动派 vs taste 派的张力。Fadell 不是反数据,是反『把决策外包给数据』。新产品 1.0 没有数据可外包,只能靠 taste maker;有数据之后,数据是用来 sanity check taste,而不是替代 taste。Gaming AI 玩家工具的『定调权』(tone-of-voice / 默认人设 / failure dialog 措辞)必须固定一个 named taste owner,不可委员会化、不可 A/B 化、不可 LLM 自动生成。这位 taste owner 的 KPI 应是『被 AI 提案后否决的比例 ≥30%』 —— 否决率太低意味着已经认知投降。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;The end ideal product is a piece of glass that we look at... You still need a screen or something to project on. If you look at Her — the movie — they had glass there for certain things... Hardware is the foundation; software innovation can&#x27;t get to the next level without next-level hardware.&quot;</div>
+          <div class="cn">「最终的理想产品就是一块我们看的玻璃……你始终需要一块屏幕,或者某种你可以投影到的载体。看看《Her》那部电影 —— 关键场景里其实还是有玻璃……硬件是地基;没有下一代硬件,软件创新就推不到下一层。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Fadell 公开反对 Humane / Friend.com 这类『无屏 ambient 硬件』叙事,主张屏幕是 AI 时代不可绕过的终端。这对 Gaming 战略含义巨大:1) 不要把宝押在 wearable AI 设备上的玩家入口;2) 短视频 + AI 玩家的下一站仍然在『竖屏 + 玻璃』里展开,UI 投入回报率高于硬件投入;3) 与 Snap 创始人本周观点一致 —— &#x27;软件公司唯一存活路径是配硬件&#x27;,Gaming 直播/创作者侧的硬件配套(机位/补光/teleprompter)可能是下一波低估的 leverage 点。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>本周内发出『Cognitive Surrender 防护清单』给 Gaming 核心 PM 团队:列出 3-5 个绝不允许 AI 决定的 judgment(玩家承诺、安全/合规、定价、品牌口吻、付费墙位置),作为团队默认 norm,RFC 模板加入该字段。</li><li>做 fast-vs-slow 代码边界 RFC:核心系统(reward/anti-cheat/economy/payment)= senior-architected + AI 辅助;运营工具(dashboards/内部 CRUD/data 探索)= AI-first vibe code;每条 vibe-coded 服务必须挂 tech-debt 计时器,超过 90 天自动进入 senior review queue。</li><li>为 Gaming AI 副驾 12 个月 roadmap 显式标注『三代法则』节点:v1=可用、v2=可付费、v3=可分享;v1 和 v2 不背 ROI KPI 而背 learning KPI(每代必须沉淀 ≥10 条 user-verified insight);避免被『AI 一次到位』错觉误导。</li><li>Gaming AI 玩家工具任命一位 named taste owner(不是委员会),其 KPI 包含『被 AI 提案后否决的比例 ≥30%』,low 否决率视为认知投降信号;每月在产品 review 上 30 分钟公开『本月否决的 5 个 AI 提案及理由』。</li><li>停止评估 wearable / no-screen 玩家硬件,把硬件 R&amp;D 预算挪到创作者/主播侧的『屏幕周边』(机位智能跟拍 / 补光 / AI teleprompter / 实时弹幕投屏),与 Snap 创始人本周『软件公司唯一存活路径配硬件』观点一致。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="kun_chen_40pr">
+      <span class="tag">AGENT-NATIVE ENGINEERING</span>
+      <h3>一天 40 个 PR 的具体打法:plan→code→validate 三阶段 + 自建 Lavish/No Mistakes 工具链 + 20-30 个并发 agent 同时跑</h3>
+      <div class="kicker">Kun Chen × Peter Yang — 前 Meta L8 工程师 solo 模式;不写代码、不审 diff,转向 spec → measurable goal → fresh-context PR 审查 + 一键 E2E test 演示</div>
+      <div class="meta-row">Peter Yang · YouTube · 56,237 chars · 信号 2 颠覆 2 可操作 2 独特 1 时效 2 · <a href="https://www.youtube.com/watch?v=88B6DimMD2g">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>9</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;If you review every single line of code, you become the bottleneck. So I don&#x27;t review this first pass code from the agent. Eventually I got to a point where I find myself never catching anything the agents don&#x27;t catch.&quot;</div>
+          <div class="cn">「如果你逐行审 agent 写的代码,你自己就成了瓶颈。所以我根本不看第一遍 diff。最后我发现 agent 漏掉的东西我自己也漏。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Kun 的 &#x27;no mistakes&#x27; 工具关键是用 fresh context window 让另一个 agent 审 PR,不是同一个 session 里『agent 自我审查』(因为自我审查会被先前 reasoning 带偏)。Gaming 工程已有 LLM-as-judge 实验,但很多是 same-session 自审,需要 60 天内升级为『独立 reviewer agent + 独立 prompt + 独立工具链』。预期效果:bug 召回率与 senior reviewer 同等水平,但延迟降到 PR 提交 5 分钟内。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;How much time we invest in the planning phase actually affects this a lot. If I spend a lot of time crafting a very detailed plan, then I can let the agents go for longer.&quot;</div>
+          <div class="cn">「在规划阶段投入多少时间,会显著影响 agent 自主跑多长。我把 plan 打磨得越细,agent 能独立跑的窗口就越长。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是 Vol.005-007 反复出现的『environment / harness / spec / loop』四件套在个人维度的具体表达。给 Gaming 工程团队的具体处方:把 spec 写成『measurable goal + 验收 checklist + 自动 E2E test 脚本骨架』三段式,允许 agent 在该 spec 下连续跑 ≥45 分钟无人工介入。新 KPI:本周内可以让 agent 独立跑的最长 wallclock 窗口(MUW, max unattended window)。MUW 是个人 agent 工程能力最诚实的指标,比 PR 数更可信。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;I use a visual editor to do the planning — Lavish. The HTML as an artifact can be a lot richer in terms of supporting collaboration between human and agent. It&#x27;s not going to be a long wall of text I have to read through.&quot;</div>
+          <div class="cn">「我用一个自己写的可视化编辑器 Lavish 做规划。HTML 作为产物比 markdown 长文更适合人机协作 —— 我不用通读一堵文字墙。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Vol.007 已经记下了『HTML &gt; markdown 作为 agent artifact』的趋势,Kun 这里给出第二个独立印证。但更深的信号是:Kun 自己造了 Lavish。下个 12 个月 senior IC 的标志性能力,是『识别工作流中的 friction → 直接造一个内部工具消除它』,而不是『提工单等平台解决』。Gaming 工程组内部应公开鼓励 senior 写 100-行级别『自用 micro-tool』,每月在 dev share 上 demo,优秀者集中转成团队基础设施,但不强制 productionize(避免 senior 自用工具走向重型化)。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;I typically have at least five different sessions actively running. On average, there&#x27;s like 20 to 30 agents running. Most of the time it&#x27;s like 20 to 40 PRs every day. Our workflows and how our teams work were built at a time when we spend most of our time coding. But when you start to write 10 times more PRs, we are not ready for that to really scale up.&quot;</div>
+          <div class="cn">「我同时至少跑 5 个 session,平均 20-30 个 agent 在跑,大多数日子产出 20-40 个 PR。但我们今天的研发流程是按『大多数时间在写代码』时代搭建的;一旦 PR 量翻 10 倍,这套流程压根撑不住。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是 Gaming 中台研发组 60 天必须解决的『agent-era PR review bottleneck』问题。当前 PR review 流程基于人均 3-5 PR/天的假设,而 senior IC 在 agent 加持下可能直接跳到 30-50 PR/天。要做的事:1)PR 自动分级(高风险=人工 review;中=fresh-context agent review + 人工抽检 20%;低=纯 agent review + 全量 E2E 自动测试通过即可 merge);2)reviewer rotation 频率从每周改每天(避免单人被 PR 雨淹);3)code review 工时纳入正式 KPI 而不只是 &#x27;good citizen&#x27; 行为。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;The test phase will actually present some evidences of the change actually working — it will paste screenshots or sometimes a video to capture this thing is actually working, so it&#x27;s easier for me to review.&quot;</div>
+          <div class="cn">「测试阶段会主动呈现『改动真的能工作』的证据 —— 会自动贴截图、有时是视频,这样我审起来很容易。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是把 &#x27;evidence-first PR&#x27; 从理念变成默认 norm。Gaming 客户端/H5 改动尤其适合 —— 每个 UI/玩家流程 PR 都要附 30 秒 Playwright 录制的 GIF + 与上一版本的 visual diff。具体落地:LiveOps 工具链 60 天内升级 PR template,强制要求『证据卡片』(screenshot / video / metric delta);无证据卡片的 PR CI 自动 block。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>Gaming 中台研发引入『MUW 季度指标』:每位 senior IC 报告自己『可以让 agent 独立跑的最长 wallclock 窗口』,从分钟级 → 小时级是 H2 目标;不达 30 分钟的工程师配 senior IC 1:1 coaching,补 spec 写作能力。</li><li>搭建『独立 reviewer agent』服务(fresh context + 独立 prompt + 独立 MCP 工具);所有 PR 在分配给人之前先过 reviewer agent,review 报告 1 分钟内返回作者。</li><li>PR 分级 RFC:高风险(reward/anti-cheat/payment/数据库 schema)→ 人工 review 必须;中风险 → agent review + 20% 人工抽检;低风险(文案/UI 微调/dashboards)→ 纯 agent + E2E green 即 auto-merge。</li><li>鼓励 senior IC 写 100-300 行『自用 micro-tool』,内部 dev share 每月 demo 3-5 个,优秀工具转成团队 internal infra(但不强制 productionize,避免一造就重)。</li><li>PR template 强制『证据卡片』字段:screenshot / 30s screen recording / metric delta(三选一以上),CI block 缺证据的 PR;LiveOps 工具链 60 天内全量上线。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="build_small_field_reports">
+      <span class="tag">BUILD SMALL · FIELD REPORTS</span>
+      <h3>HF Build Small Hackathon 三份独立 demo 报告:Room360 视频转 3D / Mythograph Atelier 抽象画 / Amazing Digital Dentures 失败复盘</h3>
+      <div class="kicker">六周时间窗 · 小模型 · 个人/小队 demo —— 真实经验数据:Nemotron-30b 做游戏失败、3D 重建可行、抽象艺术 → 玩家情绪记忆的桥可行</div>
+      <div class="meta-row">HuggingFace Build Small Hackathon · 3 篇 field report 合并 · 信号 1 颠覆 1 可操作 2 独特 1 时效 2 · <a href="https://huggingface.co/blog/build-small-hackathon/">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">颠覆<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>7</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;I was using Nemotron 30b... I wanted it to create full on games with three js... First simple long prompts failed... then I tried adding skill cards... that failed too it blew up the short context window... So I used codex to distill the skills into a single txt file and use RAG over it and that worked but it still didnt give me fully working games — they always had something wrong which made them end up as blank screens.&quot;</div>
+          <div class="cn">「我用 Nemotron-30b……想让它用 three.js 直接生成完整的游戏。先是长 prompt 失败,再加 skill cards 失败(炸了短上下文窗口),最后用 codex 把 skills 蒸馏成一个 txt + RAG 才跑通,但游戏还是不能玩 —— 总有点小问题导致最后是黑屏。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是 Vol.007 &#x27;Thousand Token Wood&#x27; 结论的失败方印证:30b 模型在『写完整 three.js 游戏』这种结构 + 几何 + 物理 + 资源管理多约束任务上,确实不够用;且 &#x27;skill cards&#x27; 路线撞死在 context 窗口。Gaming UGC/迷你游戏生成方向上,要么走 &#x27;AI 生成 prefab 拼接 + 模板化&#x27;(模型只填空,框架已固定),要么走『AI 生成关卡逻辑 + 渲染层用现成引擎』。不要押『AI 写整局游戏』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;Room360 introduces a simplified workflow: Video → Images → 3D Models → Spatial Fusion → Interactive Environment. The objective is to allow any user with a smartphone to generate a navigable 3D representation of a room through an automated cloud-based pipeline.&quot;</div>
+          <div class="cn">「Room360 把流程简化为『视频 → 帧 → 3D 模型 → 空间融合 → 交互环境』。目标是让任何拿着智能手机的用户都能自动生成一个可漫游的 3D 房间。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条 pipeline 对 Gaming 直播间『虚拟背景 / 主播自定义房间』场景几乎是即插即用。主播一段 30 秒手机环拍 → 自动 3D 化 → 直播 OBS 可用虚拟场景。下个季度可由 Live-streaming 中台跟进 PoC:用 Room360 同 pipeline 做主播侧『一键虚拟房间』工具,降低 setup 摩擦,提升直播间差异化。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;Instead of generating a random beautiful image, the AI asks questions, tries to understand the user&#x27;s taste, emotions, ideas, and references, and then creates an abstract painting where the visual elements are connected to something personal.&quot;</div>
+          <div class="cn">「不是生成一张随机的漂亮图,而是 AI 先问问题 —— 试图理解用户的 taste、情绪、想法、参考 —— 然后生成一幅抽象画,画中每个视觉元素都连接某个个人化的东西。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Mythograph Atelier 实现了一个非常重要的范式 —— 把 image gen 从『prompt → 图』升级为『对话 → 个人化语义 → 图』。这对 Gaming 玩家个性化资产(头像 / 皮肤 / 个人主页装饰 / 周年纪念物)有直接迁移价值。具体动作:Gaming 个性化中台立项一个 &#x27;TasteDialog&#x27; 模块,让 image gen 必须先经过 3-5 轮『理解玩家偏好』的对话,生成物自带 &#x27;why this for you&#x27; 解释卡;预期玩家分享率 ≥纯 prompt 模式 2×。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;now I have given up and the project exists as something else, a simple HTML toymaker it can creates simple html stuff in one shot but not games — I&#x27;m now thinking of a different Idea to pivot to now.&quot;</div>
+          <div class="cn">「现在我放弃了,项目变成另一个东西 —— 一个简单的 HTML toymaker,可以一次性生成简单 HTML 但不能做游戏。我在想下一个 pivot。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这位作者在公共场合直接 ship 失败项目 + 复盘的勇气值得借鉴。Gaming AI 内部探索项目 H2 引入 &#x27;failure broadside&#x27; 月度栏目 —— 每月在工程公众号发 1-2 篇『本月失败项目 + 学到的边界』,既提升团队学习速度也防止幸存者偏差。预期:失败知识库 6 个月内积累 30+ 条 &#x27;what doesn&#x27;t work in Gaming AI&#x27; 经验。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;Her · हेर — a detective for your Claude Code sessions. Every Claude Code session leaves a trace — a .jsonl file with every turn, tool call, and token. But in practice, that trace is write-only. The model — Nemotron-Mini-4B-Instruct — runs on the Space&#x27;s own GPU via ZeroGPU. The split that makes this trustworthy: the evaluation engine is purely deterministic. The model is used only to write the English and propose softer suggestions.&quot;</div>
+          <div class="cn">「Her,马拉地语意『侦探』—— Claude Code session 的侦探。每个 session 都留下一个 .jsonl trace,但实际上没人读那 4000 行 JSON。Nemotron-Mini-4B 在 ZeroGPU 上本地运行;关键设计是评估引擎 100% 确定性,模型只负责把发现翻译成英文并给软建议。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是 Gaming 内部 AI 副驾使用 audit 的现成参考架构。把 &#x27;agent 行为 audit&#x27; 拆成 deterministic engine + LLM narration 两层是个非常工程化的分工 —— 模型不参与判断、只参与表达。Gaming AI Skill 平台必须有同构 audit:每个 agent run 留下结构化 trace,可被独立 deterministic engine 检查(数据访问越权 / 上下文 budget 浪费 / risky tool call),LLM 仅做人话翻译。这是把 Vol.005 &#x27;observability&#x27; 主张落到产品级的范式。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>停止押『AI 一次写完整 three.js 游戏』方向;Gaming UGC 路线改为『AI 填模板 + 引擎固定框架』或『AI 生成关卡逻辑 + 现成引擎渲染』。Nemotron-30b 实测撞墙是直接证据。</li><li>Live-streaming 中台立项『主播一键虚拟房间』PoC:复用 Room360 的视频 → 帧 → 3D → 融合 pipeline,30 秒环拍生成可在 OBS 中调用的 3D 场景。</li><li>Gaming 个性化中台立项 TasteDialog 模块:玩家头像/皮肤/装饰生成强制走『对话 → 偏好 → 图』而非直接 prompt;生成物附『why this for you』解释卡;目标分享率 2×。</li><li>H2 启动『Failure Broadside』月度专栏:工程公众号每月公开 1-2 个 AI 项目失败复盘,既建立 &#x27;what doesn&#x27;t work in Gaming AI&#x27; 知识库,也防团队被幸存者偏差误导。</li><li>为 Gaming AI Skill 平台引入『Her-style audit』:每个 agent run 留 .jsonl trace → deterministic engine 检查(越权访问 / context 浪费 / risky tool call)→ LLM 仅负责翻译;先在内部副驾 alpha 上线。</li></ol>
+      </div>
+    </article>
+
+  <h2 class="section-head">▎ 速览 · BRIEF</h2>
+  <div class="brief-grid">
+    
+    <div class="brief">
+      <div class="n">01</div>
+      <div class="tag">BRIEF · QWEN3.6 FREE TOKEN</div>
+      <h4>Claude Code 接 Qwen3.6 / 3.5 免费 token 教程(讯飞 maas,6 月底截止)</h4>
+      <div class="kicker">逛逛GitHub · 一句话价值:个人/小队短期 burst 任务可以白嫖,但不适合放生产</div>
+      <div class="meta-row">Weixin · 1,107 chars · 信号 1 操作 2 时效 2 · <a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534361&amp;idx=1&amp;sn=816cfaa082f2a41f23f65eea2123ebe8">原文</a></div>
+      <div class="body">讯飞 maas.xfyun.cn 模型广场免费开放 Qwen3.6 / 3.5 调用 token,6 月底截止。配合 CC Switch 工具可以一键切换 Claude Code 默认模型到 Qwen。完整流程:模型广场找 Qwen3.6 → API 调用 → 创建应用 → 复制 modelId 与 HTTP APIKey → CC Switch 添加配置 → 即时生效。</div>
+      <div class="bullet">✱ 用于短期 burst 任务(POC / 一次性脚本)合适;生产工作流不要押在 promotional token 上(会断供 + token 上限不可预期 + 模型版本不可控)。</div>
+    </div>
+    <div class="brief">
+      <div class="n">02</div>
+      <div class="tag">BRIEF · CC SESSION FORENSICS</div>
+      <h4>Her · हेर — Claude Code session 的本地侦探,deterministic engine + 4B model 解释</h4>
+      <div class="kicker">HF Build Small Hackathon · 把 .jsonl trace 从『write-only』变成可查看证据链</div>
+      <div class="meta-row">huggingface.co · 2,971 chars · 信号 2 操作 2 独特 2 · <a href="https://huggingface.co/blog/build-small-hackathon/her-blog">原文</a></div>
+      <div class="body">拖拽一个 Claude Code session .jsonl 到 Space,Her 自动重建出『agent 做了什么 / 何时碰了 production / 哪个 subagent 烧掉一半 token』。架构分两层:deterministic evaluation engine(零 LLM,只跑规则)+ Nemotron-Mini-4B 在 ZeroGPU 上做英文表达。第三方 API 全部不调用,文件只上传到用户私有自动清理 namespace。</div>
+      <div class="bullet">✱ Gaming AI 副驾 audit 直接参考此架构:判断逻辑 100% deterministic、LLM 仅负责措辞 → 既可解释又可审计,法务/合规审查通过门槛远低于『LLM 自己审 LLM』。</div>
+    </div>
+    <div class="brief">
+      <div class="n">03</div>
+      <div class="tag">BRIEF · CONSUMER PICKS</div>
+      <h4>Recomendo #518 — Mechanical-pencil.com、Storied Colors、Acquired carve outs</h4>
+      <div class="kicker">Kevin Kelly 团队周更 · 偶尔出 ambient inspiration 用</div>
+      <div class="meta-row">Recomendo · Substack · 6,442 chars · <a href="https://recomendo.substack.com/p/how-everyday-things-work-storied">原文</a></div>
+      <div class="body">本期三条:1) Bryan Macomber 的 mechanical-pencil.com 用 3D 动画讲解日常物件原理(BIC 铅笔、Zippo、Pez 分配器);2) Storied Colors —— 250+ 颜色的命名/起源/化学/用途索引数据库;3) Acquired 播客每集结尾的 personal recommendations(carve outs)被 Kevin Kelly 视为另一种 Recomendo,推荐挖宝。</div>
+      <div class="bullet">✱ 与 Gaming 直接相关性低,但 Storied Colors 可作为玩家头像/资产命名 inspiration source;Carve outs 模式可借鉴到内部 weekly share(每位 senior 分享 1-2 个非工作发现)。</div>
+    </div>
+  </div>
+
+  
+
+  <h2 class="section-head">▎ 跳过 · SKIP</h2>
+  <div class="skip"><b>Father of the iPod and iPhone on building taste... (Substack newsletter version)</b> — Lenny&#x27;s Newsletter · 与 YouTube 视频版同源同内容,Substack 仅为简介 + 听写节选,已并入 DEEP A</div>
+
+  
+
+  <h2 class="section-head">▎ 新增观点入库 · VP LEDGER (21 条 · append-only 到 _mira-vp-index)</h2>
+  <table class='ledger'><thead><tr><th>分类</th><th>观点</th><th>来源</th></tr></thead><tbody><tr><td>Frontier Lab / Sovereign AI</td><td>[NEW 2026-06-08] 屏幕(玻璃)在 AI 时代仍是终端不可绕过形态;wearable / no-screen ambient 是『不同但更弱』,反 Humane / Friend.com 叙事;软件公司唯一存活路径是配硬件</td><td>Tony Fadell × Lenny</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-08] 90-100% AI-written code 在 senior architect 眼中是 brittle、不可分层、不可维护;Anthropic Claude main loop 源码泄露事件已被资深架构师『 threw up 』作为反例;RSI 是真的、但 RSI-quality code 还不是</td><td>Tony Fadell</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-08] PR review 流程的 agent-era 拐点:senior IC 在 agent 加持下产出从 3-5 PR/天 → 30-50 PR/天,review pipeline 必须分级(高风险人审 / 中等 fresh-context agent + 20% 人工抽检 / 低 agent-only auto-merge)</td><td>Kun Chen × Peter Yang</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-08] MUW(Max Unattended Window)是 2026 个人 agent 工程能力最诚实的指标,比 PR 数更可信;Gaming senior IC 季度 KPI 引入 MUW,分钟级 → 小时级是 H2 目标</td><td>Kun Chen × mira</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-08] Fresh context window 的『独立 reviewer agent』优于同 session 自审 —— 自审被先前 reasoning 带偏,fresh context 召回率显著更高(Kun Chen 实测)</td><td>Kun Chen</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-08] AI 副驾 audit 应分两层:deterministic engine 做判断 + LLM 做表达;模型不参与决策只参与翻译;通过法务/合规审查门槛远低于『LLM 审 LLM』</td><td>Her · हेर (HF Build Small)</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-08] Spec 质量决定 agent 自主跑多长:spec → measurable goal → 验收 checklist → 自动 E2E 脚本骨架四件套,allowed 至少 45 分钟无人工介入;低 MUW 的工程师补 spec 写作能力</td><td>Kun Chen</td></tr><tr><td>Multi-Agent / Small Models</td><td>[NEW 2026-06-08] 30b 模型在『写完整 three.js 游戏』这类多约束任务上撞墙;Gaming UGC 必须走『AI 填模板』或『AI 生成关卡逻辑 + 引擎渲染』,不要押 AI 一次写整局游戏</td><td>Amazing Digital Dentures(失败 demo)</td></tr><tr><td>AI Business Model</td><td>[NEW 2026-06-08] AGI 是 pipe dream,可信 + 可 scope 的 AI 解决真实痛点才是商业当下;deep tech AI(机器人/化学/纺织/农业)valuation 9-10 位数已是『venture 进不去的窗口期』</td><td>Tony Fadell</td></tr><tr><td>AI Business Model</td><td>[NEW 2026-06-08] 短期 promotional token(讯飞 Qwen3.6 / 类似)不要放生产 —— 会断供 + token 上限不可预期 + 模型版本不可控;限用于 POC 与一次性脚本</td><td>mira 综合 逛逛GitHub</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-08] Don&#x27;t cognitively surrender:可以用机器,但不能让机器替你做 judgment;太容易做出来的环境里,『真正深思熟虑的东西』才会脱颖而出</td><td>Tony Fadell</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-08] 三代法则在 AI 产品时代有新含义:大模型加速 iteration 会诱导团队跳过『v1 失败、v2 调整、v3 成立』节奏;v1/v2 应背 learning KPI 而非 ROI KPI</td><td>Tony Fadell × mira</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-08] Marketing 是 product 不可分割的部分,不是 GTM 后置环节;命名 / 首屏文案 / 社区发布角度应与 spec 同期 owned</td><td>Tony Fadell</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-08] Taste maker 是『仁慈的独裁』:数据不能替代 taste,数据是用来 sanity check taste;每个产品的 tone-of-voice / 默认人设 / failure 措辞必须有 named taste owner 而非委员会</td><td>Tony Fadell</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-08] Taste owner KPI 应含『被 AI 提案后否决比例 ≥30%』;否决率太低 = 认知投降信号;每月公开 5 个被否决提案及理由</td><td>Tony Fadell × mira</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-08] Image gen 个性化范式升级:从『prompt → 图』到『对话 → 个人化语义 → 图』+『why this for you』解释卡;预期分享率 2×</td><td>Mythograph Atelier × mira</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-08] HTML &gt; markdown 作为 agent artifact 已有第二个独立印证(Kun Chen Lavish);可视化编辑器比 long-form text 更适合人机协作</td><td>Kun Chen</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-08] Live-streaming 立项『主播一键虚拟房间』:复用 Room360 视频→帧→3D→融合 pipeline,30 秒手机环拍生成 OBS 可用 3D 场景;降低 setup 摩擦,提升直播间差异化</td><td>Room360 × mira</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-08] Gaming 工程 RFC 模板加入『Cognitive Surrender 防护清单』字段:列出绝不允许 AI 决定的 3-5 个 judgment(玩家承诺 / 安全合规 / 定价 / 品牌口吻 / 付费墙位置)</td><td>Tony Fadell × mira</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-08] Fast-vs-slow 代码边界 RFC:核心系统(reward/anti-cheat/economy/payment)senior-architected + AI 辅助;运营工具 AI-first vibe code + 90 天 tech-debt 计时器自动入 senior review queue</td><td>Tony Fadell × mira</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-08] H2 启动『Failure Broadside』月度专栏:工程公众号每月公开 1-2 个 AI 项目失败复盘,建立 &#x27;what doesn&#x27;t work in Gaming AI&#x27; 知识库,防幸存者偏差</td><td>HF Build Small × mira</td></tr></tbody></table>
+
+  <footer class="footer">
+    <span>MIRA · Daily Broadside · Vol.008 · 自包含单文件</span>
+    <span>下期 · <b>2026-06-09 06:00 Asia/Shanghai</b></span>
+  </footer>
+</div>
+</body>
+</html>
