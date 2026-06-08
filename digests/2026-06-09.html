@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>The Third-Phase Issue — OpenAI 自宣 S-1 + 进入第三阶段、Thousand Token Wood v3 的『消失的崩盘』、Pakistan Notice Helper 把小模型钉在边界里 — Vol.009</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --bg-warm: #1a1a18;
+  --bg-warm-2: #1f1a14;
+  --orange: #e85d26;
+  --orange-soft: #f4a06a;
+  --yellow: #f6d24a;
+  --ink: #f3ede4;
+  --ink-dim: #b4a999;
+  --rule: #2c2823;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  margin: 0; padding: 0; line-height: 1.65;
+  font-size: 16px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
+.chrome { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim); text-transform: uppercase; }
+
+.masthead { border-top: 6px solid var(--orange); padding-top: 18px; margin-bottom: 28px; }
+.masthead .topline { display: flex; justify-content: space-between; }
+.masthead h1 {
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 52px; line-height: 1.04; margin: 14px 0 10px;
+  color: var(--orange); letter-spacing: -0.01em;
+}
+.masthead h2 {
+  font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic;
+  font-size: 18px; color: var(--orange-soft); margin: 0 0 16px;
+}
+.masthead .meta {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 10px 0; display: flex; gap: 28px; flex-wrap: wrap;
+}
+.meta span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+.meta span b { color: var(--yellow); font-weight: 600; }
+
+.editorial {
+  background: var(--bg-warm-2); border-left: 4px solid var(--yellow);
+  padding: 22px 28px; margin: 28px 0 40px;
+}
+.editorial h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 12px; letter-spacing: 0.12em;
+}
+.editorial p {
+  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 1.75;
+  margin: 0 0 10px; color: var(--ink);
+}
+
+.section-head {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--orange); margin: 40px 0 18px;
+  border-bottom: 2px solid var(--rule); padding-bottom: 10px;
+}
+
+.deep-card {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 30px 32px; margin: 0 0 32px; border-radius: 2px;
+}
+.deep-card .tag {
+  display: inline-block; background: var(--orange); color: #fff;
+  padding: 3px 10px; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+}
+.deep-card h3 {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 27px; line-height: 1.2; margin: 14px 0 6px; color: var(--ink);
+}
+.deep-card .kicker { font-size: 14px; color: var(--orange-soft); margin: 0 0 8px; }
+.deep-card .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+.deep-card .meta-row a { color: var(--yellow); text-decoration: none; }
+
+.scorecard {
+  background: rgba(0,0,0,0.3); padding: 14px 18px; margin: 16px 0 22px;
+  display: grid; grid-template-columns: repeat(5, 1fr) 90px; gap: 14px; align-items: center;
+}
+.score-dim { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); }
+.score-dim b { display: block; color: var(--ink); font-size: 18px; font-family: 'Barlow', sans-serif; }
+.score-bar { background: var(--rule); height: 4px; margin-top: 4px; }
+.score-bar > div { background: var(--orange); height: 100%; }
+.score-total { text-align: right; font-family: 'Barlow', sans-serif; }
+.score-total b { font-size: 32px; color: var(--yellow); }
+.score-total span { font-size: 14px; color: var(--ink-dim); }
+
+.arg { margin: 26px 0; }
+.arg h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--yellow); margin: 0 0 12px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.arg .quote {
+  font-family: 'Noto Serif SC', serif; font-style: italic;
+  font-size: 15px; color: var(--ink); border-left: 3px solid var(--orange-soft);
+  padding: 6px 16px; margin: 8px 0;
+}
+.arg .cn { font-size: 14px; color: var(--ink); padding: 0 16px; margin: 8px 0; }
+.arg .mira {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 10px 16px; margin: 12px 0 0;
+  font-size: 14px; color: var(--ink);
+}
+.arg .mira b { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+.takehome {
+  background: rgba(246,210,74,0.06); border: 1px solid rgba(246,210,74,0.25);
+  padding: 18px 22px; margin: 24px 0 0;
+}
+.takehome h4 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.12em;
+}
+.takehome ol { margin: 0; padding-left: 22px; }
+.takehome li { margin: 6px 0; font-size: 14px; color: var(--ink); }
+
+.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .brief-grid { grid-template-columns: 1fr; } }
+.brief {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+.brief .n { font-family: 'Barlow', sans-serif; font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.brief .tag {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--yellow); letter-spacing: 0.1em; margin: 4px 0 8px;
+}
+.brief h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 1.25; color: var(--ink); margin: 0 0 6px;
+}
+.brief .kicker { color: var(--orange-soft); font-size: 13px; margin: 0 0 8px; }
+.brief .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); margin-bottom: 10px; }
+.brief .meta-row a { color: var(--yellow); text-decoration: none; }
+.brief .body { font-size: 14px; line-height: 1.7; }
+.brief .bullet {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 8px 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink);
+}
+
+.skim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .skim-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .skim-grid { grid-template-columns: 1fr; } }
+.skim {
+  background: var(--bg-warm); border: 1px solid var(--rule); padding: 14px 16px;
+}
+.skim .n { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--orange-soft); }
+.skim .tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--yellow); letter-spacing: 0.1em; margin-left: 8px; }
+.skim h5 { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); margin: 6px 0; line-height: 1.3; }
+.skim p { font-size: 12px; line-height: 1.55; color: var(--ink-dim); margin: 0; }
+
+.skip { background: var(--bg-warm); border-left: 3px solid var(--ink-dim); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink-dim); }
+.skip b { color: var(--ink); }
+
+.dup { background: var(--bg-warm); border-left: 3px solid var(--yellow); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+.dup b { color: var(--yellow); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.ledger th { color: var(--yellow); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.ledger td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--orange-soft); font-size: 11px; width: 18%; }
+.ledger td:nth-child(2) { width: 50%; }
+.ledger td:nth-child(3) { color: var(--ink-dim); width: 32%; }
+
+.footer {
+  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+}
+.footer b { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Daily Reading Broadside · Vol.009</span>
+      <span class="chrome">2026-06-09 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Third-Phase Issue — OpenAI 自宣 S-1 + 进入第三阶段、Thousand Token Wood v3 的『消失的崩盘』、Pakistan Notice Helper 把小模型钉在边界里</h1>
+    <h2>Altman / Pachocki 联署《Built for broad benefit》宣布 OpenAI 进入『把 AGI 变成人人可用工具』阶段 + 同日提交保密 S-1 + 上线 Economic Research Exchange · Thousand Token Wood v3 用五个不同 lab 的小模型证明:emergence 是 contingent 的、reliable 的崩盘只能 author 在 settlement seam · Build Small Hackathon Pakistan Notice Helper 用 Qwen3.5-4B 跑 production 安全 triage,90% 质量但 cost/speed 性价比最高 · Nadella 把『human capital on balance sheet』作为 AI 时代企业资产新定义 · Kimi Work K2.6 13h endurance + 300 子 agent + WebBridge</h2>
+    <div class="meta">
+      <span>候选 <b>15</b></span>
+      <span>深读 <b>3</b></span>
+      <span>简评 <b>3</b></span>
+      <span>速记 <b>4</b></span>
+      <span>跳过 <b>2</b></span>
+      <span>重复 <b>1</b></span>
+      <span>新观点 <b>21</b></span>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <h3>EDITORIAL · 编辑卷首语</h3>
+    <p>Vol.009 的最大信号是 OpenAI 在 6 月 8 日同一天连发三件事:Altman / Pachocki 联署《Built for broad benefit》正式宣布进入第三阶段(『把 AGI 变成人人可用的工具』)+ 向 SEC 提交保密 S-1 草案 + 上线 Economic Research Exchange。三件事分别落在『叙事、资本、政策研究』三个杠杆,意味着 OpenAI 的战略锚已经正式从『追前沿能力』迁移到『让 AI 变 commodity』。同期文里第一次给 RSI 写出官方时间表 —— 2028 年 3 月 significant fraction 内部研究由 AI 完成。Gaming 立项必须按 18 个月 model-agnostic / harness-first 假设来设计。</p>
+    <p>第二条信号来自 HuggingFace Build Small Hackathon 第三篇 field note —— 同一作者用五个不同 lab 的小模型重建『Thousand Token Wood』金融小镇后,Vol.007 那次靠 emergence 拍出的『 honey 价格崩盘 』再也跑不出来。三轮亏损 (-15 / -26 / -27 pebbles) 教给我们的不是『multi-agent 不行』,而是 multi-agent 工程三大律:emergence 是 contingent 的不是 durable 的、input shock 不可控、fast simulator 撒谎。解法是 author 在 settlement seam,不要 push input。Gaming AI 平台 60 天内必须把这套原则落进架构 doc + 评审 checklist。</p>
+    <p>第三条来自 Pakistan Notice Helper —— Qwen3.5-4B 跑 production 安全 triage 的全栈复盘,给『 Build Small 范式 』补上 production 数据(scope 清晰任务 4B 拿 80% 质量、cost/speed 性价比远高于 27B)。配套观点:scope × output contract × prompt = 模型本身;产品『刻意不做』什么的诚实降级(triage 而非 detect)比『能做什么』更重要;trace dataset 的『公开 schema + redact + 可关』隐私范式可以一次同时满足 GDPR + Apple privacy + Gaming 合规。15 候选析出 3 deep / 3 brief / 4 skim / 2 skip / 1 dup,新增 21 条观点入库。</p>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · DEEP</h2>
+  
+    <article class="deep-card" id="openai_third_phase">
+      <span class="tag">OPENAI · THIRD PHASE MANIFESTO</span>
+      <h3>OpenAI 进入第三阶段:保密 S-1 提交 + Altman/Pachocki 联署《Built for broad benefit》+ Economic Research Exchange 三发齐打</h3>
+      <div class="kicker">同日三连发 = 把『AGI for all』从 mission 翻译成 capital structure + product strategy + research network 的执行节奏</div>
+      <div class="meta-row">openai.com · Sam Altman + Jakub Pachocki · 8,508 chars · 信号 2 颠覆 1 可操作 2 独特 2 时效 2 · <a href="https://openai.com/index/built-for-broad-benefit">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>9</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;Now we are entering the third phase. The economy is beginning to reshape around AI. The central question now is how to make advanced AI abundant, affordable, safe, useful, and easy enough for every person and organization to benefit from it. Frontier capability is only part of the job. The bigger task is turning that capability into tools people can actually use to thrive.&quot;</div>
+          <div class="cn">「我们正进入第三阶段。经济正在围绕 AI 重塑。核心问题不再是『能不能造出来』,而是『如何让先进 AI 变得充沛、可负担、安全、有用、足够易用,以致每个人和组织都能受益』。前沿能力只是一部分,更大的任务是把能力变成人们真正能用起来繁荣自己的工具。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:OpenAI 自己给三阶段画了清晰的分界 —— phase 1 = 研究(2015-2019)、phase 2 = 产品化(2020-2025)、phase 3 = 普惠工具层(2026-)。这是给 Gaming 战略最重要的信号:OpenAI 已经把战略锚从『追前沿能力』正式迁移到『让 AI 变成 commodity』,意味着 API 价格会进一步压低、生态会进一步开放、垂直应用层的 leverage 会进一步上升。Gaming AI 产品立项的窗口期在缩短,2026 H2 不上线的玩家工具明年很可能被 OpenAI 自家或某个 wrapper 直接覆盖。下个季度立项原则:押应用层 + 数据 moat,不押模型层。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;Entirely automating everything is not the future we want. It would be unfulfilling, and it would be dangerous. AI should help people pursue their goals, not become untethered from them. As AI systems become more capable, the human role becomes more important: setting direction, making tradeoffs, applying judgment, and bringing values, taste, care, and responsibility to the work. A key long-term role for people will be deciding what is worth doing.&quot;</div>
+          <div class="cn">「全部自动化不是我们想要的未来,既不令人满足,也很危险。AI 应该帮助人们追求自己的目标,而不是脱离这些目标。随着 AI 越来越强,人的作用反而更重要:设定方向、做权衡、运用判断、把价值/品位/关怀/责任带到工作里。人最持久的长期角色是 —— 决定什么值得做。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这一段与 Vol.008 Tony Fadell 的『Don&#x27;t cognitively surrender』形成意外的高位共振。OpenAI 自家(传统上被认为是『 maximalist automation 』叙事代表)在 2026 年 6 月公开宣布反对『entirely automating everything』,这是显著的话术转向。Gaming AI 产品 messaging 可以借势 —— 把『AI 副驾』而非『AI 替你玩』作为公开叙事(玩家厌恶感更低、留存预期更高、合规阻力更小)。同时『 deciding what is worth doing 』作为人的 long-term role,正是 PM/策划/运营这些角色未来 5 年的护城河,内部应明确这些 role 的 KPI 重心从『做了多少』迁移到『决定了什么不做』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;We believe that AI doing AI research will become the determining factor of the pace of progress within the next few years. ... Our internal belief is that by March of 2028 we may have a significant fraction of our research being done by AI systems in tandem with our own researchers.&quot;</div>
+          <div class="cn">「我们相信『AI 做 AI 研究』将在未来几年成为进度的决定性因素……OpenAI 内部判断是,到 2028 年 3 月,我们可能有显著比例的研究工作由 AI 系统与人类研究员并肩完成。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:OpenAI 给 RSI(Recursive Self-Improvement)第一次写了官方时间表 —— 2028 年 3 月,21 个月以内,『 significant fraction 』的内部研究由 AI 完成。这是把 Vol.006 Anthropic 自陈 RSI、Vol.007 Sakana 在东京成立 RSI Lab 的趋势,再加上一个明确锚点。Gaming 战略含义:2026 年下半年立项的 AI 工具,生命周期假设不应超过 18 个月(因为 RSI 会改写一次能力曲线);任何想做 3-5 年 roadmap 的产品,核心架构必须是 model-agnostic + harness-first。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;Above all, we believe a broad distribution of power will help lead to a better future. Human history shows that concentrated power creates fragility, while widely shared power makes societies more resilient, adaptable, and free. ... AI resilience refers to the collective organizations, systems, and individuals that society could put in place to anticipate, withstand, adapt to, and rapidly recover from AI-driven disruptions.&quot;</div>
+          <div class="cn">「最重要的是,我们相信权力的广泛分布会带来更好的未来。人类历史显示,权力集中制造脆弱,广泛分享让社会更有韧性、适应性、自由度……『 AI resilience 』指的是社会能搭建出来的组织、系统、个体集合,用以预判、承受、适应、快速从 AI 驱动的扰动中恢复。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:OpenAI 第一次把『AI resilience』作为正式术语提出,类比汽车时代的『seatbelt + 交规 + 驾照 + crash testing + 道路基础设施』。这暗示 2026-2028 全球 AI 监管框架将从『关注模型』升级到『关注生态韧性』。Gaming 业务的合规策略要相应调整:不要等监管立法再被动响应,而是主动做『玩家侧 AI resilience 工具』(如玩家可见的 AI 行为审计日志、玩家可一键关闭 AI 推荐的 opt-out、AI 决策的『为什么是你』解释卡)—— 这些将在 12-18 个月内从『差异化卖点』变成『合规底线』。Vol.008 Pakistan Notice Helper 的 trace dataset 设计思路可以直接迁移。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;A good AI future cannot be one where a small number of institutions control most of the capability and most of the upside. It should be a future where many people, companies, communities, and countries can build, benefit, and hold power. ... [Same week] OpenAI submitted draft S-1 to the SEC + launched Economic Research Exchange to study AI&#x27;s impact on jobs and productivity.&quot;</div>
+          <div class="cn">「好的 AI 未来不能是少数机构掌控大部分能力和大部分收益。它应该是一个许多人、公司、社区、国家都能 build / benefit / hold power 的未来。……同周,OpenAI 提交保密 S-1 草案 + 上线 Economic Research Exchange 研究 AI 对就业与生产力的影响。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:三件事同一天发生绝不是巧合 —— manifesto(意识形态)+ S-1(capital structure)+ Economic Research Exchange(narrative/政策研究网络),是一次性把『 broad benefit 』叙事从理念落到资本/研究两个杠杆上。S-1 = 把 &#x27;broad benefit&#x27; 写进 prospectus 让公开市场背书;ERE = 主动 frame jobs/productivity 讨论,提前对冲反 AI 就业冲击的 policy backlash。Gaming 战略可借鉴:做大产品前要先把『为什么这是 net positive for users』的研究/数据基础公开建立(可以是 commissioned research、可以是自家 transparency report),不要等用户/监管的反噬到来才回应。下个 Gaming AI 大产品立项 deck 必须包含『 broad benefit narrative 』一栏。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>Gaming 战略原则更新:押应用层 + 数据 moat,不押模型层;2026 H2 立项的玩家工具生命周期假设 ≤18 个月,核心架构必须 model-agnostic + harness-first,准备 2028 Q1 RSI 改写一次能力曲线。</li><li>Gaming AI 产品 messaging 借势 OpenAI『反 entirely automating everything』转向,把『AI 副驾(human in the loop)』作为公开叙事而不是『AI 替你玩』 —— 留存 + 合规 + 玩家好感度三赢。</li><li>PM / 策划 / 运营 role KPI 重心迁移:从『做了多少』 → 『决定了什么不做』;Vol.008 已经提出 taste owner 否决率 ≥30%,Vol.009 强化为全岗位 norm,Q3 述职模板加入『本季度被我否决的 5 个 AI 提案』。</li><li>立项『玩家侧 AI resilience 工具包』:玩家可见审计日志 + 一键 AI 推荐 opt-out + 『为什么是你』解释卡 + 玩家数据 export;参考 Pakistan Notice Helper 的 trace dataset 公开设计,主动跑在监管前面 12-18 个月。</li><li>下个 Gaming AI 大产品立项 deck 必须包含『 broad benefit narrative 』一栏:明确这个产品如何让 net-positive for users / studios / 监管 / 同行 —— 提前对冲就业冲击 narrative,而不是 GTM 后置补救。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="authored_seam">
+      <span class="tag">EMERGENCE × AUTHORED CONTROL</span>
+      <h3>Thousand Token Wood v3:消失的崩盘 —— emergence 是 contingent 的,reliable 的控制只能 author 在 settlement seam</h3>
+      <div class="kicker">Build Small Hackathon 第三篇 field note · 五个不同 lab 的小模型组合再跑同一个 bank-run 剧本,原来的崩盘消失了,作者用三轮亏损教学『为什么 input shock 不可控、output seam 才可控』</div>
+      <div class="meta-row">huggingface.co · Build Small Hackathon · 7,248 chars · 信号 2 颠覆 2 可操作 2 独特 2 时效 1 · <a href="https://huggingface.co/blog/build-small-hackathon/thousand-token-wood-sim-v3">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-total"><b>9</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;In an agent economy the reference price is not a dial you turn. It is the residue of what the agents actually choose to trade. The original crash was real, but it was contingent on one model&#x27;s disposition, not a robust property of the system. Change the population, and the emergent behavior you documented can simply evaporate.&quot;</div>
+          <div class="cn">「在 agent 经济里,参考价不是一个你能拨的旋钮 —— 它只是 agent 们实际选择交易的『残值』。原来那次崩盘是真实的,但它取决于某一个模型的『脾性』,不是系统的稳健属性。换一批模型,你记录下的 emergent 行为可能直接蒸发。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是 multi-agent 工程的硬核教训,直接挑战了过去半年所有『emergent behavior demo』的可复现性。Gaming AI NPC / LiveOps / 反作弊 / 推荐系统里所有靠『emergent 智能涌现』的设计,必须做 cross-model 健壮性测试 —— 换 lab、换尺寸、换 fine-tune,行为是否一致?否则你做的是『一个 demo 一次成功』而不是『一个产品』。具体动作:Gaming AI 平台 60 天内引入 &#x27;cross-population regression test&#x27; 套件,任何依赖 multi-agent 行为的产品必须在 ≥3 个 lab × ≥2 个尺寸的模型矩阵上跑 100 次回归,通过率 ≥80% 才允许上线。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;Three recordings, three losses: minus fifteen, minus twenty-six, minus twenty-seven pebbles, when the entire premise was that this was how you made money. The pattern was the warning. Every lever I pulled was an input to the agents&#x27; decision, and the agents were free to decline. You cannot steer a heterogeneous population of models with a mechanical shock.&quot;</div>
+          <div class="cn">「三次实录三次亏损:-15 / -26 / -27 个鹅卵石,而整套前提是『靠这个套利』。这个 pattern 就是警告 —— 我拉的每个杠杆都只是 agent 决策的 input,而 agent 完全可以选择不响应。你没法用一次机械冲击去『指挥』一个异质模型种群。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条直接打破 &#x27;A/B 实验 + supply/demand shock&#x27; 这类金融/经济常用工具在 agent 时代的适用性。Gaming 内部如果想用 LiveOps event(发红包、双倍奖励、限时活动)来引导 NPC/agent 行为,要先做小样本 dry-run 看模型种群的反应;不要假设『发了就一定 work』。第二个具体动作:把『agent population response 』作为新的 A/B 实验维度,实验报告必须区分『human reaction』和『agent reaction』,不能合并。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;The fix that worked against my fast test policy gave me false confidence and cost me a live run to disprove. When the cheap stand-in and the real agents disagree, the stand-in is the one lying, and any result that only reproduces under the stand-in is not a result.&quot;</div>
+          <div class="cn">「在快速测试 policy 上 work 的那个修复,给了我虚假自信,代价是浪费一整次 live run 才证伪。当『便宜的替身』和『真 agent』不一致时,撒谎的是替身;只在替身下复现的结果就根本不算结果。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是 Vol.007 Auriel &#x27;cheap simulator 是头号谎言制造者&#x27; 的第二次独立印证(now 同一作者跨 vol 自我延续)。Gaming AI 测试管线必须区分 &#x27;fast simulator(规则 stand-in)&#x27; 和 &#x27;reality test(真模型种群)&#x27;,前者只用来加速 dev cycle、不可作为发布门槛;发布门槛必须由 reality test 提供。具体动作:把 &#x27;reality test rate&#x27;(总 dev iteration 中真模型测试占比)作为 Gaming AI 平台健康度指标,目标 ≥30%。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;The resolution was to stop trying to convince the agents and to make the panic true by construction. ... the legend now crashes its good at settlement, after the market has finished clearing for the turn, by overwriting the reference price directly. ... Emergence for texture, authored control for the moments that have to happen. The craft is knowing which is which, and where the seam sits.&quot;</div>
+          <div class="cn">「解法是停止『说服 agent』,改为『把恐慌按定义做成事实』……传说现在在结算阶段(market 已经 clear 完)直接覆写参考价,把好的价格腰斩。崩盘不再是我希望 agent 做的事,而是我在唯一无人能反驳的下游 seam 上 author 的事实。Emergence 负责质感,authored control 负责必须发生的瞬间。手艺在于知道哪个是哪个、seam 在哪里。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是本卷最有可操作性的工程哲学 —— 在 agent 系统里,不要在『input 层』追求确定性,要在『settlement 层』author 确定性。Gaming AI 直接映射:LiveOps reward 发放 / 反作弊判定 / 玩家承诺(限时优惠到期) / 经济通胀控制 —— 这些『必须发生』的事件必须 author 在『所有 agent 行为完成之后』的 settlement seam 上(直接 deterministic 覆写、不通过模型协商)。AI 协商负责故事质感(NPC 对话 / 任务描述 / 玩家反馈)、确定性 layer 负责合约履行。这条边界今天必须在 Gaming AI 平台架构 doc 里画清。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;First, emergence is contingent, not durable. ... Second, you do not control a market of agents by shocking its inputs. ... Third, the cheap simulator that lets you iterate fast is also the one most likely to flatter a wrong fix. When the stand-in and the real agents disagree, believe the agents.&quot;</div>
+          <div class="cn">「第一,emergence 是 contingent 的,不是持久的。换一批 agent,emergent 行为可能蒸发。第二,你没法靠 shock input 去控制一个 agent 市场 —— 杠杆只是 bias,异质 council 经常会拒绝。第三,让你 iterate 飞快的廉价 simulator 也最容易 flatter 一个错的修复。当替身和真 agent 不一致时,信真 agent。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这三条作为 multi-agent 工程的『三大律』可以直接进 Gaming AI 平台 readme 首页。第一条 → cross-population 回归测试必须;第二条 → input shock 不可控,emergent 行为请用 statistical 而非 deterministic 假设;第三条 → fast simulator only for dev cycle, real model only for release gating。下个 Q 工程评审 checklist 加这三条作为强制 review 项,不通过的设计直接打回。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>Gaming AI 平台 60 天内引入『cross-population regression test』套件:任何依赖 multi-agent 行为的产品必须在 ≥3 lab × ≥2 size 模型矩阵上跑 100 次回归,通过率 ≥80% 才允许上线。</li><li>把 settlement seam 写进 Gaming AI 平台架构 doc:LiveOps reward / 反作弊 / 玩家承诺履约 / 经济通胀控制 = deterministic 覆写在 settlement 层,AI 协商只负责故事质感(NPC 对话 / 任务描述 / 反馈措辞)。</li><li>新增 A/B 实验维度『agent population response』:LiveOps event 报告必须分开『human reaction』和『agent reaction』,不可合并;agent reaction 不可预期时 dry-run 优先。</li><li>把『reality test rate』(真模型测试占总 dev iteration 比例)作为 Gaming AI 平台健康度指标,目标 ≥30%;rule-based simulator 只用于 dev cycle 加速,不可作为发布门槛。</li><li>Multi-agent 工程三大律进 Gaming AI 平台 readme 首页 + 工程评审 checklist 强制 review:emergence contingent / input shock 不可控 / fast simulator 撒谎,违反者打回。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="pakistan_notice_helper">
+      <span class="tag">BUILD SMALL · PRODUCTION SAFETY</span>
+      <h3>Pakistan Notice Helper:Qwen3.5-4B 跑 production 安全 triage 的全栈复盘,小模型在被严格 scope 时 80% 质量但成本 1/N</h3>
+      <div class="kicker">HF Build Small Hackathon · 一个非常本地化的安全问题(诈骗短信 triage)+ Urdu/English bilingual + RTL + Qwen3.6-27B → MiniCPM-V → Qwen3.5-4B 三轮选型 + Codex 全栈协作 + 公开 trace dataset</div>
+      <div class="meta-row">huggingface.co · Build Small Hackathon · 15,278 chars · 信号 1 颠覆 1 可操作 2 独特 1 时效 2 · <a href="https://huggingface.co/blog/build-small-hackathon/building-pakistan-notice-helper">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">颠覆<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>7</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;In terms of quality, I would rate the larger model around 95/100 for this task. ... Compared with Qwen3.6 27B, I would rate [Qwen3.5 4B] around 80/100. But the tradeoff made sense. The 4B model was cheaper to serve, faster to load, easier to deploy, and practical on a smaller Modal machine. That balance of model quality, speed, cost, and cold-start behavior made it the &quot;Goldilocks&quot; model for Pakistan Notice Helper.&quot;</div>
+          <div class="cn">「质量上,大模型(Qwen3.6 27B)给我 95/100,Qwen3.5 4B 给我 80/100。但这个 tradeoff 是值的 —— 4B 更便宜、更快、更易部署、能跑在更小的 Modal 机器上。这个 quality / speed / cost / cold-start 的平衡让 4B 成为这个项目的『Goldilocks 模型』。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Vol.007 Thousand Token Wood 已经记『3B 是格式生成器不是推理器』,Vol.009 这里给出更精细的 production 数据:scope 清晰的安全 triage 任务,4B 拿 80% 质量、节省 N 倍成本,实际是更优商业选择。给 Gaming 的处方:任何 AI 副驾任务先做明确 scope(输入/输出/边界 contract),scope 清晰后用 4B-7B 小模型 + 优化 prompt + 严格 output contract,80% 质量 + 5-10× cost saving 通常更划算。模型层选型 KPI 不应是『benchmark 分数』,应是『scope 清晰度 × cost-quality 平衡点』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;Pakistan Notice Helper is not an authenticity checker. It does not claim that a message is officially genuine or fraudulent. Instead, it works as a triage tool. It accepts text or a screenshot and returns a risk label, a short explanation, visible red flags, and safe next steps.&quot;</div>
+          <div class="cn">「Pakistan Notice Helper 不是真伪检查器,它不会断言一条消息官方真假。它是一个 triage 工具 —— 接收文字或截图,返回风险标签、简短解释、可见的红旗、安全的下一步。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这个产品定位『刻意不做』什么的范式非常值得学。它没把自己包装成『AI 诈骗终结者』,而是降级到 triage 这个明确角色 —— 既诚实(法务/责任压力小)也更可信(用户体验更清晰)。Gaming AI 副驾 messaging 应该同样诚实降级:不说『AI 替你判断哪个 NPC 是骗子』、说『AI 给你标红可能值得警惕的对话片段 + 安全应对建议』。这种 messaging 转向能把法务/合规审查时间从 6 周缩到 2 周。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;Another model response suggested an official-looking domain that had not been verified. That was a serious product issue, so I updated the system prompt to forbid invented URLs, phone numbers, organizations, and facts. ... The model was not just being asked to &quot;detect scams.&quot; It was being asked to follow a strict safety contract.&quot;</div>
+          <div class="cn">「模型有一次回复中编造了一个看起来很『官方』但未验证的域名。这是严重产品问题,我立刻更新 system prompt 禁止编造 URL/电话/组织/事实……模型不再只是『detect scams』,而是必须遵循一份严格的 safety contract。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:小模型在安全相关产品里『output contract』比 &#x27;capability&#x27; 更重要。Gaming 玩家面向的 AI 输出(NPC 对话 / 反诈提醒 / 帮助文档 / 客服回复)必须有 strict output contract:禁止编造名词 / 禁止 hallucinate URL / 禁止编造价格或政策。这条 contract 应该是平台级的、所有 player-facing LLM 调用强制注入,而不是各 PM 自己写 prompt 时各管各。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;I also added an optional public trace feature so people can understand how the app is being used without exposing private user content. ... The trace option is visible inside the app and can be disabled before each request. When enabled, it records only limited request-level metadata, not the full user message or screenshot. Text is redacted and capped. Images are represented through fixed summaries and are not stored.&quot;</div>
+          <div class="cn">「我还加了一个可选的公开 trace 功能,让人能理解 app 怎么被使用,但不暴露用户私有内容。trace 选项在 app 里可见,每次请求前都能关闭。开启时只记录有限的请求级 metadata,不记录完整用户消息或截图。文字被脱敏与截断,图片用固定摘要表示、不存储。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是个非常成熟的『隐私 + transparency』平衡范式 —— 公开 schema、redact 内容、用户可关、cap 长度、image 只存 hash。Gaming AI 玩家工具直接搬这套设计:玩家可见 audit log + 每次可关 + 公开 dataset 只含 metadata + 私有内容自动清理 namespace。这套设计可以一次性同时满足『GDPR / Apple AppStore privacy review / Gaming 合规』三件事。具体动作:Gaming AI 平台立项一个 &#x27;observability v2&#x27; 设计规范,把 Pakistan Notice Helper trace dataset schema 作为参考实现。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;This project taught me that building with small models is less about chasing the highest benchmark score and more about finding the right balance between quality, speed, cost, and product safety. ... small models can work surprisingly well when the task is carefully bounded. ... That made the product scope, prompt design, and output contract just as important as the model itself.&quot;</div>
+          <div class="cn">「这个项目让我学到 —— 用小模型做产品的关键不是追 benchmark 高分,而是找到 quality / speed / cost / product safety 的平衡。任务被精心 bounded 时,小模型能 work 得惊人地好。这让 product scope / prompt design / output contract 与模型本身同等重要。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:把这句作为 Build Small 范式的 manifesto:scope × contract × prompt = 模型本身。Gaming AI 内部 review 模板必须强制:每个 AI 功能立项 doc 含『scope 一段』+『output contract 一段』+『prompt 设计一段』,缺任何一段不予立项。这能直接消灭 60% 的『AI 副驾上线后效果不稳定 / 出 PR 事故』问题。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>Gaming AI 功能立项 doc 模板强制三段式:scope 段(做什么、不做什么、边界 case 怎么处理)+ output contract 段(输出格式、禁止行为、错误回退)+ prompt 设计段;缺任一段不予立项。</li><li>Gaming player-facing LLM 调用平台强制注入 &#x27;safety contract&#x27;:禁止编造 URL / 电话 / 价格 / 组织 / 政策;违反 contract 的输出直接拦截、log + alert。</li><li>Gaming AI 副驾 messaging 全线降级到 &#x27;triage / suggest&#x27; 语言,不用 &#x27;detect / verify / decide&#x27; 语言;法务/合规审查时间预期从 6 周 → 2 周。</li><li>立项『Observability v2』规范:玩家可见 audit log + 每次可关 + 公开 dataset 只含 metadata + 私有内容自动清理 namespace,参考 Pakistan Notice Helper trace dataset schema。</li><li>Gaming AI 模型选型 KPI 从『benchmark 分数』转为『scope 清晰度 × cost-quality 平衡点』;scope 清晰任务优先 4B-7B,scope 模糊任务才考虑大模型(且必须先做 scope 收敛)。</li></ol>
+      </div>
+    </article>
+
+  <h2 class="section-head">▎ 速览 · BRIEF</h2>
+  <div class="brief-grid">
+    
+    <div class="brief">
+      <div class="n">01</div>
+      <div class="tag">BRIEF · HUMAN CAPITAL ON BALANCE SHEET</div>
+      <h4>Satya Nadella:AI 让人类知识第一次能上资产负债表</h4>
+      <div class="kicker">No Priors · YouTube short · 一个非常清晰的资本市场叙事</div>
+      <div class="meta-row">YouTube · No Priors · 803 chars (short) · <a href="https://www.youtube.com/shorts/j-bmCzMxOI4">原文</a></div>
+      <div class="body">Nadella:企业有大量 token 和大量 human capital,关键是怎么 compound 两者。一群 agent + 一群人合作,他们之间的 traces 才是企业创造价值的真实 context。过去 human capital 无法上资产负债表,因为 tacit knowledge 抓不住;现在可以了 —— 每家公司未来都会因『human + agent 协作 trace』成为可量化的资产。Nadella 明确表态他在『human agency 与 ambition 会随 token capital 上升而更值钱』的阵营。</div>
+      <div class="bullet">✱ Gaming HR / 财务 / 法务可联合做一个『 collaboration trace asset 』内部叙事:把 senior PM / 策划 / 主播 BD 与 AI 副驾的协作日志作为可计量企业资产管理 —— 配合 Vol.008 Fadell taste owner KPI,把 tacit-knowledge 形式化为内部 IP,而不是个人头脑里的东西。</div>
+    </div>
+    <div class="brief">
+      <div class="n">02</div>
+      <div class="tag">BRIEF · KIMI WORK 上线</div>
+      <h4>Kimi Work 来了 —— K2.6 模型 + 300 子 agent + WebBridge 浏览器 + Skill 市场</h4>
+      <div class="kicker">逛逛GitHub · Vibe Working 国产版竞品</div>
+      <div class="meta-row">Weixin · 逛逛GitHub · 2,182 chars · <a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534395&amp;idx=1&amp;sn=c9bbd39f9edce974bcb9020d78d3cfda">原文</a></div>
+      <div class="body">Kimi Work 定位面向知识工作者的通用本地 Agent,内核是 Kimi Code(K2.6 模型),支持 13 小时连续编码、300 子 agent 并行、4000+ 自主工具调用。亮点:① Agent 集群(派 300 个子 agent 并行)+ Skill 沉淀(可自定义打包成 skill 复用);② WebBridge —— AI 替你操作浏览器、十几个 tab 并行搜索整理成表格;③ 内置金融投研数据源(同花顺/雅虎财经/天眼查)。不足:速度比 Codex / Claude Code 慢;缺 Plan 模式(不支持澄清后再干);没内置浏览器预览;开发自己用 Kimi Code 一周完成 Mac/Windows beta,5 万行代码 92% 由 AI 生成。</div>
+      <div class="bullet">✱ 把 &#x27;Skill 市场 + Agent 集群 + WebBridge&#x27; 作为国产 agent 平台标配信号,Gaming 内部如果想做 player-facing agent 平台,这三件套是 baseline,缺一会被竞品比下去;特别 WebBridge 模式对 Gaming 玩家『一键比价/比赛事/查攻略』场景有直接借鉴价值。</div>
+    </div>
+    <div class="brief">
+      <div class="n">03</div>
+      <div class="tag">BRIEF · COMPUTE GEOPOLITICS</div>
+      <h4>Google × SpaceX 算力交易 + Broadcom Q 报 + Apple WWDC 政治</h4>
+      <div class="kicker">Ben Thompson Stratechery · 几个独立信号合起来都利好 Nvidia</div>
+      <div class="meta-row">Stratechery · Ben Thompson · 3,851 chars (主体段落付费墙,以官方 summary 为准) · <a href="https://stratechery.com/2026/google-buys-compute-from-spacex-broadcoms-outlook-apples-ai-politics/">原文</a></div>
+      <div class="body">Ben Thompson 本周三条联动:① Google 向 SpaceX 购买算力(意味着 hyperscaler 自己的 GPU 还不够、要外部供给,utility-scale 算力供应链开始多极化);② Broadcom 季报指引强劲(custom ASIC 需求 + Nvidia 协同利好,GPU 总需求继续上行);③ Apple AI 政治:WWDC 前 Thompson 在看 Apple 如何把 &#x27;AI on device&#x27; 叙事和 &#x27;EU DMA / 中国市场 / Anthropic 合作&#x27; 的多线协调串起来。</div>
+      <div class="bullet">✱ 含义:hyperscaler 自有算力都不够、Apple AI 自研路径多线交织 —— 意味着 Gaming 业务做 model-layer 投入是死路,做应用层(玩家工具/创作者工具/直播副驾)+ 多模型 fallback(因为没有任何一家算力供应稳定)才是务实路径。</div>
+    </div>
+  </div>
+
+  <h2 class="section-head">▎ 速记 · SKIM</h2><div class="skim-grid">
+    <div class="skim">
+      <span class="n">S01</span><span class="tag">PODCAST · 1-LINER</span>
+      <h5>Lenny Podcast · Gemini Omni / Claude Shopping</h5>
+      <p>Claire 用 Gemini Omni + Google Flow 15 分钟做 AI avatar + 7 镜头宣传片(创作可及性 ↑、角色一致性 ↓、情绪表情仍是 uncanny valley);Nicole Ruiz 用 Claude Project 做家庭采购决策助手(把可信品牌 + 标准固化,自动化退货)。两者共同主线:AI 把『高门槛创作 + 理性消费』下放给普通人。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S02</span><span class="tag">FOUNDER · 2-LINER</span>
+      <h5>David Senra (Sequoia) — 2 句话职业策略</h5>
+      <p>「花大量时间理解自己是谁、想在世界上做什么。然后每天醒来,把每次机会处理好,会带来更多机会。」 — 简单直接,作为 H2 1:1 talk 模板可用。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S03</span><span class="tag">FOUNDER · NEGATIVE ADVICE</span>
+      <h5>South Park Commons — 创业不该是首选</h5>
+      <p>「除非别无选择,否则不要创业。这是很多工作 + 全情投入。我看见太少 designer 说 fk it 我去创业。」给内部潜在创业者:在『last resort』之前,先在 SPC 这类生态里找 community 把感觉挖出来。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S04</span><span class="tag">TOOL · CHANGELOG</span>
+      <h5>Readwise &amp; Reader changelog — 6 月 5 日</h5>
+      <p>Quick Lookup 改进(读取上下文句子选对查/翻/译响应)+ MCP/API 视频元数据加 listening_time_seconds + Apple 订阅激活 bug fix + 4 个站点解析改进(bain/theinitium/psychotherapynetworker/emcrit)。</p>
+    </div></div>
+
+  <h2 class="section-head">▎ 跳过 · SKIP</h2>
+  <div class="skip"><b>Confidential submission of draft S-1 to the SEC</b> — openai.com · 正文为空(只有 summary),信号已并入 DEEP A 第 5 论点</div><div class="skip"><b>Introducing the OpenAI Economic Research Exchange</b> — openai.com · 正文为空(JS 验证页),信号已并入 DEEP A 第 5 论点</div>
+
+  <h2 class="section-head">▎ 去重 · DUP</h2><div class="dup"><b>Why this ex-Meta L8 engineer stopped reviewing his own code</b> — Vol.008 DEEP B 已完整覆盖 Kun Chen × Peter Yang 完整视频版,本条仅为 rss 摘要</div>
+
+  <h2 class="section-head">▎ 新增观点入库 · VP LEDGER (21 条 · append-only 到 _mira-vp-index)</h2>
+  <table class='ledger'><thead><tr><th>分类</th><th>观点</th><th>来源</th></tr></thead><tbody><tr><td>Frontier Lab / Sovereign AI</td><td>[NEW 2026-06-09] OpenAI 自宣进入第三阶段(2026-):战略锚从『追前沿能力』迁移到『让 AI 变 commodity』;Gaming 立项原则推论 = 押应用层 + 数据 moat,不押模型层</td><td>Altman/Pachocki × mira</td></tr><tr><td>Frontier Lab / Sovereign AI</td><td>[NEW 2026-06-09] OpenAI 给 RSI 第一次写官方时间表:2028 年 3 月,significant fraction 内部研究由 AI 完成 = Gaming 2026 H2 立项的工具生命周期假设 ≤18 个月,核心架构必须 model-agnostic + harness-first</td><td>Altman/Pachocki</td></tr><tr><td>Frontier Lab / Sovereign AI</td><td>[NEW 2026-06-09] OpenAI 提出『AI resilience』作为正式术语,类比汽车时代 seatbelt/交规/驾照 —— 2026-2028 全球 AI 监管将从『关注模型』升级到『关注生态韧性』</td><td>Altman/Pachocki</td></tr><tr><td>Frontier Lab / Sovereign AI</td><td>[NEW 2026-06-09] Google × SpaceX 算力交易 + Broadcom 强 Q 报 + Apple AI 多线协调 = hyperscaler 自有算力都不够、算力供应链多极化;Gaming 做 model-layer 投入是死路</td><td>Ben Thompson</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-09] multi-agent 工程三大律:emergence contingent / input shock 不可控 / fast simulator 撒谎;违反者打回 —— 进 Gaming AI 平台 readme 首页 + 工程评审 checklist</td><td>Thousand Token Wood v3</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-09] settlement seam 原则:LiveOps reward / 反作弊 / 玩家承诺履约 / 经济通胀控制 = deterministic 覆写在 settlement 层,AI 协商只负责故事质感</td><td>Thousand Token Wood v3</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-09] cross-population regression test 套件:multi-agent 产品上线必须 ≥3 lab × ≥2 size 矩阵 × 100 次回归,通过率 ≥80%;否则只是 demo 不是产品</td><td>Thousand Token Wood v3 × mira</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-09] reality test rate(真模型测试占 dev iteration 比例)≥30% 作为 Gaming AI 平台健康度指标;rule-based simulator 只用于 dev cycle 加速,不可作为发布门槛</td><td>Thousand Token Wood v3 × mira</td></tr><tr><td>Agentic / Harness</td><td>[NEW 2026-06-09] A/B 实验新维度『agent population response』:LiveOps event 报告必须分开 human reaction 与 agent reaction,不可合并</td><td>Thousand Token Wood v3 × mira</td></tr><tr><td>Multi-Agent / Small Models</td><td>[NEW 2026-06-09] Build Small production 数据:scope 清晰的安全 triage 任务,Qwen3.5-4B 拿 80%/100 质量(对 Qwen3.6-27B 的 95/100),cost/speed/cold-start 综合最优;模型选型 KPI 应是『scope 清晰度 × cost-quality 平衡点』而非 benchmark 分数</td><td>Pakistan Notice Helper</td></tr><tr><td>Multi-Agent / Small Models</td><td>[NEW 2026-06-09] scope × output contract × prompt = 模型本身;Gaming AI 立项 doc 模板必须强制三段式,缺任一段不予立项 —— 可消灭 60% AI 副驾上线后效果不稳定/PR 事故</td><td>Pakistan Notice Helper × mira</td></tr><tr><td>Multi-Agent / Small Models</td><td>[NEW 2026-06-09] Kimi Work 国产 Vibe Working 三件套 baseline:Agent 集群(300 子 agent 并行)+ Skill 市场(可沉淀) + WebBridge(浏览器替操);K2.6 13h endurance + 4000 自主工具调用</td><td>逛逛GitHub</td></tr><tr><td>AI Business Model</td><td>[NEW 2026-06-09] OpenAI 同日三连发(manifesto + S-1 + Economic Research Exchange)= 把『broad benefit』叙事一次性落到资本/政策两个杠杆;Gaming 大产品立项 deck 必须含『broad benefit narrative』一栏</td><td>OpenAI × mira</td></tr><tr><td>AI Business Model</td><td>[NEW 2026-06-09] Nadella:tacit knowledge 第一次能上资产负债表 —— human + agent 协作 trace 作为企业可量化资产;Gaming HR/财务/法务可联合做 collaboration trace asset 内部叙事</td><td>Satya Nadella</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-09] OpenAI 公开反对『entirely automating everything』 = 与 Vol.008 Fadell『Don&#x27;t cognitively surrender』高位共振;Gaming AI 产品 messaging 借势把『AI 副驾(human in loop)』作为公开叙事而非『AI 替你玩』</td><td>Altman/Pachocki × Fadell</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-09] PM/策划/运营 role KPI 重心迁移:从『做了多少』→『决定了什么不做』;Q3 述职模板加入『本季度被我否决的 5 个 AI 提案』</td><td>Altman/Pachocki × mira</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-09] Pakistan Notice Helper 范式:产品『刻意不做』什么比『能做』什么更重要 —— Gaming AI 副驾 messaging 全线降级到 triage / suggest,不用 detect / verify / decide;法务审查时间预期 6 周 → 2 周</td><td>Pakistan Notice Helper × mira</td></tr><tr><td>Product &amp; Growth</td><td>[NEW 2026-06-09] player-facing LLM 平台强制注入 safety contract:禁止编造 URL/电话/价格/组织/政策;违反 contract 输出直接拦截、log+alert</td><td>Pakistan Notice Helper × mira</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-09] Gaming 立项『玩家侧 AI resilience 工具包』:玩家可见审计日志 + 一键 AI 推荐 opt-out + 『为什么是你』解释卡 + 玩家数据 export;参考 Pakistan Notice Helper trace dataset,跑在监管前 12-18 个月</td><td>OpenAI × PNH × mira</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-09] Observability v2 规范:玩家可见 audit log + 每次可关 + 公开 dataset 只含 metadata + 私有内容自动清理 namespace = 一次性同时满足 GDPR + Apple AppStore privacy + Gaming 合规</td><td>Pakistan Notice Helper × mira</td></tr><tr><td>Gaming &amp; Live-streaming</td><td>[NEW 2026-06-09] WebBridge 模式对 Gaming 玩家『一键比价/比赛事/查攻略』场景有直接借鉴价值;Skill 市场 + Agent 集群 + WebBridge 三件套是国产 agent 平台 baseline,缺一会被竞品比下去</td><td>Kimi Work × mira</td></tr></tbody></table>
+
+  <footer class="footer">
+    <span>MIRA · Daily Broadside · Vol.009 · 自包含单文件</span>
+    <span>下期 · <b>2026-06-10 06:00 Asia/Shanghai</b></span>
+  </footer>
+</div>
+</body>
+</html>
