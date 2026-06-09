@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>The Fable 5 Issue — Anthropic Mythos 级 Fable 5 落地、两份独立首测、FrontierCode 给『代码已解决』泼冷水 — Vol.010</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --bg-warm: #1a1a18;
+  --bg-warm-2: #1f1a14;
+  --orange: #e85d26;
+  --orange-soft: #f4a06a;
+  --yellow: #f6d24a;
+  --ink: #f3ede4;
+  --ink-dim: #b4a999;
+  --rule: #2c2823;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  margin: 0; padding: 0; line-height: 1.65;
+  font-size: 16px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
+.chrome { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim); text-transform: uppercase; }
+
+.masthead { border-top: 6px solid var(--orange); padding-top: 18px; margin-bottom: 28px; }
+.masthead .topline { display: flex; justify-content: space-between; }
+.masthead h1 {
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 52px; line-height: 1.04; margin: 14px 0 10px;
+  color: var(--orange); letter-spacing: -0.01em;
+}
+.masthead h2 {
+  font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic;
+  font-size: 18px; color: var(--orange-soft); margin: 0 0 16px;
+}
+.masthead .meta {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 10px 0; display: flex; gap: 28px; flex-wrap: wrap;
+}
+.meta span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+.meta span b { color: var(--yellow); font-weight: 600; }
+
+.editorial {
+  background: var(--bg-warm-2); border-left: 4px solid var(--yellow);
+  padding: 22px 28px; margin: 28px 0 40px;
+}
+.editorial h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 12px; letter-spacing: 0.12em;
+}
+.editorial p {
+  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 1.75;
+  margin: 0 0 10px; color: var(--ink);
+}
+
+.section-head {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--orange); margin: 40px 0 18px;
+  border-bottom: 2px solid var(--rule); padding-bottom: 10px;
+}
+
+.deep-card {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 30px 32px; margin: 0 0 32px; border-radius: 2px;
+}
+.deep-card .tag {
+  display: inline-block; background: var(--orange); color: #fff;
+  padding: 3px 10px; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+}
+.deep-card h3 {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 27px; line-height: 1.2; margin: 14px 0 6px; color: var(--ink);
+}
+.deep-card .kicker { font-size: 14px; color: var(--orange-soft); margin: 0 0 8px; }
+.deep-card .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+.deep-card .meta-row a { color: var(--yellow); text-decoration: none; }
+
+.scorecard {
+  background: rgba(0,0,0,0.3); padding: 14px 18px; margin: 16px 0 22px;
+  display: grid; grid-template-columns: repeat(5, 1fr) 90px; gap: 14px; align-items: center;
+}
+.score-dim { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); }
+.score-dim b { display: block; color: var(--ink); font-size: 18px; font-family: 'Barlow', sans-serif; }
+.score-bar { background: var(--rule); height: 4px; margin-top: 4px; }
+.score-bar > div { background: var(--orange); height: 100%; }
+.score-total { text-align: right; font-family: 'Barlow', sans-serif; }
+.score-total b { font-size: 32px; color: var(--yellow); }
+.score-total span { font-size: 14px; color: var(--ink-dim); }
+
+.arg { margin: 26px 0; }
+.arg h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--yellow); margin: 0 0 12px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.arg .quote {
+  font-family: 'Noto Serif SC', serif; font-style: italic;
+  font-size: 15px; color: var(--ink); border-left: 3px solid var(--orange-soft);
+  padding: 6px 16px; margin: 8px 0;
+}
+.arg .cn { font-size: 14px; color: var(--ink); padding: 0 16px; margin: 8px 0; }
+.arg .mira {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 10px 16px; margin: 12px 0 0;
+  font-size: 14px; color: var(--ink);
+}
+.arg .mira b { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+.takehome {
+  background: rgba(246,210,74,0.06); border: 1px solid rgba(246,210,74,0.25);
+  padding: 18px 22px; margin: 24px 0 0;
+}
+.takehome h4 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.12em;
+}
+.takehome ol { margin: 0; padding-left: 22px; }
+.takehome li { margin: 6px 0; font-size: 14px; color: var(--ink); }
+
+.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .brief-grid { grid-template-columns: 1fr; } }
+.brief {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+.brief .n { font-family: 'Barlow', sans-serif; font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.brief .tag {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--yellow); letter-spacing: 0.1em; margin: 4px 0 8px;
+}
+.brief h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 1.25; color: var(--ink); margin: 0 0 6px;
+}
+.brief .kicker { color: var(--orange-soft); font-size: 13px; margin: 0 0 8px; }
+.brief .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); margin-bottom: 10px; }
+.brief .meta-row a { color: var(--yellow); text-decoration: none; }
+.brief .body { font-size: 14px; line-height: 1.7; }
+.brief .bullet {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 8px 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink);
+}
+
+.skim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .skim-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .skim-grid { grid-template-columns: 1fr; } }
+.skim {
+  background: var(--bg-warm); border: 1px solid var(--rule); padding: 14px 16px;
+}
+.skim .n { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--orange-soft); }
+.skim .tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--yellow); letter-spacing: 0.1em; margin-left: 8px; }
+.skim h5 { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); margin: 6px 0; line-height: 1.3; }
+.skim p { font-size: 12px; line-height: 1.55; color: var(--ink-dim); margin: 0; }
+
+.skip { background: var(--bg-warm); border-left: 3px solid var(--ink-dim); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink-dim); }
+.skip b { color: var(--ink); }
+
+.dup { background: var(--bg-warm); border-left: 3px solid var(--yellow); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+.dup b { color: var(--yellow); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.ledger th { color: var(--yellow); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.ledger td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--orange-soft); font-size: 11px; width: 18%; }
+.ledger td:nth-child(2) { width: 50%; }
+.ledger td:nth-child(3) { color: var(--ink-dim); width: 32%; }
+
+.footer {
+  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+}
+.footer b { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Daily Reading Broadside · Vol.010</span>
+      <span class="chrome">2026-06-10 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Fable 5 Issue — Anthropic Mythos 级 Fable 5 落地、两份独立首测、FrontierCode 给『代码已解决』泼冷水</h1>
+    <h2>Anthropic 把传闻一个半月『太危险不敢放』的 Mythos 级 Fable 5 正式上线($10/$50 per M tokens):Every/Dan Shipper 在 senior-engineer benchmark 上打出 91/100『warp drive』,Lenny/Claire Vo 给出『what it gets right and very wrong』的另一面 · 同日 Cognition FrontierCode 把『可合并而非仅通过测试』作为新尺,最强 Opus 4.8 在最难 tier 仅 ~13%,直接戳破 SWE-Bench 式『coding 已解决』叙事 · Peter Yang『工程团队即将崩溃』+ Nextdoor『outcome engineering』给出 PR 爆量的组织侧后果 · Gemma 4 12B encoder-free 上笔记本、Gemini 3.5 Live Translate 70+ 语言、Apple『Siri AI』WWDC 补考</h2>
+    <div class="meta">
+      <span>候选 <b>71</b></span>
+      <span>析出 <b>26</b></span>
+      <span>深读 <b>3</b></span>
+      <span>简评 <b>4</b></span>
+      <span>速记 <b>9</b></span>
+      <span>跳过 <b>1</b></span>
+      <span>重复 <b>1</b></span>
+      <span>新观点 <b>20</b></span>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <h3>EDITORIAL · 编辑卷首语</h3>
+    <p>Vol.010 的头条是 Anthropic 把传闻一个半月、当初『太危险不敢放』的 Mythos 级 Fable 5 正式上线。难得的是同一天出现了两份独立的 day-zero 首测,构成完整的双视角:Every 的 Dan Shipper 在自家 senior-engineer benchmark 上给出 91/100(此前最高 Opus 4.8 仅 63),并用一句 prompt 让模型自主跑三四个小时造出一个忠实于博尔赫斯《巴别图书馆》的可玩 3D 游戏 ——『warp drive』;而 Lenny's Newsletter 的 Claire Vo 给出了冷静的另一面 —— token-intensive by design、执行偏保守、新增 safety classifier,『what it gets right and very wrong』。两份合读的结论:Fable 5 的真正新能力是 sustained autonomous execution(无人值守长程自主),而非单步质量;但 $10/$50 的定价 + token 暴涨意味着它只该用在长程、可离线、高价值的重活上。</p>
+    <p>恰在同一天,Cognition 发布 FrontierCode —— 把 coding eval 从『过测试』升级到『可合并』(regression safety / cleanliness / scope / test correctness / maintainability,每题由开源 maintainer 花 40+ 小时构造),结果最强的 Opus 4.8 在最难 tier 只有 ~13%,远低于 SWE-Bench 式 50%+ 的舒适区,并与 METR『多数过 SWE-Bench 的 PR 不会被合并』互证。这正是本卷的核心张力:同日,Fable 5 在旧 benchmark 上打出 91、FrontierCode 在新 benchmark 上把所有人摁回 13% —— 不是矛盾,而是 benchmark 的难度天花板正在被重画。给所有人的一句话:别再拿饱和 benchmark 的分数做规划假设,要建自己的可合并性 rubric。</p>
+    <p>第三条主线把能力翻译成组织后果:Peter Yang 警告『工程团队即将崩溃』—— 团队是按『每月 10-15 PR』设计的,当 AI 把 PR 干到 10 倍,review/流程/人员结构全部不再成立;Nextdoor 则给出落地范式『outcome engineering』(从 prompt agent 迁移到定义结果 + 驱动 agent 达成,一个工程师端到端 own 产品,瓶颈从工程变成『该做什么』)。三条主线在同一个点收口,也与 Vol.007→009 三卷主线完全一致:当造东西变便宜,judgment、品味、『决定造什么』成为最稀缺、最高杠杆的能力。配套小料:Gemma 4 12B encoder-free 上 16GB 笔记本、Gemini 3.5 Live Translate 70+ 语言 speech-to-speech、Apple『Siri AI』WWDC 补考、政府拟入股 AI 大厂。71 候选(约 50 篇 takara.ai arxiv RSS)析出 26 篇精读:3 deep / 4 brief / 9 skim / 1 skip / 1 dup,新增 20 条观点入库。</p>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · DEEP</h2>
+  
+    <article class="deep-card" id="fable5_dual_review">
+      <span class="tag">ANTHROPIC · MYTHOS-CLASS LAUNCH</span>
+      <h3>Fable 5 落地:Mythos 级模型双视角首测 —— 91/100『warp drive』与『right and very wrong』的两面</h3>
+      <div class="kicker">两份独立 day-zero 评测 · Every/Dan Shipper(senior-engineer benchmark 91/100、一句话造完 Library of Babel 3D 游戏)与 Lenny/Claire Vo(token 密集、保守执行、安全 fallback、product-graph/skills-registry/multi-agent 三测)</div>
+      <div class="meta-row">Every (YouTube) + Lenny&#x27;s Newsletter (Substack) · Dan Shipper / Claire Vo · 20,671 + 2,314 chars · 信号 2 颠覆 2 可操作 2 独特 2 时效 2 · <a href="https://www.youtube.com/watch?v=GrdEid8H6H4">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>10</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;There&#x27;s Haiku, Sonnet, Opus, and then Mythos. As far as I can tell from talking to people internally at Anthropic, there&#x27;s nothing special about it architecturally. It&#x27;s basically the same thing as their other models. It&#x27;s just bigger and better. ... It&#x27;s $10 per million input tokens and $50 per million output tokens, which is about twice the cost of Opus. But it is just genuinely the most powerful coding model I&#x27;ve ever used by far.&quot;</div>
+          <div class="cn">「模型梯队是 Haiku、Sonnet、Opus,然后是 Mythos。据我和 Anthropic 内部的人聊,它在架构上没什么特别 —— 基本就是同一套东西,只是更大更好。定价 $10/M 输入、$50/M 输出,大约是 Opus 的两倍。但它确实是我用过最强的 coding 模型,遥遥领先。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Mythos 是 Anthropic 在 Haiku/Sonnet/Opus 之上新开的最高梯队,Fable 5 是它第一个 GA 的成员 —— 关键信号不是架构创新,而是『纯靠 scale + 安全护栏就能再上一个台阶』,且价格直接翻倍到 $10/$50。给 Gaming 的直接含义:旗舰编码/创作任务的『天花板』又抬高了一截,但单位成本也翻倍,意味着 2026 H2 任何 player-facing 高频调用绝不能默认顶配模型 —— 必须做『Mythos 跑离线/批处理的重活、小模型跑在线高频』的分层路由。把模型选型从『用哪个』改成『哪个 tier 跑哪类 workload』的成本曲线设计。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;We have a senior engineer benchmark... We give it a vibecoded slop production codebase and ask: if you&#x27;re going to rewrite this from first principles, how would you do it? The best model score is a 63 out of 100, which is Opus 4.8. Right behind that is GPT 5.5, 62. Fable scored a 91. That&#x27;s the same score as a human engineer with just one prompt. I knew this benchmark was going to get saturated, but I thought it would happen in like 6 months.&quot;</div>
+          <div class="cn">「我们有个 senior-engineer benchmark —— 给模型一份 vibecode 出来的劣质 production 代码库,问它:如果从第一性原理重写,你会怎么做?此前最高分是 Opus 4.8 的 63,GPT 5.5 紧随 62。Fable 打了 91,等于一个人类工程师的水平,而且只用一句 prompt。我知道这 benchmark 迟早会饱和,但以为得 6 个月后。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:91 vs 63 是一次断层式跳跃,而且是在『重构劣质代码库』这种最接近资深工程师真实工作的任务上。但这条要和本卷 DEEP B(FrontierCode)对照读 —— Every 自家 benchmark 91 分,Cognition 的 FrontierCode 最难 tier 上 Opus 4.8 只有 13%。结论不是矛盾,而是:benchmark 的『难度天花板』本身在被重画,旧 benchmark 正快速饱和、新 benchmark(可合并性/可维护性)才刚开始有区分度。Gaming 内部不要再拿『SWE-Bench 分数』当采购依据,要建自己的 senior-engineer rubric(给一份你真实的劣质代码库,看模型重构方案),每个新模型上来先跑这个内测。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;The way to work with this model is to give it a task and then leave. Go do something else. Let it go for three or four hours. Set it up overnight. It just figures stuff out and it does good work. It has good taste, attention to detail... Even with a not very well specified prompt, it has more judgment. Previous Cloud models would be a little tryhard. This one feels like it&#x27;s going to go do it.&quot;</div>
+          <div class="cn">「用这个模型的正确姿势是:给它一个任务,然后走开。去干别的,让它跑三四个小时,或者过夜挂着。它会自己把事情理清楚、做出好东西 —— 有品味、注意细节。哪怕 prompt 写得不那么清楚,它也更有判断力。以前的 Cloud 模型有点『用力过猛』,这个则像是『它会去把事干成』。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:『sustained autonomous execution(持续 3-4 小时无人值守自主执行)』是 Fable 5 的核心新能力,而不是单步质量。这对 Gaming 工作流的含义是结构性的:把工程/美术/策划的重活从『交互式 pair-prompting』迁移到『下任务 + 离线跑 + 回来 review』的 batch 模式。配套需要的不是更强的 prompt,而是更强的『验收 harness』—— 因为人不在场,质量门只能靠自动化验收(测试/截图 diff/规则校验)兜住。这条直接呼应 Vol.009 settlement seam:自主执行越强,authored 验收层越重要。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;(Claire Vo) Claude Fable 5 is token-intensive by design... Conservative on execution... new safety classifiers and a fallback concept. I ran three tests — a product graph spec, designing a skills registry, multi-agent orchestration — and my honest take is: what the new Mythos model gets right (and very wrong).&quot;</div>
+          <div class="cn">「(Claire Vo)Fable 5 是『设计上就 token 密集』的,执行上偏保守,带了新的 safety classifier 和一个 fallback 概念。我跑了三个测试 —— product graph 规格、设计一个 skills registry、multi-agent 编排 —— 我的诚实评价是:这个 Mythos 模型有它做得对的地方,也有做得很糟的地方。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Claire Vo 这份『另一面』评测是对 Dan Shipper 高分叙事的必要对冲。两个关键负面信号:① token-intensive by design —— 输出 token 暴涨 × $50/M 单价 = 实际成本可能远超『两倍 Opus』的标价直觉,务必按真实 token 量做成本测算而非按 list price;② conservative on execution —— 在需要『大胆改动/重构』的任务上反而可能放不开手。Gaming 采购决策处方:不要被任何单一 KOL 的分数锚定,Fable 5 用在『长程、可离线、高价值、能容忍 token 成本』的任务(大型重构、复杂 game 原型、研究型探索);高频在线、成本敏感、要求确定性执行的任务仍用 Opus/小模型。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;I made this entire thing in a single prompt with Fable 5. Read Borges&#x27;s Library of Babel and then plan and execute end to end a browser-playable 3D game... loop until it&#x27;s done. It read the story, then ran and ran, checking its work. After 3 or 4 hours, done. Hexagonal galleries stacked endlessly, 20 shelves, accurate to the book, the mathematics right. But never make any major life decisions within 30 days of your first encounter with a Frontier model.&quot;</div>
+          <div class="cn">「我用 Fable 5 一句 prompt 做完了整个东西:读博尔赫斯的《巴别图书馆》,然后端到端规划并实现一个浏览器可玩的 3D 游戏……循环直到完成。它读了小说,然后一直跑、一直自检,三四个小时后完成 —— 无限堆叠的六边形回廊、每边 20 层书架、忠实于原著、数学也对。但请记住:第一次接触前沿模型后的 30 天内,不要做任何重大人生决定。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:『读一篇小说 → 自主产出一个可玩 3D 游戏』这种 demo 对 Gaming 是最直接的能力预警 —— 原型/玩法验证/小游戏的边际成本正在塌缩到『一句 prompt + 几小时机时』。但 Dan Shipper 那句『30 天内别做重大决定』是清醒剂:day-zero demo 的 wow 与 production 可靠性之间隔着 FrontierCode 那 13%。Gaming 的务实动作:立刻立项一个『Fable-class 原型工厂』内部试点(让策划用一句话出可玩 demo 做玩法快筛),但严格区分『原型可及性已变天』与『上线质量仍需 harness 把关』—— 不要把 demo 速度误读成交付速度。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>建立 Gaming 自有 senior-engineer rubric:拿一份你真实的劣质 production 代码库,让每个新模型给『从第一性原理重构』方案并打分;以此替代『SWE-Bench 分数』作为模型采购依据。</li><li>模型分层路由设计(成本曲线优先):Mythos/Fable-class 只跑『长程、可离线、高价值、容忍 token 成本』的重活(大型重构/复杂原型/研究探索);在线高频、成本敏感任务用 Opus/小模型;严禁 player-facing 高频默认顶配。</li><li>工作流从『交互式 pair-prompting』迁移到『下任务 + 离线跑 3-4h + 回来 review』的 batch 模式;配套投资在自动化验收 harness(测试/截图 diff/规则校验),因为人不在场时质量只能靠 authored 验收兜底。</li><li>成本测算按真实 token 量而非 list price:Fable 5 token-intensive by design,$50/M 输出 × 暴涨 token 可能远超『两倍 Opus』的直觉;任何 Fable-class 上线前先做真实负载的 token 成本压测。</li><li>立项『Fable-class 原型工厂』试点:让策划/美术用一句话出可玩 demo 做玩法快筛,边际成本塌缩到几小时机时;但在制度上锁死『原型可及性 ≠ 上线交付速度』,demo wow 不能跳过 harness 验收。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="frontiercode_war_on_slop">
+      <span class="tag">COGNITION · WAR ON SLOP</span>
+      <h3>FrontierCode:把『可合并』而非『通过测试』作为新尺 —— 最强模型最难 tier 仅 ~13%,coding 远未『解决』</h3>
+      <div class="kicker">Cognition 新 coding eval · 每题由顶级开源 maintainer 花 40+ 小时构造 · 评 regression safety / cleanliness / scope / test correctness / maintainability · 与 METR『多数过 SWE-Bench 的 PR 不会被合并』互证</div>
+      <div class="meta-row">latent.space (AINews) · Latent Space / swyx · 12,307 chars · 信号 2 颠覆 2 可操作 2 独特 1 时效 2 · <a href="https://www.latent.space/p/ainews-frontiercode-benchmarking">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>9</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;Models write sloppy code that works but isn&#x27;t maintainable. Our eval is first to measure: would you actually merge this code? ... Each task took 40+ hrs of work by leading open-source maintainers... evaluated on dimensions like regression safety, cleanliness, scope, test correctness, and maintainability.&quot;</div>
+          <div class="cn">「模型写出的代码能跑但不可维护。我们的 eval 第一次衡量:你真的会合并这段代码吗?每道题由顶级开源 maintainer 花 40+ 小时构造,评估维度包括 regression safety、整洁度、scope 控制、测试正确性、可维护性。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是 coding eval 范式的一次升级 —— 从『功能正确(过测试)』升级到『工程可接受(可合并)』。和本卷 DEEP A 的 Fable 5 91 分对照看尤其有价值:旧维度在饱和,新维度才有区分度。Gaming 工程效率度量必须跟上:不要再用『AI 生成代码量 / PR 数』作为生产力 KPI(那只会奖励 slop),要用『AI 生成 PR 的一次合并率 / 返工率 / 引入回归数』作为真实效率指标。把 FrontierCode 的五个维度直接搬成内部 AI-PR 验收 rubric。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;The headline result is that the best model, Opus 4.8, scores only about 13% on the hardest subset—far below the 50%+ regime common on SWE-Bench-style evals, suggesting coding is much less &#x27;solved&#x27; than popular benchmarks imply.&quot;</div>
+          <div class="cn">「头条结果是:最强模型 Opus 4.8 在最难子集上只拿 ~13%,远低于 SWE-Bench 式 eval 常见的 50%+ 区间,说明 coding 远比流行 benchmark 暗示的『已解决』要难得多。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:13% 是给所有『AI 已经能替代工程师』叙事的一盆冷水,且时间点恰好与 Fable 5 91 分同日 —— 这正是本卷的核心张力。给 Gaming 高层的 framing:能力曲线在『最常见任务』上确实陡升(原型、样板、重构建议),但在『最难、最需要工程判断』的长尾上仍有巨大 gap。资源配置含义:把 AI 投到『大量中低难度、可验证』的工作以释放人力,但最难的架构/性能/安全决策仍必须保留 senior human 在环 —— 这与 Vol.007→009『把 judgment 留给人类』的三卷主线完全一致。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;METR found that Many SWE-bench-Passing PRs Would Not Be Merged into Main and the problem of false positive trajectories... was directly measured and addressed in the FrontierCode report.&quot;</div>
+          <div class="cn">「METR 发现:许多『通过 SWE-Bench』的 PR 其实不会被合并进主干,这种 false-positive 轨迹问题在 FrontierCode 报告里被直接测量并解决。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是 benchmark 可信度的独立第三方互证(Cognition + METR 双源)。对 Gaming 的操作含义:任何对外/对内宣称『AI 把某工作做到 X% 自动化』的数字,都要追问『X 的分母是什么 benchmark、它的 false-positive 率多少』。建立内部规矩:AI 能力宣称必须附带『验收口径』,严禁拿饱和 benchmark 的分数做规划假设。可以把『false-positive PR 率』作为一个新的工程健康度指标常态化追踪。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;The day&#x27;s loudest practical theme was that coding agents should be given clear goals, verification criteria, and iteration structure rather than one-shot prompts. dzhng: &#x27;don&#x27;t use loops, design state machines.&#x27; Several practitioners pushed back on naïve loop hype: Omar and Graham Neubig emphasized that human checkpoints remain essential outside easily verifiable domains.&quot;</div>
+          <div class="cn">「当天最响的实践主题是:coding agent 应该被给到清晰目标、验证标准和迭代结构,而不是 one-shot prompt。dzhng:『别用 loop,设计状态机。』多位实践者反击 naïve loop 炒作:Omar 与 Graham Neubig 强调,在不易验证的领域,human checkpoint 仍然不可或缺。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:『loops』正成为 agent 控制的主导隐喻,但社区已经在纠偏 —— 关键不是『让它循环』,而是『给清晰目标 + 验证标准 + 迭代结构』,本质是 state machine 而非无脑 loop。这与 DEEP A 的『下任务离线跑』直接配套:自主执行越强,越要把验证标准前置写死。Gaming AI 平台动作:把『goal + verification criteria + iteration structure』作为所有 agent 任务的强制三件套模板(对应 Vol.009 的 scope×contract×prompt),并在『不易验证的领域』强制保留 human checkpoint,不允许全自动放行。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;Current agent performance is still strongly shaped by harness behavior and workflow choices, not just base-model quality. Angaisb_ warned against overlong Codex threads degrading performance, while reach_vb reported success with single-thread context accumulation. That mismatch itself is useful signal.&quot;</div>
+          <div class="cn">「当前 agent 表现仍强烈受 harness 行为和 workflow 选择影响,而不只是底座模型质量。有人警告过长的 Codex thread 会拖垮表现,也有人报告单线程上下文累积反而成功 —— 这种矛盾本身就是有用信号。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:同一个底座模型,harness/workflow 不同,结果可以南辕北辙 —— 这是对『换最强模型就能解决一切』的再一次否定,呼应 Vol.007 起反复出现的 harness-first 主线。Gaming 含义:与其追逐最新 SOTA 模型,不如把工程预算的大头压在自家 harness(上下文管理、线程长度策略、验证回路、工具编排)上 —— 这才是可累积、可形成 moat 的部分,而模型层是会被商品化的(呼应 Vol.009 OpenAI 第三阶段)。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>把 FrontierCode 五维度(regression safety / cleanliness / scope / test correctness / maintainability)直接做成内部 AI-PR 验收 rubric;工程生产力 KPI 从『AI 生成代码量/PR 数』改为『一次合并率 / 返工率 / 引入回归数』,避免奖励 slop。</li><li>AI 能力宣称强制附带验收口径:任何『X% 自动化』数字必须注明 benchmark 分母与 false-positive 率;严禁拿饱和 benchmark(SWE-Bench 式)做规划假设;常态追踪『false-positive PR 率』。</li><li>资源配置二分:把 AI 大量投到中低难度、可验证的工作释放人力;最难的架构/性能/安全决策保留 senior human 在环 —— 与三卷主线『judgment 留给人类』一致。</li><li>所有 agent 任务强制三件套模板:goal + verification criteria + iteration structure(state machine 而非无脑 loop);不易验证领域强制保留 human checkpoint,禁止全自动放行。</li><li>工程预算大头压在自家 harness(上下文/线程策略/验证回路/工具编排)而非追逐 SOTA 模型 —— harness 是可累积的 moat,模型层会被商品化(承接 Vol.009 OpenAI 第三阶段判断)。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="teams_about_to_break">
+      <span class="tag">ORG · OUTCOME ENGINEERING</span>
+      <h3>工程团队即将崩溃:PR 爆 10 倍后,流程/评审/团队构成全部不再成立 —— Nextdoor 用『outcome engineering』给出落地范式</h3>
+      <div class="kicker">Peter Yang short(团队按『每月 10-15 PR』时代设计,AI 让 PR ×10 后 review/流程/人员结构全部撑不住)+ Nextdoor/Cory Dolphin(从 prompting 迁移到 outcome engineering、一个工程师端到端 own 产品、瓶颈从工程变成『该做什么』的战略问题)</div>
+      <div class="meta-row">YouTube short + OpenAI News · Peter Yang / Cory Dolphin · 797 + 4,237 chars · 信号 2 颠覆 1 可操作 2 独特 1 时效 2 · <a href="https://openai.com/index/nextdoor">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>8</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;Our workflows and how our teams work were built at a time when we spent most of our time coding. The average engineer writes 10 to 15 PRs every month. When that&#x27;s the case, it&#x27;s okay for everyone else to do code reviews and all these processes. But when you start to write 10 times more PRs, we are not ready for that. Our processes and human team composition are not built with that assumption. Things are starting to break.&quot;</div>
+          <div class="cn">「我们的 workflow 和团队运作方式,是在『大部分时间花在写代码』的年代设计的。一个工程师平均每月写 10-15 个 PR,这种情况下大家互相 code review、走那一套流程是 OK 的。但当你开始写 10 倍的 PR,我们根本没准备好 —— 流程、团队人员构成,全都不是按这个假设搭的。东西开始崩了。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是把 DEEP A/B 的『模型能力』翻译成『组织后果』的关键一跳。产出量 ×10 不会自动变成效率 ×10,因为 review/QA/集成/沟通这些『协调成本』会成为新瓶颈,甚至反噬。Gaming 工程管理必须提前重构:① code review 不能再靠人海互评(评审会成为最大瓶颈),要上 AI 预审 + 分级人审(高风险改动才进 senior 人审队列);② 团队构成从『多数写代码』转向『少数定方向 + 强验收 + 强集成』;③ 把『协调成本』作为显式预算项纳入团队设计,而不是默认免费。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;Codex represents an essential shift: away from iteratively prompting an agent, and towards outcome engineering, where engineers start to think about the result they want to see and work with an agent to engineer that result.&quot;</div>
+          <div class="cn">「Codex 代表一次本质转变:从『反复 prompt 一个 agent』转向『outcome engineering』—— 工程师开始思考自己想看到的结果,然后与 agent 协作去把那个结果工程化出来。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:『outcome engineering』是个比『prompt engineering』高一个抽象层的关键词,值得作为内部统一话术。它的实质是:工程师的核心产出从『写过程』变成『定义结果 + 定义验收 + 驱动 agent 达成』。这与 DEEP A『下任务离线跑』、DEEP B『goal+verification』完全同构 —— 三个来源指向同一个工程范式。Gaming 动作:把工程师的 JD / 晋升 rubric 从『编码能力』向『结果定义 + 验收设计 + agent 编排』迁移;入职/晋升评估加一项『能否把一个模糊目标拆成可验收的 outcome 规格』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;Individual engineers move up the stack—no longer locked up as specialists in a certain system, they own the product experience end-to-end, even across multiple platforms. One engineer realized it would help to show service providers on a map. Historically that required mobile, frontend, and backend teams and might never have made it out of the backlog. With Codex, one engineer built it end to end.&quot;</div>
+          <div class="cn">「工程师整体上移:不再被锁死为某个系统的专才,而是端到端 own 产品体验,甚至跨多个平台。有个工程师意识到在地图上展示服务商会很有用 —— historically 这需要移动端、前端、后端三个团队协作,可能永远出不了 backlog。用 Codex,一个工程师端到端把它做出来了。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:『一个工程师跨端做完一个特性』直接冲击 Gaming 现有的职能分工(客户端/服务端/前端/工具链)和按职能划分的团队边界。机会面:很多以前因『要三个团队协作而胎死 backlog』的小特性现在可单人交付,长尾创意的实现成本骤降。风险面:边界模糊后,质量一致性、架构腐化、owner 责任稀释会成为新问题。Gaming 组织设计动作:试点『full-stack product engineer + 强中台/平台支撑』模式,在给个人端到端权限的同时,用平台层(共享组件/规范/自动化验收)守住一致性 —— 否则 outcome engineering 会换来一地难维护的 slop(呼应 DEEP B)。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;Productivity has accelerated so much that the bottleneck is no longer engineering, but rather the hard strategic questions about what to build next. ... Engineers get to spend a lot less time thinking about exactly how they build, and more time thinking about the outcome.&quot;</div>
+          <div class="cn">「生产力加速到这种程度,瓶颈不再是工程,而是『接下来该做什么』这种艰难的战略问题……工程师花在『具体怎么造』上的时间大幅减少,更多时间花在『结果』上。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:瓶颈从『execution』迁移到『decision』—— 这是本卷与 Vol.007-009 三卷主线最强的收口共振:当造东西变便宜,『决定造什么』变成最稀缺、最高杠杆的能力。Gaming 资源配置含义:产品/策划/数值/用研这些『决定做什么』的角色,其重要性和人效杠杆在上升,应优先加强而非被 AI 替代叙事削弱;反过来,纯执行岗的价值在被压缩,需要主动帮这部分人向 outcome-definition / 验收设计 转型。Q3 组织盘点应显式问:我们的瓶颈到底卡在 execution 还是 decision?预算往瓶颈处倾斜。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>提前重构 code review:不再靠人海互评(会成最大瓶颈),上 AI 预审 + 分级人审(仅高风险改动进 senior 人审队列);把『协调成本(review/QA/集成/沟通)』作为显式预算项纳入团队设计。</li><li>统一话术与能力模型:用『outcome engineering』替代『prompt engineering』;工程师 JD/晋升 rubric 从『编码能力』迁移到『结果定义 + 验收设计 + agent 编排』,评估加项『能否把模糊目标拆成可验收 outcome 规格』。</li><li>试点『full-stack product engineer + 强平台支撑』:给个人端到端交付权限,同时用平台层(共享组件/规范/自动化验收)守住一致性,防止边界模糊带来架构腐化与 slop(承接 DEEP B)。</li><li>团队构成转向『少数定方向 + 强验收 + 强集成』:释放被长尾小特性占用的协作开销,让以前『因需三团队协作而出不了 backlog』的创意能单人交付。</li><li>Q3 组织盘点显式区分瓶颈在 execution 还是 decision,预算往瓶颈倾斜;加强产品/策划/数值/用研等『决定做什么』的高杠杆角色,主动帮纯执行岗向 outcome-definition 转型。</li></ol>
+      </div>
+    </article>
+
+  <h2 class="section-head">▎ 速览 · BRIEF</h2>
+  <div class="brief-grid">
+    
+    <div class="brief">
+      <div class="n">01</div>
+      <div class="tag">BRIEF · EDGE MULTIMODAL</div>
+      <h4>Gemma 4 12B:encoder-free 统一架构,16GB 笔记本跑近 26B 水平的多模态 agent</h4>
+      <div class="kicker">Google DeepMind · Gemma 系列累计 1.5 亿下载</div>
+      <div class="meta-row">deepmind.google · Google DeepMind Blog · 2,833 chars · <a href="https://deepmind.google/blog/introducing-gemma-4-12b-a-unified-encoder-free-multimodal-model/">原文</a></div>
+      <div class="body">Gemma 4 12B:首个中等尺寸带原生音频输入的 Gemma,核心创新是『无多模态 encoder』—— 视觉用单次矩阵乘 + 位置嵌入的轻量模块、音频直接投影进 text token 空间,vision/audio 直接流进 LLM 主干,减少延迟与显存。性能逼近 26B MoE 但显存不到一半,16GB VRAM/统一内存即可本地跑;Apache 2.0、自带 MTP drafter 降延迟。同期 QAT checkpoint 省 ~4× 显存、E2B 约 1GB 即可跑、MTP 已并入 llama.cpp。</div>
+      <div class="bullet">✱ Gaming 含义:端侧/玩家设备上的多模态 agent(语音指令、截图理解、本地反作弊预筛)正变得现实 —— 16GB 笔记本即可跑近旗舰水平。配合 DEEP A 的分层路由策略,『端侧小模型跑高频 + 云端 Mythos 跑重活』的两层架构现在两端都成熟了;玩家隐私敏感场景(本地处理不上云)有了可落地选项。</div>
+    </div>
+    <div class="brief">
+      <div class="n">02</div>
+      <div class="tag">BRIEF · LIVE TRANSLATION</div>
+      <h4>Gemini 3.5 Live Translate:70+ 语言、speech-to-speech、连续生成不等说完</h4>
+      <div class="kicker">Google DeepMind · Grab 已在司机/乘客通话测试(月 1000 万通)</div>
+      <div class="meta-row">deepmind.google · Google DeepMind Blog · 4,615 chars · <a href="https://deepmind.google/blog/fluid-natural-voice-translation-with-gemini-35-live-translate/">原文</a></div>
+      <div class="body">新音频模型做实时 speech-to-speech 翻译:自动识别 70+ 语言、保留语调/节奏/音高、连续生成(不等说完即翻),延迟仅落后说话者几秒。通过 Gemini Live API 开放,Agora/LiveKit/Pipecat 等平台已集成;Google Meet 即将接入(70+ 语言、2000+ 语言对、私有预览)。Grab 在司乘 pickup 沟通测试。</div>
+      <div class="bullet">✱ Gaming/直播含义:跨语言实时语音是出海直播、跨区组队、国际赛事解说的直接刚需。speech-to-speech + 保留语调 + 几秒延迟意味着『跨语言开黑/连麦』『多语言直播实时字幕+配音』从概念变成可集成 API;建议直播业务线立刻做一个『跨语种连麦实时翻译』的可行性 spike,对标 Grab 的低延迟司乘场景。</div>
+    </div>
+    <div class="brief">
+      <div class="n">03</div>
+      <div class="tag">BRIEF · THIN-CLIENT / AGENTS</div>
+      <h4>The iPhone&#x27;s Last Stand:Apple『Siri AI』WWDC 补考 vs 微软 Project Solara 的 agent thin-client</h4>
+      <div class="kicker">Stratechery · Ben Thompson</div>
+      <div class="meta-row">stratechery.com · Ben Thompson · 10,807 chars · <a href="https://stratechery.com/2026/the-iphones-last-stand/">原文</a></div>
+      <div class="body">Thompson 双线:① 微软 Build 抛出 Project Solara —— 一堆设备都只是『云端 agent 的入口』,把 thin client 推到极致(agent 替你 compute,几秒交互换几小时工作,绕开穿戴设备『交互体验差』的死穴);② Apple WWDC 用预录 demo 展示『Siri AI』(借 App Intents 做上下文感知 + 跨 app 操作),demo 能跑但也暴露 Apple 落后 —— 还停在 2024 年的 SOTA 水准。核心论点:当 agent 让『compute 而非 interact』成为主线,iPhone 作为『最佳交互设备』的护城河正被釜底抽薪。</div>
+      <div class="bullet">✱ Gaming 含义:若交互范式从『设备上操作』迁移到『agent 替你完成』,玩家与游戏/直播的触点也会被重构 —— 想象『跟 agent 说一句就帮你打完日常、整理战绩、剪好高光、约好下次开黑』。Gaming 应提前布局『agent 入口』而非只盯 app UI:把核心玩家动作开放成 agent 可调用的能力(intents/API),抢在平台级 agent 把流量截走之前成为被调用的一方。</div>
+    </div>
+    <div class="brief">
+      <div class="n">04</div>
+      <div class="tag">BRIEF · AI POLITICS</div>
+      <h4>政府要入股 AI 大厂:Trump 确认『公众成为合伙人』,OpenAI 主动游说捐股建主权基金</h4>
+      <div class="kicker">AI Daily Brief · 跨党派(Sanders × Trump)罕见共识</div>
+      <div class="meta-row">YouTube · The AI Daily Brief · 25,026 chars · <a href="https://www.youtube.com/watch?v=RKpEI37RnfI">原文</a></div>
+      <div class="body">白宫层面讨论政府对大 AI 厂取得 equity stake:Trump 确认『有一个让美国公众成为公司合伙人的概念』,本周可能会见『所有大厂』;Sanders 主张征 50% AI 公司股权建主权财富基金,Trump 称双方『分歧没那么大』。OpenAI 主动推进 —— Altman 周三会见 Sanders,提议向美国政府捐股 seed 公共财富基金(可能通过 Trump children accounts 分红)。评论者:这是在为 OpenAI 政府纾困铺路。</div>
+      <div class="bullet">✱ 含义:这是 Vol.009 OpenAI『broad benefit』叙事的政策侧落地 —— 把『公众共享 AI 收益』从 manifesto 推进到 equity/主权基金的具体杠杆。对 Gaming 出海:AI 监管正从『管模型』转向『管收益分配 + 国家持股』,地缘与合规复杂度上升;任何重 AI 的出海产品都要把『所在国对 AI 的国家资本/税收主张』纳入风险评估,别只看技术合规。</div>
+    </div>
+  </div>
+
+  <h2 class="section-head">▎ 速记 · SKIM</h2><div class="skim-grid">
+    <div class="skim">
+      <span class="n">S01</span><span class="tag">ARXIV · TAKARA 精选</span>
+      <h5>takara.ai 精选 6 篇(agent/LLM-ops 相关)</h5>
+      <p>① Cheap Reward Hacking Detection:小 encoder + 线性探针检测 reward hacking,AUC 0.95、成本低 4 个数量级(但去掉 NL 推理 AUC 掉到 0.62)。② Context-Fractured Decomposition Attacks:工具型 agent 的 provenance gap —— 防御跨步组合而非单条文本,现有多轮越狱假设单一连续对话,在真实 agent pipeline 失效。③ Multi-Hop Knowledge 受预训练暴露约束:两跳推理失败是预训练问题(97% 单跳准确仍崩),需组合式预训练。④ AGENTSERVESIM:面向多轮 agent serving 的硬件感知模拟器(跨轮 KV cache 局部性)。⑤ End-to-End Context Compression at Scale:重做 encoder-decoder 压缩逼近 KV-cache 压缩前沿。⑥ When Built-in Thinking Helps/Hurts:thinking 提升 Planning 类约束、损害 Precision 类(局部精确格式),总分变化小但 10-20% prompt 切换 pass/fail。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S02</span><span class="tag">ARXIV · 批量 SKIM</span>
+      <h5>takara.ai arxiv RSS 洪流 44 篇(批量略读)</h5>
+      <p>本日 takara.ai 一次性灌入约 50 篇 arxiv 论文 RSS,绝大多数为高度学术/窄域(理论、特定基准、小众架构),对 Gaming 产品决策杠杆低。已用 agent/LLM-ops 相关白名单析出 6 篇(见 S01),其余 44 篇进批量 skim 桶不逐篇分析;清单存档于 takara_skim.json,如后续某方向需要深挖可回捞。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S03</span><span class="tag">PRODUCT · BOOKS</span>
+      <h5>Lenny:产品人必读书单 Part 2</h5>
+      <p>Lenny&#x27;s Newsletter 第二批产品人书单 —— 覆盖产品思维、增长、领导力、职业发展;适合作为团队 H2 共读/培养清单原料,不含强时效信号,收藏型内容。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S04</span><span class="tag">OSS · 现象级</span>
+      <h5>PewDiePie 手搓 AI 工作台 Odysseus,一周 5 万+ Star</h5>
+      <p>1.1 亿粉的 PewDiePie 开源本地 AI 工作台 Odysseus(大部分代码 AI 写):聊天(vLLM/llama.cpp/Ollama/OpenRouter)+ Agent + Cookbook(扫硬件荐模型一键部署)+ 深研 + Compare 盲测 + 邮件/日历/笔记/任务 + PWA。24h 破 2 万 Star。逛逛GitHub 评价『功能平平,重度 Claude Code/Codex 用户无惊喜』—— 现象级更多是 1 亿粉流量,但『一周一个全功能本地 AI 工作台』本身就是 DEEP A 能力塌缩的旁证。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S05</span><span class="tag">RESEARCH · ASR</span>
+      <h5>双语/code-switching 语音 agent 基准</h5>
+      <p>HuggingFace:为双语/code-switching(句中切换语言)客户构建 ASR 基准与数据集 —— 半数人类多语,但企业语音 agent 对 code-switch 研究极少,ASR 转写错误会向下游所有环节传播。对出海客服/直播语音 agent 是有用的评测视角,呼应 BRIEF 02 跨语言场景。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S06</span><span class="tag">AI FOR GOOD · 现场</span>
+      <h5>DeepMind:欧洲机器人 + Sierra Leone 学习成效</h5>
+      <p>两篇 DeepMind 应用稿:① 在欧洲推进机器人(物理 agent 生态);② 测量 AI 辅助学习在 Sierra Leone 的成效(教育普惠现场数据)。signal 偏 PR/愿景,作为『AI 落地现场』背景参考,非决策级。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S07</span><span class="tag">CRAFT · 1-LINER</span>
+      <h5>Rick Rubin 为何这么强(David Senra)+ Figma 慢即是快 + 产品要讲故事</h5>
+      <p>三条短料:① Senra 解读 Rick Rubin —— 极致专注于『感觉对不对』而非技术,品味即护城河;② Figma 产品战略『Moving Slow to Ship Fast』—— 慢决策换快交付;③『Great products tell a story』—— 产品叙事是留存与传播的底层。三条共同指向 DEEP C 的收口:当执行变便宜,品味/叙事/判断成为稀缺。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S08</span><span class="tag">FINE-TUNE · 个人项目</span>
+      <h5>NeuroBait:为 ADHD 微调一个『点燃多巴胺』的启动助手</h5>
+      <p>Backyard AI 个人项目:作者为有 ADHD 的妻子微调模型,针对『知道该做但起不了步(task-initiation paralysis)』而非诊断/清单 —— 把执行功能障碍理论对照真实观察调教。小而美的 fine-tune 落地案例,对『情绪化/陪伴型』玩家功能设计有借鉴。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S09</span><span class="tag">MEDIA · BUILDING BLOCKS</span>
+      <h5>Multimedia Building Blocks</h5>
+      <p>多媒体构建块综述型内容(5,079 chars),偏工具/组件清单,作为媒体生成技术栈背景参考收藏,无强时效决策信号。</p>
+    </div></div>
+
+  <h2 class="section-head">▎ 跳过 · SKIP</h2>
+  <div class="skip"><b>(takara.ai arxiv RSS)</b> — takara.ai · 约 50 篇 arxiv RSS 一次性灌入,6 篇析出见 S01、44 篇批量 skim 见 S02,清单存 takara_skim.json,不逐篇深析</div>
+
+  <h2 class="section-head">▎ 去重 · DUP</h2><div class="dup"><b>Confidential submission of draft S-1 to the SEC</b> — 正文仅 101 字(空 body),且信号已在 Vol.009 DEEP A 第 5 论点(OpenAI 同日 manifesto+S-1+ERE 三连发)完整覆盖</div>
+
+  <h2 class="section-head">▎ 新增观点入库 · VP LEDGER (20 条 · append-only 到 _mira-vp-index)</h2>
+  <table class='ledger'><thead><tr><th>分类</th><th>观点</th><th>来源</th></tr></thead><tbody><tr><td>Frontier Models / Capability</td><td>[NEW 2026-06-10] Anthropic 新开 Mythos 最高梯队(Haiku/Sonnet/Opus/Mythos),Fable 5 首个 GA:无架构创新、纯 scale+安全护栏再上台阶,$10/$50 per M(2× Opus);旗舰天花板再抬高但单位成本翻倍</td><td>Dan Shipper × mira</td></tr><tr><td>Frontier Models / Capability</td><td>[NEW 2026-06-10] Fable 5 核心新能力是 sustained autonomous execution(3-4h 无人值守自主执行),不是单步质量;工作流应从交互式 pair-prompting 迁移到『下任务+离线跑+回来 review』batch 模式,配套强自动化验收 harness</td><td>Dan Shipper × mira</td></tr><tr><td>Frontier Models / Capability</td><td>[NEW 2026-06-10] Fable 5 token-intensive by design + conservative on execution(Claire Vo);成本须按真实 token 量而非 list price 测算,$50/M×暴涨 token 可能远超『2× Opus』直觉;别被单一 KOL 分数锚定</td><td>Claire Vo × mira</td></tr><tr><td>Frontier Models / Capability</td><td>[NEW 2026-06-10] benchmark 难度天花板在被重画:Every senior-engineer benchmark Fable 91/100(Opus 4.8=63),同日 FrontierCode 最难 tier Opus 4.8 仅~13%;旧 benchmark 快速饱和、可合并性新维度才有区分度</td><td>Dan Shipper × Cognition × mira</td></tr><tr><td>Eval / Harness</td><td>[NEW 2026-06-10] FrontierCode 把 coding eval 从『过测试』升级到『可合并』(regression safety/cleanliness/scope/test correctness/maintainability);最强模型最难 tier 仅 13% = coding 远未解决</td><td>Cognition</td></tr><tr><td>Eval / Harness</td><td>[NEW 2026-06-10] 工程生产力 KPI 从『AI 生成代码量/PR 数』改为『一次合并率/返工率/引入回归数』,否则只奖励 slop;FrontierCode 五维度直接做内部 AI-PR 验收 rubric</td><td>Cognition × mira</td></tr><tr><td>Eval / Harness</td><td>[NEW 2026-06-10] AI 能力宣称强制附验收口径:任何 X% 自动化必须注明 benchmark 分母与 false-positive 率;METR『多数过 SWE-Bench 的 PR 不会被合并』第三方互证,禁用饱和 benchmark 做规划假设</td><td>METR × Cognition × mira</td></tr><tr><td>Eval / Harness</td><td>[NEW 2026-06-10] agent 任务强制三件套 goal+verification criteria+iteration structure(state machine 而非无脑 loop);不易验证领域强制保留 human checkpoint;harness/workflow 比底座模型更决定结果</td><td>AINews × mira</td></tr><tr><td>Eval / Harness</td><td>[NEW 2026-06-10] 工程预算大头压在自家 harness(上下文/线程策略/验证回路/工具编排)而非追 SOTA 模型 —— harness 是可累积 moat,模型层会被商品化</td><td>AINews × mira</td></tr><tr><td>Org / Outcome Engineering</td><td>[NEW 2026-06-10] PR 产出 ×10 不等于效率 ×10:review/QA/集成/沟通的协调成本成为新瓶颈甚至反噬;code review 从人海互评改为 AI 预审+分级人审,协调成本须作显式预算项</td><td>Peter Yang × mira</td></tr><tr><td>Org / Outcome Engineering</td><td>[NEW 2026-06-10] outcome engineering(高于 prompt engineering 一层):工程师产出从『写过程』变『定义结果+定义验收+驱动 agent』;JD/晋升 rubric 应迁移到结果定义+验收设计+agent 编排</td><td>Cory Dolphin/Nextdoor × mira</td></tr><tr><td>Org / Outcome Engineering</td><td>[NEW 2026-06-10] 一个工程师可端到端跨端交付特性,冲击按职能分工的团队边界;机会=长尾创意单人可交付,风险=架构腐化/owner 稀释;解法 full-stack product engineer+强平台支撑守一致性</td><td>Cory Dolphin/Nextdoor × mira</td></tr><tr><td>Org / Outcome Engineering</td><td>[NEW 2026-06-10] 瓶颈从 execution 迁移到 decision:造东西变便宜后『决定造什么』成最稀缺最高杠杆;产品/策划/数值/用研角色重要性上升,纯执行岗须向 outcome-definition 转型;Q3 盘点显式区分瓶颈在 execution 还是 decision</td><td>Cory Dolphin × mira</td></tr><tr><td>Edge / Multimodal / Voice</td><td>[NEW 2026-06-10] Gemma 4 12B encoder-free(视觉单矩阵乘、音频直接投影进 token 空间),16GB 笔记本跑近 26B 水平多模态 agent;端侧小模型跑高频+云端 Mythos 跑重活的两层架构两端都成熟了</td><td>Google DeepMind × mira</td></tr><tr><td>Edge / Multimodal / Voice</td><td>[NEW 2026-06-10] Gemini 3.5 Live Translate:70+ 语言 speech-to-speech、连续生成不等说完、延迟几秒、保留语调;跨语种开黑/连麦/多语言直播实时翻译从概念变可集成 API(Grab 月千万通话验证)</td><td>Google DeepMind × mira</td></tr><tr><td>AI Politics / Geopolitics</td><td>[NEW 2026-06-10] 政府拟入股 AI 大厂(Trump 确认『公众成合伙人』、Sanders 主张征 50% 股权建主权基金、OpenAI 主动捐股游说)= Vol.009 broad benefit 叙事的政策落地;AI 监管从管模型转向管收益分配+国家持股</td><td>AI Daily Brief × mira</td></tr><tr><td>AI Politics / Geopolitics</td><td>[NEW 2026-06-10] 重 AI 出海产品须把『所在国对 AI 的国家资本/税收主张』纳入风险评估,不能只看技术合规;地缘与收益分配复杂度上升</td><td>AI Daily Brief × mira</td></tr><tr><td>Product / Taste / Gaming</td><td>[NEW 2026-06-10] 原型/玩法验证边际成本塌缩到『一句 prompt+几小时机时』(Fable 5 读小说自主产出可玩 3D 游戏);立项 Fable-class 原型工厂做玩法快筛,但制度锁死『原型可及性≠上线交付速度』,demo wow 不跳过 harness</td><td>Dan Shipper × mira</td></tr><tr><td>Product / Taste / Gaming</td><td>[NEW 2026-06-10] agent thin-client 抽走 iPhone『最佳交互设备』护城河(微软 Project Solara『compute 而非 interact』);Gaming 应把核心玩家动作开放成 agent 可调用 intents/API,抢在平台级 agent 截流前成为被调用方</td><td>Ben Thompson × mira</td></tr><tr><td>Product / Taste / Gaming</td><td>[NEW 2026-06-10] 执行变便宜后品味/叙事/判断成为稀缺(Rick Rubin 品味即护城河/Figma 慢即是快/产品要讲故事);与三卷主线 judgment 留给人类收口共振</td><td>Senra/Figma × mira</td></tr></tbody></table>
+
+  <footer class="footer">
+    <span>MIRA · Daily Broadside · Vol.010 · 自包含单文件</span>
+    <span>下期 · <b>2026-06-11 06:00 Asia/Shanghai</b></span>
+  </footer>
+</div>
+</body>
+</html>
