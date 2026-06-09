@@ -1,0 +1,12 @@
+{
+  "date": "2026-06-10",
+  "vol": "010",
+  "title": "The Fable 5 Issue — Anthropic Mythos 级 Fable 5 落地、两份独立首测、FrontierCode 给『代码已解决』泼冷水",
+  "subtitle": "Anthropic 把传闻一个半月『太危险不敢放』的 Mythos 级 Fable 5 正式上线($10/$50 per M tokens):Every/Dan Shipper 在 senior-engineer benchmark 上打出 91/100『warp drive』,Lenny/Claire Vo 给出『what it gets right and very wrong』的另一面 · 同日 Cognition FrontierCode 把『可合并而非仅通过测试』作为新尺,最强 Opus 4.8 在最难 tier 仅 ~13%,直接戳破 SWE-Bench 式『coding 已解决』叙事 · Peter Yang『工程团队即将崩溃』+ Nextdoor『outcome engineering』给出 PR 爆量的组织侧后果 · Gemma 4 12B encoder-free 上笔记本、Gemini 3.5 Live Translate 70+ 语言、Apple『Siri AI』WWDC 补考",
+  "deep_count": 3,
+  "brief_count": 4,
+  "skim_count": 9,
+  "skip_count": 1,
+  "dup_count": 1,
+  "new_viewpoints": 20
+}
