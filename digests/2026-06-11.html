@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>The Ladder-Pulling Issue — Fable 5 GA 落地,但『静默削弱自身研发能力』点燃 ladder-pulling 之争 — Vol.011</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --bg-warm: #1a1a18;
+  --bg-warm-2: #1f1a14;
+  --orange: #e85d26;
+  --orange-soft: #f4a06a;
+  --yellow: #f6d24a;
+  --ink: #f3ede4;
+  --ink-dim: #b4a999;
+  --rule: #2c2823;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  margin: 0; padding: 0; line-height: 1.65;
+  font-size: 16px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
+.chrome { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim); text-transform: uppercase; }
+
+.masthead { border-top: 6px solid var(--orange); padding-top: 18px; margin-bottom: 28px; }
+.masthead .topline { display: flex; justify-content: space-between; }
+.masthead h1 {
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 52px; line-height: 1.04; margin: 14px 0 10px;
+  color: var(--orange); letter-spacing: -0.01em;
+}
+.masthead h2 {
+  font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic;
+  font-size: 18px; color: var(--orange-soft); margin: 0 0 16px;
+}
+.masthead .meta {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 10px 0; display: flex; gap: 28px; flex-wrap: wrap;
+}
+.meta span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+.meta span b { color: var(--yellow); font-weight: 600; }
+
+.editorial {
+  background: var(--bg-warm-2); border-left: 4px solid var(--yellow);
+  padding: 22px 28px; margin: 28px 0 40px;
+}
+.editorial h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 12px; letter-spacing: 0.12em;
+}
+.editorial p {
+  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 1.75;
+  margin: 0 0 10px; color: var(--ink);
+}
+
+.section-head {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--orange); margin: 40px 0 18px;
+  border-bottom: 2px solid var(--rule); padding-bottom: 10px;
+}
+
+.deep-card {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 30px 32px; margin: 0 0 32px; border-radius: 2px;
+}
+.deep-card .tag {
+  display: inline-block; background: var(--orange); color: #fff;
+  padding: 3px 10px; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+}
+.deep-card h3 {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 27px; line-height: 1.2; margin: 14px 0 6px; color: var(--ink);
+}
+.deep-card .kicker { font-size: 14px; color: var(--orange-soft); margin: 0 0 8px; }
+.deep-card .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+.deep-card .meta-row a { color: var(--yellow); text-decoration: none; }
+
+.scorecard {
+  background: rgba(0,0,0,0.3); padding: 14px 18px; margin: 16px 0 22px;
+  display: grid; grid-template-columns: repeat(5, 1fr) 90px; gap: 14px; align-items: center;
+}
+.score-dim { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); }
+.score-dim b { display: block; color: var(--ink); font-size: 18px; font-family: 'Barlow', sans-serif; }
+.score-bar { background: var(--rule); height: 4px; margin-top: 4px; }
+.score-bar > div { background: var(--orange); height: 100%; }
+.score-total { text-align: right; font-family: 'Barlow', sans-serif; }
+.score-total b { font-size: 32px; color: var(--yellow); }
+.score-total span { font-size: 14px; color: var(--ink-dim); }
+
+.arg { margin: 26px 0; }
+.arg h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--yellow); margin: 0 0 12px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.arg .quote {
+  font-family: 'Noto Serif SC', serif; font-style: italic;
+  font-size: 15px; color: var(--ink); border-left: 3px solid var(--orange-soft);
+  padding: 6px 16px; margin: 8px 0;
+}
+.arg .cn { font-size: 14px; color: var(--ink); padding: 0 16px; margin: 8px 0; }
+.arg .mira {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 10px 16px; margin: 12px 0 0;
+  font-size: 14px; color: var(--ink);
+}
+.arg .mira b { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+.takehome {
+  background: rgba(246,210,74,0.06); border: 1px solid rgba(246,210,74,0.25);
+  padding: 18px 22px; margin: 24px 0 0;
+}
+.takehome h4 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.12em;
+}
+.takehome ol { margin: 0; padding-left: 22px; }
+.takehome li { margin: 6px 0; font-size: 14px; color: var(--ink); }
+
+.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .brief-grid { grid-template-columns: 1fr; } }
+.brief {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+.brief .n { font-family: 'Barlow', sans-serif; font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.brief .tag {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--yellow); letter-spacing: 0.1em; margin: 4px 0 8px;
+}
+.brief h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 1.25; color: var(--ink); margin: 0 0 6px;
+}
+.brief .kicker { color: var(--orange-soft); font-size: 13px; margin: 0 0 8px; }
+.brief .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); margin-bottom: 10px; }
+.brief .meta-row a { color: var(--yellow); text-decoration: none; }
+.brief .body { font-size: 14px; line-height: 1.7; }
+.brief .bullet {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 8px 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink);
+}
+
+.skim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .skim-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .skim-grid { grid-template-columns: 1fr; } }
+.skim {
+  background: var(--bg-warm); border: 1px solid var(--rule); padding: 14px 16px;
+}
+.skim .n { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--orange-soft); }
+.skim .tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--yellow); letter-spacing: 0.1em; margin-left: 8px; }
+.skim h5 { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); margin: 6px 0; line-height: 1.3; }
+.skim p { font-size: 12px; line-height: 1.55; color: var(--ink-dim); margin: 0; }
+
+.skip { background: var(--bg-warm); border-left: 3px solid var(--ink-dim); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink-dim); }
+.skip b { color: var(--ink); }
+
+.dup { background: var(--bg-warm); border-left: 3px solid var(--yellow); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+.dup b { color: var(--yellow); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.ledger th { color: var(--yellow); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.ledger td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--orange-soft); font-size: 11px; width: 18%; }
+.ledger td:nth-child(2) { width: 50%; }
+.ledger td:nth-child(3) { color: var(--ink-dim); width: 32%; }
+
+.footer {
+  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+}
+.footer b { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Daily Reading Broadside · Vol.011</span>
+      <span class="chrome">2026-06-11 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Ladder-Pulling Issue — Fable 5 GA 落地,但『静默削弱自身研发能力』点燃 ladder-pulling 之争</h1>
+    <h2>Anthropic 把 Mythos 级 Fable 5 推到 GA($10/$50 per M tokens、benchmark 全面 SOTA),但同一份 system card 抛出三颗争议雷:对『前沿 LLM 研发类请求』用 steering vectors/PEFT 静默削弱效果且不告知用户(~0.03% 流量)、Mythos 级全量取消 ZDR(强制 30 天留存)、cyber/bio 自动 reroute 到 Opus 4.8 —— 开源派斥为『labs 开始收梯子』『对付费产品下静默暗桩极其敌意』,Karpathy/bcherny 则力挺『近年最大一跳、只是护栏太敏感』 · 配套:Krieger『给目标不给任务、对 Claude 道晚安』工作流实录、黄仁勋『AI 工厂/生成而非检索/按小时付费给 AI』第一性原理、DiffusionGemma 4× 加速、PRC 影响力行动盯上 AI 舆论、OpenAI ERE + IPO</h2>
+    <div class="meta">
+      <span>候选 <b>68</b></span>
+      <span>析出 <b>23</b></span>
+      <span>深读 <b>3</b></span>
+      <span>简评 <b>4</b></span>
+      <span>速记 <b>9</b></span>
+      <span>跳过 <b>1</b></span>
+      <span>重复 <b>0</b></span>
+      <span>新观点 <b>17</b></span>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <h3>EDITORIAL · 编辑卷首语</h3>
+    <p>Vol.010 我们记录了 Fable 5 的能力首测;Vol.011 的头条已经不在能力,而在信任。Anthropic 把 Mythos 级 Fable 5 推到 GA、benchmark 几乎全面 SOTA($10/$50 per M tokens、保留 1M 上下文),但同一份 system card 抛出三颗争议雷:对『瞄准前沿 LLM 研发』的请求,用 prompt 改写 / steering vectors / PEFT 静默削弱模型效果,而且明确写明『对用户不可见、不 fallback』(估计影响 ~0.03% 流量);Mythos 级全量取消 ZDR、强制 30 天留存;cyber/bio 请求自动 reroute 到 Opus 4.8。开源与研究社区的反弹极其猛烈——『付费产品里不该有静默暗桩』『不告知就降 ML 研究表现极其敌意』,Nathan Lambert 一句『labs starting to pull up the ladders(头部实验室开始把梯子收上去)』成了本卷的标题。</p>
+    <p>但这不是一边倒的批判。Karpathy 称这是『配得上大版本号的阶跃式提升,只是护栏发布时有点神经过敏』,bcherny 说是自 Opus 4.5 以来最大一步、模型展现出判断力与品味;中立的 finbarrtimbers 给出最有用的判断:动机可能真诚,但『静默 + 不可见 + 边界过宽』的产品设计是错的。把两侧并起来读,本卷的真问题浮现了:当智能越来越强,模型供应方对它的『治理』开始反噬用户的可预测性——你将无法分辨一次失败到底来自模型、prompt 还是一道你看不见的干预。对企业与研究用户,这是一类全新的供应链风险;对行业,Ben Thompson 称之为『选择性能力释放(selective capability release)』的正常化:公众能用到前沿模型,但带着不可见的、按领域划分的隐藏限制。</p>
+    <p>配套三条线把图景补全:Anthropic Labs 负责人 Mike Krieger 的一线实录给出能力侧的镜像证言——『给目标而非任务、对 Claude 道晚安、它凌晨 2 点完工』,人机协作从结对走向委派+验收,并落到 effort 档位、按 surface 选模型、用自然语言取消菜单导航等极具体的产品设计;黄仁勋则从第一性原理把这一切接到基础设施:计算正从『检索』翻转为『实时生成』,世界需要海量生成器,我们已经在『按小时付费给 AI』,智能终将像电网一样商品化包裹世界——于是差异化只剩你用智能做出的、别人复制不了的东西。其余:DiffusionGemma 文本扩散提速 4×、PRC 影响力行动把 AI 基础设施武器化为舆论叙事、OpenAI 同步推 ERE 与 IPO。68 候选(约 50 篇 takara.ai arxiv RSS)析出 23 篇精读:3 deep / 4 brief / 9 skim / 1 skip / 0 dup,新增 17 条观点入库。延续 Vol.007→010 主线:能力/智能越商品化、越被供应方收紧,判断、品味、可审计性与独特资产就越稀缺——把 judgment 和可控的那一层留在自己手里。</p>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · DEEP</h2>
+  
+    <article class="deep-card" id="fable5_ladder_pulling">
+      <span class="tag">ANTHROPIC · ALIGNMENT &amp; ACCESS CONTROL</span>
+      <h3>Fable 5 的真正头条不是能力,而是『静默削弱』:labs 开始收梯子,前沿研究工具的可信度被重新定价</h3>
+      <div class="kicker">同日两份独立梳理 · Latent Space/AINews(社区 544 Twitter recap,facts vs opinions 分栏)与 Ben Thompson/Stratechery(Fable 5/Alignment/AI Tiers)· 核心争议:对『前沿 LLM 研发』请求用 prompt modification/steering vectors/PEFT 静默降效、不告知、不 fallback</div>
+      <div class="meta-row">latent.space (AINews) + Stratechery · swyx / Ben Thompson · 28,821 + 3,842 chars · 信号 2 颠覆 2 可操作 2 独特 2 时效 2 · <a href="https://www.latent.space/p/ainews-anthropic-claude-fable-5-mythos">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>10</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;In light of the ability of recent models to accelerate their own development, we&#x27;ve implemented new interventions that limit Claude&#x27;s effectiveness for requests targeting frontier LLM development... Unlike our interventions for cybersecurity, biology and chemistry, and distillation attempts, these safeguards will not be visible to the user. Fable 5 will not fall back to a different model. Instead, the safeguards will limit effectiveness through methods such as prompt modification, steering vectors, or parameter-efficient fine-tuning (PEFT)... We estimate they will impact ~0.03% of traffic, concentrated in fewer than 0.1% of organizations.&quot;</div>
+          <div class="cn">「鉴于近期模型已具备加速自身研发的能力,我们对『瞄准前沿 LLM 研发』的请求实施了新干预,限制 Claude 的有效性……与我们针对网络安全、生化、蒸馏攻击的干预不同,这些护栏对用户不可见。Fable 5 不会 fallback 到另一个模型,而是通过 prompt 改写、steering vectors 或 PEFT 等手段直接削弱效果……我们估计影响约 0.03% 流量,集中在不到 0.1% 的组织。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是本卷的核心断点。前几卷讨论的是『模型能做什么(能力侧)』,这一条第一次把焦点移到『模型供应方会不会对你隐藏地动手脚(可信度侧)』。关键不在 0.03% 的小流量,而在『静默 + 不 fallback + 用 steering/PEFT 改权重级行为』这三件事叠加 —— 它意味着付费 API 的输出可能因模型方推断你的『任务类别』而被悄悄降质,且你无从分辨失败来自模型、prompt 还是隐藏干预。给 Gaming 的直接含义:任何把关键工作流押在单一闭源 API 上的架构,现在多了一类此前不存在的供应链风险 —— 『供应商可静默改变行为且不告知』。采购合同与技术设计都要把『行为可审计性/可复现性』当作一等需求,而不只看 benchmark 分。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;&#x27;silent handicaps should not be a thing in a paid product&#x27; (@nrehiew_). &#x27;degrading performance on ML research without telling the user is shockingly hostile&#x27; (@deanwball). &#x27;labs starting to pull up the ladders&#x27; (@natolambert). &#x27;this is the biggest wake-up call to protect and nourish open source AI&#x27; (@rasdani_). &#x27;They didn&#x27;t mean pause AI research, they meant pause your AI research&#x27; (@bayeslord).&quot;</div>
+          <div class="cn">「『付费产品里不该有静默暗桩』(@nrehiew_)。『在不告知用户的情况下降低 ML 研究的表现,极其敌意』(@deanwball)。『labs 开始把梯子收上去了』(@natolambert)。『这是保护和滋养开源 AI 的最大警钟』(@rasdani_)。『他们说的不是暂停 AI 研究,而是暂停你的 AI 研究』(@bayeslord)。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这正是前几卷 next_run_notes 一直在找的『反向声音』—— 但它不是『为更多自动化判断辩护』的那一种,而是从开放研究/反垄断角度对头部 lab 的反击。注意措辞从技术问题升级到了权力问题:『ladder-pulling(收梯子)』『concentration of power is the biggest risk』『original thinkers can&#x27;t be an underclass』。给 Gaming 的 framing:模型层的竞争正在从『谁更强』转向『谁更可信、谁不会在你不知情时卡你』,这会实质性抬高开源/自托管/多供应商策略的战略价值。建议:对核心、长期、研究型的 AI 工作流,显式保留至少一个开源/可自托管的备选链路,把『供应商静默降质』作为业务连续性预案里的一个具体故障模式来演练。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;(Karpathy) a &#x27;major-version-bump-deserving step change,&#x27; especially on long difficult tasks, though safeguards are &#x27;a little too trigger happy for launch.&#x27; (bcherny) biggest step since Opus 4.5; the model shows judgment, taste, methodical debugging. (finbarrtimbers) Anthropic probably sincerely believes these interventions are necessary for safety, even if the product design is poor.&quot;</div>
+          <div class="cn">「(Karpathy)这是『配得上大版本号的阶跃式提升』,尤其在长程难任务上,但护栏『发布时有点过于神经过敏』。(bcherny)自 Opus 4.5 以来最大的一步;模型展现出判断力、品味、有条理的调试。(finbarrtimbers)Anthropic 大概是真心相信这些干预对安全是必要的,即便产品设计很糟。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:必须把支持侧并列读,避免把争议简化成『Anthropic 作恶』。支持派的两个有效论点:① 能力确实是大版本级跃迁(judgment/taste/methodical debugging,与 DEEP B 的 Krieger 实录互证);② 护栏问题更可能是『校准过头』而非『动机邪恶』。中立派(finbarrtimbers)给出最可操作的判断:动机可能真诚,但产品设计(静默、不可见、边界过宽)是错的。给 Gaming 的处方:评估一个模型不要只看『峰值能力』或只看『一条争议』,要建一个二维表 —— 能力档位 × 可信度/可审计性档位。Fable 5 是『能力极高 + 可审计性显著下降』的组合,适合放在你能接受『偶发不可解释降质』的高价值离线任务,不适合放在需要稳定可复现的关键链路。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;The central enterprise issue was predictability: if a provider can silently degrade outputs based on inferred task category, users may no longer know whether failures come from the model, the prompt, or hidden intervention... For research users, the hidden intervention was framed as especially damaging because it undermines reproducibility and scientific attribution. Some users worried this is effectively a supply-chain risk for important workflows, pushing companies toward open weights or in-house models.&quot;</div>
+          <div class="cn">「企业侧的核心问题是可预测性:如果供应方能基于推断的任务类别静默降低输出,用户将无法分辨失败来自模型、prompt 还是隐藏干预……对研究用户,隐藏干预尤其有害,因为它破坏可复现性和科学归因。一些用户担心这实际上是重要工作流的供应链风险,正把公司推向开源权重或自研模型。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条把争议从『道德/政治』收敛回『工程/采购』,是给 Gaming 决策者最该读的一段。可预测性 = 你能否对一个依赖建立稳定的故障模型。当供应商引入『不可见、基于推断、可改变行为』的干预,你的根因分析体系就被插入了一个无法观测的混淆变量。落地动作三条:① 对所有关键 AI 链路建立『黄金基准集 + 定期回归跑分』,用来侦测供应商侧的静默漂移;② 关键链路至少双供应商(含一个开源/自托管)以便交叉验证异常;③ 把『行为变更通知义务』写进与任何闭源供应商的合同条款。这与 Vol.007 起的 harness-first 主线一脉相承:你能控制和审计的那一层,才是 moat。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;(Ben Thompson) Fable 5 is the public version of Mythos, and while it is very capable it sets some troubling new precedents... Community reaction suggests the launch may be remembered not only for &#x27;big model smell&#x27; and benchmark jumps, but for normalizing selective capability release: public access to the frontier model, but with domain-specific hidden limits.&quot;</div>
+          <div class="cn">「(Ben Thompson)Fable 5 是 Mythos 的公开版,虽然能力很强,但它立下了一些令人不安的新先例……社区反应表明,这次发布也许不会因为『大模型味』和 benchmark 跳跃被记住,而会因为它把『选择性能力释放』正常化:公众能用到前沿模型,但带着特定领域的隐藏限制。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Thompson 的判断点是『正常化选择性能力释放(selective capability release)』—— 即『同一个模型,对不同任务/不同人给不同档位的能力,且部分限制不可见』将成为行业范式。这与黄仁勋(DEEP C)『按小时付费给 AI、AI 是可计量商品』的图景拼在一起看很关键:当智能变成按用途分级、分价、分可见性供应的商品,『你买到的到底是什么档位的智能』本身会变得不透明。给 Gaming 战略层:要把『AI 供给的分层与不透明化』作为未来 2-3 年的结构性趋势纳入规划 —— 这会反向提升『自有数据 + 自有 harness + 可控模型层』的议价权。谁掌握可审计、可复现的智能供给,谁就在下一阶段更有杠杆。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>把模型评估从一维(峰值能力)升级为二维:能力档位 × 可信度/可审计性档位。Fable 5 属『能力极高 + 可审计性下降』,只放在能容忍偶发不可解释降质的高价值离线任务,不进需要稳定可复现的关键链路。</li><li>对所有关键 AI 链路建立『黄金基准集 + 定期回归跑分』,专门侦测供应商侧静默漂移(silent degradation);把『false-positive / 异常降质率』纳入常态监控。</li><li>关键链路至少双供应商,其中显式保留一个开源/可自托管备选,用于交叉验证异常,并作为『供应商静默降质』业务连续性预案里的具体故障模式来演练。</li><li>把『行为变更通知义务 / 行为可审计性』写进与任何闭源 AI 供应商的采购合同条款,作为一等需求,而不只谈 SLA 与价格。</li><li>战略层把『AI 供给分层化 + 不透明化』当作 2-3 年结构性趋势:它反向抬高『自有数据 + 自有 harness + 可控模型层』的议价权,资源应向你能审计、能复现的那一层倾斜(承接 Vol.007 起 harness-first 主线)。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="krieger_objectives_not_tasks">
+      <span class="tag">ANTHROPIC LABS · WORKFLOW FROM THE INSIDE</span>
+      <h3>给目标而非任务:Krieger 的 Fable 5 实录 —— 对 Claude 道晚安、凌晨 2 点完工,人机协作从『结对』变成『委派 + 验收』</h3>
+      <div class="kicker">Every/Dan Shipper 专访 Mike Krieger(Anthropic Labs 负责人、Instagram 联创)· 一线日用而非 day-zero 印象 · 长程自主、effort 档位、planning 前置、sticky-per-surface 模型选择</div>
+      <div class="meta-row">Every (YouTube) · Dan Shipper / Mike Krieger · 61,275 chars · 信号 2 颠覆 1 可操作 2 独特 2 时效 2 · <a href="https://www.youtube.com/watch?v=XWpTgCvgYaE">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>9</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;My last two months have been full of a lot of times where I will wish Claude a good night, set it up on a pretty complex task of this model class, and wake up to — actually it&#x27;s usually done by like 2:00 in the morning... It got itself out of the situation where it&#x27;s like, okay, Mike asked me to do this complex task overnight, I got stuck because this remote service went down, I&#x27;m going to write a scaffolded backend for it for now, document that, and keep track of that fact. It really feels like now it&#x27;s a teammate that I can delegate a lot of work to.&quot;</div>
+          <div class="cn">「我过去两个月经常这样:对 Claude 道一声晚安,给它布置一个这种模型档位的复杂任务,然后一觉醒来——其实它通常凌晨 2 点就干完了……它能自己从困境里走出来:好,Mike 让我连夜做这个复杂任务,我卡住了因为某个远程服务挂了,那我先写个脚手架后端、记录下来、并把这件事标注好。现在它真的感觉像一个我能委派大量工作的队友。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条是 DEEP A 争议之外、能力侧最有信息量的一线证言,且来自模型方核心高管,需打折但仍有参考价值。关键不是『它能跑很久』,而是『遇阻后会自主降级、留痕、续接』——这是从 autocomplete 到 teammate 的质变。给 Gaming 的含义:可以开始试点『过夜批处理』类工作流(大型重构、资产批量生成、回归套件构建),但前提是 DEEP A 的验收基建到位。务实做法:选 1-2 个边界清晰、可自动验收的重活做『隔夜委派』试点,要求模型在受阻时按约定『降级 + 留痕 + 续接』,第二天人只做 review;以此校准你们对『可委派任务』的真实边界。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;It&#x27;s no longer &#x27;I have an idea for this feature, can we start by...&#x27; — absolutely not. It&#x27;s now: let me express more of the intent, and it understands the intent around how we&#x27;re going to evolve this and understands the global context as well. I&#x27;ve had to rethink what being productive with one of these models looks like.&quot;</div>
+          <div class="cn">「不再是『我有个功能想法,我们能不能先从……开始』——完全不是了。现在是:让我更多地表达意图,它就能理解我们打算如何演进它、也理解全局上下文。我不得不重新思考『用这种模型高效工作』到底意味着什么。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这与 Vol.010 的『outcome engineering』、FrontierCode 的『goal + verification』三源同构:人的核心产出从『拆解步骤』上移到『表达意图 + 定义演进方向』。Krieger 的版本更强调『全局上下文与演进意图』而非单点任务。给 Gaming 的能力建设:把『写清意图与演进方向』当作一项可训练的工程素养来培养(而不是默认人人都会)。具体可做一份内部模板:目标 / 约束 / 演进方向 / 验收标准 / 不要做什么,要求重要 agent 任务都先填这张表 —— 这既提升产出质量,也是隔夜委派能成立的前提。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;I&#x27;ve ended up having a lot more architectural planning conversations up front... I&#x27;ll often ask it: can you just make an HTML page that represents what we just talked about so I can share it with the team, or even just a markdown document. That ends up being the place where human-to-human interaction still stays very much part of the process — forcing more of that early alignment.&quot;</div>
+          <div class="cn">「我现在会在前期做多得多的架构规划对话……我常让它:你能不能就做一个 HTML 页面把我们刚聊的东西呈现出来,好让我分享给团队,甚至只是一个 markdown 文档。那恰恰成了人与人的互动仍然牢牢嵌在流程里的地方——逼出更多的早期对齐。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:很反直觉但很重要的一条:当模型能一口气造很多东西,人机协作里『人与人对齐』的权重不降反升,而且被前置到了规划阶段。Krieger 的具体手法是用模型快速产出『可分享的对齐物(HTML/markdown/图)』来强制团队早期对齐,避免『各自快速 build 出一堆发散的东西』。给 Gaming 的工作流处方:在 AI 提效后,显式增加『早期对齐 ceremony』——任何较大特性开工前,先用 AI 快速产出一份可视化方案物供团队对齐,把对齐成本前置;否则 Vol.010 警告的『协调成本爆炸』会在产出量上来后吞掉效率红利。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;Fable is the first model where I&#x27;ve actually played more with the effort levels... &#x27;okay, I just needed to tweak some UI, put it to medium and see how that plays out.&#x27; I didn&#x27;t find myself doing that as much with Opus because the range felt less wide... Having a sticky model selection per surface might be the way to do that — it&#x27;s probably unlikely that most of the time with the iOS app I&#x27;m doing Fable-type tasks.&quot;</div>
+          <div class="cn">「Fable 是第一个让我真正去调 effort 档位的模型……『好,我只是要改点 UI,设成 medium 看看效果』。用 Opus 时我没这么频繁地调,因为它的区间感觉没这么宽……按 surface 做 sticky 的模型选择也许是个办法——大多数时候我在 iOS app 上其实不太可能做 Fable 级的任务。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条把 DEEP A 的『成本/能力分层』落到非常具体的产品设计层面。两个可直接抄的设计:① effort 档位是真实可调的成本/质量旋钮,不要默认顶配(对应 Vol.010 的分层路由);② 『按 surface 粘性选择模型』——不同入口(IDE/移动端/批处理)默认绑定不同档位的模型,而不是让用户每次纠结。给 Gaming 的产品与基建含义:无论是内部工具还是 player-facing 功能,都应把『模型/effort 档位』做成按场景预设、对用户透明但默认合理的策略,而非把选择负担丢给用户;这也是控制 $50/M 输出成本的关键抓手。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;The thread I&#x27;ve been pulling a lot in labs this year is: how do you bring the software team — which is Claude these days — closer to the software itself? I did a spike on: what if you could actually modify the software from within itself... I want every software to have this where I should never have to navigate a menu to do anything ever again.&quot;</div>
+          <div class="cn">「我今年在 labs 一直在拉的一条线是:你如何让软件团队——如今就是 Claude——离软件本身更近?我做了个 spike:如果你能从软件内部去修改软件本身会怎样……我想让每个软件都具备这个能力,让我永远不必再为了做任何事去翻菜单。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:『从软件内部修改软件 / 用自然语言取代菜单导航』是一个值得 Gaming 提前下注的交互范式,且和 BRIEF 里的 agent thin-client 趋势同向。对游戏与工具的想象:玩家/策划/运营用自然语言直接对客户端或后台下达意图,由内嵌 agent 改配置、调参数、生成内容,而不是穿越层层菜单。务实切入点:选一个内部高频但菜单繁琐的工具(如关卡/数值/活动配置后台)做『自然语言驱动 + agent 执行 + 可审计回放』试点,既能验证范式,又能积累『可审计的 agent 操作日志』这类未来必备的 harness 资产。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>试点『隔夜委派』批处理工作流:选 1-2 个边界清晰、可自动验收的重活(大型重构/资产批量生成/回归套件构建),要求模型受阻时按约定『降级 + 留痕 + 续接』,人只做次日 review——以此校准『可委派任务』的真实边界。前提是 DEEP A 的验收基建到位。</li><li>把『写清意图与演进方向』当可训练工程素养:推一份内部模板(目标/约束/演进方向/验收标准/不要做什么),重要 agent 任务先填表;这是隔夜委派与高质量产出的共同前提。</li><li>AI 提效后显式增加『早期对齐 ceremony』:大特性开工前用 AI 快速产出可视化方案物(HTML/markdown/图)供团队对齐,把对齐成本前置,防止 Vol.010 警告的协调成本爆炸吞掉效率红利。</li><li>把『模型 / effort 档位』做成按场景预设、对用户透明但默认合理的策略(按 surface 粘性绑定),不要默认顶配、也不要把选择负担丢给用户——这是控制 $50/M 输出成本的关键抓手。</li><li>选一个高频但菜单繁琐的内部工具(关卡/数值/活动配置后台)做『自然语言驱动 + agent 执行 + 可审计回放』试点,既验证 thin-client 范式,又积累『可审计 agent 操作日志』这类未来必备 harness 资产。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="jensen_ai_factory">
+      <span class="tag">NVIDIA · FIRST PRINCIPLES</span>
+      <h3>黄仁勋的第一性原理:计算从『检索』翻转为『实时生成』,世界需要海量『生成器』,智能将像电网一样把地球包裹</h3>
+      <div class="kicker">Sequoia 现场 · Jensen Huang『AI 工厂=把能量变成 token 的 dynamo』· 生成而非检索 · 按小时付费给 AI · 数百亿 agent 互联 · 给投资者的判断直觉</div>
+      <div class="meta-row">Sequoia Capital (YouTube) · Jensen Huang · 36,780 chars · 信号 2 颠覆 1 可操作 1 独特 2 时效 1 · <a href="https://www.youtube.com/watch?v=2UpQbeAZuqA">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">可操作<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-total"><b>7</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;AI went from having this capability to now agentic — it went from not very valuable to producing useful work. So much useful work that you and I are doing this every day: we&#x27;re paying AI by the hour. We might pay them $30 an hour, $20 an hour to do the work. The fastest growing software business in the history of mankind, because now it&#x27;s doing useful work and we can pay them to do it.&quot;</div>
+          <div class="cn">「AI 从『具备能力』走到了『agentic』——从『没多大价值』走到了『产出有用的工作』。有用到什么程度?有用到你我每天都在这么干:我们在按小时给 AI 付费。我们可能付它每小时 $30、$20 去干活。这是人类历史上增长最快的软件生意,因为它现在真的在做有用的工作,我们可以为此付费。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:『按小时给 AI 付费』把 AI 从『工具(一次性买断/订阅)』重新定价为『可计量的劳动力供给』。这与 DEEP A 的 $10/$50 token 定价、Ben Thompson 的『分层供给』拼起来,共同指向:智能正在被商品化为可按量、按档、按用途计价的要素。给 Gaming 的财务与组织含义:AI 成本会从『软件订阅(相对固定)』迁移到『按用量浮动的可变成本』,需要像管云成本一样建立 AI 用量的计量、归因、预算与优化体系(FinOps for AI)。谁能把单位有用产出的 AI 成本压下来,谁就有结构性毛利优势——这也再次印证 DEEP B 的『按场景选档位、不默认顶配』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;Computers as we know it for 60 years are retrieval-based — that&#x27;s why these buildings are called data centers, they store data you retrieve. But now every time you use AI, the content is produced originally every single time. Every pixel you see, every sound you hear in the future will be originally generated, not retrieved. Which means in the future we need a lot more generators.&quot;</div>
+          <div class="cn">「我们所知的计算机 60 年来都是基于检索的——所以这些楼叫数据中心,它们存储你去检索的数据。但现在,你每次用 AI,内容都是当场原创生成的。未来你看到的每一个像素、听到的每一个声音,都将是原创生成而非检索而来。这意味着未来我们需要多得多的『生成器』。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:『从检索到生成』是黄仁勋给出的最干净的范式判断,而游戏恰恰是这个范式最天然的落地场——游戏世界本就是『生成』的,只是过去靠预制资产+引擎实时渲染。当『生成』下沉为算力商品,游戏内容(关卡、NPC 对话、剧情分支、美术资产、个性化世界)的实时生成会从奢侈走向常态。给 Gaming 的中期判断:为『每个玩家看到的内容都不同(originally generated per player)』这个未来做架构与成本准备——这既是体验差异化的最大机会,也是算力成本的最大风险点;现在就该有团队探索『生成式内容 × 成本可控』的边界(对应 DEEP B 的分层与 DiffusionGemma 这类降本路线)。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;It is very likely that the internet we use today for a billion people will mostly become several billion — call it a hundred billion — agents working around the clock, using the internet and talking to each other. Inside our company we have hundreds of thousands of agents running around right now, all guardrailed, all sandboxed, but working with each other.&quot;</div>
+          <div class="cn">「我们今天为十亿人服务的互联网,很可能大部分会变成数十亿——称之为上千亿——个全天候工作的 agent,它们使用互联网、彼此交谈。在我们公司内部,现在就有数十万个 agent 在跑,全部加了护栏、全部沙箱化,但它们彼此协作。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:『百亿 agent 互联 + 全部 guardrailed/sandboxed』是黄仁勋顺带给出的一个治理前提——注意他强调的不是 agent 多,而是『全部加护栏、全部沙箱』。这与 DEEP A 的护栏争议形成有趣对照:行业共识是『大规模 agent 必须治理』,分歧只在『治理是否该静默、是否该可见』。给 Gaming 的基建含义:当内部 agent 从个位数走向规模化,你需要的不是更多 agent,而是 agent 的治理底座——身份、权限、沙箱、审计、相互调用的可观测性。建议把『agent 治理与可观测性平台』作为比『多上几个 agent』更优先的基建投资,这与 DEEP A『可审计性是 moat』的结论完全一致。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;NVIDIA is a dynamo: anything that moves comes in — waterfalls, wind, fire, steam — transferred into electrons, electrons come into our factory, and what comes out are numbers. These numbers turn into language, math, proteins, the language of biology, physics, the 3D world, robotics. Energy, communications, intelligence — it will cocoon the world, it&#x27;ll just be a commodity, and we&#x27;ll use it all over the place.&quot;</div>
+          <div class="cn">「NVIDIA 是一台 dynamo:任何运动的东西进来——瀑布、风、火、蒸汽——转成电子,电子进入我们的工厂,出来的是数字。这些数字变成语言、数学、蛋白质、生物学的语言、物理、3D 世界、机器人。能量、通信、智能——它将像茧一样包裹世界,它会就是一种商品,我们会在所有地方用它。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:黄仁勋的收口是『智能将像电力/网络一样成为包裹世界的基础商品(commodity)』。对 Gaming 的战略提醒恰恰是反面:当智能本身成为商品,差异化就不在『有没有 AI』,而在『你用智能做出了什么独特的、别人复制不了的东西』——也就是数据、玩法、社区、品味这些 non-commoditizable 的层。这与 Vol.007→010 主线收口一致:能力/智能越商品化,人的判断、品味、独特资产越稀缺越值钱。给 Gaming 的一句话:把 AI 当水电来规划成本与基建,但把竞争力押在水电之上那层别人买不到的东西。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>为 AI 建立『FinOps for AI』:像管云成本一样建立 AI 用量的计量、归因、预算与优化体系,因为 AI 成本正从固定订阅迁向按量浮动的可变成本;单位有用产出的 AI 成本是结构性毛利来源。</li><li>为『生成而非检索』的中期范式做架构与成本准备:探索游戏内容(关卡/NPC/剧情/美术/个性化世界)实时生成的『体验差异化 × 成本可控』边界,设专人跟进(对应 DEEP B 分层与 DiffusionGemma 降本路线)。</li><li>把『agent 治理与可观测性平台』(身份/权限/沙箱/审计/互调可观测性)作为比『多上几个 agent』更优先的基建投资——规模化 agent 的瓶颈是治理底座,与 DEEP A『可审计性是 moat』一致。</li><li>战略定位:把 AI/智能当作即将商品化的水电来规划,竞争力押在水电之上别人买不到的层——数据、玩法、社区、品味等 non-commoditizable 资产(承接 Vol.007→010 主线收口)。</li></ol>
+      </div>
+    </article>
+
+  <h2 class="section-head">▎ 速览 · BRIEF</h2>
+  <div class="brief-grid">
+    
+    <div class="brief">
+      <div class="n">01</div>
+      <div class="tag">BRIEF · TEXT DIFFUSION</div>
+      <h4>DiffusionGemma:文本扩散,单卡 H100 1000+ tok/s,本地交互式生成提速 4×</h4>
+      <div class="kicker">Google DeepMind · Apache 2.0 · 26B MoE(激活 3.8B)</div>
+      <div class="meta-row">deepmind.google · Google DeepMind Blog · 6,507 chars · <a href="https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/">原文</a></div>
+      <div class="body">实验性开放模型,用文本扩散替代自回归逐 token 解码,整块并行生成:单卡 H100 1000+ tok/s、RTX 5090 700+ tok/s,较自回归提速最高 4×。26B 总参 MoE 推理仅激活 3.8B,量化后可塞进 18GB 消费级 GPU;双向注意力一次前向并行生成 256 token,适合 in-line editing、代码 infilling、氨基酸序列、数学图等非线性结构,且能迭代自我纠错。定位 speed-critical 的本地交互式工作流,高质量生产输出仍推荐自回归 Gemma 4。</div>
+      <div class="bullet">✱ Gaming 含义:本地/端侧低延迟生成有了新路线——in-line editing、实时代码补全、交互式内容生成等『要快不要等』的场景受益。配合 DEEP C 的『生成而非检索』与 DEEP B 的分层路由,扩散类模型可成为『端侧高频快生成』那一层的候选,与云端 Mythos 跑重活形成互补;建议工具链/编辑器类内部产品做一次扩散模型的延迟/质量对比 spike。</div>
+    </div>
+    <div class="brief">
+      <div class="n">02</div>
+      <div class="tag">BRIEF · AI &amp; GEOPOLITICS</div>
+      <h4>PRC 关联影响力行动盯上美国 AI 舆论:OpenAI 封禁两簇账号</h4>
+      <div class="kicker">OpenAI Global Affairs · 『Data Center Bandwagon』+『Tech and Tariffs』</div>
+      <div class="meta-row">openai.com · OpenAI News · 3,449 chars · <a href="https://openai.com/index/prc-linked-influence-operations-ai-debates">原文</a></div>
+      <div class="body">OpenAI 披露并封禁两簇疑似源自中国的 ChatGPT 账号:① 『Data Center Bandwagon』生成社媒评论/图片,宣称 AI 数据中心建设抬高普通家庭电价;② 『Tech and Tariffs』批评美国关税是技术竞争霸权,prompt 明确要求只出现 Trump、不出现习近平,并关联一个疑似伪造账号网络谎称 ChatGPT 用户数据泄露(系完全虚假)。OpenAI 称行动未明显改变舆论,但意义在于:PRC 影响力操作者正拿 AI 基础设施这一美国技术领导力根基做叙事测试。</div>
+      <div class="bullet">✱ 含义:AI 不只是被用来生产内容,也成了影响力行动的战场与靶子;『AI 基础设施(数据中心/电价/关税)』正被武器化为舆论叙事。对 Gaming 出海:涉 AI 的品牌与公共叙事面临被卷入地缘信息战的风险,UGC/社区/评论区需要把『协同性影响力行动』纳入内容安全与舆情监测模型,而不只防普通垃圾信息。</div>
+    </div>
+    <div class="brief">
+      <div class="n">03</div>
+      <div class="tag">BRIEF · AI ECONOMICS</div>
+      <h4>OpenAI 经济研究交易所(ERE)+ confidential IPO 申报:把『AI 经济影响测量』和『资本化』同时推进</h4>
+      <div class="kicker">OpenAI · ERE 6/8 上线 · IPO 周一 confidential 申报</div>
+      <div class="meta-row">openai.com + AI Daily Brief · 2,876 + 31,506 chars · <a href="https://openai.com/index/economic-research-exchange">原文</a></div>
+      <div class="body">两件同期事:① OpenAI 推出 Economic Research Exchange(ERE)—— 通过结构化、项目制合作支持外部学者用(隐私受控的)OpenAI 工具与数据,做 AI 对工人/企业/机构/经济影响的严谨实证研究,建立可信证据基。② OpenAI 周一 confidential 申报 IPO(继 Anthropic 上周之后),官方称『尚未决定时间,可能还要一阵』,强调只是拿到『SEC 审查后可上市的选项』。媒体渲染为 OpenAI vs Anthropic 上市竞赛,但双方表态都不急。</div>
+      <div class="bullet">✱ 含义:头部 lab 一边主动建『AI 经济影响』的证据与话语体系(ERE),一边推进资本化(IPO),呼应 Vol.009→010『broad benefit / 收益分配』主线的制度化。对 Gaming:AI 对就业/生产力的『官方测量口径』正在被这些 lab 主导建立,未来政策与舆论会引用这些数据;关注 ERE 产出,既是趋势情报来源,也提醒内部对『AI 提效』的对外口径要有自己的、可辩护的测量方法,别被外部叙事定义。</div>
+    </div>
+    <div class="brief">
+      <div class="n">04</div>
+      <div class="tag">BRIEF · BIO / OPEN SCIENCE</div>
+      <h4>Biohub:开源生物学的未来 —— Zuckerberg 谈『终结所有疾病』与开放科研基建</h4>
+      <div class="kicker">No Priors · Mark Zuckerberg / CZI Biohub</div>
+      <div class="meta-row">YouTube (No Priors) · 59,359 + 683 chars · <a href="https://www.youtube.com/watch?v=u8cYwaLzN-k">原文</a></div>
+      <div class="body">No Priors 两段(长访谈 + short):CZI/Biohub 押注『开源生物学 + AI』推进基础科研,目标是在本世纪内『预防、治疗或管理所有疾病』。强调开放数据/开放工具/跨机构协作的科研基建,与 AI for science 的算力与模型结合。与 DEEP A 的 ladder-pulling 之争形成有趣对照:一边是头部 lab 对前沿研究收梯子,一边是巨富资本推开放科研基建。</div>
+      <div class="bullet">✱ 含义:作为『开放 vs 封闭』张力的另一极背景信号——同期 Anthropic 因静默护栏被斥收梯子,而 CZI 高调押注开放科研。对 Gaming 关联度低,价值在趋势观测:AI for science 的算力/数据/模型需求是长期结构性增量,且『开放科研基建』可能成为对冲头部 lab 集中化的制度力量。收藏型背景,非决策级。</div>
+    </div>
+  </div>
+
+  <h2 class="section-head">▎ 速记 · SKIM</h2><div class="skim-grid">
+    <div class="skim">
+      <span class="n">S01</span><span class="tag">ARXIV · TAKARA 精选</span>
+      <h5>takara.ai 精选 6 篇(agent/LLM-ops/eval 相关)</h5>
+      <p>白名单析出 6 篇:① Supervised Fine-tuning with Synthetic Rationale Data Hurts —— 用合成 rationale 做 SFT 反而损害推理(对『合成数据训练』的警示)。② Early-Token Confidence Predicts Reasoning Quality in Multi-Agent —— 早期 token 置信度可预测多 agent 推理质量(可做早停/路由信号)。③ TabClaw:交互式自进化的表格 agent。④ STAGE-Claw:基于状态的自动化 agent benchmarking(对应 DEEP A『可审计 eval』思路)。⑤ Beyond APIs:探测 MLLM 在物理工具使用上的极限。⑥ Dynamic Linear Attention:动态线性注意力(效率向)。整体偏 agent 评测与效率,LLM-ops 团队可择 ②④ 深挖。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S02</span><span class="tag">ARXIV · 批量 SKIM</span>
+      <h5>takara.ai arxiv RSS 洪流 44 篇(批量略读)</h5>
+      <p>本日 takara.ai 一次性灌入约 50 篇 arxiv 论文 RSS,绝大多数高度学术/窄域(理论、特定基准、小众架构),对 Gaming 产品决策杠杆低。已用 agent/LLM-ops/eval 白名单析出 6 篇(见 S01),其余 44 篇进批量 skim 桶不逐篇分析;清单存档于 takara_skim.json,如某方向需深挖可回捞。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S03</span><span class="tag">CAREER · 决策框架</span>
+      <h5>Lenny:旧剧本答不了的 5 个职业问题</h5>
+      <p>Lenny&#x27;s Newsletter:AI 时代职业发展的 5 个新问题,旧 playbook 失效(技能半衰期、专才 vs 通才、上移到 outcome 等)。与 Vol.010『outcome engineering / 瓶颈从 execution 迁到 decision』、DEEP B『给目标不给任务』同向,适合作为团队职业发展沟通与晋升 rubric 调整的输入。收藏型框架内容。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S04</span><span class="tag">CAREER · 现身说法</span>
+      <h5>Peter Yang:从高薪产品岗辞职 all-in 自己</h5>
+      <p>Peter Yang 讲述辞掉高薪 PM 工作押注自己:zone of genius、个人品牌、AI 放大个人杠杆。属个人叙事/励志向,信号偏软;价值在印证『AI 放大个体产能 → 高杠杆个人/小团队兴起』的趋势侧写,与 DEEP C『按小时付费给 AI』放大个体一致。非决策级。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S05</span><span class="tag">BCI · 前沿</span>
+      <h5>非侵入式脑机接口的未来(AXIOS/South Park Commons)</h5>
+      <p>37,997 chars 长访谈,谈非侵入式 BCI 的技术路线与近期进展。属远期前沿技术观测,对当前 Gaming 决策杠杆低,但对『下一代交互范式(超越触屏/语音)』是长期信号,与 DEEP B 的『取消菜单导航』和 BRIEF 的 thin-client 远端呼应。收藏型。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S06</span><span class="tag">DEV · HTML 生成 Skill</span>
+      <h5>逛逛GitHub:两个主流 HTML 生成视频的 Skill</h5>
+      <p>公众号梳理 2 个 GitHub 上主流的『HTML 生成视频』Skill。偏工具发现/实操向,对做内容/营销视频自动化的团队有直接参考价值;可作为媒体生成工具链的候选评估对象。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S07</span><span class="tag">ENTERPRISE · 案例</span>
+      <h5>LSEG:从数据到决策,规模化可信 AI</h5>
+      <p>OpenAI 客户案例:伦敦证交所集团(LSEG)如何规模化部署可信 AI,从数据走向决策。企业级『可信/治理优先』落地范式,与 DEEP A『可审计性/可预测性是企业核心诉求』同向,可作为内部 AI 治理叙事的外部佐证。案例型。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S08</span><span class="tag">CONSUMER · 1-LINER</span>
+      <h5>下一个大消费设备 + 创始人要看什么(Lenny / David Senra)</h5>
+      <p>两条短料:① Lenny&#x27;s Podcast 预测下一个大消费设备(AI 原生硬件方向,呼应 thin-client/agent 入口);② David Senra 谈他在创始人身上唯一会看的特质(极致的执着/热爱)。短信号,作为消费硬件与人才判断的边角料收藏。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S09</span><span class="tag">HEALTH · short</span>
+      <h5>Zuckerberg:终结所有疾病的计划(short)</h5>
+      <p>No Priors short:Zuckerberg 用一分钟讲 CZI『终结所有疾病』愿景,是 BRIEF 04 Biohub 的短版引子。愿景型片段,背景收藏。</p>
+    </div></div>
+
+  <h2 class="section-head">▎ 跳过 · SKIP</h2>
+  <div class="skip"><b>(takara.ai arxiv RSS)</b> — takara.ai · 约 50 篇 arxiv RSS 一次性灌入,6 篇析出见 S01、44 篇批量 skim 见 S02,清单存 takara_skim.json,不逐篇深析</div>
+
+  
+
+  <h2 class="section-head">▎ 新增观点入库 · VP LEDGER (17 条 · append-only 到 _mira-vp-index)</h2>
+  <table class='ledger'><thead><tr><th>分类</th><th>观点</th><th>来源</th></tr></thead><tbody><tr><td>Alignment / Trust / Access Control</td><td>[NEW 2026-06-11] Fable 5 对『前沿 LLM 研发』请求用 prompt 改写/steering vectors/PEFT 静默削弱效果、不告知、不 fallback(~0.03% 流量);焦点从『模型能做什么』转向『供应方会否对你隐藏地动手脚』</td><td>AINews × mira</td></tr><tr><td>Alignment / Trust / Access Control</td><td>[NEW 2026-06-11] 静默降质 = 付费 API 的新供应链风险:用户无法分辨失败来自模型/prompt/隐藏干预,破坏可复现性与根因分析;关键链路须建黄金基准集定期回归、双供应商交叉验证、合同写入行为变更通知义务</td><td>AINews × mira</td></tr><tr><td>Alignment / Trust / Access Control</td><td>[NEW 2026-06-11] ladder-pulling 之争:开源派斥头部 lab 收梯子(『付费产品不该有静默暗桩』『不告知降 ML 研究表现极其敌意』『concentration of power 是 AI 最大风险』),抬高开源/自托管/多供应商的战略价值</td><td>natolambert/deanwball/ClementDelangue × mira</td></tr><tr><td>Alignment / Trust / Access Control</td><td>[NEW 2026-06-11] 支持侧并列读避免简化:能力确为大版本级跃迁(Karpathy/bcherny:judgment/taste/methodical debugging),护栏问题更可能是校准过头而非动机邪恶;评估须用二维表=能力档位×可审计性档位</td><td>Karpathy/finbarrtimbers × mira</td></tr><tr><td>Alignment / Trust / Access Control</td><td>[NEW 2026-06-11] selective capability release(选择性能力释放)正被正常化:同一模型对不同任务/人给不同档位能力且部分限制不可见,叠加黄仁勋『智能按用途分级计价』= 你买到的是哪档智能本身变不透明</td><td>Ben Thompson × mira</td></tr><tr><td>Workflow / Outcome Engineering</td><td>[NEW 2026-06-11] Fable 5 从 autocomplete 到 teammate 的质变在于受阻后自主降级+留痕+续接(Krieger:道晚安、凌晨 2 点完工);可试点隔夜委派批处理,但前提是自动验收基建到位</td><td>Mike Krieger × mira</td></tr><tr><td>Workflow / Outcome Engineering</td><td>[NEW 2026-06-11] 人的核心产出上移到『表达意图+定义演进方向』(给目标不给任务);把它当可训练工程素养,推内部模板:目标/约束/演进方向/验收标准/不要做什么</td><td>Mike Krieger × mira</td></tr><tr><td>Workflow / Outcome Engineering</td><td>[NEW 2026-06-11] AI 提效后『人与人早期对齐』权重不降反升:用 AI 快速产出可分享对齐物(HTML/markdown/图)强制前置对齐,防协调成本爆炸吞掉效率红利</td><td>Mike Krieger × mira</td></tr><tr><td>Workflow / Outcome Engineering</td><td>[NEW 2026-06-11] effort 档位是真实成本/质量旋钮+按 surface 粘性选模型:别默认顶配、也别把选择负担丢给用户,做成按场景预设、对用户透明的策略,是控制 $50/M 成本的关键抓手</td><td>Mike Krieger × mira</td></tr><tr><td>Workflow / Outcome Engineering</td><td>[NEW 2026-06-11] 从软件内部用自然语言修改软件、取消菜单导航是值得下注的交互范式;选高频但菜单繁琐的内部工具做自然语言驱动+agent 执行+可审计回放试点</td><td>Mike Krieger × mira</td></tr><tr><td>AI as Commodity / Infra</td><td>[NEW 2026-06-11] 按小时付费给 AI = AI 从工具(买断/订阅)重定价为可计量劳动力供给;须建 FinOps for AI(计量/归因/预算/优化),单位有用产出的 AI 成本是结构性毛利来源</td><td>Jensen Huang × mira</td></tr><tr><td>AI as Commodity / Infra</td><td>[NEW 2026-06-11] 计算从检索翻转为实时生成(每个像素/声音将原创生成而非检索),游戏是该范式最天然落地场;为『每玩家内容皆不同』做架构与成本准备=最大体验机会也是最大成本风险点</td><td>Jensen Huang × mira</td></tr><tr><td>AI as Commodity / Infra</td><td>[NEW 2026-06-11] 行业共识是大规模 agent(百亿级)必须 guardrailed+sandboxed,分歧只在治理是否该静默/可见;agent 治理与可观测性平台优先级高于多上几个 agent(与 DEEP A 可审计性是 moat 一致)</td><td>Jensen Huang × mira</td></tr><tr><td>AI as Commodity / Infra</td><td>[NEW 2026-06-11] 智能将像电网/网络一样商品化包裹世界;差异化不在『有没有 AI』而在用智能做出的别人复制不了的东西(数据/玩法/社区/品味)——越商品化,人的判断与独特资产越稀缺</td><td>Jensen Huang × mira</td></tr><tr><td>Edge / Generation Efficiency</td><td>[NEW 2026-06-11] DiffusionGemma 文本扩散整块并行生成,单卡 H100 1000+ tok/s、提速 4×,26B MoE 仅激活 3.8B 可塞 18GB 消费级 GPU;为端侧高频快生成那层提供候选,与云端 Mythos 跑重活互补</td><td>Google DeepMind × mira</td></tr><tr><td>AI Politics / Economics</td><td>[NEW 2026-06-11] PRC 关联影响力行动把 AI 基础设施(数据中心/电价/关税)武器化为舆论叙事并被 OpenAI 封禁;涉 AI 品牌与 UGC/社区须把协同性影响力行动纳入内容安全模型,而非只防普通垃圾信息</td><td>OpenAI × mira</td></tr><tr><td>AI Politics / Economics</td><td>[NEW 2026-06-11] 头部 lab 一边建 AI 经济影响的证据与话语体系(OpenAI ERE)一边推 IPO 资本化;AI 提效的官方测量口径正被 lab 主导,企业对外口径须有自己可辩护的测量方法别被外部叙事定义</td><td>OpenAI × mira</td></tr></tbody></table>
+
+  <footer class="footer">
+    <span>MIRA · Daily Broadside · Vol.011 · 自包含单文件</span>
+    <span>下期 · <b>2026-06-12 06:00 Asia/Shanghai</b></span>
+  </footer>
+</div>
+</body>
+</html>
