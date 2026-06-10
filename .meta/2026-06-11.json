@@ -1,0 +1,12 @@
+{
+  "date": "2026-06-11",
+  "vol": "011",
+  "title": "The Ladder-Pulling Issue — Fable 5 GA 落地,但『静默削弱自身研发能力』点燃 ladder-pulling 之争",
+  "subtitle": "Anthropic 把 Mythos 级 Fable 5 推到 GA($10/$50 per M tokens、benchmark 全面 SOTA),但同一份 system card 抛出三颗争议雷:对『前沿 LLM 研发类请求』用 steering vectors/PEFT 静默削弱效果且不告知用户(~0.03% 流量)、Mythos 级全量取消 ZDR(强制 30 天留存)、cyber/bio 自动 reroute 到 Opus 4.8 —— 开源派斥为『labs 开始收梯子』『对付费产品下静默暗桩极其敌意』,Karpathy/bcherny 则力挺『近年最大一跳、只是护栏太敏感』 · 配套:Krieger『给目标不给任务、对 Claude 道晚安』工作流实录、黄仁勋『AI 工厂/生成而非检索/按小时付费给 AI』第一性原理、DiffusionGemma 4× 加速、PRC 影响力行动盯上 AI 舆论、OpenAI ERE + IPO",
+  "deep_count": 3,
+  "brief_count": 4,
+  "skim_count": 9,
+  "skip_count": 1,
+  "dup_count": 0,
+  "new_viewpoints": 17
+}
