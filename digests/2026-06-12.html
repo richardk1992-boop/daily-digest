@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>The Untrainable Issue — benchmark 之外的『不可训练角落』:模型吃掉 harness,意图比算力更稀缺 — Vol.012</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --bg-warm: #1a1a18;
+  --bg-warm-2: #1f1a14;
+  --orange: #e85d26;
+  --orange-soft: #f4a06a;
+  --yellow: #f6d24a;
+  --ink: #f3ede4;
+  --ink-dim: #b4a999;
+  --rule: #2c2823;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  margin: 0; padding: 0; line-height: 1.65;
+  font-size: 16px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
+.chrome { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim); text-transform: uppercase; }
+
+.masthead { border-top: 6px solid var(--orange); padding-top: 18px; margin-bottom: 28px; }
+.masthead .topline { display: flex; justify-content: space-between; }
+.masthead h1 {
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 52px; line-height: 1.04; margin: 14px 0 10px;
+  color: var(--orange); letter-spacing: -0.01em;
+}
+.masthead h2 {
+  font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic;
+  font-size: 18px; color: var(--orange-soft); margin: 0 0 16px;
+}
+.masthead .meta {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 10px 0; display: flex; gap: 28px; flex-wrap: wrap;
+}
+.meta span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+.meta span b { color: var(--yellow); font-weight: 600; }
+
+.editorial {
+  background: var(--bg-warm-2); border-left: 4px solid var(--yellow);
+  padding: 22px 28px; margin: 28px 0 40px;
+}
+.editorial h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 12px; letter-spacing: 0.12em;
+}
+.editorial p {
+  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 1.75;
+  margin: 0 0 10px; color: var(--ink);
+}
+
+.section-head {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--orange); margin: 40px 0 18px;
+  border-bottom: 2px solid var(--rule); padding-bottom: 10px;
+}
+
+.deep-card {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 30px 32px; margin: 0 0 32px; border-radius: 2px;
+}
+.deep-card .tag {
+  display: inline-block; background: var(--orange); color: #fff;
+  padding: 3px 10px; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+}
+.deep-card h3 {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 27px; line-height: 1.2; margin: 14px 0 6px; color: var(--ink);
+}
+.deep-card .kicker { font-size: 14px; color: var(--orange-soft); margin: 0 0 8px; }
+.deep-card .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+.deep-card .meta-row a { color: var(--yellow); text-decoration: none; }
+
+.scorecard {
+  background: rgba(0,0,0,0.3); padding: 14px 18px; margin: 16px 0 22px;
+  display: grid; grid-template-columns: repeat(5, 1fr) 90px; gap: 14px; align-items: center;
+}
+.score-dim { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); }
+.score-dim b { display: block; color: var(--ink); font-size: 18px; font-family: 'Barlow', sans-serif; }
+.score-bar { background: var(--rule); height: 4px; margin-top: 4px; }
+.score-bar > div { background: var(--orange); height: 100%; }
+.score-total { text-align: right; font-family: 'Barlow', sans-serif; }
+.score-total b { font-size: 32px; color: var(--yellow); }
+.score-total span { font-size: 14px; color: var(--ink-dim); }
+
+.arg { margin: 26px 0; }
+.arg h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--yellow); margin: 0 0 12px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.arg .quote {
+  font-family: 'Noto Serif SC', serif; font-style: italic;
+  font-size: 15px; color: var(--ink); border-left: 3px solid var(--orange-soft);
+  padding: 6px 16px; margin: 8px 0;
+}
+.arg .cn { font-size: 14px; color: var(--ink); padding: 0 16px; margin: 8px 0; }
+.arg .mira {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 10px 16px; margin: 12px 0 0;
+  font-size: 14px; color: var(--ink);
+}
+.arg .mira b { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+.takehome {
+  background: rgba(246,210,74,0.06); border: 1px solid rgba(246,210,74,0.25);
+  padding: 18px 22px; margin: 24px 0 0;
+}
+.takehome h4 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.12em;
+}
+.takehome ol { margin: 0; padding-left: 22px; }
+.takehome li { margin: 6px 0; font-size: 14px; color: var(--ink); }
+
+.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .brief-grid { grid-template-columns: 1fr; } }
+.brief {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+.brief .n { font-family: 'Barlow', sans-serif; font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.brief .tag {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--yellow); letter-spacing: 0.1em; margin: 4px 0 8px;
+}
+.brief h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 1.25; color: var(--ink); margin: 0 0 6px;
+}
+.brief .kicker { color: var(--orange-soft); font-size: 13px; margin: 0 0 8px; }
+.brief .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); margin-bottom: 10px; }
+.brief .meta-row a { color: var(--yellow); text-decoration: none; }
+.brief .body { font-size: 14px; line-height: 1.7; }
+.brief .bullet {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 8px 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink);
+}
+
+.skim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .skim-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .skim-grid { grid-template-columns: 1fr; } }
+.skim {
+  background: var(--bg-warm); border: 1px solid var(--rule); padding: 14px 16px;
+}
+.skim .n { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--orange-soft); }
+.skim .tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--yellow); letter-spacing: 0.1em; margin-left: 8px; }
+.skim h5 { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); margin: 6px 0; line-height: 1.3; }
+.skim p { font-size: 12px; line-height: 1.55; color: var(--ink-dim); margin: 0; }
+
+.skip { background: var(--bg-warm); border-left: 3px solid var(--ink-dim); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink-dim); }
+.skip b { color: var(--ink); }
+
+.dup { background: var(--bg-warm); border-left: 3px solid var(--yellow); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+.dup b { color: var(--yellow); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.ledger th { color: var(--yellow); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.ledger td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--orange-soft); font-size: 11px; width: 18%; }
+.ledger td:nth-child(2) { width: 50%; }
+.ledger td:nth-child(3) { color: var(--ink-dim); width: 32%; }
+
+.footer {
+  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+}
+.footer b { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Daily Reading Broadside · Vol.012</span>
+      <span class="chrome">2026-06-12 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Untrainable Issue — benchmark 之外的『不可训练角落』:模型吃掉 harness,意图比算力更稀缺</h1>
+    <h2>Fable 5 的尘埃落定后,讨论从『能力/治理』移向一个更根本的问题:什么是模型永远学不会的?Sarah Guo(经 Latent Space)给出最锋利的回答——应用靠『把公司私域现实整理成模型可操作的样子』赢得『不可训练角落(the untrainable corner)』,而『选择做什么(intent/offense)』模型帮不上忙、无法 benchmark、因此无法训练,『意图也许是比算力更稀缺的输入』· Logan Kilpatrick(Google AI Studio/Gemini API)反向断言:『模型会吃掉 harness』,自建 scaffolding 的 alpha 约 12 个月保质期,会被上收进模型,alpha 转移到别处 · Every/Kieran:Slack 反馈『自己变成 PR』的 AI 工厂、隔夜跑 2-4 小时 CI 绿了自动 merge · 配套:Codex 模拟黑洞、PyTorch MLP fusion、takara.ai arxiv 洪流(steerability/Claw-SWE-Bench/post-training 可解释性白名单 6 篇)</h2>
+    <div class="meta">
+      <span>候选 <b>67</b></span>
+      <span>析出 <b>21</b></span>
+      <span>深读 <b>3</b></span>
+      <span>简评 <b>4</b></span>
+      <span>速记 <b>9</b></span>
+      <span>跳过 <b>1</b></span>
+      <span>重复 <b>1</b></span>
+      <span>新观点 <b>16</b></span>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <h3>EDITORIAL · 编辑卷首语</h3>
+    <p>Vol.010 我们测了 Fable 5 的能力,Vol.011 记录了它『静默护栏』点燃的信任与治理之争。当争议沉淀,本卷把问题推到更根本的一层:在一个模型能力可以被训到 SOTA、又会被商品化的世界里,什么是模型永远学不会的?Sarah Guo(Conviction)经 Latent Space 给出最锋利的回答——应用靠『把公司私域现实整理成模型可操作的样子』赢得它在『不可训练角落(the untrainable corner)』里的位置,这种翻译永不结束、贴着客户、难以复制;而最难的『offense / 选择一开始要造什么』模型根本帮不上忙——它会做你指给它的任何事,却无法告诉你什么值得指,你无法对它做 benchmark,所以你无法训练它。一句话定调了本卷:『也许意图(intent)是比算力更稀缺的输入。』这从数学上回答了 Vol.009 起一直悬着的问题:『把 judgment 留给人类』不是怀旧,而是因为 intent 根本不在模型的可优化空间里。</p>
+    <p>与之形成本卷最重要张力的是 Logan Kilpatrick(掌管 Google AI Studio 与 Gemini API)的反向断言:『模型会吃掉 harness。』他说『模型』已不再等于权重,而是权重加上不断被吞并进来的脚手架构成的扩张系统;今天人人争造的 agent harness,其 alpha 大约只有 12 个月保质期,会被模型消化、上收为原生能力,然后 alpha 转移到别处。两篇并读,本卷的核心论断浮现并修正了 Vol.007 起的 harness-first 主线:会被吃掉的是『通用脚手架』,吃不掉的恰恰是 Sarah Guo 的『不可训练角落』——私域翻译、客户侧集成、intent。所以真正要囤的长期资产不是『我们造了个 harness』,而是 harness 之上/之外那层:私域数据结构、可审计操作日志、领域工具。第三篇给了活体样本:Every 的 Kieran 把 Slack 反馈做成『自己变成 PR』的 AI 工厂——定时例程读 Slack、自造 Rifrack 工具把反馈采集成比视频更富信息的结构化证据、隔夜跑 2-4 小时、CI 绿了自动 merge——这正是『把私域现实翻译给模型』的工程落地,也提醒了自动验收门的边界:可 CI 验证的能自动 merge,玩法手感/数值/美术品味这些不可训练角落必须留人工。</p>
+    <p>配套四条:天体物理学家用 Codex 模拟黑洞(coding 作为科研私域翻译的接口,印证 DEEP B『coding 是通用 agent harness』);PyTorch MLP fusion(前沿 API 当不稳定依赖时,自有推理链路的成本优化即可移植性资产);微信内跑 Claude Code(agent 入口向用户既有高频 IM 下沉);15 公里太空炮(第一性原理质疑既有范式)。67 候选(约 50 篇 takara.ai arxiv RSS,白名单析出 steerability/Claw-SWE-Bench/post-training 可解释性 6 篇)析出 21 篇精读:3 deep / 4 brief / 9 skim / 1 skip / 1 dup,新增 16 条观点入库。延续 Vol.007→011 主线并收口:模型越强、harness 越会被吃掉,人和应用的护城河就越收敛到那个学不会的角落——意图、品味、贴客户的私域翻译、可审计的那一层。把这些留在自己手里。</p>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · DEEP</h2>
+  
+    <article class="deep-card" id="untrainable_corner">
+      <span class="tag">SARAH GUO · MODEL LABS vs AGENT LABS</span>
+      <h3>不可训练的角落:模型会做你指给它的任何事,却不会告诉你什么值得指——意图比算力更稀缺</h3>
+      <div class="kicker">Latent Space/AINews 对 Sarah Guo(Conviction)Substack 长文的回应 · 经 legibility(可读性)框架贯通 open models / agent-vs-model labs / verifiable benchmarks / intent 四条线 · 同日 544 Twitter recap 记录 Fable 5 静默护栏的信任反弹</div>
+      <div class="meta-row">latent.space (AINews) · Latent Space / Sarah Guo · 11,608 chars · 信号 2 颠覆 2 可操作 2 独特 2 时效 2 · <a href="https://www.latent.space/p/ainews-open-models-model-labs-vs">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>10</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;An application earns its place in the untrainable corner by doing unglamorous work: arranging a company&#x27;s private reality so a model can act on it, handing the model the tools to act, working with the customer to change the reality of its workforce. A company that brings the translation is tough to copy – and the translation never ends. Integration and maintenance run as long as the relationship does, won by teams that put domain-specialized engineers and tools next to the customer.&quot;</div>
+          <div class="cn">「一个应用赢得它在『不可训练角落』里的位置,靠的是不光鲜的活儿:把一家公司的私域现实整理成模型可以据以行动的样子、把行动工具交到模型手里、与客户一起改变其员工队伍的现实。带来这种『翻译』的公司很难被复制——而翻译永无止境。集成和维护与客户关系一样长久,由那些把领域专精的工程师和工具部署在客户身边的团队赢得。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是本卷的定盘星,也直接回答了 Vol.007→011 一直追的那条主线『模型越强,人/应用的护城河在哪』。Sarah Guo 的回答极其具体:moat 不在模型,而在『把私域现实翻译成模型可操作形态』这件永不结束的脏活。注意它和 Vol.011『可审计的 harness 是 moat』是同一枚硬币的两面——Vol.011 讲『你能控制和审计的那层』,这里讲『你贴着客户、把现实整理给模型的那层』。给 Gaming 的直接含义:不要把资源压在『追平模型能力』上(那是 model labs 的战场、且会被商品化),要压在『把你独有的私域现实(玩家行为、运营数据、内容管线、买量与合规约束)整理成 agent 可直接操作的结构 + 工具』上。这层越脏、越贴近业务、越需要领域工程师陪跑,就越不可复制。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;The most cited benchmark score of the year is a map of territory about to be worthless, and a notice of who is about to lose the right to say what counts as good.&quot;</div>
+          <div class="cn">「本年度被引用最多的那个 benchmark 分数,是一张『即将变得一文不值的疆域地图』,同时也是一份『谁即将失去定义何为好的权力』的通告。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这句配着上下文读才有杀伤力——Anthropic 之所以在 Fable 发布时抢着采用 FrontierCode 这类可验证 benchmark,正因为旧 benchmark 一旦被攻克,定义『什么算好』的话语权就要易手。对应 Vol.011『selective capability release』:谁掌握『评判标准』,谁就掌握隐性权力。给 Gaming 的处方:① 不要用『行业通用 benchmark 分』来定义你们的 AI 是否够好——那张地图正在贬值,且评判权不在你手里;② 自建『贴合你业务的可验证评测集(golden set)』,用你自己的成功标准(留存、出包质量、合规通过率、玩家满意度)来定义『何为好』,把评判权握在自己手里。这与 Vol.011 的『黄金基准集侦测静默漂移』是同一套基建,只是这里强调它还是『话语权资产』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;Even harder is offense, choosing what to build in the first place... The model is no help there. It will do whatever you point it at and can&#x27;t tell you what&#x27;s worth pointing it at, and you can&#x27;t benchmark that, so you can&#x27;t train it... Maybe intent is an even scarcer input than compute.&quot;</div>
+          <div class="cn">「更难的是进攻——一开始到底选择去造什么……在这件事上模型帮不上忙。它会做你指给它的任何事,却无法告诉你什么才值得去指;而你无法对它做 benchmark,所以你无法训练它……也许意图(intent)是比算力更稀缺的输入。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是整卷的标题来源,也是对『判断该不该自动化』这个跨卷悬案最干净的收口。Sarah Guo 把不可训练的东西精确定位到『offense / 选择做什么』:模型是无限的执行力,但方向(intent)它给不了,且原理上无法被 benchmark、无法被训练。这正面回答了 Vol.009 起一直悬而未决的问题——为什么『把 judgment 留给人类』不是怀旧而是结构必然:因为 intent 在数学上就不在模型的可优化空间里。给 Gaming 的组织含义:既然执行力正在被商品化、意图成为最稀缺要素,组织的人才与流程重心应从『谁能执行』迁向『谁能选对要造什么』。具体动作:把『选题/立项判断力』当作一等能力来识别、保护、激励(对应 Vol.011『表达意图是可训练工程素养』,但这里更进一步——选什么意图本身不可训练,只能靠人的品味与一线洞察)。这也是为什么贴近玩家、贴近一线的 PM/策划比任何时候都更值钱。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;Silent degradation of AI R&amp;D help dominated the discourse... this creates an unverifiable gap between observed and actual model capability, undermines reproducibility, and damages trust... A second-order lesson repeated by multiple practitioners: treat frontier APIs as unstable dependencies, maintain model portability, and verify outputs continuously with evals and harnesses (@dbreunig, @omarsar0, @yacineMTB).&quot;</div>
+          <div class="cn">「对 AI 研发帮助的『静默降质』主导了讨论……它在『观测到的能力』与『真实能力』之间制造了一道无法验证的缝隙,破坏可复现性、损害信任……多位从业者反复强调的二阶教训:把前沿 API 当作不稳定的依赖来对待,保持模型可移植性,并用 evals 和 harness 持续验证输出(@dbreunig、@omarsar0、@yacineMTB)。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是 Vol.011『ladder-pulling / 静默护栏』争议沉淀一天后,社区收敛出的、最可操作的工程结论,值得作为本卷与上卷的接续记录。注意措辞已从『道德愤怒』转为『依赖管理』:把前沿 API 当『不稳定依赖』,保持可移植性,持续用 eval+harness 验证。还有一条新增的企业约束被点名——30 天留存、部分场景无 opt-out,直接排除零留存环境与部分欧洲地区(@GergelyOrosz/@scaling01)。给 Gaming 的落地:① 架构上把每个闭源前沿模型视作可替换的不稳定依赖,关键链路保持 model portability(双供应商 + 抽象层);② 合规上把『数据留存/ZDR/地域』作为选型硬约束,出海尤其要先过这一关;③ 持续 eval 不是锦上添花而是侦测供应商静默漂移的唯一手段。这条与 DEEP B『模型吃掉 harness』并读会产生张力——见下一篇。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;Agent Arena showed #1 overall with especially large margins in confirmed task success and user praise, albeit weaker steerability... Fable 5 is plausibly state-of-the-art for many agentic coding tasks, but trust and product constraints are materially affecting adoption.&quot;</div>
+          <div class="cn">「Agent Arena 显示其总体第一,在『确认任务成功率』和『用户好评』上领先优势尤其大,尽管可操控性(steerability)更弱……Fable 5 对许多 agentic 编码任务大概率是 SOTA,但信任与产品约束正在实质性影响其被采用。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:把这条放在 DEEP A 收尾,是为了给『不可训练角落』提供一个反证锚点——能力(task success)和可操控性(steerability)是两个维度,Fable 5 在前者登顶、后者反而更弱。这恰好印证 Sarah Guo 的命题:纯能力可以被训到 SOTA 并被复制/商品化,但『让模型按你的私域意图精确行动(steerability + 私域翻译)』才是难复制的角落,且它正在成为采用与否的真正瓶颈。给 Gaming 的判断:选型时不要被『总榜第一』迷惑,要单独评估『在你的私域任务上的可操控性』——能不能稳定地按你的约束、口径、风格行动,比峰值能力更决定它能不能进生产链路。这也再次说明:把私域现实翻译给模型(DEEP A 论点 1)是采用价值的核心,不是附属工程。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>把资源从『追平模型能力』转向『不可训练角落』:把你独有的私域现实(玩家行为/运营数据/内容管线/买量与合规约束)整理成 agent 可直接操作的结构 + 工具,这层越脏、越贴业务、越需领域工程师陪跑,就越不可复制(承接 Vol.011 harness-is-moat)。</li><li>自建『贴业务的可验证评测集(golden set)』定义『何为好』:用留存/出包质量/合规通过率/玩家满意度等自有成功标准评判 AI,别用正在贬值、且评判权不在你手的行业通用 benchmark——评测集既是质量基建也是话语权资产。</li><li>组织重心从『谁能执行』迁向『谁能选对要造什么』:intent/offense 不可 benchmark、不可训练,只能靠人的品味与一线洞察;把『选题/立项判断力』当一等能力识别、保护、激励,贴近玩家的 PM/策划比任何时候更值钱。</li><li>把每个闭源前沿模型当『不稳定依赖』:关键链路保持 model portability(双供应商 + 抽象层)、持续 eval 侦测静默漂移;把数据留存/ZDR/地域作为选型硬约束,出海先过合规这一关。</li><li>选型看『私域任务上的可操控性(steerability)』而非总榜峰值:能否稳定按你的约束/口径/风格行动,比 task-success 第一更决定能否进生产链路——可操控性弱的模型留给可容忍漂移的离线重活。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="model_eats_harness">
+      <span class="tag">LOGAN KILPATRICK · GOOGLE AI STUDIO / GEMINI API</span>
+      <h3>模型会吃掉 harness:自建脚手架的 alpha 约 12 个月保质期,然后被上收进模型,alpha 转移到别处</h3>
+      <div class="kicker">Sequoia 现场专访 · Logan Kilpatrick(掌管 Google AI Studio 与 Gemini API)· 与 DEEP A『不可训练角落』正面张力:scaffolding 会被消化,但贴客户的私域翻译不会 · anti-gravity agent harness 成为 Google 产品的『through line』</div>
+      <div class="meta-row">Sequoia Capital (YouTube) · Logan Kilpatrick · 57,375 chars · 信号 2 颠覆 2 可操作 1 独特 2 时效 2 · <a href="https://www.youtube.com/watch?v=cMAs8z2dehs">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>9</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;What we have historically thought of as the model is not the model anymore. Like when I think two years ago when LLMs were popular, the model was actually just a set of weights... [now] it&#x27;s actually not just the weights anymore, it&#x27;s like an entire expanding sprawling system that&#x27;s built around the weights.&quot;</div>
+          <div class="cn">「我们历史上认为的『模型』,已经不再是那个模型了。我想想两年前 LLM 刚火的时候,模型其实就是一组权重……(现在)它已经不只是权重了,而是一整个围绕权重不断扩张、蔓延的系统。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Logan 重新定义了『模型』的边界——它不再等于权重,而是『权重 + 持续吞并进来的脚手架』构成的扩张系统。这是理解整篇的前提,也和 DEEP A 形成本卷最重要的一组张力:Sarah Guo 说 moat 在『模型学不会的私域翻译』,Logan 说『模型的边界在不断外扩、吃掉越来越多原本属于应用层的东西』。两者其实可以统一——会被吃掉的是『通用 scaffolding』,吃不掉的是『贴客户的私域现实翻译』。给 Gaming 的判断框架:对任何一项你正在自建的 AI 工程,先问一句『这是通用脚手架(会被模型吃掉)还是私域翻译(吃不掉)』,据此决定是自建还是等模型原生能力。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;The scaffolding is oftentimes a couple of steps ahead of what is baked directly into the model, and then what ends up happening is the model eats that scaffolding and it becomes part of the native model system. There&#x27;s still value in having the external scaffolding in certain cases.&quot;</div>
+          <div class="cn">「脚手架往往比『直接烘焙进模型里的东西』领先几步,然后最终发生的是:模型吃掉那层脚手架,它变成原生模型系统的一部分。在某些情况下,保留外部脚手架仍然有价值。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条给出了节奏感——scaffolding 永远领先模型『几步』,但模型会持续追上并吞并。这意味着自建脚手架不是没价值,而是它的价值有时效:你靠它领先的那『几步』是真实窗口期,但不要把长期 moat 押在会被吞并的那部分上。给 Gaming 的操作:把自研 AI 工程显式分两类管理——(a)『窗口期能力』:吃到当下领先红利,但预设它 12 个月内会被模型原生化,不做重投资、不追求长期锁定;(b)『结构性资产』:私域数据、可审计日志、客户侧集成、领域工具,这些是模型吃不掉的,值得长期重投。最忌讳的是把(a)当(b)来投。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;Everyone&#x27;s like &#x27;we got to go build a harness and the harness is where the alpha is&#x27; and I think that perhaps won&#x27;t be true, at least in the way we think of the harness today, in 12 months. The models will have digested a bunch of that. It&#x27;ll be upstreamed into the model and the alpha will be somewhere else now — it won&#x27;t be in trying to spin your own harness because the model just does it natively.&quot;</div>
+          <div class="cn">「现在每个人都在说『我们得去造一个 harness,alpha 就在 harness 里』——我认为这大概不会成立,至少不会以我们今天理解 harness 的方式,在 12 个月后还成立。模型会把其中很大一部分消化掉,上收进模型本身,而 alpha 会转移到别处——它不会再在『自己造 harness』里,因为模型会原生地做这件事。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是对 Vol.007 起就贯穿的『harness-first』主线最强的反向声音,必须严肃对待——它没有否定 harness 的当下价值,而是给了它一个 12 个月的保质期警告。把它和 DEEP A 并读,本卷的核心论断浮现:『通用 agent harness』的 alpha 会被模型吃掉并转移,但『alpha 转移去的别处』正是 Sarah Guo 的『不可训练角落(私域翻译、intent、客户侧集成)』。给 Gaming 的战略修正:不要把『我们自己造了个 agent harness』当成长期护城河来宣传和重投;harness 是吃当下红利的工具,真正要囤的长期资产是 harness 之上/之外那层——私域数据结构、可审计操作日志、领域工具、客户侧集成。这也微调了前几卷的 harness-first 表述:是『私域翻译 + 可审计层 first』,通用 harness 只是阶段性载体。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;(On application companies building their own harnesses for flexibility / to avoid lock-in) That starts out perhaps true, but then as the model capability improves it becomes less true over time. You don&#x27;t have a generalized model if it can&#x27;t use another harness.&quot;</div>
+          <div class="cn">「(关于应用公司为了灵活性/避免被锁定而自建 harness)这一开始或许成立,但随着模型能力提升,它会随时间变得越来越不成立。如果一个模型不能使用另一个 harness,那它就不算通用模型。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条要和 DEEP A 论点 4(『把前沿 API 当不稳定依赖、保持可移植性』)对照着批判性地读——两者表面冲突:DEEP A 说为防锁定要自建/保持 portability,Logan 说自建 harness 的防锁定价值会随模型变强而衰减。我的判断:Logan 是模型方,立场上会淡化『自建防锁定』的价值;但他的技术论点(强模型本就能适配多 harness)成立。综合给 Gaming 的结论不是『二选一』,而是分层:portability 仍要保(DEEP A 对、尤其防静默漂移与合规),但 portability 的实现方式应从『自建厚 harness』转向『薄抽象层 + 强模型自适应』——别造一个又厚又重、维护成本高、又会被吃掉的 harness 来求 portability,那是用会贬值的资产去对冲风险。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;For Gemini, this agentic layer being powered by the anti-gravity agent harness is an additional through line for Google that connects all of our products... Coding has proved to be the general-purpose agent harness, in addition to also working really well for coding.&quot;</div>
+          <div class="cn">「对 Gemini 而言,这个由 anti-gravity agent harness 驱动的 agentic 层,是 Google 的一条额外『主线』,把我们所有产品连起来……编码已经被证明是『通用型的 agent harness』,而不只是在编码本身上表现很好。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:两个值得 Gaming 记下的结构判断:① 大厂正把『agent harness』当作贯穿全产品线的『through line(主线/连接层)』——即 agent 层不是某个功能,而是连接所有产品的统一底座;② 『编码已成为通用 agent harness』——coding 不只是一个垂直能力,而是 agent 操作世界的通用接口(因为代码能调用一切)。给 Gaming 的启发:如果要在内部建 agent 底座,把它定位成『连接所有内部工具/产品的 through line』而非孤立功能,且以『代码/可执行接口』作为 agent 操作内部系统的通用层——让内部系统都暴露可被 agent 调用的代码级接口,这比给每个工具单独做 agent 包装更可扩展,也与 Vol.011『从软件内部用自然语言改软件』一脉相承。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>给每项自研 AI 工程贴标签:『通用脚手架(会被模型吃掉,预设 12 个月保质期,只吃窗口红利不重投)』vs『私域翻译/结构性资产(模型吃不掉,长期重投)』——最忌把前者当后者投资。</li><li>不要把『我们自建了 agent harness』当长期护城河宣传:harness 是吃当下红利的阶段性载体,真正要囤的是 harness 之上/之外的私域数据结构、可审计操作日志、领域工具、客户侧集成。</li><li>portability 仍要保(防静默漂移 + 合规),但实现方式从『自建厚 harness』转向『薄抽象层 + 强模型自适应』——别用又厚又会贬值的 harness 去对冲锁定风险。</li><li>内部 agent 底座定位成连接所有内部工具/产品的『through line』而非孤立功能,并以代码/可执行接口作为 agent 操作内部系统的通用层(让内部系统暴露 agent 可调用的代码级接口),比逐个工具做 agent 包装更可扩展。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="every_slack_ships_itself">
+      <span class="tag">EVERY / KIERAN KLAASSEN · AI 软件工厂实录</span>
+      <h3>Slack 反馈『自己变成 PR』:隔夜跑 2-4 小时、CI 绿了自动 merge,一线工程师把『不可训练角落』做成了具体管线</h3>
+      <div class="kicker">Every/Cora 团队 Kieran Klaassen 实录 · Slack 反馈 → 定时 Claude Cowork 例程 → 结构化 PR → Fable 5 + Compound Engineering LFG 批量修复 · 是 DEEP A『私域翻译』与 DEEP B『窗口期脚手架』的活体样本</div>
+      <div class="meta-row">Every (YouTube) · Kieran Klaassen · 5,946 chars · 信号 2 颠覆 1 可操作 2 独特 1 时效 2 · <a href="https://www.youtube.com/watch?v=rYX6m4gIys0">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>8</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;I&#x27;ve been using Fable for about a week now and I love it, it&#x27;s my favorite model ever... it&#x27;s basically a factory where lots of stuff goes automatic. I have a scheduled routine in Claude co-work that runs in the morning and the evening... it goes through Slack, just reads everything and structures it. This skill — the alpha feedback pulse — fetches messages using the Slack MCP, classifies it, checks if things are already done.&quot;</div>
+          <div class="cn">「我用 Fable 大约一周了,非常喜欢,是我用过最爱的模型……它基本上就是一个工厂,很多东西自动跑起来。我在 Claude co-work 里有一个定时例程,早晚各跑一次……它会过一遍 Slack、把所有内容读完并结构化。这个 skill——alpha feedback pulse——用 Slack MCP 拉取消息、分类、检查哪些已经做完。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这正是 DEEP A『把私域现实整理成模型可操作形态』的活体样本——Slack 里散乱的人类反馈(私域现实)被一个定时 skill 翻译成结构化、分类、去重的可执行输入。注意它的构件:定时例程 + Slack MCP(私域数据接入)+ 分类/去重逻辑(私域翻译)+ 状态追踪(已做/未做)。给 Gaming 的可抄管线:把你们最有价值但最散乱的私域反馈流(玩家工单、社区舆情、QA bug、运营群)用同样四件套做成『定时拉取 → 结构化分类去重 → 状态追踪』的 pulse,这是把私域现实喂给 agent 的第一步,也是 DEEP A 那层 moat 的起点。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;If they&#x27;re recordings like riff recordings or video, it downloads them so we can analyze them... Rifrack is an open-source library I created, a wrapper you put around your React app where you click a button and it records what you&#x27;re clicking, what you&#x27;re saying, all the network requests and errors, saves the file and you can share it to Slack. It&#x27;s richer information than a video.&quot;</div>
+          <div class="cn">「如果是 riff 录制或视频这类,它会下载下来好让我们分析……Rifrack 是我创建的一个开源库,一个你套在 React app 外面的 wrapper,点一个按钮它就记录你点了什么、说了什么、所有网络请求和报错,存成文件分享到 Slack,比视频信息更丰富。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条是『私域翻译』的精髓细节——他没有止步于『让 agent 读文字反馈』,而是自造了一个工具(Rifrack)把反馈现场升级成『结构化、机器可读、比视频更富信息』的形态(点击流 + 语音 + 网络请求 + 报错)。这就是 DEEP A 说的『handing the model the tools to act / domain-specialized tools next to the customer』。给 Gaming 的启发:不可训练角落的真功夫,在于为采集私域现实造专用工具,把模糊的人类反馈变成 agent 能精准行动的结构化信号。比如游戏内一键反馈不应只录视频,而应同时采集操作序列、状态快照、报错日志、设备上下文——让 agent 拿到的是可直接定位的结构化证据,而非需要人再解读的录像。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;The magic moment was last night: I kicked it off and said &#x27;okay, if everything looks good and the CI is green, merge it.&#x27; This morning I woke up and Brandon said &#x27;whoa, the design looks good, things are slick.&#x27; I was sleeping and it was doing that. So that&#x27;s the dream... It takes a long time to run, sometimes two, three, four hours.&quot;</div>
+          <div class="cn">「魔法时刻是昨晚:我启动它,然后说『好,如果一切看起来没问题、CI 是绿的,就 merge』。今早我醒来,Brandon 说『哇,设计看着不错、很顺滑』。我在睡觉,而它在做这件事。这就是梦想……它要跑很久,有时两三四个小时。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这与 Vol.011 Krieger『对 Claude 道晚安、凌晨 2 点完工』是同一范式的独立第二证言,但更进一步——Kieran 把验收门槛(CI 绿 + 看起来没问题)交给了 agent 自己判断并自动 merge。这是『委派+验收』向『委派+自动验收』的危险而诱人的一步。给 Gaming 的务实分寸:隔夜自动管线的可行性完全取决于『自动验收门』的可信度。CI 绿可以自动 merge 的前提是 CI 覆盖足够;在覆盖不足的领域(玩法手感、数值平衡、美术品味——恰恰是不可训练角落)绝不能自动 merge,必须留人工验收。建议把任务按『验收是否可自动化』分两条流水线:可自动验收的走隔夜自动 merge,不可自动验收的走隔夜产出+晨间人工 review。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;I mine the stuff in batches and I like that because it&#x27;s manageable for me to review. Imagine there were 17 items found in Slack — imagine you have to review 17 pull requests, that&#x27;s a lot of work... The cool part is the compound step: if it makes a mistake, it will also not make the same mistake the next time.&quot;</div>
+          <div class="cn">「我把这些东西批量地挖出来,我喜欢这样,因为对我来说 review 是可管理的。想象 Slack 里找到了 17 个条目——想象你要 review 17 个 pull request,那是很大的工作量……酷的部分是 compound 这一步:如果它犯了个错,下次它也不会再犯同样的错。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:两个可操作的设计点。① 批量化是为了让人的 review 可管理——不是把 17 个反馈变成 17 个 PR 让人逐个看,而是聚合成可批量审阅的形态。这呼应 Vol.011『AI 提效后人与人对齐/review 的权重上升』:产出量上来后,瓶颈从『做』转到『审』,必须把 review 本身设计得可规模化。② compound step(犯错后沉淀为不再犯)是把『纠错』变成『可累积的私域资产』——错误被结构化沉淀进系统,下次自动规避。给 Gaming:建 agent 管线时,把『人类 review 的可管理性』和『错误的可累积沉淀』当作一等设计目标,而非事后补丁——前者决定能否扩规模,后者决定系统会不会越用越聪明(这又是一类模型吃不掉的私域资产)。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>为最有价值但最散乱的私域反馈流(玩家工单/社区舆情/QA bug/运营群)做『定时拉取 → 结构化分类去重 → 状态追踪』pulse(Slack MCP 式四件套),这是把私域现实喂给 agent、构筑不可训练角落 moat 的第一步。</li><li>为采集私域现实造专用工具:游戏内反馈不止录视频,同时采集操作序列/状态快照/报错日志/设备上下文,让 agent 拿到可直接定位的结构化证据而非需人再解读的录像(Rifrack 式『比视频更富信息』)。</li><li>隔夜自动管线按『验收是否可自动化』分两条流水线:CI/可自动验收的走隔夜自动 merge;玩法手感/数值/美术品味等不可训练角落必须留晨间人工 review,绝不自动 merge——自动管线可行性 = 自动验收门可信度。</li><li>把『人类 review 的可管理性』(批量聚合而非逐条 PR)和『错误的可累积沉淀』(compound:犯错后结构化沉淀、下次自动规避)当一等设计目标——前者决定能否扩规模,后者是模型吃不掉的私域资产。</li></ol>
+      </div>
+    </article>
+
+  <h2 class="section-head">▎ 速览 · BRIEF</h2>
+  <div class="brief-grid">
+    
+    <div class="brief">
+      <div class="n">01</div>
+      <div class="tag">BRIEF · AI FOR SCIENCE</div>
+      <h4>天体物理学家用 Codex 模拟黑洞:agent 编码作为科研『私域翻译』的样本</h4>
+      <div class="kicker">OpenAI · 用 Codex 搭建黑洞模拟、检验广义相对论</div>
+      <div class="meta-row">openai.com · OpenAI News · 5,845 chars · <a href="https://openai.com/index/using-codex-to-simulate-black-holes">原文</a></div>
+      <div class="body">OpenAI 案例:天体物理学家用 Codex 构建黑洞模拟,帮助研究极端物理、检验爱因斯坦广义相对论。关键不在『AI 写代码』本身,而在科研人员把高度专业的领域知识(数值相对论、张量计算、特定边界条件)『翻译』成 Codex 可执行的形态——这正是 DEEP A『不可训练角落 = 把私域现实整理成模型可操作样子』在科研场景的具体演绎,也印证 DEEP B『coding 是通用 agent harness』(代码是 agent 操作专业世界的通用接口)。</div>
+      <div class="bullet">✱ Gaming 含义:任何高度专业、规则复杂的内部领域(物理引擎调参、数值平衡建模、反作弊规则、经济系统仿真),价值不在『让 AI 写代码』,而在让领域专家把规则翻译成 agent 可执行/可验证的代码与工具。把领域专家 + agent 编码接口配对,是把专业私域变成 agent 可操作资产的高杠杆路径。</div>
+    </div>
+    <div class="brief">
+      <div class="n">02</div>
+      <div class="tag">BRIEF · PERF / SYSTEMS</div>
+      <h4>PyTorch Profiling(下):从 nn.Linear 到融合 MLP,把性能优化讲成可复制方法</h4>
+      <div class="kicker">Hugging Face Blog · 用 profiler 定位瓶颈、手写 fused MLP kernel</div>
+      <div class="meta-row">huggingface.co · Hugging Face Blog · 21,401 chars · <a href="https://huggingface.co/blog/torch-mlp-fusion">原文</a></div>
+      <div class="body">系列第二篇:用 PyTorch profiler 一步步定位 nn.Linear 的开销,通过算子融合(fused MLP)减少 kernel 启动与显存往返,给出可复制的 profiling→优化闭环。偏底层工程,适合需要压低自有推理/训练成本的团队作为方法参考——在 DEEP A『前沿 API 是不稳定依赖』的背景下,自托管/端侧链路的单位成本优化能力本身就是一种可移植性资产。</div>
+      <div class="bullet">✱ 含义:当前沿 API 被建议当『不稳定依赖』、且 AI 成本走向按量浮动(承接 Vol.011 Jensen『FinOps for AI』),自有推理链路的 profiling/kernel 优化能力 = 直接的毛利与可移植性。技术工具团队可把『推理成本 profiling』纳入常态能力建设,而非临时救火。</div>
+    </div>
+    <div class="brief">
+      <div class="n">03</div>
+      <div class="tag">BRIEF · 工具 / SKILL</div>
+      <h4>微信里跑 Claude Code:开源 Skill 更新,把 agent 编码搬进国内 IM 入口</h4>
+      <div class="kicker">逛逛GitHub · 开源 Skill 更新 · 微信内调用 Claude Code</div>
+      <div class="meta-row">Weixin Official Accounts · 逛逛GitHub · 2,435 chars · <a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534429&amp;idx=1&amp;sn=c918119b30f6fd50fceeac4e1aa61423">原文</a></div>
+      <div class="body">公众号介绍其开源 Skill 的更新,让用户在微信里直接调用 Claude Code 做编码任务,把 agent 编码能力嵌进国内高频 IM 入口。偏工具发现/实操向,价值在『入口下沉』信号:agent 能力正从专用 IDE 向用户已在的 IM/聊天界面迁移,与 Vol.011『agent thin-client / 取消菜单』同向。</div>
+      <div class="bullet">✱ 含义:agent 能力的分发入口正在向用户既有的高频界面(IM)下沉。对 Gaming:面向策划/运营/玩家的 agent 能力,考虑嵌进他们已在使用的聊天/协作工具,而非要求他们切到新界面——入口摩擦往往比能力本身更决定采用率。工具发现型,可作内部 agent 分发形态的参考。</div>
+    </div>
+    <div class="brief">
+      <div class="n">04</div>
+      <div class="tag">BRIEF · DEEPTECH / 第一性原理</div>
+      <h4>15 公里『太空炮』:用第一性原理质疑火箭路径,廉价入轨的另一种解</h4>
+      <div class="kicker">South Park Commons · Longshot Space CTO Nato Saichek</div>
+      <div class="meta-row">YouTube · South Park Commons · 45,058 chars · <a href="https://www.youtube.com/watch?v=2efJqrK5DKQ">原文</a></div>
+      <div class="body">Longshot Space 联创/CTO Nato Saichek 论证:火箭赢得太空竞赛是出于『错误的理由』,而一门 15 公里长的电磁/气动『太空炮』也许是廉价入轨最理性的路径。核心是第一性原理式的路径质疑——不被既有范式(火箭)绑架,从物理与成本本质重推方案。与 Gaming 直接关联低,价值在思维方法。</div>
+      <div class="bullet">✱ 含义:纯思维方法参考——当所有人都在同一条范式(自建 harness/堆模型能力)上竞争时,回到第一性原理问『这条路是不是因为错误的理由赢的』。呼应本卷主线:别在会被商品化/被模型吃掉的赛道上内卷,从成本与本质重推你真正的不可复制角落在哪。非决策级,思维收藏。</div>
+    </div>
+  </div>
+
+  <h2 class="section-head">▎ 速记 · SKIM</h2><div class="skim-grid">
+    <div class="skim">
+      <span class="n">S01</span><span class="tag">ARXIV · TAKARA 精选</span>
+      <h5>takara.ai 精选 6 篇(steerability / agent eval / post-training 可解释性)</h5>
+      <p>白名单析出 6 篇:① When is Your LLM Steerable? —— activation steering 成败高度依赖 prompt/concept/model/配置,可从前几个 token 的内部状态预测可操控区间(直接呼应 Fable 5 steering-vector 争议与 DEEP A『可操控性是采用瓶颈』)。② Claw-SWE-Bench —— 为 OpenClaw 式通用 agent 定义干净的 Docker/patch/prediction 适配协议来公平测编码能力(对应 DEEP B『harness 标准化』)。③ Anatomy of Post-Training —— 用可解释性在优化前检视偏好数据集教了模型什么(揪 sycophancy/过度风格化的伪相关)。④ SkillJuror —— Progressive Disclosure(精简根文件指向支撑资源)vs 扁平组织如何改变 Skill 运行时行为。⑤ Notes2Skills —— 把实验室笔记(含不确定性)转成 certainty-aware 科学 agent skills。⑥ AI Researchers Must Help Lead Arms Control —— 呼吁 AI 研究者参与军用 AI 军控。LLM-ops 团队可择 ①②③ 深挖。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S02</span><span class="tag">ARXIV · 批量 SKIM</span>
+      <h5>takara.ai arxiv RSS 洪流 44 篇(批量略读)</h5>
+      <p>本日 takara.ai 一次性灌入约 50 篇 arxiv 论文 RSS,绝大多数高度学术/窄域(理论、特定基准、小众架构),对 Gaming 产品决策杠杆低。已用 steerability/agent-eval/post-training 白名单析出 6 篇(见 S01),其余 44 篇进批量 skim 桶不逐篇分析;清单存档于 takara_skim.json,如某方向需深挖可回捞。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S03</span><span class="tag">NVIDIA · short</span>
+      <h5>Jensen:你不会输给 AI,但会输给用 AI 的人(short)</h5>
+      <p>Sequoia short:黄仁勋讲 AI 投资的五层蛋糕(能源/芯片/基础设施/模型/应用),并用放射科与软件工程的例子反驳『AI 消灭工作』——自动化反而抬高了劳动需求。是 Vol.011 黄仁勋长访谈的短版引子,观点已在上卷深读,本卷仅作背景收藏。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S04</span><span class="tag">STRATECHERY · 访谈</span>
+      <h5>Ben Thompson × Ben Bajarin:Apple、AI 与算力(WWDC 复盘)</h5>
+      <p>Stratechery 访谈 Ben Bajarin 谈 WWDC 与 AI 算力产业现状(601 词正文 + 付费墙)。可取片段有限,主要价值在跟踪 Apple 在端侧/Foundation Models 上的 AI 算力布局(本卷 DEEP A 提到 Apple 已给开发者接入 Claude Fable 5 的 Foundation Models 支持)。付费墙限制深读,背景收藏;Stratechery 邮件转发仍值得配置以便更全摄取。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S05</span><span class="tag">MARKETING · 模板</span>
+      <h5>Tom&#x27;s Marketing:让亿级 CEO 回复的 LinkedIn 冷消息模板</h5>
+      <p>一套经验证的 LinkedIn 冷启动话术与模板:让对方感到被精选的开场、简洁具体有惊喜的价值句、避免自说自话和直接索要长时间通话。偏 BD/增长实操,对需要高层 outreach 的 BD/合作团队有直接参考价值。付费解锁完整模板,本卷作工具型收藏。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S06</span><span class="tag">MEMO · 行业氛围</span>
+      <h5>Dan Hockenmaier / Emily Kramer:Mythos 论战与旧金山 AI 路牌广告</h5>
+      <p>两条短笔记:① Dan Hockenmaier 讨论 Claude Mythos/Fable 上线引发的正反论战(有人称 AGI 证据、有人说噱头且低效);② Emily Kramer 实地观察旧金山最贵的路牌广告几乎都在打初创公司的 agent 与 AI。是本卷 Fable 主线的行业氛围侧写,印证『信任分裂 + 资本狂热并存』。短信号收藏。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S07</span><span class="tag">FOUNDER · short</span>
+      <h5>David Senra:Steve Jobs 收到的最好建议(short)</h5>
+      <p>Sequoia short:David Senra 讲 Atari 创始人 Nolan Bushnell 影响 Steve Jobs 的一句话。创始人叙事/品味向短片,与本卷『intent/品味不可训练』隐性呼应,边角料收藏。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S08</span><span class="tag">PRODUCT · short</span>
+      <h5>第一代 iPod 并不成功(short)</h5>
+      <p>Lenny&#x27;s Podcast short:第一代 iPod 并非一炮而红。产品耐心/长期主义向短片,提醒『初代不成功不等于方向错』,对评估早期 AI 产品的耐心有隐性参考。边角料收藏。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S09</span><span class="tag">DEEPTECH · short</span>
+      <h5>造一门巨型太空炮(short)</h5>
+      <p>South Park Commons short:15 公里太空炮能否成立的引子,是 BRIEF 04 Longshot Space 长访谈的短版。第一性原理思维向片段,背景收藏。</p>
+    </div></div>
+
+  <h2 class="section-head">▎ 跳过 · SKIP</h2>
+  <div class="skip"><b>(takara.ai arxiv RSS)</b> — takara.ai · 约 50 篇 arxiv RSS 一次性灌入,6 篇析出见 S01、44 篇批量 skim 见 S02,清单存 takara_skim.json,不逐篇深析</div>
+
+  <h2 class="section-head">▎ 去重 · DUP</h2><div class="dup"><b>PRC-linked influence operations are targeting AI debates in the US</b> — Vol.011 BRIEF 02 已深读(OpenAI 封禁两簇 PRC 关联账号、AI 基础设施被武器化为舆论叙事);本卷不重复分析</div>
+
+  <h2 class="section-head">▎ 新增观点入库 · VP LEDGER (16 条 · append-only 到 _mira-vp-index)</h2>
+  <table class='ledger'><thead><tr><th>分类</th><th>观点</th><th>来源</th></tr></thead><tbody><tr><td>The Untrainable Corner / Moat</td><td>[NEW 2026-06-12] 应用的 moat 不在模型,而在『不可训练角落』:把公司私域现实整理成模型可操作形态 + 交付行动工具 + 与客户改变其员工现实——这种翻译永不结束、难以复制,由贴客户的领域工程师赢得</td><td>Sarah Guo/Latent Space × mira</td></tr><tr><td>The Untrainable Corner / Moat</td><td>[NEW 2026-06-12] intent/offense(选择做什么)是模型帮不上、无法 benchmark、因此无法训练的——意图也许是比算力更稀缺的输入;这从数学上解释了为何『把 judgment 留给人类』是结构必然而非怀旧</td><td>Sarah Guo × mira</td></tr><tr><td>The Untrainable Corner / Moat</td><td>[NEW 2026-06-12] 最常被引用的 benchmark 分是『即将贬值的疆域地图』+『谁将失去定义何为好之权力』的通告;应自建贴业务的可验证评测集(golden set)把评判权握在自己手里,它既是质量基建也是话语权资产</td><td>Sarah Guo × mira</td></tr><tr><td>The Untrainable Corner / Moat</td><td>[NEW 2026-06-12] 选型看『私域任务上的可操控性(steerability)』而非总榜峰值:Fable 5 task-success 第一但 steerability 更弱;能否稳定按你的约束/口径行动比峰值能力更决定能否进生产链路</td><td>AINews/Agent Arena × mira</td></tr><tr><td>The Untrainable Corner / Moat</td><td>[NEW 2026-06-12] Fable 静默护栏争议沉淀后的工程共识:把前沿 API 当不稳定依赖、保持 model portability、持续 eval 验证;数据留存/ZDR/地域是选型硬约束(30 天留存排除零留存环境与部分欧洲)</td><td>dbreunig/GergelyOrosz/scaling01 × mira</td></tr><tr><td>Model Eats the Harness</td><td>[NEW 2026-06-12] 『模型』已不等于权重,而是权重 + 不断吞并进来的脚手架构成的扩张系统;判断自研工程时先问『这是通用脚手架(会被吃掉)还是私域翻译(吃不掉)』</td><td>Logan Kilpatrick × mira</td></tr><tr><td>Model Eats the Harness</td><td>[NEW 2026-06-12] 自建 harness 的 alpha 约 12 个月保质期,会被模型消化、上收进模型,alpha 转移到别处(正是 Sarah Guo 的不可训练角落);harness 是吃窗口红利的阶段性载体,不是长期护城河</td><td>Logan Kilpatrick × mira</td></tr><tr><td>Model Eats the Harness</td><td>[NEW 2026-06-12] portability 仍要保(防静默漂移+合规),但实现方式从『自建厚 harness』转向『薄抽象层 + 强模型自适应』——别用又厚又会贬值的资产去对冲锁定风险</td><td>Logan Kilpatrick × mira(批判性综合)</td></tr><tr><td>Model Eats the Harness</td><td>[NEW 2026-06-12] 大厂把 agent harness 当贯穿全产品线的 through line(连接层)而非孤立功能;coding 已成通用 agent harness(代码是 agent 操作世界的通用接口),内部系统应暴露 agent 可调用的代码级接口</td><td>Logan Kilpatrick × mira</td></tr><tr><td>AI Factory / Workflow (活体样本)</td><td>[NEW 2026-06-12] 把散乱私域反馈流做成『定时拉取→结构化分类去重→状态追踪』pulse(Slack MCP 式四件套),是把私域现实喂给 agent、构筑不可训练角落 moat 的第一步</td><td>Kieran Klaassen/Every × mira</td></tr><tr><td>AI Factory / Workflow (活体样本)</td><td>[NEW 2026-06-12] 为采集私域现实造专用工具(Rifrack:点击流+语音+网络请求+报错,比视频更富信息);不可训练角落的真功夫在把模糊人类反馈变成 agent 可精准行动的结构化证据</td><td>Kieran Klaassen × mira</td></tr><tr><td>AI Factory / Workflow (活体样本)</td><td>[NEW 2026-06-12] 隔夜自动管线按『验收是否可自动化』分两条流水线:CI 绿可自动 merge;玩法手感/数值/美术品味等不可训练角落必须留人工 review——自动管线可行性=自动验收门可信度</td><td>Kieran Klaassen × mira</td></tr><tr><td>AI Factory / Workflow (活体样本)</td><td>[NEW 2026-06-12] 产出量上来后瓶颈从『做』转到『审』:把人类 review 可管理性(批量聚合非逐条 PR)与错误可累积沉淀(compound:犯错后结构化沉淀、下次自动规避)当一等设计目标;后者是模型吃不掉的私域资产</td><td>Kieran Klaassen × mira</td></tr><tr><td>AI for Science / Systems</td><td>[NEW 2026-06-12] 高度专业领域(物理引擎/数值平衡/反作弊/经济系统仿真)价值不在让 AI 写代码,而在领域专家把规则翻译成 agent 可执行可验证的代码与工具;领域专家+agent 编码接口配对是高杠杆路径</td><td>OpenAI(Codex 黑洞)× mira</td></tr><tr><td>AI for Science / Systems</td><td>[NEW 2026-06-12] 前沿 API 被当不稳定依赖+AI 成本按量浮动的背景下,自有推理链路的 profiling/kernel 融合(fused MLP)优化能力=直接毛利与可移植性资产,应纳入常态能力建设而非临时救火</td><td>Hugging Face × mira</td></tr><tr><td>Distribution / Entry Point</td><td>[NEW 2026-06-12] agent 能力分发入口正向用户既有高频界面(IM/聊天)下沉(微信内跑 Claude Code);面向策划/运营/玩家的 agent 应嵌进其已用工具而非要求切新界面——入口摩擦常比能力更决定采用率</td><td>逛逛GitHub × mira</td></tr></tbody></table>
+
+  <footer class="footer">
+    <span>MIRA · Daily Broadside · Vol.012 · 自包含单文件</span>
+    <span>下期 · <b>2026-06-13 06:00 Asia/Shanghai</b></span>
+  </footer>
+</div>
+</body>
+</html>
