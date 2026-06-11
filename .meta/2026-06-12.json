@@ -1,0 +1,12 @@
+{
+  "date": "2026-06-12",
+  "vol": "012",
+  "title": "The Untrainable Issue — benchmark 之外的『不可训练角落』:模型吃掉 harness,意图比算力更稀缺",
+  "subtitle": "Fable 5 的尘埃落定后,讨论从『能力/治理』移向一个更根本的问题:什么是模型永远学不会的?Sarah Guo(经 Latent Space)给出最锋利的回答——应用靠『把公司私域现实整理成模型可操作的样子』赢得『不可训练角落(the untrainable corner)』,而『选择做什么(intent/offense)』模型帮不上忙、无法 benchmark、因此无法训练,『意图也许是比算力更稀缺的输入』· Logan Kilpatrick(Google AI Studio/Gemini API)反向断言:『模型会吃掉 harness』,自建 scaffolding 的 alpha 约 12 个月保质期,会被上收进模型,alpha 转移到别处 · Every/Kieran:Slack 反馈『自己变成 PR』的 AI 工厂、隔夜跑 2-4 小时 CI 绿了自动 merge · 配套:Codex 模拟黑洞、PyTorch MLP fusion、takara.ai arxiv 洪流(steerability/Claw-SWE-Bench/post-training 可解释性白名单 6 篇)",
+  "deep_count": 3,
+  "brief_count": 4,
+  "skim_count": 9,
+  "skip_count": 1,
+  "dup_count": 1,
+  "new_viewpoints": 16
+}
