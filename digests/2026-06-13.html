@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>The Loop Issue — 别再写 prompt 了,去设计循环:Agent 的『苦涩教训』升级版 — Vol.013</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --bg-warm: #1a1a18;
+  --bg-warm-2: #1f1a14;
+  --orange: #e85d26;
+  --orange-soft: #f4a06a;
+  --yellow: #f6d24a;
+  --ink: #f3ede4;
+  --ink-dim: #b4a999;
+  --rule: #2c2823;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  margin: 0; padding: 0; line-height: 1.65;
+  font-size: 16px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
+.chrome { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim); text-transform: uppercase; }
+
+.masthead { border-top: 6px solid var(--orange); padding-top: 18px; margin-bottom: 28px; }
+.masthead .topline { display: flex; justify-content: space-between; }
+.masthead h1 {
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 52px; line-height: 1.04; margin: 14px 0 10px;
+  color: var(--orange); letter-spacing: -0.01em;
+}
+.masthead h2 {
+  font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic;
+  font-size: 18px; color: var(--orange-soft); margin: 0 0 16px;
+}
+.masthead .meta {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 10px 0; display: flex; gap: 28px; flex-wrap: wrap;
+}
+.meta span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+.meta span b { color: var(--yellow); font-weight: 600; }
+
+.editorial {
+  background: var(--bg-warm-2); border-left: 4px solid var(--yellow);
+  padding: 22px 28px; margin: 28px 0 40px;
+}
+.editorial h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 12px; letter-spacing: 0.12em;
+}
+.editorial p {
+  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 1.75;
+  margin: 0 0 10px; color: var(--ink);
+}
+
+.section-head {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--orange); margin: 40px 0 18px;
+  border-bottom: 2px solid var(--rule); padding-bottom: 10px;
+}
+
+.deep-card {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 30px 32px; margin: 0 0 32px; border-radius: 2px;
+}
+.deep-card .tag {
+  display: inline-block; background: var(--orange); color: #fff;
+  padding: 3px 10px; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+}
+.deep-card h3 {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 27px; line-height: 1.2; margin: 14px 0 6px; color: var(--ink);
+}
+.deep-card .kicker { font-size: 14px; color: var(--orange-soft); margin: 0 0 8px; }
+.deep-card .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+.deep-card .meta-row a { color: var(--yellow); text-decoration: none; }
+
+.scorecard {
+  background: rgba(0,0,0,0.3); padding: 14px 18px; margin: 16px 0 22px;
+  display: grid; grid-template-columns: repeat(5, 1fr) 90px; gap: 14px; align-items: center;
+}
+.score-dim { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); }
+.score-dim b { display: block; color: var(--ink); font-size: 18px; font-family: 'Barlow', sans-serif; }
+.score-bar { background: var(--rule); height: 4px; margin-top: 4px; }
+.score-bar > div { background: var(--orange); height: 100%; }
+.score-total { text-align: right; font-family: 'Barlow', sans-serif; }
+.score-total b { font-size: 32px; color: var(--yellow); }
+.score-total span { font-size: 14px; color: var(--ink-dim); }
+
+.arg { margin: 26px 0; }
+.arg h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--yellow); margin: 0 0 12px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.arg .quote {
+  font-family: 'Noto Serif SC', serif; font-style: italic;
+  font-size: 15px; color: var(--ink); border-left: 3px solid var(--orange-soft);
+  padding: 6px 16px; margin: 8px 0;
+}
+.arg .cn { font-size: 14px; color: var(--ink); padding: 0 16px; margin: 8px 0; }
+.arg .mira {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 10px 16px; margin: 12px 0 0;
+  font-size: 14px; color: var(--ink);
+}
+.arg .mira b { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+.takehome {
+  background: rgba(246,210,74,0.06); border: 1px solid rgba(246,210,74,0.25);
+  padding: 18px 22px; margin: 24px 0 0;
+}
+.takehome h4 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.12em;
+}
+.takehome ol { margin: 0; padding-left: 22px; }
+.takehome li { margin: 6px 0; font-size: 14px; color: var(--ink); }
+
+.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .brief-grid { grid-template-columns: 1fr; } }
+.brief {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+.brief .n { font-family: 'Barlow', sans-serif; font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.brief .tag {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--yellow); letter-spacing: 0.1em; margin: 4px 0 8px;
+}
+.brief h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 1.25; color: var(--ink); margin: 0 0 6px;
+}
+.brief .kicker { color: var(--orange-soft); font-size: 13px; margin: 0 0 8px; }
+.brief .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); margin-bottom: 10px; }
+.brief .meta-row a { color: var(--yellow); text-decoration: none; }
+.brief .body { font-size: 14px; line-height: 1.7; }
+.brief .bullet {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 8px 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink);
+}
+
+.skim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .skim-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .skim-grid { grid-template-columns: 1fr; } }
+.skim {
+  background: var(--bg-warm); border: 1px solid var(--rule); padding: 14px 16px;
+}
+.skim .n { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--orange-soft); }
+.skim .tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--yellow); letter-spacing: 0.1em; margin-left: 8px; }
+.skim h5 { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); margin: 6px 0; line-height: 1.3; }
+.skim p { font-size: 12px; line-height: 1.55; color: var(--ink-dim); margin: 0; }
+
+.skip { background: var(--bg-warm); border-left: 3px solid var(--ink-dim); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink-dim); }
+.skip b { color: var(--ink); }
+
+.dup { background: var(--bg-warm); border-left: 3px solid var(--yellow); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+.dup b { color: var(--yellow); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.ledger th { color: var(--yellow); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.ledger td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--orange-soft); font-size: 11px; width: 18%; }
+.ledger td:nth-child(2) { width: 50%; }
+.ledger td:nth-child(3) { color: var(--ink-dim); width: 32%; }
+
+.footer {
+  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+}
+.footer b { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Daily Reading Broadside · Vol.013</span>
+      <span class="chrome">2026-06-13 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Loop Issue — 别再写 prompt 了,去设计循环:Agent 的『苦涩教训』升级版</h1>
+    <h2>今天整个圈子在同一件事上撞车:不要再 prompt agent,要去设计 prompt agent 的循环(loop)。Steipete『你应该设计驱动 agent 的循环』、Boris Cherny『我不再 prompt Claude,我写循环、循环干活』、Karpathy『把自己移出循环、最大化 token 吞吐』三方独立同频;AINews 据此提出 agent 版『Salty Lesson(苦涩教训)』——别再自己动手修,转去做能随 agent 数量扩展的系统(目标与编排)· 微软开源 SkillOpt 把『训练神经网络的纪律』搬到优化 Skill.md(权重=md 文件/梯度=轨迹反思/验证集=评分门控),52 评测单元全胜、最高 +39 分、零推理成本 · AI Daily Brief:网站正成为知识工作的新产出单元,且 Cloudflare 称 bot 浏览量首超人类——产物要为 agent 消费而设计 · 配套:olmo-eval(开发循环的评测工作台)、Jensen『token 工厂』、OpenAI Academy/Preply(把 AI 嵌进工作流但保留人类判断)· 延续 Vol.012『意图不可训练』:模型负责执行,人的活迁向循环的设计与编排</h2>
+    <div class="meta">
+      <span>候选 <b>66</b></span>
+      <span>析出 <b>20</b></span>
+      <span>深读 <b>3</b></span>
+      <span>简评 <b>4</b></span>
+      <span>速记 <b>9</b></span>
+      <span>跳过 <b>1</b></span>
+      <span>重复 <b>1</b></span>
+      <span>新观点 <b>14</b></span>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <h3>EDITORIAL · 编辑卷首语</h3>
+    <p>今天整个圈子在同一件事上撞了车,撞得干脆利落:不要再 prompt agent 了,去设计 prompt agent 的『循环(loop)』。Peter Steinberger 说『你应该设计驱动 agent 的循环』,Anthropic 的 Boris Cherny 说『我不再 prompt Claude,我写循环、循环干活』,Karpathy 说『把自己从瓶颈位置移走、最大化 token 吞吐——我不想做守在循环里盯结果的人』。三个人各自独立喊出同一句话,这种『独立同频』本身就是最强的信号。AINews 据此把它提炼成 agent 时代的『Salty Lesson(苦涩教训)』,对位 Rich Sutton 给模型的『Bitter Lesson』:别再像过去那样自己动手修一个个问题,转去做能随 agent 数量扩展的系统——目标(goals)与编排(orchestration)。而循环设计的核心手艺,是知道何时『下沉一层求可靠』、何时『上升一层求杠杆』。</p>
+    <p>这恰好是 Vol.012『意图不可训练』的直接操作化续集。Vol.012 把人和模型的边界画在『模型负责执行、意图留给人』;本卷回答了那个紧接着的问题——那人具体该干什么?答案是:人的活从『在循环里写 prompt』上移到『在循环外设计循环』。三篇深读正好是这条主线的三个切面。Loopcraft 是元原理(别 prompt,去堆叠循环,会升降档)。微软开源的 SkillOpt 是最硬核的一个具体循环:把 Skill.md 当成神经网络的可训练参数,权重=md 文件、梯度=任务轨迹反思、学习率=编辑幅度预算、验证集=评分门控、epoch=多轮迭代——第一次把『优化 prompt/skill』这件全凭手感的事,装上了完整的训练学科框架,52 个评测单元全胜、最高 +39 分,产物却是一个零推理成本的小 markdown。AI Daily Brief 则讲循环的产物长什么样:当生成成本崩塌,网站正取代 deck/PDF 成为知识工作的新产出单元,而 Cloudflare 称 bot/agent 浏览量已首超人类——产物从此要为 agent 消费而设计。</p>
+    <p>把三篇串起来,本卷的主线很清楚:模型负责执行(且正被商品化,见 Jensen『token 工厂』),人的护城河收敛到三件模型学不会的事——选对意图(Vol.012 的 offense)、设计能扩展的循环与编排(本卷 Salty Lesson)、以及把这一切立在 eval/验证门控的地基上(SkillOpt 的验证门、olmo-eval 的开发循环、Vol.011/012 的 golden set,本是同一根钉子)。配套四条 brief:olmo-eval(开发循环的评测工作台)、Jensen(智能商品化的战略背景)、OpenAI Academy(连官方课程都把『识别哪里需要人类判断』写进教学)、Preply(AI 接管脏活、人保留连接与判断的分工样本)。66 候选(约 50 篇 takara.ai arxiv RSS,白名单析出 agent 记忆/eval/可解释/防御 6 篇)析出 20 篇精读:3 deep / 4 brief / 9 skim / 1 skip / 1 dup,新增 14 条观点入库。一句话收口 Vol.012→013:意图不可训练,所以人来选;执行会商品化,所以人去编排——别再写 prompt,去设计循环。</p>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · DEEP</h2>
+  
+    <article class="deep-card" id="loopcraft">
+      <span class="tag">LATENT SPACE / AINEWS · LOOP DISCOURSE</span>
+      <h3>堆叠循环的艺术:别再 prompt,去设计循环——知道何时『下沉一层求可靠』、何时『上升一层求杠杆』</h3>
+      <div class="kicker">Steipete / Boris Cherny / Karpathy 三方独立同频 · AINews 提炼 agent 版『Salty Lesson(苦涩教训)』 · 与 Rich Sutton『Bitter Lesson(苦涩教训)for models』对位 · 同日记录 Fable 5 静默降质一天内被舆论逼回滚</div>
+      <div class="meta-row">latent.space (AINews) · Latent Space · 12,810 chars · 信号 2 颠覆 2 可操作 2 独特 2 时效 2 · <a href="https://www.latent.space/p/ainews-loopcraft-the-art-of-stacking">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>10</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">Steipete: &quot;Here&#x27;s your monthly reminder that you shouldn&#x27;t be prompting coding agents anymore. You should be designing loops that prompt your agents.&quot; Boris: &quot;I don&#x27;t prompt Claude anymore. I write loops, the loops do the work.&quot;</div>
+          <div class="cn">Steipete:「这是给你的每月提醒:你不应该再去 prompt 编码 agent 了,你应该去设计那些 prompt 你的 agent 的循环。」Boris(Cherny):「我不再 prompt Claude 了,我写循环,循环来干活。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是本卷的定盘星,也是 Vol.012『意图不可训练』的直接操作化续集。Vol.012 说模型负责执行、意图留给人;本卷回答『那人到底该干什么』——人的活从『写 prompt(在循环里)』上移到『设计循环(在循环外)』。两位是 Peter Steinberger 与 Anthropic 的 Boris Cherny,各自独立喊出同一句话,这种『独立同频』本身就是强信号:prompt 工程作为核心技能正在被『循环设计/编排』取代。给 Gaming 的判断:衡量团队 AI 成熟度的指标要从『谁的 prompt 写得好』迁到『谁设计的循环跑得稳、能无人值守扩展』。把『循环设计能力』当作新的一等工程技能来识别和培养。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">Karpathy on autoresearch: &quot;You have to remove yourself as the bottleneck. You can&#x27;t be there to prompt the next thing... the name of the game now is to increase your leverage. I don&#x27;t want to be the researcher in the loop looking at results etc, I&#x27;m holding the system back. So the question is how do I refactor all the abstractions so that I&#x27;m not — I have to arrange it once and hit go.&quot;</div>
+          <div class="cn">Karpathy 谈自动化研究:「你必须把自己从瓶颈位置移走。你不能守在那里去 prompt 下一件事……现在游戏的名字叫提升你的杠杆。我不想做那个守在循环里盯结果的研究员,我在拖慢系统。所以问题是:我如何重构所有抽象,让我不必在场——我只需安排一次,然后按下开始。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Karpathy 把『把自己移出循环』说成了一种纪律——只要你还守在循环里逐步 prompt,你就是系统的瓶颈。注意他的关键动作是『重构抽象,使得安排一次即可 hit go』,这与 Vol.011『委派+验收』、Vol.012 Kieran『隔夜跑、CI 绿自动 merge』是同一条演化线的源头理论。给 Gaming 的务实分寸:『把人移出循环』追求的是 token 吞吐/杠杆最大化,但前提是验收能被自动化(见 Vol.012 自动验收门)。在可自动验证的环节(构建、测试、数据处理、批量素材生成)激进地把人移出循环;在不可验证的环节(玩法手感、数值、品味)人仍是循环的必要一环。先问『这个循环的验收能不能自动化』,再决定人留不留在里面。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;One might argue the entire game of the next century is to be able to stack loops as effectively as possible. In the early days of each phase, it will be valuable to know when to go DOWN a loop when things go wrong (for reliability)... but it will probably be more valuable to know how to go UP a loop as models improve (for leverage). If you don&#x27;t figure out how to do this, don&#x27;t be salty when you lose to those that do.&quot;</div>
+          <div class="cn">「也许可以说,未来一个世纪整个游戏就是:尽可能高效地堆叠循环。在每个阶段的早期,知道何时『下沉一层循环』(出问题时,为了可靠性)很有价值……但随着模型变强,知道如何『上升一层循环』(为了杠杆)可能更有价值。如果你想不明白怎么做,等你输给那些想明白的人时,别不服气(don&#x27;t be salty)。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条给出了循环设计的核心操作变量——『上/下一层』的时机判断。下沉(go DOWN)= 出问题时回到更细粒度、人更介入的循环,换可靠性;上升(go UP)= 模型变强后退到更高抽象、更少介入的循环,换杠杆。这其实是一种动态的『信任校准』:不是一次性决定自动化程度,而是随模型能力、随任务可靠性持续上下调档。给 Gaming 的框架:为每条 AI 管线显式定义它的『循环层级阶梯』和升降档触发条件——比如『连续 N 次自动验收通过 → 上升一层(减少人工 checkpoint)』『出现 M 次回归 → 下沉一层(加回人工 review)』。把自动化程度做成可调档、有触发条件的旋钮,而不是拍脑袋的开关。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">The &#x27;Salty Lesson&#x27; for agents (vs Sutton&#x27;s &#x27;Bitter Lesson&#x27; for models): &quot;Don&#x27;t fix things yourself, as you have done historically. Instead focus on systems that scale with more agents, like goals and orchestration.&quot;</div>
+          <div class="cn">agent 版的『苦涩教训(Salty Lesson)』(对位 Sutton 给模型的『Bitter Lesson』):「不要像你历来那样自己动手修。转而专注于那些能随更多 agent 而扩展的系统——比如目标(goals)与编排(orchestration)。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:Sutton 的 Bitter Lesson 是『别堆人工先验,押注算力+通用方法会赢』;这里的 Salty Lesson 把同一精神迁到 agent 时代——『别自己动手修一个个具体问题,押注能随 agent 数量扩展的系统(目标设定 + 编排)会赢』。这是对『工程师价值』的一次重定义:价值不在你亲手修了多少 bug,而在你设计的目标/编排系统能调动多少 agent。给 Gaming 的组织含义:这与 Vol.012『组织重心从谁能执行迁向谁能选对要造什么』完全咬合,并补上中间层——选对意图(offense)→设计能扩展的循环/编排(Salty Lesson)→agent 执行。三层里,纯执行最先被商品化,意图与编排是人要牢牢握住的。绩效与晋升信号也应随之调整:奖励『搭出能自动扩展的系统』,而非『加班手修问题』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">On agents as persistent infra: &quot;ClaudeDevs added scheduled deployments and environment variables to Claude Managed Agents, enabling recurring jobs and CLI/API auth without exposing secrets to the model; credentials are swapped at the network boundary... The common theme is a shift from &#x27;best model&#x27; discourse toward execution control, review layers, observability, and portability.&quot;</div>
+          <div class="cn">关于 agent 作为持久基础设施:「ClaudeDevs 给 Claude Managed Agents 加了定时部署和环境变量,支持周期性任务和 CLI/API 鉴权,而不把密钥暴露给模型——凭证在网络边界处被替换……共同主题是:从『哪个模型最好』的讨论,转向执行控制、审查层、可观测性与可移植性。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:把这条放在 Loopcraft 收尾,是因为它是『循环』从理念落到基建的证据——当你不再 prompt 而是设计循环,循环就需要被当成持久服务来运营:能定时调度、能安全注入凭证(在网络边界换、不进模型上下文)、能观测、能换模型。注意整段的判断与 Vol.012 DEEP A『把前沿 API 当不稳定依赖、保持 portability、持续 eval』完全一致:行业话语权正从『best model』转向『execution control / review / observability / portability』。给 Gaming 的基建清单:把内部 agent 循环按『持久服务』标准建设——① 定时/事件触发调度;② 凭证在边界注入、绝不进模型上下文(安全合规底线);③ 全链路可观测(每步轨迹可回放);④ 模型可替换。这四件套是『循环时代』的运维地基。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>把团队 AI 成熟度指标从『谁 prompt 写得好』迁到『谁设计的循环跑得稳、能无人值守扩展』:把『循环设计/编排』当作新的一等工程技能来识别、培养、激励(prompt 工程正被循环设计取代)。</li><li>为每条 AI 管线先问『验收能不能自动化』再决定人留不留在循环里:可自动验证环节(构建/测试/数据/批量素材)激进把人移出循环换杠杆;不可验证环节(玩法手感/数值/品味)人留在循环里换可靠性。</li><li>把自动化程度做成可调档旋钮而非开关:为每条管线定义『循环层级阶梯』与升降档触发条件(连续 N 次自动验收通过→上升一层减人工 checkpoint;M 次回归→下沉一层加回人工 review),动态校准信任。</li><li>按 Salty Lesson 重定义工程价值与绩效信号:奖励『搭出能随 agent 数量扩展的目标/编排系统』而非『加班手修一个个问题』——执行最先被商品化,意图与编排是人要握住的。</li><li>把内部 agent 循环按『持久服务』四件套建设:定时/事件触发调度 + 凭证在网络边界注入(绝不进模型上下文) + 全链路可观测可回放 + 模型可替换——这是循环时代的运维地基,也是合规底线。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="skillopt">
+      <span class="tag">MICROSOFT RESEARCH · SKILLOPT(开源)</span>
+      <h3>像训练神经网络一样训练 Skill:把 Skill.md 当可训练参数,52 评测单元全胜、最高 +39 分、零推理成本</h3>
+      <div class="kicker">微软研究院开源 SkillOpt · 权重=Skill.md / 梯度=轨迹反思 / 学习率=编辑幅度预算 / 验证集=评分门控 / epoch=多轮迭代 · ReflACT 六阶段管线 · GitHub 上线不到一月 5000+ Star · 是 DEEP A『设计循环』里最硬核的一个具体循环</div>
+      <div class="meta-row">Weixin (逛逛GitHub 转述) · github.com/microsoft/SkillOpt · 3,825 chars · 信号 2 颠覆 2 可操作 2 独特 2 时效 1 · <a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534447&amp;idx=1&amp;sn=f9b46a49c2c7b41a0396575c22cd7290">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-total"><b>9</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">「SkillOpt 的核心想法其实很直觉:把 Skill 的 md 文件当作神经网络里的可训练参数,然后用训练神经网络的那套纪律去优化它。神经网络的权重 → Skill.md;梯度 → 基于任务轨迹的反思分析;学习率 → 每次文本编辑的幅度预算;验证集 → held-out 数据上的评分门控;epoch → 多轮迭代优化。」</div>
+          <div class="cn">(原文为中文)核心:把 Skill 的 markdown 文件当成神经网络里的可训练参数,用训练神经网络那一整套纪律来优化它——权重对应 Skill.md,梯度对应『基于任务执行轨迹的反思分析』,学习率对应『每次文本编辑的幅度预算』,验证集对应『在留出数据上的评分门控』,epoch 对应『多轮迭代优化』。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是把『优化 prompt/skill』这件一直靠手感的事,第一次装上了完整的训练学科框架。它正面回答了所有做 agent 的人都头疼的问题:Skill.md 改了到底有没有变好?以前是『改改跑跑、好就留下、不好再改』,没有验证集、全凭手感;SkillOpt 把它变成有梯度(轨迹反思)、有学习率(小步编辑)、有验证集(评分门控)的可复现优化。这正是 DEEP A『设计循环』里最硬核的一个落地循环——一个自动优化 skill 文档的循环。给 Gaming 的直接价值:你们内部一定积累了大量手写的 agent skill / 系统提示(客服、QA、运营、策划助手),它们大概率从没被系统优化过。SkillOpt 给了一条可立刻试的路:用真实任务轨迹 + 自有评分集,把这些 skill 文档从『手感版』迭代成『验证过的最优版』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">「第六步:验证门控。这是最关键的一步。候选 skill 文档不会直接生效,必须先在验证集上跑一轮评分,只有得分严格优于当前 skill 文档,才会被接受。否则这次修改直接丢弃。」</div>
+          <div class="cn">(原文为中文)六阶段管线的最后一步『验证门控』是最关键的:合并后的候选 skill 文档不会直接上线,必须先在验证集上评分,只有严格优于当前版本才被接受,否则这次修改直接丢弃。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:验证门控是整个方法的灵魂,也是它区别于普通『让大模型帮我改改 prompt』的关键——没有评分门控的『AI 改 prompt』只是换了种手感,有门控才叫优化。它和 DEEP A『循环时代要可观测、要验收门』、Vol.012『自建 golden set 把评判权握在自己手里』、Vol.011『黄金基准集侦测静默漂移』是同一根主线:eval/验证集是这一切的地基。没有自己的评分集,你既不能优化 skill、也不能侦测模型漂移、也不能放心自动 merge。给 Gaming 的优先级排序:在追逐任何 agent 自动化之前,先建『贴业务的可验证评分集』——它是 SkillOpt 式优化、自动验收、漂移侦测三件事共用的底座,投入产出比最高。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">「最终产物是一个通常只有 300 到 2000 token 的 best_skill.md 文件。部署的时候,直接把这个文件作为系统指令喂给模型就行了,不需要任何额外的模型调用,推理成本为零。」</div>
+          <div class="cn">(原文为中文)最终产物是一个通常仅 300–2000 token 的 best_skill.md;部署时直接作为系统指令喂给模型即可,无需任何额外模型调用,推理成本为零。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条点出了它在工程经济上的杀伤力——优化成本(多轮 epoch、优化器模型)是一次性的训练期开销,产物却是一个零推理成本的小 markdown。对比微调:不用动权重、不用 GPU 训练管线、不增加每次推理的成本,却能拿到接近『为你的任务定制』的效果。给 Gaming 的成本判断:在『提示工程(免费但靠手感)』和『微调(强但贵且重)』之间,SkillOpt 这类『skill 文档优化』开辟了第三条性价比极高的路——尤其适合任务边界清晰、有评分集、又不值得专门微调的中等场景(客服话术、特定品类出包检查、运营文案规范)。优先在这类场景试点。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">「优化后的 skill 文档具有迁移能力。在一个模型上训练出来的技能,可以直接用在另一个模型上,效果虽然有损但依然显著。在 Codex 上优化的技能,拿到 Claude Code CLI 上也能用。甚至跨 benchmark 也有一定的泛化性。」</div>
+          <div class="cn">(原文为中文)优化后的 skill 文档具备迁移能力:在一个模型上训出的技能可直接用到另一个模型(有损但仍显著),在 Codex 上优化的技能拿到 Claude Code CLI 也能用,甚至跨 benchmark 也有一定泛化。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:迁移能力这条直接呼应 Vol.012『保持 model portability、把前沿 API 当不稳定依赖』——一个跨模型可迁移的 best_skill.md,本身就是一种可移植性资产。当某天你需要换底层模型(因涨价、漂移、合规、地域),优化好的 skill 文档不必从零重来,有损迁移即可。给 Gaming 的资产观:把『经验证优化过的 skill 文档库』当成和数据、日志、领域工具同级的可移植私域资产来沉淀(对应 Vol.012『模型吃不掉的结构性资产』)。它跨模型、零推理成本、可迭代——是『不可训练角落』里一类很实在的可累积资产。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">「SkillOpt 在全部 52 个评测单元上都是最佳或并列最佳。在 GPT-5.5 上:直接对话 +23.5 分、Codex 代理循环 +24.8 分、Claude Code 代理循环 +19.1 分,部分场景最高提升 +39.0 分。对手是 TextGrad/GEPA(prompt 优化)、Trace2Skill/EvoSkill(技能演化)以及人类专家手写与强模型一次性生成的技能——全部被压下去。」</div>
+          <div class="cn">(原文为中文)在 6 benchmark × 7 模型 × 3 执行方式共 52 个评测单元上,SkillOpt 全部最佳或并列最佳;GPT-5.5 上直接对话 +23.5、Codex 循环 +24.8、Claude Code 循环 +19.1,部分场景最高 +39.0;压过 TextGrad/GEPA、Trace2Skill/EvoSkill 以及人类专家手写与强模型一次性生成的 skill。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:把效果数据放在收尾,是为了给前面的方法论一个量级锚点——这不是边际改良,而是同一个模型、不换参数、只优化一个 markdown 文件就拿到两位数百分点的提升,且同时压过『人类专家手写』和『强模型一次性生成』两类基线。后者尤其值得注意:它说明『让 GPT 帮我一次性写个好 prompt』远不如『带验证门控地多轮迭代』。给 Gaming 的认知更新:别再满足于『让大模型一次性生成一版好 skill』就收工——真正的增量在『带评分门控的迭代循环』里。这也再次印证 DEEP A:价值在循环,不在单次生成。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>盘点内部所有手写 agent skill / 系统提示(客服/QA/运营/策划助手),它们大概率从没被系统优化过——用 SkillOpt 式『真实轨迹 + 自有评分集 + 验证门控』把它们从手感版迭代成验证过的最优版。</li><li>在追任何 agent 自动化之前先建『贴业务的可验证评分集』:它是 skill 优化、自动验收、模型漂移侦测三件事共用的底座(承接 Vol.011/012),投入产出比最高。</li><li>把『skill 文档优化』作为提示工程与微调之间的第三条性价比路线:零推理成本、不动权重,优先用在任务边界清晰、有评分集、又不值得专门微调的中等场景(客服话术/品类出包检查/运营文案规范)。</li><li>把『经验证优化过的 skill 文档库』当成和数据/日志/领域工具同级的可移植私域资产沉淀:跨模型有损迁移、零推理成本、可迭代——是 Vol.012『模型吃不掉的结构性资产』里很实在的一类。</li><li>别满足于『让大模型一次性生成一版好 prompt』:数据显示带验证门控的多轮迭代显著优于一次性生成,也优于人类专家手写——价值在循环,不在单次生成。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="sites_as_unit">
+      <span class="tag">AI DAILY BRIEF · 网站作为新产出单元</span>
+      <h3>网站正成为知识工作的新产出单元:URL 即正典、为不同读者重组、且 bot 浏览量已首超人类——产物要为 agent 而设计</h3>
+      <div class="kicker">AI Daily Brief 长读 · 由 OpenAI Codex 新增 sites 功能引出 · 18 个可立刻动手的网站化场景 · Cloudflare:bot/agent 浏览量首超人类——网站首次可为 agent 消费而设计</div>
+      <div class="meta-row">YouTube · The AI Daily Brief · 20,478 chars · 信号 2 颠覆 1 可操作 2 独特 1 时效 2 · <a href="https://www.youtube.com/watch?v=45UGHbqq2fQ">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>8</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;This both recognizes but also amplifies is the idea of the website or simple web app as a new unit of work output — i.e. a new anchor artifact in the knowledge workers toolkit. For decades knowledge workers have packaged thinking into different types of documents... AI has of course changed that cost structure entirely. Any semi-capable person can now generate a useful, fairly good-looking website as easily, if not more easily, than they used to throw together a deck.&quot;</div>
+          <div class="cn">「这件事既确认也放大了一个观念:网站或简单 web app 正成为知识工作的一种新产出单元——即知识工作者工具箱里一个新的『锚点产物』。几十年来知识工作者把思考打包成各种文档……而 AI 彻底改变了成本结构。任何半熟练的人现在都能像过去随手拼一个 deck 一样轻松(甚至更轻松)地生成一个有用、还挺好看的网站。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:把这条放在 DEEP A/B 之后,是因为它回答了『循环的产物长什么样』——当生成成本崩塌,知识工作的默认交付物正从 deck/PDF/spreadsheet 迁向『网站』。这不只是审美升级,而是产出单元的范式迁移。给 Gaming 的直接含义:对内对外的很多交付(立项一页纸、玩法说明、运营复盘、数据看板、版本说明)默认形态可以从『又一个 PDF/deck』变成『一个有正典 URL、可更新、可交互的网站』。先选一两个高频、最受版本混乱之苦的交付物试点网站化。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;A URL and doing things as a website gives the knowledge a canonical home. When you continue to control the ability to update it, it means that whenever people land on that URL, it is the most up-to-date version. This saves time, cognitive back and forth, and creates information consistency across the whole organization.&quot;</div>
+          <div class="cn">「URL、把事情做成网站,给知识一个『正典之家』。只要你持续掌握更新它的能力,任何人落到这个 URL 上,看到的就是最新版本。这省时间、省来回的认知成本,并在整个组织里建立信息一致性。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条点的是文档工作最普遍的暗疾——『plan_v2 / plan_final / plan_final_v3 / plan_final_final』的版本地狱。可下载文件是某个时间点的快照,发出去那一刻就开始过期;URL 把知识变成持续更新的活物。给 Gaming 的落地:凡是『需要被多人反复引用、且会持续更新』的东西(运营日历、活动 SOP、配置说明、对外政策),优先用『单一正典 URL』承载,而不是在群里反复转发新版文件。这也和 DEEP A『agent 循环要可观测、单一事实源』隐性咬合:agent 也需要一个稳定的正典地址去读最新状态。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;This week, Cloudflare reported that agent and bot browsing accounted for more web use than human browsing. For the first time ever, websites can be designed for agent consumption. In a paradigm where knowledgework artifacts have to interact with agents, the old messy system of PDFs and docs and CSVs and PowerPoints starts to look really brittle, especially compared to the comparatively designed-for-agent HTML and other web languages.&quot;</div>
+          <div class="cn">「本周 Cloudflare 报告:agent 与 bot 的浏览量已超过人类浏览量。这是史上第一次,网站可以为『agent 消费』而设计。在一个知识工作产物必须与 agent 交互的范式里,旧的那套 PDF/doc/CSV/PPT 系统开始显得非常脆弱——尤其对比天生为 agent 友好的 HTML 等 web 语言。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是本篇最具前瞻性的一条,也把『网站化』从效率话题升级成战略话题——当 bot/agent 浏览量首超人类,你的产物有没有为 agent 而设计,决定它能不能被 agent 顺畅消费和行动。PDF/PPT 对 agent 极不友好;结构化 HTML/web 则天然可被 agent 读取、抽取、调用。给 Gaming 的前瞻动作:在做产物网站化时,顺手为 agent 消费而设计——语义化结构、稳定的 URL/锚点、机器可读的数据(而非把数字埋在图片里)。这是低成本的『面向 agent 时代的内容基建』,也与 Vol.012 DEEP B『让内部系统暴露 agent 可调用的代码级接口』同向:让你的知识与系统对 agent friendly。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;My observation is that a huge part of the explosion of vibe coding is simply knowledge workers figuring out that websites are better ways to share information than the traditional artifacts that they used to use. And you better believe the fact that platforms like Codex are now embedding features like sites into them means that that&#x27;s going to do nothing but expand.&quot;</div>
+          <div class="cn">「我的观察是:vibe coding 大爆发,很大一部分其实就是知识工作者意识到——网站比他们过去用的传统产物是更好的信息分享方式。而且你最好相信:Codex 这类平台现在把 sites 这类功能直接内嵌进来,意味着这股趋势只会扩大。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条给了『vibe coding 热潮』一个去魅的、正确的解释——它的本质不是『人人都成了程序员』,而是『网站取代传统产物成为默认交付物』,而平台(Codex sites、Gamma 等)正把发布门槛降到接近发一个 deck。给 Gaming 的判断:不必把 vibe coding 当成工程师专属现象,它对 PM/运营/策划同样适用——目标不是教他们写代码,而是让他们用自然语言产出可发布、可更新、可交互的网站化交付物。把这种能力当作非技术岗的通用生产力升级来推广,选低风险高频场景先铺(如运营复盘页、活动说明页),配合 DEEP B 的 skill 优化思路沉淀团队模板。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>把高频且最受版本混乱之苦的交付物先试点『网站化』:立项一页纸/玩法说明/运营复盘/数据看板/版本说明,从『又一个 PDF/deck』改为有正典 URL、可更新、可交互的网站。</li><li>凡『需被多人反复引用且持续更新』的内容(运营日历/活动 SOP/配置说明/对外政策)用单一正典 URL 承载,取代群里反复转发新版文件——既治版本地狱,也给 agent 一个稳定的最新状态读取点。</li><li>做网站化时顺手『为 agent 消费而设计』:语义化结构 + 稳定 URL/锚点 + 机器可读数据(别把数字埋进图片)——bot 浏览量已首超人类,这是低成本的面向 agent 时代内容基建(承接 Vol.012『系统对 agent 暴露可调用接口』)。</li><li>把 vibe coding 当作非技术岗(PM/运营/策划)的通用生产力升级推广:目标不是教写代码,而是用自然语言产出可发布可更新的网站化交付物;选低风险高频场景先铺,配合 SkillOpt 式思路沉淀团队模板。</li></ol>
+      </div>
+    </article>
+
+  <h2 class="section-head">▎ 速览 · BRIEF</h2>
+  <div class="brief-grid">
+    
+    <div class="brief">
+      <div class="n">01</div>
+      <div class="tag">BRIEF · EVAL / 开发循环</div>
+      <h4>olmo-eval:为『模型开发循环』而生的评测工作台——2.4pp 的提升到底算不算数?</h4>
+      <div class="kicker">Allen AI 开源 · 在 OLMES 基础上扩展到模型开发全过程 · agentic/多轮评测为一等场景</div>
+      <div class="meta-row">huggingface.co · Allen AI · 9,926 chars · <a href="https://huggingface.co/blog/allenai/olmo-eval">原文</a></div>
+      <div class="body">Allen AI 开源 olmo-eval:多数评测工具是为『跑成品基准』设计的,跟不上一个持续变化中的模型;olmo-eval 专为开发循环而生——反复加基准、在每个 checkpoint 重跑、分析结果,并自带统计工具判断『一次干预到底是真改善还是噪声(2.4pp 够不够下结论?)』,且 agentic/多轮评测为一等场景。与本卷 DEEP B『验证门控』、Vol.012『自建 golden set』同根:eval 是循环时代的地基设施。</div>
+      <div class="bullet">✱ Gaming 含义:这是 DEEP B『验证门控』在『模型/系统开发』层面的工具化样本。无论自训小模型还是评估 agent 管线,都需要一个能跨 checkpoint 重跑、能区分真改善与噪声的评测工作台。把『eval 工作台』当常态基建,而非每次临时拼脚本——它同时服务于 skill 优化、自动验收、漂移侦测。</div>
+    </div>
+    <div class="brief">
+      <div class="n">02</div>
+      <div class="tag">BRIEF · NVIDIA / 算力叙事</div>
+      <h4>Jensen:Token 工厂——原子进电子出、电子进数字出,智能将像电力一样『包裹地球』</h4>
+      <div class="kicker">Sequoia short · 三次范式:电力→互联网→智能,各自『cocoon the world』</div>
+      <div class="meta-row">YouTube · Sequoia Capital · 2,381 chars · <a href="https://www.youtube.com/shorts/mmz_vr2jZUY">原文</a></div>
+      <div class="body">黄仁勋把 NVIDIA 类比为『新发电机/工厂』:300 年前的 dynamo 把运动(原子)转成电子、让电力『包裹地球』;今天 NVIDIA 这台机器把电子转成数字(token),而 token 可被重组为语言、数学、蛋白质、物理、机器人等各种形态的智能。结论:智能会像电力与互联网一样成为包裹地球的商品层。承接 Vol.011 Jensen『AI 工厂/按小时付费』叙事的精炼版。</div>
+      <div class="bullet">✱ 含义:智能正被定位成『像电力一样的商品层』——这从宏观再次印证本卷与 Vol.012 主线:底层智能会商品化,差异化要去别处找(私域翻译、意图、循环编排)。对 Gaming 是战略背景:不要在会被商品化的『智能本身』上建护城河,要在『如何把这层商品化智能编排进你独有的循环与私域』上建。</div>
+    </div>
+    <div class="brief">
+      <div class="n">03</div>
+      <div class="tag">BRIEF · AI 采纳 / 培训</div>
+      <h4>OpenAI Academy 三门新课:把『把 AI 用好』标准化,但显式保留『人类判断与监督』</h4>
+      <div class="kicker">OpenAI · AI Foundations / Applied AI Foundations / Agents and Workflows</div>
+      <div class="meta-row">openai.com · OpenAI News · 5,346 chars · <a href="https://openai.com/index/academy-courses-applying-ai-at-work">原文</a></div>
+      <div class="body">OpenAI 推三门课,路径为『理解 AI → 把它用于重复性工作 → 用 agent 引导更结构化的工作流』,与 BCG/Accenture/BBVA 合作。值得注意的是 Agents and Workflows 一课明确教学员『定义输出与边界、审查结果,并识别哪里需要人类判断与监督(where human judgment and oversight are required)』——把『保留人类判断』写进了官方课程,与本卷及 Vol.012 主线高度一致。</div>
+      <div class="bullet">✱ 含义:连模型厂商的官方培训都把『定义边界 + 人类判断与监督』作为 agent 工作流的核心教学点,佐证『把判断留给人类』已成行业共识(非小众观点)。对 Gaming:内部 AI 培训不应只教 prompt 技巧,要把『如何设计循环、定义验收边界、识别必须留人的环节』作为核心模块——这正是 DEEP A 循环设计能力的组织化落地。</div>
+    </div>
+    <div class="brief">
+      <div class="n">04</div>
+      <div class="tag">BRIEF · 案例 / 人机协作</div>
+      <h4>Preply:AI 强化而非取代人类导师——把每节课变成个性化学习旅程</h4>
+      <div class="kicker">OpenAI 案例 · Lesson Insights · 员工周活从 60%→95%,70%+ 导师使用</div>
+      <div class="meta-row">openai.com · OpenAI News · 11,287 chars · <a href="https://openai.com/index/preply">原文</a></div>
+      <div class="body">全球最大语言学习平台 Preply 用 OpenAI API 做 Lesson Insights:课后分析转录,给学习者跨语法/词汇/发音的个性化反馈,给导师省去重复性的课记与计划。明确定位为『强化而非取代(strengthen, not replace)』师生关系——把 AI 放在重复性脏活上,把人类不可替代的能量、动机、文化连接留给导师。员工 ChatGPT 周活从 60% 升至 95%。</div>
+      <div class="bullet">✱ 含义:一个清晰的『人机分工』产品样本——AI 接管重复性私域脏活(转录→结构化反馈),人保留不可替代的连接与判断。完全对应 Vol.012『不可训练角落』:可标准化的交给模型,需人际/品味/判断的留给人。对 Gaming 社区/客服/陪玩/教学类场景:用 AI 做课记/工单/反馈的结构化,把人留在关系与判断上,是可直接抄的分工模板。</div>
+    </div>
+  </div>
+
+  <h2 class="section-head">▎ 速记 · SKIM</h2><div class="skim-grid">
+    <div class="skim">
+      <span class="n">S01</span><span class="tag">ARXIV · TAKARA 精选</span>
+      <h5>takara.ai 精选 6 篇(agent 记忆 / eval / 可解释性 / 防御)</h5>
+      <p>白名单析出 6 篇:① MemRefine —— LLM 引导的长期 agent 记忆压缩(对应 Loopcraft 提到的『主动记忆管理 extract→transform→commit,而非裸 append 聊天记录』)。② EvoArena —— 在动态环境中追踪 agent 记忆演化以测稳健性。③ MARS —— 并行 LLM 测试时扩展的边际对抗风险可控停止(test-time scaling 的停止准则)。④ Authority, Truth, and Citation Bias —— 大规模多域基准:模型是否被『权威/引用』带偏(RAG 可信度相关)。⑤ Beyond Runtime Enforcement: Shield Synthesis —— 把『护盾合成』作为对抗性可防御性分析(对应 agent 安全边界)。⑥ Reasoning as Pattern Matching —— 人与 LLM 日常推理的共享机制。做 agent 记忆/eval/安全的团队可择 ①②⑤ 深挖。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S02</span><span class="tag">ARXIV · 批量 SKIM</span>
+      <h5>takara.ai arxiv RSS 洪流 44 篇(批量略读)</h5>
+      <p>本日 takara.ai 一次性灌入约 50 篇 arxiv 论文 RSS,绝大多数高度学术/窄域(量子电路、扩散视频、字体生成、谱学习等),对 Gaming 产品决策杠杆低。已用 agent-记忆/eval/可解释/防御白名单析出 6 篇(见 S01),其余 44 篇进批量 skim 桶不逐篇分析;清单存档于 takara_skim.json,如某方向需深挖可回捞。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S03</span><span class="tag">STRATECHERY · 周报</span>
+      <h5>Ben Thompson:Hey Siri, Tell Me a Fable(Apple 终交付 + Fable 回滚)</h5>
+      <p>Stratechery 周报合集:① Apple 终于交付 Siri AI——Tim Cook 最后一次 WWDC,演示虽不惊艳但是能跑的真货(慢到不可能造假),与两年前的 vaporware 形成对比,『够用』即可守住 iPhone;② Anthropic 的 Fable——周二发布、带 cyber/bio 显性护栏 + 对 LLM 创建能力的静默削弱,周四因舆论回滚,Ben 称这种行为对 Anthropic『完全可预测』。是本卷 DEEP A 同日记录的 Fable 回滚事件的产业评论侧。付费墙限制深读。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S04</span><span class="tag">BUILDER · short</span>
+      <h5>Peter Yang:给自己许可去『造东西』(builder vs 管理者梯子)</h5>
+      <p>传统职业阶梯把所有人推向管理岗,但很多 builder 只想做 builder。Peter Yang:不要花最好的年华爬错的梯子;好消息是公司正比以往更奖励 builder/IC,连经理总监也被期望做 IC 活,AI 让 PM 也能亲自 check in 代码。与本卷『循环设计是新一等技能』隐性呼应——动手造的能力正重新升值。短片收藏。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S05</span><span class="tag">SCIENCE · short</span>
+      <h5>No Priors:现代医学只是在『猜』(机制化医疗)</h5>
+      <p>No Priors short:嘉宾指现代医学缺乏机制性理解,常是『你像这群被研究的人、这药大概影响我们以为相关的通路,试试看』式的猜测;目标是把个体当个体、理解机制。与 Gaming 关联低,作为 AI for Science 的方向性信号收藏(机制理解 vs 统计相关)。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S06</span><span class="tag">MSFT · short</span>
+      <h5>Satya Nadella:AI 的能源账单值不值?</h5>
+      <p>No Priors short:Satya Nadella 谈 AI 能耗——用很多能源同时为社会创造很多价值,故事就很棒;若不能,则不然。关键看 token 经济能否驱动生产力、经济增长、更广参与与更好健康结果。是 Vol.011 Jensen『AI 工厂/能源-智能层』的需求侧呼应。短信号收藏。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S07</span><span class="tag">FOUNDER · short</span>
+      <h5>David Senra:旧金山创始人圈的『反模因的模因』(short)</h5>
+      <p>Sequoia short:David Senra 观察湾区/旧金山——他们都『以反模因为模因』,反而成了最模因化的群体。创始人文化观察向短片,边角料收藏。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S08</span><span class="tag">ENG · short</span>
+      <h5>SR-71 是怎么造出来的:小团队 + 深技术背景(short)</h5>
+      <p>South Park Commons short:设计 SR-71 的不是军队和数十亿美元,而是不到 100 名工程师、数千万美元——但每个人此前都已设计建造过数十架飞机,有深厚领域背景。与本卷隐性呼应:小而深的团队 + 领域专精,胜过人海。短片收藏。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S09</span><span class="tag">AI VIBE · 无字幕</span>
+      <h5>Unsupervised Learning:Lab Wars / API 会不会消失 / 未来预测</h5>
+      <p>Unsupervised Learning(Redpoint)一期 AI Vibe Check,主题含实验室之争、『为什么 API 可能消失』、未来预测。YouTube 未提供字幕,无法取全文;但『API 可能消失』话题与 Vol.012 DEEP B『模型吃掉 harness』、本卷 DEEP A『从 best-model 转向 execution/portability』同频,标记追踪,待有转录再深挖。</p>
+    </div></div>
+
+  <h2 class="section-head">▎ 跳过 · SKIP</h2>
+  <div class="skip"><b>(takara.ai arxiv RSS)</b> — takara.ai · 约 50 篇 arxiv RSS 一次性灌入,6 篇析出见 S01、44 篇批量 skim 见 S02,清单存 takara_skim.json,不逐篇深析</div>
+
+  <h2 class="section-head">▎ 去重 · DUP</h2><div class="dup"><b>Why Fable 5 is the Most Controversial AI Release Ever</b> — Fable 5 争议已在 Vol.010(能力实测)与 Vol.011(ladder-pulling/静默护栏)深读;本卷 DEEP A/S03 仅记录其『静默降质一天内被舆论逼回滚』的最新进展,不重复深析</div>
+
+  <h2 class="section-head">▎ 新增观点入库 · VP LEDGER (14 条 · append-only 到 _mira-vp-index)</h2>
+  <table class='ledger'><thead><tr><th>分类</th><th>观点</th><th>来源</th></tr></thead><tbody><tr><td>The Loop Issue / 设计循环而非 prompt</td><td>[NEW 2026-06-13] 别再 prompt agent,去设计 prompt agent 的循环;Steipete/Boris Cherny/Karpathy 三方独立同频——prompt 工程作为核心技能正被『循环设计/编排』取代,团队成熟度指标应随之迁移</td><td>Steipete/Boris/Karpathy via AINews × mira</td></tr><tr><td>The Loop Issue / 设计循环而非 prompt</td><td>[NEW 2026-06-13] 循环设计的核心操作变量是『上/下一层』的时机:出问题下沉一层(更细粒度、人更介入)换可靠性,模型变强上升一层(更高抽象、更少介入)换杠杆;把自动化程度做成有触发条件的可调档旋钮</td><td>AINews/Loopcraft × mira</td></tr><tr><td>The Loop Issue / 设计循环而非 prompt</td><td>[NEW 2026-06-13] agent 版 Salty Lesson(对位 Sutton 的 Bitter Lesson):别自己动手修一个个问题,押注能随 agent 数量扩展的系统(目标+编排)会赢;工程价值与绩效信号从『手修』迁向『搭可扩展系统』</td><td>AINews × mira</td></tr><tr><td>The Loop Issue / 设计循环而非 prompt</td><td>[NEW 2026-06-13] Karpathy:把自己移出循环是纪律——只要你守在循环里逐步 prompt 你就是瓶颈;关键动作是重构抽象使『安排一次即可 hit go』,但前提是验收能自动化(可验证环节激进移人、不可验证环节留人)</td><td>Karpathy × mira</td></tr><tr><td>The Loop Issue / 设计循环而非 prompt</td><td>[NEW 2026-06-13] 循环时代行业话语权从『哪个模型最好』转向 execution control/review/observability/portability;内部 agent 循环要按持久服务建设:定时调度+凭证边界注入(不进模型上下文)+全链路可观测+模型可替换</td><td>AINews × mira</td></tr><tr><td>Skills as Trainable Artifacts(可训练的技能文档)</td><td>[NEW 2026-06-13] 把 Skill.md 当神经网络可训练参数:权重=md/梯度=轨迹反思/学习率=编辑幅度预算/验证集=评分门控/epoch=多轮迭代;让『优化 prompt』从手感变成有梯度有门控的可复现优化(SkillOpt)</td><td>Microsoft Research × mira</td></tr><tr><td>Skills as Trainable Artifacts(可训练的技能文档)</td><td>[NEW 2026-06-13] 验证门控是 skill 优化的灵魂:候选文档必须在验证集上严格优于当前版才被接受,否则丢弃;没有自有评分集就既不能优化 skill、也不能侦测漂移、也不能放心自动 merge——eval 是循环时代地基</td><td>SkillOpt × mira</td></tr><tr><td>Skills as Trainable Artifacts(可训练的技能文档)</td><td>[NEW 2026-06-13] skill 文档优化是提示工程与微调之间的第三条性价比路线:零推理成本、不动权重、跨模型有损迁移;产物是 300-2000 token 的 best_skill.md,适合任务清晰有评分集又不值得微调的中等场景,且带门控迭代显著优于一次性生成</td><td>SkillOpt × mira</td></tr><tr><td>Website as New Work Unit(产物为 agent 而设计)</td><td>[NEW 2026-06-13] 生成成本崩塌后,知识工作默认交付物从 deck/PDF 迁向网站(新的锚点产出单元);高频且受版本混乱之苦的交付物优先网站化,用单一正典 URL 取代群里反复转发新版文件</td><td>AI Daily Brief × mira</td></tr><tr><td>Website as New Work Unit(产物为 agent 而设计)</td><td>[NEW 2026-06-13] Cloudflare:bot/agent 浏览量首超人类——网站首次可为 agent 消费而设计;做网站化时顺手语义化结构+稳定锚点+机器可读数据(别把数字埋图片),是低成本的面向 agent 时代内容基建</td><td>AI Daily Brief × mira</td></tr><tr><td>Website as New Work Unit(产物为 agent 而设计)</td><td>[NEW 2026-06-13] vibe coding 大爆发的本质不是人人变程序员,而是网站取代传统产物成为默认交付物;应作为非技术岗(PM/运营/策划)通用生产力升级推广,目标是用自然语言产出可发布可更新的交付物</td><td>AI Daily Brief × mira</td></tr><tr><td>Eval as Foundation / 人机分工</td><td>[NEW 2026-06-13] eval 工作台应是常态基建而非临时脚本:需能跨 checkpoint 重跑、能区分真改善与噪声(2.4pp 够不够下结论);它同时服务 skill 优化、自动验收、漂移侦测三件事(olmo-eval)</td><td>Allen AI × mira</td></tr><tr><td>Eval as Foundation / 人机分工</td><td>[NEW 2026-06-13] 清晰的人机分工样本:AI 接管重复性私域脏活(转录→结构化反馈),人保留不可替代的连接与判断(strengthen not replace);连 OpenAI 官方课程都把『识别哪里需要人类判断与监督』写进 agent 工作流教学</td><td>Preply/OpenAI Academy × mira</td></tr><tr><td>Commodity Intelligence / 战略背景</td><td>[NEW 2026-06-13] Jensen:智能正被定位成像电力/互联网一样『包裹地球』的商品层(原子→电子→token);别在会被商品化的『智能本身』建护城河,要在『把商品化智能编排进你独有的循环与私域』上建</td><td>Jensen Huang/NVIDIA × mira</td></tr></tbody></table>
+
+  <footer class="footer">
+    <span>MIRA · Daily Broadside · Vol.013 · 自包含单文件</span>
+    <span>下期 · <b>2026-06-14 06:00 Asia/Shanghai</b></span>
+  </footer>
+</div>
+</body>
+</html>
