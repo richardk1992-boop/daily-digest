@@ -1,0 +1,12 @@
+{
+  "date": "2026-06-13",
+  "vol": "013",
+  "title": "The Loop Issue — 别再写 prompt 了,去设计循环:Agent 的『苦涩教训』升级版",
+  "subtitle": "今天整个圈子在同一件事上撞车:不要再 prompt agent,要去设计 prompt agent 的循环(loop)。Steipete『你应该设计驱动 agent 的循环』、Boris Cherny『我不再 prompt Claude,我写循环、循环干活』、Karpathy『把自己移出循环、最大化 token 吞吐』三方独立同频;AINews 据此提出 agent 版『Salty Lesson(苦涩教训)』——别再自己动手修,转去做能随 agent 数量扩展的系统(目标与编排)· 微软开源 SkillOpt 把『训练神经网络的纪律』搬到优化 Skill.md(权重=md 文件/梯度=轨迹反思/验证集=评分门控),52 评测单元全胜、最高 +39 分、零推理成本 · AI Daily Brief:网站正成为知识工作的新产出单元,且 Cloudflare 称 bot 浏览量首超人类——产物要为 agent 消费而设计 · 配套:olmo-eval(开发循环的评测工作台)、Jensen『token 工厂』、OpenAI Academy/Preply(把 AI 嵌进工作流但保留人类判断)· 延续 Vol.012『意图不可训练』:模型负责执行,人的活迁向循环的设计与编排",
+  "deep_count": 3,
+  "brief_count": 4,
+  "skim_count": 9,
+  "skip_count": 1,
+  "dup_count": 1,
+  "new_viewpoints": 14
+}
