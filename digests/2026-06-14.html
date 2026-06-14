@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>The Token Scarcity Issue — 从『token 管够』到『token 配给』:那张吓坏华尔街的图,其实没说它被传成的意思 — Vol.014</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --bg-warm: #1a1a18;
+  --bg-warm-2: #1f1a14;
+  --orange: #e85d26;
+  --orange-soft: #f4a06a;
+  --yellow: #f6d24a;
+  --ink: #f3ede4;
+  --ink-dim: #b4a999;
+  --rule: #2c2823;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  margin: 0; padding: 0; line-height: 1.65;
+  font-size: 16px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
+.chrome { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim); text-transform: uppercase; }
+
+.masthead { border-top: 6px solid var(--orange); padding-top: 18px; margin-bottom: 28px; }
+.masthead .topline { display: flex; justify-content: space-between; }
+.masthead h1 {
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 52px; line-height: 1.04; margin: 14px 0 10px;
+  color: var(--orange); letter-spacing: -0.01em;
+}
+.masthead h2 {
+  font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic;
+  font-size: 18px; color: var(--orange-soft); margin: 0 0 16px;
+}
+.masthead .meta {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 10px 0; display: flex; gap: 28px; flex-wrap: wrap;
+}
+.meta span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+.meta span b { color: var(--yellow); font-weight: 600; }
+
+.editorial {
+  background: var(--bg-warm-2); border-left: 4px solid var(--yellow);
+  padding: 22px 28px; margin: 28px 0 40px;
+}
+.editorial h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 12px; letter-spacing: 0.12em;
+}
+.editorial p {
+  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 1.75;
+  margin: 0 0 10px; color: var(--ink);
+}
+
+.section-head {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--orange); margin: 40px 0 18px;
+  border-bottom: 2px solid var(--rule); padding-bottom: 10px;
+}
+
+.deep-card {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 30px 32px; margin: 0 0 32px; border-radius: 2px;
+}
+.deep-card .tag {
+  display: inline-block; background: var(--orange); color: #fff;
+  padding: 3px 10px; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+}
+.deep-card h3 {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 27px; line-height: 1.2; margin: 14px 0 6px; color: var(--ink);
+}
+.deep-card .kicker { font-size: 14px; color: var(--orange-soft); margin: 0 0 8px; }
+.deep-card .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+.deep-card .meta-row a { color: var(--yellow); text-decoration: none; }
+
+.scorecard {
+  background: rgba(0,0,0,0.3); padding: 14px 18px; margin: 16px 0 22px;
+  display: grid; grid-template-columns: repeat(5, 1fr) 90px; gap: 14px; align-items: center;
+}
+.score-dim { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); }
+.score-dim b { display: block; color: var(--ink); font-size: 18px; font-family: 'Barlow', sans-serif; }
+.score-bar { background: var(--rule); height: 4px; margin-top: 4px; }
+.score-bar > div { background: var(--orange); height: 100%; }
+.score-total { text-align: right; font-family: 'Barlow', sans-serif; }
+.score-total b { font-size: 32px; color: var(--yellow); }
+.score-total span { font-size: 14px; color: var(--ink-dim); }
+
+.arg { margin: 26px 0; }
+.arg h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--yellow); margin: 0 0 12px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.arg .quote {
+  font-family: 'Noto Serif SC', serif; font-style: italic;
+  font-size: 15px; color: var(--ink); border-left: 3px solid var(--orange-soft);
+  padding: 6px 16px; margin: 8px 0;
+}
+.arg .cn { font-size: 14px; color: var(--ink); padding: 0 16px; margin: 8px 0; }
+.arg .mira {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 10px 16px; margin: 12px 0 0;
+  font-size: 14px; color: var(--ink);
+}
+.arg .mira b { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+.takehome {
+  background: rgba(246,210,74,0.06); border: 1px solid rgba(246,210,74,0.25);
+  padding: 18px 22px; margin: 24px 0 0;
+}
+.takehome h4 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.12em;
+}
+.takehome ol { margin: 0; padding-left: 22px; }
+.takehome li { margin: 6px 0; font-size: 14px; color: var(--ink); }
+
+.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .brief-grid { grid-template-columns: 1fr; } }
+.brief {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+.brief .n { font-family: 'Barlow', sans-serif; font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.brief .tag {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--yellow); letter-spacing: 0.1em; margin: 4px 0 8px;
+}
+.brief h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 1.25; color: var(--ink); margin: 0 0 6px;
+}
+.brief .kicker { color: var(--orange-soft); font-size: 13px; margin: 0 0 8px; }
+.brief .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); margin-bottom: 10px; }
+.brief .meta-row a { color: var(--yellow); text-decoration: none; }
+.brief .body { font-size: 14px; line-height: 1.7; }
+.brief .bullet {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 8px 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink);
+}
+
+.skim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .skim-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .skim-grid { grid-template-columns: 1fr; } }
+.skim {
+  background: var(--bg-warm); border: 1px solid var(--rule); padding: 14px 16px;
+}
+.skim .n { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--orange-soft); }
+.skim .tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--yellow); letter-spacing: 0.1em; margin-left: 8px; }
+.skim h5 { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); margin: 6px 0; line-height: 1.3; }
+.skim p { font-size: 12px; line-height: 1.55; color: var(--ink-dim); margin: 0; }
+
+.skip { background: var(--bg-warm); border-left: 3px solid var(--ink-dim); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink-dim); }
+.skip b { color: var(--ink); }
+
+.dup { background: var(--bg-warm); border-left: 3px solid var(--yellow); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+.dup b { color: var(--yellow); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.ledger th { color: var(--yellow); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.ledger td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--orange-soft); font-size: 11px; width: 18%; }
+.ledger td:nth-child(2) { width: 50%; }
+.ledger td:nth-child(3) { color: var(--ink-dim); width: 32%; }
+
+.footer {
+  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+}
+.footer b { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Daily Reading Broadside · Vol.014</span>
+      <span class="chrome">2026-06-14 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Token Scarcity Issue — 从『token 管够』到『token 配给』:那张吓坏华尔街的图,其实没说它被传成的意思</h1>
+    <h2>今天最响的信号是一张图引发的集体误读:Citadel/Silicon Data 的『LLM token 支出指数』掉头向下,被全网传成『AI 需求崩了、泡沫要破』——但 AI Daily Brief 逐帧拆解后指出,这张图既不是需求、也不是总量、更不是总支出,它只是『第三方 token 路由器上每百万 token 的加权均价』,而路由器的存在本就是为了把流量导向更便宜的模型 · 真正的结构性迁移是:补贴时代结束,token 进入稀缺/配给时代,每家 AI 公司现在都被迫进入『token 效率』生意 · 中位公司每人每月只花 11.38 美元 AI、头部 1% 已达 7.5 万美元/人——总需求增长仍将碾压『转向廉价 token』带来的均价下移 · 配套:本周 18 个 GitHub 开源项目(Agent 生态霸榜)、Lenny 社区问『AI 如何改变产品运营模式』· 延续 Vol.013『智能商品化』:底层智能会被商品化,稀缺的是把它高效编排进你独有循环的能力</h2>
+    <div class="meta">
+      <span>候选 <b>5</b></span>
+      <span>析出 <b>5</b></span>
+      <span>深读 <b>1</b></span>
+      <span>简评 <b>2</b></span>
+      <span>速记 <b>2</b></span>
+      <span>跳过 <b>0</b></span>
+      <span>重复 <b>1</b></span>
+      <span>新观点 <b>7</b></span>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <h3>EDITORIAL · 编辑卷首语</h3>
+    <p>今天是个『瘦身日』——24 小时窗口只入库 5 条,没有往日 takara.ai 的 arxiv 洪流。但少不等于淡:今天最响的信号,是一张图引发的全网集体误读。Citadel 的『tokconomics』报告配上 Silicon Data 的『LLM token 支出指数』掉头向下,被社交媒体疯传成『AI 需求崩了、泡沫要破、agentic 热潮退回原点』。AI Daily Brief 的 NLW 把这张图逐帧拆开,结论很冷静也很关键:这张图跟 token 需求无关、跟 token 总量无关、也跟实际总支出无关——它量的只是『第三方 token 路由器上每百万 token 的加权均价』。而人们用路由器恰恰是为了省钱、把请求导向更便宜的模型,所以这个指数天生就会夸大『市场正在逃离前沿模型』的程度。一句话:这就像只统计折扣店的客单价,然后宣布全国消费降级。</p>
+    <p>把误读拨正之后,真正的结构性信号才浮出来,也就是本卷的标题——token 正从『补贴时代(廉价管够)』走向『配给时代(为效率付费)』。NLW 的判断很直接:每一家 AI 公司现在都进入了『token 效率』生意,因为从辅助式到 agentic 用法的迁移,把单个任务的 token 消耗放大了几个数量级,而 token 在物理上是有限的。但这绝不等于需求见顶——他甩出的量级对比把泡沫论按在地上:头部 1% 完全 AI 化的公司已经花到每人每月 7.5 万美元,而中位公司只花 11.38 美元,中间隔着约 6600 倍。换句话说,渗透才刚刚开始,总需求的增长会极大压过『转向廉价 token』带来的均价下移。连 Citadel 报告自己的真实结论都远没那么耸动:最贵的前沿 AI 会向『最能用好它的一小撮公司』集中——这不是泡沫破裂,这是市场在理性化地配置稀缺资源。</p>
+    <p>这条主线和近几卷严丝合缝:Vol.013 说底层智能正被商品化、稀缺的是把它编排进你独有循环的能力;本卷补上经济侧的另一半——当 token 进入配给,胜负手不再是『谁买得起最贵的 token』,而是『谁有领域深度把难题的回报规模化』。配套两条 brief 也都在这条线上:本周 GitHub 被 Agent 生态霸榜,其中 headroom 这类『喂 LLM 前压缩上下文省 60–95% token』的工具,正是把『token 效率』从理念变成可立刻装的依赖;Lenny 社区则在追问『AI 到底怎么改变了产品运营模式』——这是 Vol.013『人从写 prompt 上移到设计循环』在组织层面的回声。5 条候选全部析出精读(1 deep / 2 brief / 2 skim / 1 dup,Fable 5『被政府叫停』因无字幕降级追踪),新增 7 条观点入库。一句话收口:别被一根吓人的线带节奏——先问它到底量的是什么;真正的故事不是泡沫,而是稀缺,而稀缺时代奖励的是会把前沿用在刀刃上的人。</p>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · DEEP</h2>
+  
+    <article class="deep-card" id="token_scarcity">
+      <span class="tag">AI DAILY BRIEF · TOKEN 经济</span>
+      <h3>那张『所有人都看错的 AI 图』:它量的不是需求,是路由器上的均价——真正的故事是补贴时代结束、token 进入配给时代</h3>
+      <div class="kicker">Citadel『tokconomics』+ Silicon Data『LLM token 支出指数』引爆全网误读 · NLW 逐帧证伪:非需求/非总量/非总支出,而是第三方路由器上每百万 token 的加权均价 · 真信号=『每家公司都被迫进入 token 效率生意』· 中位公司 11.38 美元/人·月 vs 头部 1% 7.5 万美元/人</div>
+      <div class="meta-row">YouTube · The AI Daily Brief · 31,621 chars · 信号 2 颠覆 2 可操作 2 独特 2 时效 2 · <a href="https://www.youtube.com/watch?v=05VE_9rI954">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>10</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;The speed at which the investors have gone from token maxing to token panic is head spinning. And yet the chart in question... shockingly doesn&#x27;t say what everyone on social media is saying it says. This chart, which shows a big scary downward line on something called the token expenditure index, has nothing to do with token demand, nothing to do with token volume, and nothing to do with actual token expenditure.&quot;</div>
+          <div class="cn">「投资者从『token 管够(token maxing)』切换到『token 恐慌(token panic)』的速度快得令人眩晕。然而那张被议论的图……令人震惊地根本不是社交媒体上所有人所说的意思。这张在所谓『token 支出指数』上显示一根吓人下行线的图,跟 token 需求无关、跟 token 总量无关、也跟实际 token 总支出无关。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是本卷的定盘星,也是一堂顶级的『数据素养』示范课。一张图被病毒式误读,核心错误是把『均价指数』当成了『需求/总量/总支出』。NLW 的方法值得逐条学:① 回到数据源方(Silicon Data)看官方澄清;② 追问数据采自哪里(只采第三方路由器);③ 据此判断它会系统性高估什么(高估『逃离前沿模型』的程度)。给 Gaming 的直接价值:你们每天都在被各种『AI 看板/留存图/付费曲线』推着做决策,这集给了一个可复用的反误读 checklist——任何一根『吓人的线』先问三件事:这指标到底量的是什么?数据采样来自哪个口径?这个口径会系统性放大或缩小什么?把它做成团队看数据的肌肉记忆。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">Silicon Data&#x27;s own clarification: &quot;Our LLM token expenditure index should really have been named the token expenditure price index because it&#x27;s an expenditure or usage weighted average token price index. It tells you how much currently the entire market AI is paying for a million LLM tokens, irrespective of models.&quot; The index draws only from third-party token routers — whose entire purpose is to route to lower-cost models.</div>
+          <div class="cn">Silicon Data 官方澄清:「我们的『LLM token 支出指数』其实应该叫『token 支出价格指数』,因为它是一个按支出/用量加权的 token 均价指数,告诉你当前整个市场为一百万 LLM token 付多少钱,与具体模型无关。」而该指数只采自第三方 token 路由器——而路由器的全部存在意义,就是把请求导向更低成本的模型。</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条是证伪的技术核心,妙在『数据来源决定了结论的偏差方向』。指数只采自路由器,而人们用路由器恰恰是为了省钱、把请求导向更便宜的模型——所以这个指数天然会夸大『市场正在逃离昂贵前沿模型』的程度。这就像『只统计折扣店的平均客单价,然后宣布全国消费降级』。给 Gaming 的方法论:做任何内部指标前,先画清楚『采样总体 vs 你想推断的总体』之间的缺口。比如只用『主动反馈用户』推断全体玩家满意度、只用『核心公会』推断版本口碑,都会犯同类系统性偏差。建立指标时强制标注采样口径与已知偏差方向,是低成本高回报的治理动作。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;I think every AI company is now in the token efficiency business. The equation is really simple. The shift from assisted to agentic use cases radically increases the amount of AI that companies use. Because of the real constraints of the physical world, there are only so many tokens to go around. As demand starts to outpace supply, the prices that people pay get high and companies which never had to think about token efficiency... now all of a sudden do.&quot;</div>
+          <div class="cn">「我认为现在每一家 AI 公司都进入了『token 效率』生意。等式很简单:从『辅助式』到『代理式(agentic)』用例的迁移,极大增加了公司用掉的 AI 量。由于物理世界的真实约束,token 总归是有限的。当需求开始超过供给,人们付的价格就会上升,那些从前根本不用考虑 token 效率的公司……现在突然都得考虑了。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是把误读拨正后真正的结构性信号,也是本卷标题『token 稀缺』的由来。它和 Vol.013『智能商品化』、Vol.011 Jensen『AI 工厂/按量付费』连成一条经济主线:agentic 用法把单任务的 token 消耗放大几个数量级,补贴时代(廉价管够)正在让位于配给时代(要为效率付费)。给 Gaming 的务实动作:凡是要规模化跑 agent 的场景(批量素材、QA、客服、数据处理),从第一天就把『token 效率』当一等约束来设计——分层用模(便宜模型做粗活、前沿模型做难活)、缓存与复用中间结果、压缩喂给模型的上下文(呼应 Vol.013 headroom 那类工具)。别等收到账单才补效率课。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;Right now the top 1% of firms — those who are fully AI&#x27;d — are spending about $75,000 per employee on AI... But when you move down to the top 10%, that number comes all the way down to $610 per month... and the median firm... AI spend sits at $11.38. When the median company is still only spending 11 bucks a person on AI, the sheer amount of growth in total AI that will be consumed... massively outweighs any shift away from the most expensive tokens.&quot;</div>
+          <div class="cn">「现在头部 1% 的公司(完全 AI 化的)每名员工花约 7.5 万美元在 AI 上……但下移到头部 10%,这个数字一路降到每月 610 美元……而中位公司……AI 支出仅为 11.38 美元。当中位公司每人每月还只花 11 块钱在 AI 上,未来被消费掉的 AI 总量的增长……会极大地压过『从最贵 token 转向较便宜 token』这种结构变化。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条用一个量级对比,把『泡沫论』按在地上——头部与中位之间是 75000 vs 11.38 的鸿沟(约 6600 倍)。它的含义不是『泡沫』,而是『渗透才刚开始』:绝大多数公司离『需要设上限』的成熟度还差得远,总需求的增长空间被严重低估。给 Gaming 的战略判断:不要被『大厂开始设 token 上限』的新闻吓到而误判 AI 投入见顶——那是头部 1% 的烦恼。对绝大多数团队,真实状态是渗透率与人均强度都极低,增量空间巨大。当下该做的是提高『有效采纳强度』(人均真正用起来),而不是过早收紧预算。把 AI 投入节奏对标自己的成熟度阶段,而不是对标头部 1% 的账单焦虑。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">Citadel&#x27;s actual (less bombastic) point: &quot;We do not think this implies that the frontier of inference intensive AI will be abandoned, only that it is likely to be concentrated among a narrower set of firms with the balance sheets to absorb the compute costs, the research depth to deploy it effectively, and most important, the operating domain to scale the rewards from solving genuinely hard problems.&quot; NLW: &quot;That&#x27;s not an AI bubble popping. That&#x27;s an AI market rationalizing.&quot;</div>
+          <div class="cn">Citadel 报告的真实(远没那么耸动的)观点:「我们并不认为这意味着推理密集型 AI 的前沿会被放弃,只是它很可能会集中到一小撮公司手里——那些有资产负债表去吸收算力成本、有研究深度去有效部署、且最重要的是有经营领域去把『解决真正难题』的回报规模化的公司。」NLW 总结:「这不是 AI 泡沫破裂,这是 AI 市场在理性化。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:把这条放在收尾,是因为它给出了『稀缺时代』的资源配置图景——最贵的前沿 AI 会向『最能用好它的人』集中,这是市场在高效配置稀缺资源,不是需求崩盘。它和 Vol.012『把判断/意图留给人』、Vol.013『稀缺的是编排能力』形成闭环:当前沿算力稀缺,胜出的不是『谁能买到最贵的 token』,而是『谁有领域深度把难题的回报规模化』。给 Gaming 的组织含义:前沿模型预算应向『能把它转化为可规模化回报的高杠杆场景与团队』集中,而非平均撒给所有人;同时在长尾场景用便宜模型保证广覆盖。一句话:前沿 token 集中投给会用的人,长尾用廉价模型铺面——这就是 token 配给时代的内部分配原则。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>建立『反误读 checklist』当看数据的肌肉记忆:任何一根吓人的线先问三件事——这指标到底量的是什么、数据采样来自哪个口径、这个口径会系统性放大/缩小什么(本集 NLW 拆图法可直接抄)。</li><li>做内部指标时强制标注『采样总体 vs 推断总体』的缺口与已知偏差方向:别用主动反馈用户推断全体满意度、别用核心公会推断版本口碑——这类系统性偏差和『只采路由器推断全市场』同源。</li><li>凡规模化跑 agent 的场景从第一天就把 token 效率当一等约束:分层用模(便宜模型做粗活/前沿做难活)+ 缓存复用中间结果 + 压缩上下文——补贴时代结束,别等账单来才补效率课。</li><li>别被『大厂设 token 上限』吓到误判 AI 投入见顶:那是头部 1%(7.5 万/人)的烦恼,中位公司仅 11.38/人——对多数团队当务之急是提高人均有效采纳强度,把投入节奏对标自身成熟度而非头部账单焦虑。</li><li>按『token 配给时代』分配模型预算:前沿 token 集中投给能把难题回报规模化的高杠杆场景与团队,长尾场景用廉价模型铺面——前沿向会用的人集中,是市场理性化不是泡沫。</li></ol>
+      </div>
+    </article>
+
+  <h2 class="section-head">▎ 速览 · BRIEF</h2>
+  <div class="brief-grid">
+    
+    <div class="brief">
+      <div class="n">01</div>
+      <div class="tag">BRIEF · 开源 / Agent 生态</div>
+      <h4>本周 GitHub:Agent 生态几乎霸榜——从跨平台调研到 token 压缩,工具链在快速补齐</h4>
+      <div class="kicker">逛逛GitHub 周精选 · last30days / headroom / taste-skill / markitdown / Apple container / Agent-Reach 等</div>
+      <div class="meta-row">Weixin · 逛逛GitHub · 3,832 chars · <a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534521&amp;idx=1&amp;sn=fca1a7af773d97bc168b518c0106fb87">原文</a></div>
+      <div class="body">本周 GitHub Trending 被 AI Agent 生态霸占。值得注意的几个与本卷/近卷主线咬合:headroom——在喂给 LLM 前压缩 tool outputs/日志/RAG chunks,token 省 60–95% 效果不缩水(正是 DEEP『token 效率生意』的直接工具);last30days——让 agent 自动跨 Reddit/X/YouTube/HN 做调研总结;taste-skill——给 AI 装审美、别产廉价 slop(呼应 Vol.007『品味』);markitdown(微软,各种文件一键转 Markdown)、Apple container(Apple Silicon 上轻量跑 Linux 容器)、Agent-Reach(把主流平台读取搜索封装成 CLI 给 agent 当工具)。</div>
+      <div class="bullet">✱ Gaming 含义:Agent 工具链正在从『能跑』走向『跑得省、跑得稳』。headroom 这类上下文/token 压缩工具应直接进你们的 agent 管线选型清单——它把 DEEP 里『token 效率』从理念变成可立刻装的依赖;Agent-Reach/last30days 则可作为内部调研类 agent 的现成数据接入层,不必重造轮子。</div>
+    </div>
+    <div class="brief">
+      <div class="n">02</div>
+      <div class="tag">BRIEF · 产品 / 运营模式</div>
+      <h4>Lenny 社区在问:AI 到底怎么改变了产品团队的『运营模式』——不只是更快,而是结构变了</h4>
+      <div class="kicker">Community Wisdom 189 · PM/设计直接 push 到 GitHub · BMAD 等方法 · 重组 product operating model</div>
+      <div class="meta-row">Email · Lenny&#x27;s Newsletter · 15,753 chars · <a href="mailto:reader-forwarded-email/f70ac2da8e7c8c04b109db21e6a9d523">原文</a></div>
+      <div class="body">Lenny 付费社区本期的核心讨论之一:AI 如何真正改变产品团队的运营模式——发问者强调他想知道的不只是『更快』,而是『结构怎么变了:团队怎么组织、怎么和工程交接、决策怎么做』。社区反复提到 PM/设计师开始直接把改动 push 到 GitHub,以及 BMAD 这类方法。正文多为社区活动/线下聚会公告,实质讨论在付费墙后,但这个问题本身是强信号。</div>
+      <div class="bullet">✱ 含义:这正是 Vol.013『人的活从写 prompt 上移到设计循环/编排』在『产品组织』层面的回声——AI 带来的不是局部提速,而是运营模式的结构性重组(角色边界、交接方式、决策流)。对 Gaming PM 团队:别把 AI 仅当个人效率工具,要主动重审『运营模式』本身——谁直接动代码、PM 与工程的交接点在哪、哪些决策可由 agent 循环承担。把这当组织设计议题,而非工具采购议题。</div>
+    </div>
+  </div>
+
+  <h2 class="section-head">▎ 速记 · SKIM</h2><div class="skim-grid">
+    <div class="skim">
+      <span class="n">S01</span><span class="tag">RSS · 无字幕</span>
+      <h5>AI Daily Brief:Fable 5 被美国政府叫停(紧急一期)——YouTube 无字幕,待转录</h5>
+      <p>AI Daily Brief 一期紧急节目,标题为『Fable 5 被美国政府叫停』,称美政府下令 Anthropic 暂停相关访问。YouTube 未提供字幕,正文仅 64 字符无法取全文。Fable 5 议题已在 Vol.010(能力实测)、Vol.011(ladder-pulling/静默护栏)深读,Vol.013 记录其『静默降质被舆论逼回滚』;本条为『政府叫停』的最新进展,属重大治理升级——标记追踪,待有转录或文字报道再深读。这是 Fable 治理线从『厂商自我回滚』升级到『监管介入』的潜在拐点,值得回捞。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S02</span><span class="tag">RECOMENDO · 工具</span>
+      <h5>Recomendo #519:强光工作灯 / 充电吹风机 / 可检索的 Attenborough 纪录片库</h5>
+      <p>Recomendo 第 519 期生活好物推荐:Nightstick 可充电强光工作灯(600 流明、带磁铁与 360° 挂钩)、可换电池便携高功率吹风机(车间清洁)、Searchable Attenborough(索引了 Attenborough 约 5000 集纪录片、可按动物/栖息地/地点/现象检索并指向流媒体)、Far Out Company(60–70 年代反主流文化视觉艺术档案)。与 Gaming 决策无关,纯生活信息流,收藏备查。Searchable Attenborough 的『把海量内容做成可检索单一入口』倒与 Vol.013『网站作为正典 URL』隐性同频。</p>
+    </div></div>
+
+  
+
+  <h2 class="section-head">▎ 去重 · DUP</h2><div class="dup"><b>Fable 5 Shut Down by US Government (AI Daily Brief)</b> — Fable 5 主线已在 Vol.010/011 深读、Vol.013 记录回滚;本条为『政府叫停』新进展但 YouTube 无字幕无法取全文,降级到 SKIM S01 标记追踪,不作重复深析</div>
+
+  <h2 class="section-head">▎ 新增观点入库 · VP LEDGER (7 条 · append-only 到 _mira-vp-index)</h2>
+  <table class='ledger'><thead><tr><th>分类</th><th>观点</th><th>来源</th></tr></thead><tbody><tr><td>The Token Scarcity Issue / 从管够到配给</td><td>[NEW 2026-06-14] 那张吓坏华尔街的 token 支出指数图被集体误读:它既非需求也非总量更非总支出,只是第三方路由器上每百万 token 的加权均价,而路由器存在的意义就是导向更便宜模型——故该指数天然高估『逃离前沿』的程度</td><td>AI Daily Brief × mira</td></tr><tr><td>The Token Scarcity Issue / 从管够到配给</td><td>[NEW 2026-06-14] 反误读 checklist:任何吓人的线先问三件事——这指标量的是什么、数据采样来自哪个口径、这口径会系统性放大/缩小什么;数据来源决定结论的偏差方向(只采折扣店不能推断全国消费降级)</td><td>AI Daily Brief × mira</td></tr><tr><td>The Token Scarcity Issue / 从管够到配给</td><td>[NEW 2026-06-14] 真正的结构性迁移:补贴时代(廉价管够)让位于配给时代(为效率付费);agentic 用法把单任务 token 消耗放大几个数量级,每家 AI 公司现在都被迫进入 token 效率生意</td><td>AI Daily Brief × mira</td></tr><tr><td>The Token Scarcity Issue / 从管够到配给</td><td>[NEW 2026-06-14] 别被『大厂设 token 上限』误判 AI 投入见顶:头部 1% 已 7.5 万美元/人、中位公司仅 11.38 美元/人(约 6600 倍鸿沟),渗透才刚开始,总需求增长将碾压『转向廉价 token』的均价下移</td><td>AI Daily Brief × mira</td></tr><tr><td>The Token Scarcity Issue / 从管够到配给</td><td>[NEW 2026-06-14] token 配给时代的分配原则:最贵的前沿 AI 会向最能用好它的人集中(有资产负债表/研究深度/可规模化回报的经营领域)——这是市场理性化不是泡沫;前沿 token 集中投给会用的人,长尾用廉价模型铺面</td><td>Citadel via AI Daily Brief × mira</td></tr><tr><td>Agent 工具链 / token 效率落地</td><td>[NEW 2026-06-14] token 效率正从理念变成可装的依赖:headroom 在喂 LLM 前压缩 tool outputs/日志/RAG chunks 省 60-95% 不缩水;规模化跑 agent 应把分层用模+缓存复用+上下文压缩当第一天的一等约束</td><td>逛逛GitHub × mira</td></tr><tr><td>AI 改变产品运营模式 / 组织设计</td><td>[NEW 2026-06-14] AI 对产品团队的改变不是局部提速而是运营模式结构性重组(角色边界/工程交接/决策流);这是 Vol.013『人从写 prompt 上移到设计循环』在组织层面的回声——应作组织设计议题而非工具采购议题</td><td>Lenny&#x27;s Newsletter × mira</td></tr></tbody></table>
+
+  <footer class="footer">
+    <span>MIRA · Daily Broadside · Vol.014 · 自包含单文件</span>
+    <span>下期 · <b>2026-06-15 06:00 Asia/Shanghai</b></span>
+  </footer>
+</div>
+</body>
+</html>
