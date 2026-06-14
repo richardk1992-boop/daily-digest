@@ -1,0 +1,12 @@
+{
+  "date": "2026-06-14",
+  "vol": "014",
+  "title": "The Token Scarcity Issue — 从『token 管够』到『token 配给』:那张吓坏华尔街的图,其实没说它被传成的意思",
+  "subtitle": "今天最响的信号是一张图引发的集体误读:Citadel/Silicon Data 的『LLM token 支出指数』掉头向下,被全网传成『AI 需求崩了、泡沫要破』——但 AI Daily Brief 逐帧拆解后指出,这张图既不是需求、也不是总量、更不是总支出,它只是『第三方 token 路由器上每百万 token 的加权均价』,而路由器的存在本就是为了把流量导向更便宜的模型 · 真正的结构性迁移是:补贴时代结束,token 进入稀缺/配给时代,每家 AI 公司现在都被迫进入『token 效率』生意 · 中位公司每人每月只花 11.38 美元 AI、头部 1% 已达 7.5 万美元/人——总需求增长仍将碾压『转向廉价 token』带来的均价下移 · 配套:本周 18 个 GitHub 开源项目(Agent 生态霸榜)、Lenny 社区问『AI 如何改变产品运营模式』· 延续 Vol.013『智能商品化』:底层智能会被商品化,稀缺的是把它高效编排进你独有循环的能力",
+  "deep_count": 1,
+  "brief_count": 2,
+  "skim_count": 2,
+  "skip_count": 0,
+  "dup_count": 1,
+  "new_viewpoints": 7
+}
