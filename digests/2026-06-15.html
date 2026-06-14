@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>The Taste Issue — 当『造东西』变便宜,『知道该造什么』成了唯一的瓶颈 — Vol.015</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --bg-warm: #1a1a18;
+  --bg-warm-2: #1f1a14;
+  --orange: #e85d26;
+  --orange-soft: #f4a06a;
+  --yellow: #f6d24a;
+  --ink: #f3ede4;
+  --ink-dim: #b4a999;
+  --rule: #2c2823;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  margin: 0; padding: 0; line-height: 1.65;
+  font-size: 16px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
+.chrome { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim); text-transform: uppercase; }
+
+.masthead { border-top: 6px solid var(--orange); padding-top: 18px; margin-bottom: 28px; }
+.masthead .topline { display: flex; justify-content: space-between; }
+.masthead h1 {
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 52px; line-height: 1.04; margin: 14px 0 10px;
+  color: var(--orange); letter-spacing: -0.01em;
+}
+.masthead h2 {
+  font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic;
+  font-size: 18px; color: var(--orange-soft); margin: 0 0 16px;
+}
+.masthead .meta {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 10px 0; display: flex; gap: 28px; flex-wrap: wrap;
+}
+.meta span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+.meta span b { color: var(--yellow); font-weight: 600; }
+
+.editorial {
+  background: var(--bg-warm-2); border-left: 4px solid var(--yellow);
+  padding: 22px 28px; margin: 28px 0 40px;
+}
+.editorial h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 12px; letter-spacing: 0.12em;
+}
+.editorial p {
+  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 1.75;
+  margin: 0 0 10px; color: var(--ink);
+}
+
+.section-head {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--orange); margin: 40px 0 18px;
+  border-bottom: 2px solid var(--rule); padding-bottom: 10px;
+}
+
+.deep-card {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 30px 32px; margin: 0 0 32px; border-radius: 2px;
+}
+.deep-card .tag {
+  display: inline-block; background: var(--orange); color: #fff;
+  padding: 3px 10px; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+}
+.deep-card h3 {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 27px; line-height: 1.2; margin: 14px 0 6px; color: var(--ink);
+}
+.deep-card .kicker { font-size: 14px; color: var(--orange-soft); margin: 0 0 8px; }
+.deep-card .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+.deep-card .meta-row a { color: var(--yellow); text-decoration: none; }
+
+.scorecard {
+  background: rgba(0,0,0,0.3); padding: 14px 18px; margin: 16px 0 22px;
+  display: grid; grid-template-columns: repeat(5, 1fr) 90px; gap: 14px; align-items: center;
+}
+.score-dim { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); }
+.score-dim b { display: block; color: var(--ink); font-size: 18px; font-family: 'Barlow', sans-serif; }
+.score-bar { background: var(--rule); height: 4px; margin-top: 4px; }
+.score-bar > div { background: var(--orange); height: 100%; }
+.score-total { text-align: right; font-family: 'Barlow', sans-serif; }
+.score-total b { font-size: 32px; color: var(--yellow); }
+.score-total span { font-size: 14px; color: var(--ink-dim); }
+
+.arg { margin: 26px 0; }
+.arg h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--yellow); margin: 0 0 12px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.arg .quote {
+  font-family: 'Noto Serif SC', serif; font-style: italic;
+  font-size: 15px; color: var(--ink); border-left: 3px solid var(--orange-soft);
+  padding: 6px 16px; margin: 8px 0;
+}
+.arg .cn { font-size: 14px; color: var(--ink); padding: 0 16px; margin: 8px 0; }
+.arg .mira {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 10px 16px; margin: 12px 0 0;
+  font-size: 14px; color: var(--ink);
+}
+.arg .mira b { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+.takehome {
+  background: rgba(246,210,74,0.06); border: 1px solid rgba(246,210,74,0.25);
+  padding: 18px 22px; margin: 24px 0 0;
+}
+.takehome h4 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.12em;
+}
+.takehome ol { margin: 0; padding-left: 22px; }
+.takehome li { margin: 6px 0; font-size: 14px; color: var(--ink); }
+
+.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .brief-grid { grid-template-columns: 1fr; } }
+.brief {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+.brief .n { font-family: 'Barlow', sans-serif; font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.brief .tag {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--yellow); letter-spacing: 0.1em; margin: 4px 0 8px;
+}
+.brief h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 1.25; color: var(--ink); margin: 0 0 6px;
+}
+.brief .kicker { color: var(--orange-soft); font-size: 13px; margin: 0 0 8px; }
+.brief .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); margin-bottom: 10px; }
+.brief .meta-row a { color: var(--yellow); text-decoration: none; }
+.brief .body { font-size: 14px; line-height: 1.7; }
+.brief .bullet {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 8px 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink);
+}
+
+.skim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .skim-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .skim-grid { grid-template-columns: 1fr; } }
+.skim {
+  background: var(--bg-warm); border: 1px solid var(--rule); padding: 14px 16px;
+}
+.skim .n { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--orange-soft); }
+.skim .tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--yellow); letter-spacing: 0.1em; margin-left: 8px; }
+.skim h5 { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); margin: 6px 0; line-height: 1.3; }
+.skim p { font-size: 12px; line-height: 1.55; color: var(--ink-dim); margin: 0; }
+
+.skip { background: var(--bg-warm); border-left: 3px solid var(--ink-dim); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink-dim); }
+.skip b { color: var(--ink); }
+
+.dup { background: var(--bg-warm); border-left: 3px solid var(--yellow); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+.dup b { color: var(--yellow); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.ledger th { color: var(--yellow); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.ledger td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--orange-soft); font-size: 11px; width: 18%; }
+.ledger td:nth-child(2) { width: 50%; }
+.ledger td:nth-child(3) { color: var(--ink-dim); width: 32%; }
+
+.footer {
+  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+}
+.footer b { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Daily Reading Broadside · Vol.015</span>
+      <span class="chrome">2026-06-15 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Taste Issue — 当『造东西』变便宜,『知道该造什么』成了唯一的瓶颈</h1>
+    <h2>又一个瘦身日,但两位重量级嘉宾把同一根主线钉死了:Zynga 创始人 Mark Pincus 说『今天造好产品的唯一瓶颈,是知道该造什么』,并给出 Proven/Better/New 框架——直觉 95% 对、点子 75% 错,要在补贴的点子上『杀死希望、收割胜局而非下注』· 另一边,一个『连代码都不会读』的非技术创始人 Matt 用 agentic engineering 一天造一个产品、OSS 拿下 GitHub 榜首,从不读 plan、只靠判断力提问 · 两条线殊途同归:智能与代码都在被商品化,稀缺的是品味与判断——这是 Vol.013『稀缺的是编排能力』、Vol.014『前沿向会用的人集中』在『人』这一侧的收口</h2>
+    <div class="meta">
+      <span>候选 <b>5</b></span>
+      <span>析出 <b>5</b></span>
+      <span>深读 <b>2</b></span>
+      <span>简评 <b>2</b></span>
+      <span>速记 <b>0</b></span>
+      <span>跳过 <b>0</b></span>
+      <span>重复 <b>1</b></span>
+      <span>新观点 <b>9</b></span>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <h3>EDITORIAL · 编辑卷首语</h3>
+    <p>又是一个『瘦身日』——24 小时窗口只入库 5 条,没有 takara.ai 的 arxiv 洪流。但今天有两位重量级嘉宾,从两个完全不同的方向,把同一根主线钉死了:当『造东西』变得越来越便宜,真正稀缺、真正决定胜负的,是『知道该造什么』——也就是品味与判断。这是本卷标题 The Taste Issue 的由来,也是 Vol.012『意图不可训练』→ Vol.013『智能商品化、稀缺的是编排』→ Vol.014『前沿向会用的人集中』这条主线,在『人』这一侧的收口。</p>
+    <p>第一位是 Zynga 创始人 Mark Pincus(FarmVille、Words with Friends,巅峰 1400 万 DAU)。他新书的推荐语里,Sam Altman 写下一句话:今天造好产品的唯一瓶颈,是知道该造什么。Pincus 把这句话拆成可操作的纪律——Proven/Better/New 框架:你的直觉 95% 是对的、你的点子 75% 是错的,所以要先把品类里『被验证的』抄成博士级、再做一个 10/10 现有用户会喊『太爽了我换』的 better,而那个你自以为聪明的 new,大概率会失败。他还有两句话值得每个做产品的人贴墙上:连席德·梅尔都因为 FTUE 没做好而让伟大的游戏设计『一出生就死了』;以及『在希望杀死你之前先杀死希望』——区分 belief(基于真实信号的信念)和 hope(无根据的祈祷),而 AI 把『做出一个勉强能用的 demo』压到几乎零成本之后,这道纪律空前致命。</p>
+    <p>第二位是非技术创始人 Matt Van Horn,他几乎是 Pincus 那句话的活体证明:一个『连代码都不会读』的人,靠 agentic engineering(compound engineering 的 CE plan / CE work)一天造一个产品、开源项目拿下 GitHub 榜首。他甚至不读 agent 写的 plan——把全部人类注意力押在『判断哪个问题值得问』上。他用『BCAC(Before/After Claude,去年感恩节 Opus 4.5)』标记了 agentic coding『从玩具变成真东西』的相变点,还做了个 printing press:给任何服务一键『打印』出 CLI,靠 HAR 嗅探找隐藏 API、把一切下载进本地 SQLite 再喂给 agent(正好是 Vol.014『token 效率』的具体手法)。两位嘉宾殊途同归:智能在被商品化、代码在被商品化,于是『知道该造什么』『判断哪个问题值得问』——品味与判断——成了唯一的瓶颈。</p>
+    <p>配套两条 brief 也各自落在这条线的边上:Recomendo 的 Searchable Attenborough 把约 5000 集纪录片做成可多维检索的单一入口,内容越爆炸、可被精准编排的入口越值钱;逛逛GitHub 报道 Agnes AI『无限期免费、首周烧掉 1 万亿 token』,恰好给 Vol.014『token 配给』做了个反讽注脚——前沿向会用的人集中,长尾用补贴抢心智。5 条候选全部析出(2 deep / 2 brief / 1 dup,Pincus 的邮件版与播客版去重),新增 9 条观点入库。一句话收口:当人人都能造,胜负手不再是手速,而是品味——知道该造什么,知道该问什么。</p>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · DEEP</h2>
+  
+    <article class="deep-card" id="pincus_taste">
+      <span class="tag">LENNY&#x27;S PODCAST · 产品判断力</span>
+      <h3>『今天造好产品的唯一瓶颈,是知道该造什么』——Pincus 的 Proven/Better/New:直觉 95% 对、点子 75% 错,所以别下注、去收割</h3>
+      <div class="kicker">Zynga 创始人 Mark Pincus(FarmVille/Words with Friends/14M DAU) · 新书《Life at the Speed of Play》 · Sam Altman 背书:唯一瓶颈是『知道该造什么』· Proven 先拿 PhD、Better 要 10/10 喊『f yeah』、New 大概率会失败 · 杀死希望(hope)而非信念(belief)</div>
+      <div class="meta-row">YouTube · Lenny&#x27;s Podcast · 86,412 chars · 信号 2 颠覆 2 可操作 2 独特 2 时效 2 · <a href="https://www.youtube.com/watch?v=7eh9C3TUotc">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>10</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;In a quote for the book, Sam Altman said that today the only bottleneck to building great products is knowing what to create.&quot; / Pincus: &quot;We have these human level instincts that are pretty much always right. And then we put these ideas on top of the instincts that are usually wrong. My rule of thumb is your instincts are right 95% of the time. Your ideas are wrong 75% — or at best right 25% — of the time.&quot;</div>
+          <div class="cn">「Sam Altman 为这本书写的推荐语说:今天造好产品的唯一瓶颈,是知道该造什么。」Pincus:「我们有一种人类层面的直觉,几乎总是对的;然后我们在直觉之上叠加点子,而这些点子通常是错的。我的经验法则是:你的直觉 95% 的时候是对的,你的点子 75% 是错的——最好的情况也只有 25% 对。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是本卷的定盘星,也是 012→013→014 这条主线在『人』这一侧的收口。当算力、智能、代码都在被商品化(Vol.013/014),真正稀缺的不再是『能不能造』,而是『知不知道该造什么』——也就是品味与判断。Pincus 把它拆得更细:直觉(对你正在解决的人类需求的嗅觉)和点子(你拍脑袋想出的具体实现)是两回事,前者珍贵且稳定、后者廉价且易错。给 Gaming 的直接价值:在 AI 让『出原型』几乎零成本的今天,团队的杠杆点彻底从『实现速度』转移到『选题质量』。该重投资的是『把直觉找准、把点子快速证伪』的能力——而不是再招一队人去更快地造更多大概率错的点子。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;Proven better new... be a master of the proven first. Get your PhD in proven first. We haven&#x27;t earned the right to innovate on the camera until we are the world&#x27;s leading PhD on the best mobile cameras that already exist. Better is something that 10 out of 10 of the existing users would say &#x27;f*** yeah.&#x27; 10 out of 10 — not you. What you think is better is called new.&quot;</div>
+          <div class="cn">「Proven / Better / New……先成为『已被验证』的大师。先把『proven』读成博士。在我们成为『现存最好的手机相机』的世界第一专家之前,我们没有资格去创新相机。Better 是指:现有产品的 10 个用户里有 10 个会说『太爽了我换』。是 10/10,不是你自己觉得。你自己觉得的 better,其实叫 new。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条是框架的操作核心,妙在它给『创新』装了一道纪律。多数失败不是死于不够创新,而是死于『把 new 误当 better』——团队爱上自己拍脑袋的点子,误以为用户也会爱。Pincus 的硬标准极其可操作:Proven=先把品类里被验证的最佳实践抄到位(合法地、带品味地抄);Better=能用数据证明、且 10/10 现有用户无脑买账的小改进;New=那个大概率会失败、但值得一试的钩子。给 Gaming 的方法论:做新玩法/新功能前,先逼问自己三件事——① 这个品类被验证的最佳实践我们抄全了吗(FTUE/留存/付费节奏)?② 我们的『better』是 10/10 现有玩家会喊爽的,还是只有我们自己觉得爽的?③ 我们清楚哪部分是大概率失败的 new,并准备好了备选吗?把它做成立项评审的标准三问。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">Sid Meier&#x27;s social Civilization: &quot;10 minutes after the game came out, the Zynga PMs said it&#x27;s dead on arrival because his first time user experience was so many clicks and so bad that no one was ever going to see his great game design. Even Sid Meier tripped over what the most junior Zynga PMs understood. Because he didn&#x27;t perfectly copy the proven, his innovation never got seen by anybody.&quot;</div>
+          <div class="cn">席德·梅尔的社交版《文明》:「游戏上线 10 分钟后,Zynga 的产品经理就传阅分析说:这游戏一出生就死了,因为他的首次用户体验点击太多、太糟糕,没人能看到他那伟大的游戏设计。连席德·梅尔都栽在了 Zynga 最初级产品经理都懂的事上——因为他没把『被验证的』完美抄到位,他的创新根本没人看得见。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是整集最扎心的案例,因为它证明『天才的创新』会被『没做好的基本功』直接闷杀。席德·梅尔——游戏设计教父——栽在 FTUE(首次用户体验)这种『proven 基本功』上。它和 Vol.013 的『苦涩教训』形成镜像:再强的 new(模型能力/玩法创意)也救不了破掉的 proven(用户进入路径/循环设计)。给 Gaming 的警钟:在 AI 让创意产能暴涨的当下,真正卡住转化的往往不是创意不够炫,而是 onboarding/首局体验/留存钩子这些『被验证的基本功』没抄到位。把『proven 基本功审计』当成每个新玩法上线前的强制关卡——别让你最好的 new 死在最初 10 分钟。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">&quot;Kill hope before hope kills you. There&#x27;s a difference between belief and hope. Hope is confidence without basis. The best product makers are collecting winnings — they&#x27;re not making bets. They already know. If you talk to Brian Chesky about his launches, he already knows he has a hit. He&#x27;s not launching it to find out if people like it.&quot; / &quot;AI is so powerful that it&#x27;s dangerous — it means we can get to a viable product in much less time. And that&#x27;s a dangerous drug.&quot;</div>
+          <div class="cn">「在希望杀死你之前,先杀死希望。信念(belief)和希望(hope)是两回事。希望是没有根据的信心。最好的产品人是在『收割胜局』,而不是『下注』——他们早就知道结果了。你去问 Brian Chesky 他的发布,他早就知道这是个爆款;他发布不是为了搞清楚大家喜不喜欢。」/「AI 太强大了,强大到危险——它意味着我们能用少得多的时间做出一个『viable(勉强可用)』的产品。这是一种危险的毒品。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条把 AI 时代的一个隐性陷阱点破了,极具时效价值。belief(基于真实信号的信念)vs hope(无根据的祈祷)的区分,在 AI 把『做出 viable 产品』的成本压到几乎为零之后变得空前致命——因为 AI 让你能极快地造出一个『看起来能用、于是你抱着希望continue砸资源』的东西。Pincus 的解药是把『MVP(minimum viable product)』换成『MLP(maximum launchable product)』:别发一个『勉强可用、靠希望续命』的版本,要发一个你『相信(而非希望)会赢』的版本。给 Gaming 的务实动作:在立项/续投评审里,强制区分『我们有真实信号相信它会赢(belief)』还是『我们只是希望下个版本会有奇迹(hope)』——后者就是该被杀死的项目。AI 越能快速造出 viable demo,这道纪律越值钱。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;Why being less ambitious is often the path to the most ambitious ideas.&quot; / &quot;It&#x27;s almost a moral arbitrage. You became a founder because you wanted to be an innovator, but you&#x27;re trying to win the hearts and minds of nurses in Indiana — like for FarmVille. You&#x27;re not trying to win awards and respect from your peers. Define your ambition in the eyes of your consumer.&quot;</div>
+          <div class="cn">「为什么『不那么野心勃勃』往往才是通向最有野心的点子的路。」/「这几乎是一种道德套利。你成为创始人是因为你想做个创新者,但你真正要赢得的,是印第安纳州那些护士的心——就像 FarmVille 那样。你不是要赢同行的奖项和尊重。在你的消费者眼中定义你的野心。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:把这条放收尾,因为它纠正了一个在 AI 时代被放大的虚荣陷阱——『为同行炫技』而非『为用户解决问题』。Pincus 说的『道德套利』很犀利:创业者常被『让同行佩服』的虚荣绑架,去做技术上炫但用户不需要的东西;而真正的野心,是放下身段去赢普通用户(印第安纳护士)的心。这和 Vol.012『意图/判断是不可训练的稀缺品』直接呼应:AI 会让『炫技式创新』产能爆炸,于是『谦逊地对准真实用户需求』反而成了更稀缺、更高回报的判断力。给 Gaming 的判断:别被『做一个让 GDC 同行惊叹的系统』诱惑,先问『印第安纳护士级的普通玩家』要不要、爽不爽。在用户眼中定义野心——这是 AI 时代最反直觉也最值钱的品味。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>把杠杆点从『实现速度』搬到『选题质量』:AI 让出原型近乎零成本,团队该重投资的是『把直觉找准 + 把点子快速证伪』的能力,而不是招更多人更快地造更多大概率错的点子。</li><li>把 Proven/Better/New 做成立项评审标准三问:① 品类被验证的最佳实践(FTUE/留存/付费节奏)抄全了吗?② 我们的 better 是 10/10 现有玩家会喊爽的,还是只有自己觉得爽?③ 哪部分是大概率失败的 new、备选准备好了吗?</li><li>上线前强制『proven 基本功审计』:连席德·梅尔都死在 FTUE 上——再炫的玩法创意也救不了破掉的 onboarding/首局/留存钩子。别让你最好的 new 死在最初 10 分钟。</li><li>续投评审强制区分 belief vs hope:有真实信号相信会赢(belief)才投,只是『希望下个版本有奇迹』(hope)就该砍。AI 越能快速造出 viable demo,这道纪律越值钱——发 MLP 不发靠希望续命的 MVP。</li><li>在用户眼中定义野心,而非在同行眼中:别被『让 GDC 同行惊叹』诱惑,先问印第安纳护士级的普通玩家要不要、爽不爽——AI 让炫技产能爆炸,谦逊对准真实需求反而最稀缺。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="matt_agentic">
+      <span class="tag">PETER YANG · AGENTIC ENGINEERING</span>
+      <h3>一个『连代码都不会读』的人,如何用 agentic engineering 一天造一个产品、OSS 拿下 GitHub 榜首——他从不读 plan,只靠判断力提问</h3>
+      <div class="kicker">非技术创始人 Matt Van Horn · compound engineering(CE plan / CE work) · BCAC『Before/After Claude』——去年感恩节 Opus 4.5『不再是玩具』· printing press:给任何服务一键打印 CLI(HAR 嗅探找 secret API)· 『不读 plan,因为要跑得快』</div>
+      <div class="meta-row">YouTube · Peter Yang · 47,484 chars · 信号 2 颠覆 2 可操作 2 独特 1 时效 2 · <a href="https://www.youtube.com/watch?v=BxEf3RqIHkw">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>9</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;I certainly don&#x27;t read any code. I don&#x27;t even know how to read any code. I haven&#x27;t written any code since high school. I am not an engineer... but somehow I&#x27;m able to ship things of value, which is crazy and weird and still blowing my mind.&quot; / &quot;My favorite tool is compound engineering. The killer feature is CE plan and CE work... agents have a propensity to be lazy — by writing down a step-by-step systematic plan, it sets itself up so it&#x27;s not lazy.&quot;</div>
+          <div class="cn">「我当然不读任何代码。我甚至不知道怎么读代码。我从高中起就没写过代码。我不是工程师……但我居然能持续交付有价值的东西,这很疯狂、很怪异,至今仍让我震惊。」/「我最爱的工具是 compound engineering(复利工程)。杀手级功能是 CE plan 和 CE work……agent 天生有偷懒的倾向,而把一步步的系统化计划写下来,会逼它不偷懒。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是 Pincus 那条主线的另一面镜子——如果说 Pincus 论证『知道该造什么』比『能造』更稀缺,Matt 就是这句话的活体证明:一个连代码都不会读的人,靠判断力和品味就能持续交付。它和 Vol.013『人从写 prompt 上移到设计循环』完全咬合:Matt 不写代码、不读 plan,他做的全部工作是『设计循环 + 在关键节点用判断力提问』。给 Gaming 的直接价值:agentic engineering 正在把『谁能交付软件』的边界从『会写代码的人』扩展到『有产品判断力的人』。这意味着你团队里的策划、设计、运营——只要判断力够——都可能成为能独立交付工具/原型的人。该投资的是给他们配 agent 工作流(CE plan/CE work 这类),而不是默认他们必须先学会编程。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;I used to always read the plans... but in the last two months I found there&#x27;s no reason to look at the plan. You should never look at the plan because you got to move fast. I just ask questions to the agents.&quot; His one question that morning: &quot;You&#x27;re just modifying agent cookie, right? You don&#x27;t have to make a change to Vercel&#x27;s agent browser or Playwright?&quot; — &quot;Nope, just agent cookie.&quot; — &quot;Great, CE work, let&#x27;s go build.&quot;</div>
+          <div class="cn">「我以前总是读 plan……但过去两个月我发现根本没必要看 plan。你永远不该看 plan,因为你得跑得快。我只是向 agent 提问。」他那天早上唯一的问题是:「你只是在改 agent cookie 对吧?你不用去动 Vercel 的 agent browser 或 Playwright?」——「对,只动 agent cookie。」——「很好,CE work,开干。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条是最反直觉、也最值得 Gaming 警惕地学习的。Matt 不读 plan、不读 code,他把人的注意力全部押在『判断哪个问题值得问』上——这正是 Pincus『直觉/判断稀缺』的工程化版本。但要小心:这套打法的前提是 Matt 有极强的产品直觉 + 大量使用经验积累出的『知道什么问题导向成功/失败』。给 Gaming 的平衡判断:① 正面——对低风险、自用、可快速验证的工具(内部脚本、原型、数据小工具),『不读 plan、靠提问把关、快速迭代』能极大提速,值得鼓励;② 反面——对上线给玩家、涉及付费/安全/合规的代码,『不读 plan』是不可接受的,必须保留 code review 与测试关卡。关键是按风险分级:把 Matt 式的『判断力驱动、不读细节』用在试错区,把工程严谨用在生产区。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;November 24th Opus 4.5 shipped... I call it BCAC — Before Claude, After Claude. It was that Thanksgiving last year where it stopped being a toy and started being real. Before that I couldn&#x27;t build anything of value — &#x27;look I made a weather app that kind of works&#x27; — and I&#x27;d spend 3 days trying to get Google OAuth to work and it didn&#x27;t.&quot;</div>
+          <div class="cn">「11 月 24 号 Opus 4.5 发布……我把它叫做 BCAC——Before Claude / After Claude(克劳德之前 / 克劳德之后)。就是去年感恩节那会儿,它不再是玩具、开始变成真东西了。在那之前我造不出任何有价值的东西——『看我做了个勉强能跑的天气 app』——我会花 3 天想让 Google OAuth 跑起来,结果还跑不通。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条提供了一个具体的时间锚点,时效价值高。Matt 用『BCAC(感恩节 Opus 4.5)』标记了一个相变点:agentic coding 从『玩具 demo』跨过了『能交付真实价值』的门槛。这和 Vol.014『从辅助式到 agentic 的迁移』、Vol.013『智能商品化』是同一场相变的不同切面——能力一旦越过某条线,『非技术的人也能交付软件』就从奇闻变成常态。给 Gaming 的判断:如果你团队上一次认真评估『AI 能不能让非工程同学独立交付工具』还是在这个相变点之前(2025 年中以前),那个结论已经过期了,值得重新摸底。能力曲线的台阶式跃迁意味着『半年前不行』不等于『现在不行』。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">The printing press (printingpress.dev): &quot;What if anyone could print their own CLI about anything?&quot; It studies Peter Steinberger&#x27;s patterns (downloads everything into a SQLite DB, builds power-user personas, optimizes for token efficiency), ingests official CLIs/APIs, and does a HAR sniff to find secret APIs. &quot;Google Flights and Kayak don&#x27;t have an official API, but if you do a HAR sniff and click around you can find all the secret APIs — that&#x27;s how the flight goat was invented.&quot;</div>
+          <div class="cn">印刷机(printingpress.dev):「如果任何人都能为任何东西『打印』出自己的 CLI 呢?」它学习 Peter Steinberger 的模式(把一切下载进 SQLite 库、构建『超级用户』人设、优化 token 效率),吸收已有的官方 CLI/API,再做 HAR 嗅探去找『隐藏 API』。「Google Flights 和 Kayak 没有官方 API,但你做个 HAR 嗅探、点一点,就能找到所有隐藏的 API——flight goat 就是这么发明的。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条是最具体的『工具造工具』案例,呼应 Vol.014 的 Agent 工具链主线。printing press 的设计里藏着两个值得抄的工程品味:① Steinberger 的『把一切下载进本地 SQLite』——与其每次问 API,不如一次性同步全量数据到本地库,agent 查询既快又省 token(这正是 Vol.014『token 效率』的具体手法);② 用『power-user persona』反推该造什么功能——这又回到 Pincus『在用户眼中定义需求』。给 Gaming 的务实价值:你们内部大量重复的、围绕第三方服务(数据平台、运营后台、商店后台)的取数/操作,完全可以用这类『打印 CLI/skill』的思路封装成 agent 工具——把『下载everything 进本地库 + 给 agent 当工具』作为内部效率工程的默认模式。注意 HAR 嗅探 secret API 在对外/合规场景有风险,内部自用工具优先。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>把『谁能交付软件』的边界从『会写代码的人』扩展到『有判断力的人』:给策划/设计/运营配 agent 工作流(CE plan/CE work 这类),让判断力够的非工程同学也能独立交付内部工具与原型——而非默认他们必须先学编程。</li><li>按风险分级套用『不读 plan、靠提问把关』:低风险自用工具(内部脚本/原型/数据小工具)鼓励 Matt 式快速迭代;上线给玩家、涉付费/安全/合规的代码必须保留 code review 与测试关卡。把判断力驱动用在试错区,工程严谨用在生产区。</li><li>重新摸底 AI 交付能力:若上次认真评估『非工程同学能否独立交付工具』还在 2025 年中(BCAC 相变点)之前,结论已过期——能力台阶式跃迁,『半年前不行』不等于『现在不行』。</li><li>把『下载 everything 进本地 SQLite + 给 agent 当工具』作为内部效率工程默认模式:围绕第三方服务(数据平台/运营后台/商店后台)的重复取数操作,用『打印 CLI/skill』思路封装——既提速又省 token(呼应 Vol.014 token 效率)。</li><li>守住 slop 底线:Matt 反复强调『别造 slop(廉价垃圾)』、用 compound engineering 保质——产能暴涨时,把关品质的判断力(又一次回到品味)比产量更重要。</li></ol>
+      </div>
+    </article>
+
+  <h2 class="section-head">▎ 速览 · BRIEF</h2>
+  <div class="brief-grid">
+    
+    <div class="brief">
+      <div class="n">01</div>
+      <div class="tag">BRIEF · 工具 / 信息流</div>
+      <h4>Recomendo #519:强光工作灯 / 充电吹风机 / 可检索的 Attenborough 纪录片库 / 反主流文化设计档案</h4>
+      <div class="kicker">Recomendo 第 519 期 · Nightstick 600 流明工作灯 · 便携高功率吹风机(车间清洁)· Searchable Attenborough · Far Out Company</div>
+      <div class="meta-row">Email · Recomendo (Substack) · 5,463 chars · <a href="mailto:reader-forwarded-email/b3557b793decc061bb8ff94f293340a4">原文</a></div>
+      <div class="body">Recomendo 第 519 期四件生活好物:Nightstick 可充电强光工作灯(600 流明、三磁铁 + 360° 可旋挂钩,免手作业)、无名高功率便携吹风机(套现有电动工具电池,车间/露台清洁,被提名为『很有老爸味』的父亲节礼物)、Searchable Attenborough(索引了 Attenborough 90 个系列约 5000 集纪录片,可按动物/栖息地/地点/自然现象/主题检索并精准指向对应流媒体)、Far Out Company(60–70 年代反主流文化视觉艺术策展档案)。</div>
+      <div class="bullet">✱ Gaming 含义:本期与决策无直接关联,纯生活流,收藏备查。但 Searchable Attenborough『把海量内容索引成可按多维检索的单一入口』这一形态值得记一笔——它和本卷『判断力/品味是稀缺品』隐性同频:内容产能越爆炸,『可被精准检索/编排的单一入口』越值钱。对玩家社区/攻略/UGC 的海量内容治理是个可借鉴的产品形态。</div>
+    </div>
+    <div class="brief">
+      <div class="n">02</div>
+      <div class="tag">BRIEF · 开源 / 反讽注脚</div>
+      <h4>逛逛GitHub:把 3 个免费全模态模型接进 Claude Code『Token 随便用』——给 Vol.014『token 配给』当了个反讽注脚</h4>
+      <div class="kicker">Agnes AI 6/1 起无限期免费开放文本/图片/视频三模型 API · 首周文本被调用 1 万亿 token · cc-switch 接入 · 一堆 Skill/ComfyUI 节点已开源</div>
+      <div class="meta-row">Weixin · 逛逛GitHub · 2,318 chars · <a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534527&amp;idx=1&amp;sn=63980e0d2e1a81599c85b53e681629b6">原文</a></div>
+      <div class="body">Agnes AI(自称全球榜单前十的 AI Lab)从 6 月 1 号起把文本(Agnes-2.0-Flash)、图片(Agnes-Image-2.1-Flash)、视频(Agnes-Video-2.0)三个核心模型 API 无限期免费开放;首周文本模型被调用 1 万亿 token、图片生成 200 万张、视频生成 550+ 小时。文章给出 cc-switch 接入 Claude Code 的具体配置,并列了若干已开源的封装 Skill 与 ComfyUI 节点;本周还将上 1M 上下文与 4K 出图。</div>
+      <div class="bullet">✱ 含义:这条恰好给 Vol.014『token 配给时代』做了个有趣的反讽注脚——一边是前沿 token 进入稀缺/配给,一边是二线 Lab 用『无限免费』疯狂买量、首周烧掉 1 万亿 token。两者并不矛盾,正是 Vol.014『前沿向会用的人集中、长尾用廉价模型铺面』的现实写照:免费 = 在长尾用补贴抢心智。对 Gaming 的务实点:这类『免费/廉价模型 + 现成 Skill』可纳入内部非关键链路(素材草稿、批量粗加工)的备选,把贵的前沿 token 省给真正的难活;但『无限期免费』不可持续,别把生产链路绑死在补贴上。</div>
+    </div>
+  </div>
+
+  
+
+  
+
+  <h2 class="section-head">▎ 去重 · DUP</h2><div class="dup"><b>The hidden pattern behind successful products | Mark Pincus (Lenny&#x27;s Newsletter email)</b> — Lenny&#x27;s Newsletter 的邮件版(id 01kv32mt…)是同一期 Pincus 访谈的 newsletter 推送,与已深读的 Lenny&#x27;s Podcast 全文(YouTube 转写)为同一内容来源,正文实质在播客转写里更全;邮件版降级去重,不重复深析</div>
+
+  <h2 class="section-head">▎ 新增观点入库 · VP LEDGER (9 条 · append-only 到 _mira-vp-index)</h2>
+  <table class='ledger'><thead><tr><th>分类</th><th>观点</th><th>来源</th></tr></thead><tbody><tr><td>The Taste Issue / 知道该造什么是唯一瓶颈</td><td>[NEW 2026-06-15] Sam Altman:今天造好产品的唯一瓶颈是知道该造什么;Pincus:直觉 95% 对、点子 75% 错——当算力/智能/代码都被商品化,稀缺的不是能不能造,而是品味与判断(012→013→014 在『人』这一侧的收口)</td><td>Lenny&#x27;s Podcast (Mark Pincus) × mira</td></tr><tr><td>The Taste Issue / 知道该造什么是唯一瓶颈</td><td>[NEW 2026-06-15] Proven/Better/New 框架:先把 proven 读成博士(合法且带品味地抄最佳实践)、Better 要 10/10 现有用户喊 f yeah(不是你自己觉得)、你以为的 better 其实是大概率失败的 new——做立项评审的标准三问</td><td>Lenny&#x27;s Podcast (Mark Pincus) × mira</td></tr><tr><td>The Taste Issue / 知道该造什么是唯一瓶颈</td><td>[NEW 2026-06-15] 连席德·梅尔都死在 FTUE:再炫的 new(玩法/模型能力)也救不了破掉的 proven(onboarding/首局/留存钩子);AI 让创意产能暴涨时,卡转化的往往是没抄到位的基本功——上线前强制 proven 基本功审计</td><td>Lenny&#x27;s Podcast (Mark Pincus) × mira</td></tr><tr><td>The Taste Issue / 知道该造什么是唯一瓶颈</td><td>[NEW 2026-06-15] 杀死希望而非信念:belief(基于真实信号)才投、hope(祈祷下版本有奇迹)就砍;AI 把做出 viable demo 的成本压到近零后这道纪律空前致命——发 MLP(maximum launchable)不发靠希望续命的 MVP</td><td>Lenny&#x27;s Podcast (Mark Pincus) × mira</td></tr><tr><td>The Taste Issue / 知道该造什么是唯一瓶颈</td><td>[NEW 2026-06-15] 在用户眼中定义野心而非同行眼中:别被『让 GDC 同行惊叹』的道德虚荣绑架,先赢印第安纳护士级普通玩家的心;AI 让炫技产能爆炸,谦逊对准真实需求反成最稀缺判断力(呼应 Vol.012 意图不可训练)</td><td>Lenny&#x27;s Podcast (Mark Pincus) × mira</td></tr><tr><td>Agentic Engineering / 判断力驱动的交付</td><td>[NEW 2026-06-15] 一个连代码都不会读的非技术创始人靠 agentic engineering 一天造一个产品、OSS 拿 GitHub 榜首——他不读 plan/不读 code,全部注意力押在『判断哪个问题值得问』:Pincus『判断稀缺』的工程化活体证明</td><td>Peter Yang (Matt Van Horn) × mira</td></tr><tr><td>Agentic Engineering / 判断力驱动的交付</td><td>[NEW 2026-06-15] agentic engineering 把『谁能交付软件』从『会写代码的人』扩到『有判断力的人』:给策划/设计/运营配 CE plan/CE work 工作流即可独立交付内部工具;但需按风险分级——试错区靠判断快迭代,生产区(玩家/付费/合规)保留 review 与测试</td><td>Peter Yang (Matt Van Horn) × mira</td></tr><tr><td>Agentic Engineering / 判断力驱动的交付</td><td>[NEW 2026-06-15] BCAC 相变锚点:去年感恩节 Opus 4.5 让 agentic coding 从玩具跨到能交付真实价值;若上次评估『非工程同学能否独立交付』还在 2025 年中前,结论已过期——能力台阶式跃迁,半年前不行≠现在不行</td><td>Peter Yang (Matt Van Horn) × mira</td></tr><tr><td>Agentic Engineering / 判断力驱动的交付</td><td>[NEW 2026-06-15] 工具造工具的工程品味:printing press 抄 Steinberger 的『把一切下载进本地 SQLite 再给 agent 当工具』(查询快且省 token,呼应 Vol.014 效率)+ 用 power-user persona 反推该造什么功能;内部重复取数操作可用『打印 CLI/skill』思路封装为默认模式</td><td>Peter Yang (Matt Van Horn) × mira</td></tr></tbody></table>
+
+  <footer class="footer">
+    <span>MIRA · Daily Broadside · Vol.015 · 自包含单文件</span>
+    <span>下期 · <b>2026-06-16 06:00 Asia/Shanghai</b></span>
+  </footer>
+</div>
+</body>
+</html>
