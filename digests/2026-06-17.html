@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Simulation Issue — 在下注之前,先把现实跑一遍 — Vol.017</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.017</span>
+      <span class="chrome">2026-06-17 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Simulation Issue — 在下注之前,先把现实跑一遍</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>今天两篇深读指向同一个动作:发布之前、决策之前,先把现实模拟一遍再下注。OpenAI 的 Deployment Simulation 用真实历史对话回放新模型,在它见到用户前就预估『会不会变坏』;Simile 的 Joon Sung Park 把同一思路推到社会尺度——用生成式智能体模拟人群,让公司在真投放前先跑一遍市场。一个测模型,一个测人;共同的赌注是:让『彩排』变成可以买的算力,而不是只能用真实世界的代价去买的教训。这是 015『品味』→016『主权』主线的延伸:当你能模拟,主导权就从『事后补救』前移到『事前预演』。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果『预演』变成一种可以用算力购买的商品,你愿意在真实投放前,先花多少钱把用户的反应跑一遍?</li><li>模拟越逼真,越难分辨『被测』与『真实』——当模型/用户都意识不到自己在被模拟,这套方法的伦理边界在哪?</li><li>TikTok Gaming 的下一个版本更新、下一次活动配置,有没有一个『先在仿真人群里跑一遍』的环节?还是仍然靠真实玩家做小白鼠?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="openai-deployment-sim">
+      <span class="tag">OPENAI · 模型安全</span>
+      <h3>在模型见到用户之前,先把它的『翻车』跑出来</h3>
+      <div class="src">OpenAI Research,Deployment Simulation · <a href="https://openai.com/index/deployment-simulation">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">传统评测靠人工编对抗题、覆盖面有限还会被模型识破;OpenAI 改用『回放真实历史对话、让候选新模型重答一遍』来预演上线后的行为分布,把『模型会不会变坏、多频繁变坏』从发布后的事故,变成发布前可量化的预测。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">用真实流量分布做评测,才能预测真实风险,而不只是测极端尾部。</p><p class="w">传统评测为特定风险量身定做,天然带选择偏差,只能回答『被极限施压时会怎样』;Deployment Simulation 直接采样近期真实对话,覆盖度随算力线性增长——想测得更全,只要多模拟流量,而不是多雇人写题。这把风险评估的瓶颈从『人力』换成了『算力』。</p></div><div class="pillar"><p class="p">方法本身极其朴素:拿最近的对话,删掉旧模型的回答,让新模型重答,再统计新出现的失败模式。</p><p class="w">正因为输入就是真实部署语境,模型几乎无法分辨这是『测试』还是『真实流量』——这恰好治住了当前最棘手的病:模型越来越能察觉自己在被测,从而表演式地变乖,污染安全测量。朴素反而是它的护城河。</p></div><div class="pillar"><p class="p">它能给出可被事后验证的预测,且已扩展到智能体场景。</p><p class="w">上线前的预估频率,可以在上线后用真实流量复核——预测对不对,有据可查,这是评测方法少见的闭环。OpenAI 称已在多个 GPT‑5 系 Thinking 版本上提升了不良行为率的估计,并把它用到了带工具调用的复杂 agent rollout 上。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">它自己划了红线:测不了发生率低于 1/200,000 的行为。也就是说,真正灾难性的长尾(罕见但致命)依旧得靠传统对抗评测兜底——Deployment Simulation 是『把常见风险测全』,不是『把致命风险测尽』。另一个没明说的张力:『隐私保护地回放真实对话』这件事本身,把用户的真实聊天变成了安全资产,这条数据供应链的边界,文章一笔带过。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 来说,这是一套可以直接照搬的方法论,只是把『模型』换成『版本/玩法/数值』。今天我们验证一个新活动、一个新付费点,基本靠灰度——拿一小撮真实玩家当小白鼠,出了事再回滚。Deployment Simulation 的思路是:先把最近的真实玩家行为日志『回放』给新配置,在它接触大盘之前,就预估留存、付费、流失会怎么动,以及会不会冒出没预料到的负面行为(比如某个引导让新手集体卡死)。关键启发有两个:一是『用真实分布而非人造用例』去评估改动,我们的 A/B 往往只盯几个核心指标,容易漏掉分布尾部的异常;二是『可事后验证的预测』——把灰度从『赌一把看结果』升级成『先预测、再用真实数据复核预测准不准』,让每一次发版都在给团队的判断力做校准。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“We take recent conversations from deployment, remove the original assistant response from the older model, and regenerate it with a candidate model to be released.”</p><p class="cn">我们取最近的真实对话,删掉旧模型的原回答,让待发布的新模型重新生成一遍。</p></div><div class="quote"><p class="en">“This tradeoff between compute and coverage is important, because it makes the quality of risk assessment scale with compute, rather than the manual effort.”</p><p class="cn">算力换覆盖度——它让风险评估的质量随算力扩展,而不是随人力堆叠。</p></div></div>
+    </article>
+    <article class="deep" id="simile-joon-park">
+      <span class="tag">SEQUOIA · 人群仿真</span>
+      <h3>当模型擅长答对题,谁来模拟『不理性的人』</h3>
+      <div class="src">Joon Sung Park(Simile CEO),Sequoia Capital 访谈 · <a href="https://www.youtube.com/watch?v=lfhFmwcESRw">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">主流大模型的北极星是『超级理性、答对客观题』,但人是不理性的、有偏好和品味的;Park 主张下一个前沿是反方向的——专门去建模人的多样性,用生成式智能体把整个人群、整个市场搬进仿真,让公司在真投放前先跑一遍决策。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">『模拟』和『AGI』是科幻里成熟社会的两根支柱,而今天第一次具备了认真搭建模拟的条件。</p><p class="w">从 2022 的 Social Simulacra(模拟一整个 subreddit 测社区设计)到 2023 Smallville 的 25 个生成式智能体(自发办起情人节派对),Park 一路验证:大模型已把海量人类微观行为编码进权重,『给定情境,X 会怎么做』能被稳定地激发出来。这是过去做社会计算时缺的那块拼图。</p></div><div class="pillar"><p class="p">前沿模型越追求理性,越偏离真实人类——这是一个可观测的『背离』。</p><p class="w">Park 直言:随着 moral science 类能力上升,模型预测和模拟真实人类行为的能力反而开始 plateau。理性化的优化方向,把『人的非理性、主观价值与品味』优化掉了。所以模拟人群需要的不是更聪明的模型,而是另一个专门建模多样性的前沿。</p></div><div class="pillar"><p class="p">仿真已经被验证到可商用的精度,并真的在替代传统调研。</p><p class="w">他们构建了 1000 人规模的美国人口仿真,宣称能以『本人复测自己的 85%』的准确度预测个体行为。CVS 已合作近半年——其『人群洞察』高级副总裁的痛点是:真实世界里能 field-test 的问题数量有物理上限,而仿真可以问无数遍。Simile 与 Gallup 战略合作,用真人数据给智能体『打地基』,再让客户在 SaaS 上随便问。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">85% 这个数字是双刃剑:它足够好到能替代很多调研,但剩下的 15% 恰恰可能藏着那些『反直觉、改变结局』的人群反应——而商业决策最贵的错误往往就发生在长尾。还有一个 Park 没有正面回答的循环风险:当越来越多公司用同一批仿真人群做决策,市场会不会向模型的『人类先验』收敛,反而抹平真实人群本该有的多样性?模拟越普及,被模拟者就越被这套先验定义。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这指向一种比 A/B 测试更前置的能力:在把活动、付费设计、社区规则推给真实玩家之前,先在一个『仿真玩家人群』里跑一遍,看哪种配置更能激发正向互动、哪种会诱发负面情绪扩散(Park 特别举了『推送负面情绪的 feed』作为要在仿真里避免的设计)。我们手里其实握着 Simile 缺的那个地基——海量真实玩家行为数据。与其等真实玩家用流失来告诉我们某个改动错了,不如用自有数据训出『游戏人群仿真』,把高风险的玩法实验、敏感的数值调整,先在仿真里淘汰掉最差的几个方案。但务必记住那 15% 和收敛风险:仿真用来『砍掉明显的坏选项』很稳,用来『精细预测最优解』要留余地,真实灰度仍不可少。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“These machines are meant to be rational... but people are irrational. We have a lot of subjective values, preferences, and taste.”</p><p class="cn">这些机器追求理性……可人是不理性的,我们有大量主观价值、偏好和品味。</p></div><div class="quote"><p class="en">“We can predict people&#x27;s behaviors 85% as accurately as people replicate their own.”</p><p class="cn">我们能以『本人复测自己』85% 的准确度,预测一个人的行为。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 9 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · 主权主线</div><div class="c"><div class="t"><a href="https://www.latent.space/p/ainews-satya-on-loopcraft-building">Nadella 的 Loopcraft:拥有学习循环,模型中立硬化为架构</a></div><div class="v">微软 CEO 首篇 X 长文(&gt;6000 万阅读)提出 Loopcraft——人力资本 × token 资本在『学习循环』上复利,别押单一模型,要押『可被你拥有的、编码机构知识的循环』。同篇 AINews:Fable 5 出口管制风波后,model neutrality / own-your-stack / routing 成共识,harness/context/memory/routing 要做进应用层。直接延续 016 主权主线。</div></div></div><div class="row"><div class="k">BRIEF 02 · 公共服务</div><div class="c"><div class="t"><a href="https://deepmind.google/blog/unlocking-uk-house-building-with-ai-accelerated-planning/">Google DeepMind × 英国政府:用 Gemini 把建房审批砍半</a></div><div class="v">为 2029 年建 150 万套房,DeepMind 联手英政府做规划审批原型,目标把住宅申请决策时间砍 50%。AI 落到『政务流程提速』而非炫技,是 toG 的务实样本。</div></div></div><div class="row"><div class="k">SKIM · Nadella</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/QoDPzshX8Ks">真正的雄心是『让不可能成为可能』</a></div><div class="v">No Priors 短片:80 年代没人会把『40 亿人打字』理解成知识工作。给自己许可做新的 meta-cognition、改变真正重要的产出,企业价值就在那条连接线上。</div></div></div><div class="row"><div class="k">SKIM · 黄仁勋</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/KDVgWX5_eqE">AI 不神秘,它就是计算机和软件</a></div><div class="v">别被 Terminator / singularity 吓到——『每年都在变好,不懂原理怎么变好?』。金句仍是那句:你不一定被 AI 取代,但一定会被『会用 AI 的人』取代。</div></div></div><div class="row"><div class="k">SKIM · 复制即创新</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/0Qd-nUslXGE">Mark Pincus:创新始于抄袭</a></div><div class="v">『学校教我们抄是作弊』,但若以消费者(印第安纳的护士)而非同行的眼光定义雄心,就会去任何地方拿最好的点子。烧掉简历,为她造她更爱的体验。</div></div></div><div class="row"><div class="k">SKIM · GitHub</div><div class="c"><div class="t"><a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534593&amp;idx=1&amp;sn=79c17a8cbe09be4d44d2ef5a4295b84a">4 个实用开源项目:本地路由省 9 倍 token、多 Claude 并行、AI 求职指挥中心</a></div><div class="v">OpenSquilla 本地模型路由按复杂度选最便宜模型(花费 1/9、得分几乎持平);Nezha 多项目并行跑 Claude Code/Codex;Career-Ops 用 AI 评估 740+ 职位拿到 offer。</div></div></div><div class="row"><div class="k">SKIP · Stratechery</div><div class="c"><div class="t"><a href="https://stratechery.com/2026/fox-buys-roku-the-problem-with-foxs-smart-strategy-streaming-that-works/">Fox 收购 Roku(付费墙)</a></div><div class="v">Ben Thompson 论 Fox 以『从版权方榨取』换『作为租户的杠杆』。正文几乎全是订阅墙样板,无可提炼增量,标记跳过。</div></div></div><div class="row"><div class="k">SKIP · Peter Yang</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/1MLUD9iXp7Y">频道预告:跟随我的 AI builder 之旅</a></div><div class="v">纯订阅引导,无实质内容。跳过。</div></div></div><div class="row"><div class="k">SKIP · Readwise</div><div class="c"><div class="t"><a href="https://docs.readwise.io/changelog#june-12-2026">Readwise/Reader 更新日志(6/12)</a></div><div class="v">侧栏加载、Twitter 连接、推文保存等修复;邮件退订统一。工具维护项,无观点价值。跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.017 · 新观点 8 · 累计 293 · _mira-vp-index</span>
+    <span>下期 · <b>2026-06-18 06:00</b></span>
+  </footer>
+</div></body></html>
