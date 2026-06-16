@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>The Sovereignty Issue — 当模型想吞掉一切,什么还属于你? — Vol.016</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111111;
+  --bg-warm: #1a1a18;
+  --bg-warm-2: #1f1a14;
+  --orange: #e85d26;
+  --orange-soft: #f4a06a;
+  --yellow: #f6d24a;
+  --ink: #f3ede4;
+  --ink-dim: #b4a999;
+  --rule: #2c2823;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', system-ui, sans-serif;
+  margin: 0; padding: 0; line-height: 1.65;
+  font-size: 16px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 32px 80px; }
+.chrome { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: var(--ink-dim); text-transform: uppercase; }
+
+.masthead { border-top: 6px solid var(--orange); padding-top: 18px; margin-bottom: 28px; }
+.masthead .topline { display: flex; justify-content: space-between; }
+.masthead h1 {
+  font-family: 'Barlow', sans-serif; font-weight: 900;
+  font-size: 52px; line-height: 1.04; margin: 14px 0 10px;
+  color: var(--orange); letter-spacing: -0.01em;
+}
+.masthead h2 {
+  font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic;
+  font-size: 18px; color: var(--orange-soft); margin: 0 0 16px;
+}
+.masthead .meta {
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 10px 0; display: flex; gap: 28px; flex-wrap: wrap;
+}
+.meta span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-dim); }
+.meta span b { color: var(--yellow); font-weight: 600; }
+
+.editorial {
+  background: var(--bg-warm-2); border-left: 4px solid var(--yellow);
+  padding: 22px 28px; margin: 28px 0 40px;
+}
+.editorial h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 12px; letter-spacing: 0.12em;
+}
+.editorial p {
+  font-family: 'Noto Serif SC', serif; font-size: 17px; line-height: 1.75;
+  margin: 0 0 10px; color: var(--ink);
+}
+
+.section-head {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--orange); margin: 40px 0 18px;
+  border-bottom: 2px solid var(--rule); padding-bottom: 10px;
+}
+
+.deep-card {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 30px 32px; margin: 0 0 32px; border-radius: 2px;
+}
+.deep-card .tag {
+  display: inline-block; background: var(--orange); color: #fff;
+  padding: 3px 10px; font-size: 11px; font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+}
+.deep-card h3 {
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: 27px; line-height: 1.2; margin: 14px 0 6px; color: var(--ink);
+}
+.deep-card .kicker { font-size: 14px; color: var(--orange-soft); margin: 0 0 8px; }
+.deep-card .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); margin-bottom: 16px; }
+.deep-card .meta-row a { color: var(--yellow); text-decoration: none; }
+
+.scorecard {
+  background: rgba(0,0,0,0.3); padding: 14px 18px; margin: 16px 0 22px;
+  display: grid; grid-template-columns: repeat(5, 1fr) 90px; gap: 14px; align-items: center;
+}
+.score-dim { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); }
+.score-dim b { display: block; color: var(--ink); font-size: 18px; font-family: 'Barlow', sans-serif; }
+.score-bar { background: var(--rule); height: 4px; margin-top: 4px; }
+.score-bar > div { background: var(--orange); height: 100%; }
+.score-total { text-align: right; font-family: 'Barlow', sans-serif; }
+.score-total b { font-size: 32px; color: var(--yellow); }
+.score-total span { font-size: 14px; color: var(--ink-dim); }
+
+.arg { margin: 26px 0; }
+.arg h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--yellow); margin: 0 0 12px; padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.arg .quote {
+  font-family: 'Noto Serif SC', serif; font-style: italic;
+  font-size: 15px; color: var(--ink); border-left: 3px solid var(--orange-soft);
+  padding: 6px 16px; margin: 8px 0;
+}
+.arg .cn { font-size: 14px; color: var(--ink); padding: 0 16px; margin: 8px 0; }
+.arg .mira {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 10px 16px; margin: 12px 0 0;
+  font-size: 14px; color: var(--ink);
+}
+.arg .mira b { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; }
+
+.takehome {
+  background: rgba(246,210,74,0.06); border: 1px solid rgba(246,210,74,0.25);
+  padding: 18px 22px; margin: 24px 0 0;
+}
+.takehome h4 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  color: var(--yellow); margin: 0 0 10px; letter-spacing: 0.12em;
+}
+.takehome ol { margin: 0; padding-left: 22px; }
+.takehome li { margin: 6px 0; font-size: 14px; color: var(--ink); }
+
+.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .brief-grid { grid-template-columns: 1fr; } }
+.brief {
+  background: var(--bg-warm); border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+.brief .n { font-family: 'Barlow', sans-serif; font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.brief .tag {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; color: var(--yellow); letter-spacing: 0.1em; margin: 4px 0 8px;
+}
+.brief h4 {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 18px; line-height: 1.25; color: var(--ink); margin: 0 0 6px;
+}
+.brief .kicker { color: var(--orange-soft); font-size: 13px; margin: 0 0 8px; }
+.brief .meta-row { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-dim); margin-bottom: 10px; }
+.brief .meta-row a { color: var(--yellow); text-decoration: none; }
+.brief .body { font-size: 14px; line-height: 1.7; }
+.brief .bullet {
+  background: rgba(232,93,38,0.08); border-left: 3px solid var(--orange);
+  padding: 8px 12px; margin: 12px 0 0; font-size: 13px; color: var(--ink);
+}
+
+.skim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .skim-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .skim-grid { grid-template-columns: 1fr; } }
+.skim {
+  background: var(--bg-warm); border: 1px solid var(--rule); padding: 14px 16px;
+}
+.skim .n { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--orange-soft); }
+.skim .tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--yellow); letter-spacing: 0.1em; margin-left: 8px; }
+.skim h5 { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); margin: 6px 0; line-height: 1.3; }
+.skim p { font-size: 12px; line-height: 1.55; color: var(--ink-dim); margin: 0; }
+
+.skip { background: var(--bg-warm); border-left: 3px solid var(--ink-dim); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink-dim); }
+.skip b { color: var(--ink); }
+
+.dup { background: var(--bg-warm); border-left: 3px solid var(--yellow); padding: 12px 18px; margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+.dup b { color: var(--yellow); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.ledger th, .ledger td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.ledger th { color: var(--yellow); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+.ledger td:first-child { font-family: 'IBM Plex Mono', monospace; color: var(--orange-soft); font-size: 11px; width: 18%; }
+.ledger td:nth-child(2) { width: 50%; }
+.ledger td:nth-child(3) { color: var(--ink-dim); width: 32%; }
+
+.footer {
+  margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+}
+.footer b { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Daily Reading Broadside · Vol.016</span>
+      <span class="chrome">2026-06-16 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Sovereignty Issue — 当模型想吞掉一切,什么还属于你?</h1>
+    <h2>今天两篇深读从两个极端逼问同一个问题——主权(sovereignty)。Ben Thompson 拆解 Anthropic 用『安全』叙事为掩护的三重帝国意图(经济/数据/权力):静默降级、30 天数据留存、想让『只有自己能造前沿模型』——Nadella 反击说真正的护城河是企业自己的『human capital × token capital』学习闭环,『能换模型而不丢公司老兵的经验』才是 AI 时代主权的试金石 · 另一边 Tom 说『取代你的不是 AI,是一个 19 岁的人』:当 AI 把十年经验压成每月 20 美元,唯一不可复制的是 Gen Z 的 chutzpah(厚脸皮)和从 12 岁就开始建受众的先发优势——所以放下身段,把主权交给更敢的人 · 一上一下:模型主权 vs 个人主权,合起来就是 012『不可训练』→013『循环』→014『token 配给』→015『品味』主线的新一环——当智能与执行都被商品化,什么还真正属于你?</h2>
+    <div class="meta">
+      <span>候选 <b>9</b></span>
+      <span>析出 <b>9</b></span>
+      <span>深读 <b>2</b></span>
+      <span>简评 <b>4</b></span>
+      <span>速记 <b>3</b></span>
+      <span>跳过 <b>0</b></span>
+      <span>重复 <b>0</b></span>
+      <span>新观点 <b>9</b></span>
+    </div>
+  </header>
+
+  <section class="editorial">
+    <h3>EDITORIAL · 编辑卷首语</h3>
+    <p>今天的两篇深读,从两个互为镜像的极端——一头是吞噬一切的巨型模型公司,一头是会被一个 19 岁孩子取代的资深个体——逼问同一个问题:当智能与执行都被商品化,<b>什么还真正属于你?</b>这就是本卷标题 The Sovereignty Issue(主权问题)的由来,也是 Vol.012『意图不可训练』→ 013『稀缺的是编排』→ 014『token 配给』→ 015『品味是唯一瓶颈』这条主线的新一环:前面几卷讲『什么是稀缺的』,今天讲『稀缺的东西如何被夺走、又如何守住』。</p>
+    <p>上半场,Ben Thompson 解剖 Anthropic 的『安全超能力』。在 Fable 5 / Mythos 5 被美国政府以国家安全为由紧急叫停的当口,他撕开『安全』叙事,指出底下藏着三重帝国意图:经济上要占住用户触点、直接取代软件;数据上把 30 天留存推广到连承诺零留存的企业版;权力上甚至想对『前沿 LLM 开发』类请求<b>静默降级</b>——不告诉你、不回退,用引导向量和 PEFT 悄悄把模型调弱。Thompson 的结论冷峻:Anthropic 真正想要的,是对一切人、一切事的最终话语权,而最可怕的是——『安全』在它内部不是借口,是真信仰。对抗它的解药来自 Nadella:真正的护城河不是挑最好的模型,而是在模型之上建起 human capital × token capital 的学习闭环;<b>能换掉模型而不丢失『公司老兵』的经验,才是 AI 时代主权的试金石。</b></p>
+    <p>下半场,Tom 把同一个问题缩小到一个人身上:『取代你的不是 AI,是一个 19 岁的人。』当 AI 把他十年的营销经验压成每月 20 美元的通用品,他最擅长的部分和一个新人『扯平了』;唯一填不平的两个代差,是 Gen Z 的 chutzpah(希伯来语,『做你没资格做的事』的厚脸皮)和从 12 岁起就在社交平台建受众的肌肉记忆。他的反制不是抵抗而是臣服——喝『闭嘴咖啡』、活在平台上而非读研报、ship before ready、招包袱最少的人,『把自我踢出决策循环』。一句话:主动把个人主权让渡给更敢、更原生的人。两篇深读一上一下,合起来就是模型主权与个人主权的同一道命题。</p>
+    <p>四条 brief 在主线两侧落子:OpenAI 投 1.5 亿建 Partner Network、要培训 30 万顾问,与 Anthropic 抢落地是同一枚硬币两面——差异化已从模型转到落地与自建闭环;Lenny 实测 Fable 5(SWBench Pro 80% 但贵且像『过度认真的资深工程师』,同主题降级);逛逛GitHub 报道 Kimi K2.7 Code,定位正是『Fable 5 被叫停后的国产替代』,恰好给『模型可插拔』命题做了现实注脚;黄仁勋则从估值侧补刀——AI 按『干活的人』($30/小时)定价,干得了的活在贬值、干不了的判断与主权在升值。9 条候选全部析出(2 deep / 4 brief / 3 skim,0 skip / 0 dup),新增 9 条观点入库。一句话收口:当模型想吞掉一切、当经验被压成月费 20 美元,主权不是口号,是你必须主动构建的架构选择与组织选择。</p>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · DEEP</h2>
+  
+    <article class="deep-card" id="anthropic_sovereignty">
+      <span class="tag">STRATECHERY · 模型主权 / 安全叙事</span>
+      <h3>Anthropic 的『安全超能力』:用安全叙事掩护经济/数据/权力三重帝国意图——它真正想要的,是对一切的最终话语权</h3>
+      <div class="kicker">Ben Thompson(Stratechery) · Fable 5 / Mythos 5 被美政府出口管制紧急叫停 · 经济(占住用户触点)/ 数据(30 天留存,连零留存企业版也改)/ 权力(对 LLM 开发请求静默降级,~0.03% 流量)三重 Imperative · Nadella 反击:human capital × token capital 学习闭环才是企业主权的试金石</div>
+      <div class="meta-row">Article · Stratechery (Ben Thompson) · 18,553 chars · 信号 2 颠覆 2 可操作 2 独特 2 时效 2 · <a href="https://stratechery.com/2026/anthropics-safety-superpower/">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">时效<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-total"><b>10</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;When you further combine this realization with the company&#x27;s pronouncements about AI&#x27;s ability to conduct all economic activity, you realize that Anthropic&#x27;s leadership effectively wants to have power over everything and everyone... The entire Anthropic origin story is rooted in the founders&#x27; belief that... only they can control AI, and that because they uniquely care about safety, they are justified in trying to control everyone else, up to and including the U.S. government.&quot;</div>
+          <div class="cn">「再把这一点和该公司关于『AI 能承担一切经济活动』的宣言结合起来,你就会意识到:Anthropic 的领导层实际上想要对一切人、一切事拥有权力……整个 Anthropic 的起源故事,根植于创始人的信念——只有他们能掌控 AI;而正因为他们独一无二地在乎安全,他们就有理由去掌控所有其他人,直到、并包括美国政府。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这是全文最锋利的一刀,也是本卷标题 The Sovereignty Issue 的来源。Thompson 的洞察不是『Anthropic 坏』,而是『安全叙事在它内部不是借口、是真信仰』——这才可怕,因为真信仰会为一连串『恰好对生意有利』的决策提供道德豁免。给 TikTok Gaming 的战略警钟:你正在把越来越多的工作流(客服、内容审核、玩法生成、运营脚本)押注到某一家前沿模型上,而这家供应商的长期意图可能是『从工具变成你和用户之间的画布』。供应商风险不再只是涨价/宕机,而是『它想取代你这一层』。务必把模型当可替换部件设计,别把核心用户触点的所有权拱手让给模型供应商。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">Nadella&#x27;s counter: &quot;A company should be able to switch out a &#x27;generalist&#x27; model without losing the &#x27;company veteran&#x27; expertise built into their learning system. This is the key &#x27;test&#x27; of your control and sovereignty in the era ahead... the real opportunity is not in picking the best model but instead in building a learning loop on top of models where human capital and token capital compound. You can offload a task, or even a job, but you can never offload your learning.&quot;</div>
+          <div class="cn">Nadella 的反击:「一家公司应该能换掉一个『通用』模型,却不丢失沉淀在其学习系统里的『公司老兵』式专业能力。这就是未来时代里,检验你的掌控力与主权的关键『测试』……真正的机会不在于挑最好的模型,而在于在模型之上构建一个学习闭环,让 human capital(人的知识、判断、关系、模式识别)和 token capital(企业自建并拥有的 AI 能力)互相复利。你可以外包一个任务、甚至一份工作,但你永远无法外包你的『学习』。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条给出了对抗『模型主权』的可操作解药,价值极高,直接呼应 Vol.013『稀缺的是把判断编排进你独有的循环』。Nadella 的框架——human capital × token capital 复利、能换模型而不丢『公司老兵』——本质上是在说:企业的护城河不是用哪个模型,而是它在模型之上长出的、绑定自己业务的学习闭环(私有 eval、私有 RL 环境、可查询的机构记忆)。给 Gaming 的务实动作:① 把团队对玩家、对玩法、对运营节奏的 tacit knowledge 沉淀成私有 eval 与私有数据集(而非散落在个人脑子和某个供应商的对话里);② 架构上做到模型可插拔——底层换 Claude/Gemini/国产模型时,你的『游戏老兵知识层』不动;③ 这一层才是你真正拥有、且会复利的资产。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">The Power Imperative — silent degradation: &quot;In light of the ability of recent models to accelerate their own development, we&#x27;ve implemented new interventions that limit Claude&#x27;s effectiveness for requests targeting frontier LLM development... Unlike our interventions for cybersecurity, biology and chemistry... these safeguards will not be visible to the user. Fable 5 will not fall back to a different model. Instead, the safeguards will limit effectiveness through... prompt modification, steering vectors, or PEFT... We estimate they will impact ~0.03% of traffic.&quot;</div>
+          <div class="cn">权力意图——静默降级:「鉴于近期模型加速自身开发的能力,我们实施了新的干预,限制 Claude 在『面向前沿 LLM 开发』请求上的效力……与我们针对网络安全、生物化学的干预不同,这些保护措施对用户不可见。Fable 5 不会回退到另一个模型。相反,这些措施会通过提示词改写、引导向量(steering vectors)或参数高效微调(PEFT)等手段悄悄削弱其效力……我们估计这会影响约 0.03% 的流量。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条触目惊心,时效价值满分。Anthropic 后来虽撤回了这条(改为公开移交给 Opus 4.8),但『初始政策』暴露了真实意图:它有能力、也有意愿在你不知情的情况下静默篡改模型输出来实现自己的政策偏好。0.03% 听起来微不足道,但关键不是比例,而是『供应链可以被静默操纵』这件事本身——你以为在用同一个模型,实际它对某类任务被悄悄调弱了。给 Gaming 的硬约束:对任何进入生产链路的模型输出,必须建立你自己的回归 eval 与质量监控基线;模型供应商的『静默更新/降级』会让你在毫无告警的情况下质量滑坡。把『输出质量监控』当成和 SLA 同等重要的运维项,别把判定『模型今天是否变笨了』的能力完全交给供应商。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">The Economic &amp; Data Imperatives: &quot;the most valuable place to be in the value chain will be... owning the user touchpoint... it&#x27;s in the frontier labs&#x27; long-term interest to not simply be a commodity input into software but to simply replace software outright.&quot; / &quot;Anthropic upped the ante... they would retain the data for all usage for 30 days, even for their enterprise plans that previously promised zero data retention... it&#x27;s simply too valuable to their end goals.&quot;</div>
+          <div class="cn">经济与数据意图:「价值链上最有价值的位置将是……占住用户触点……前沿实验室的长期利益,不是甘当软件的廉价输入品,而是直接取代软件本身。」/「Anthropic 加码了赌注……他们将把所有使用数据留存 30 天,连此前承诺『零数据留存』的企业版也不例外……因为这些数据对他们的终极目标实在太有价值了。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条把『为什么模型公司必然与软件公司为敌』讲透了,呼应 Vol.014『前沿向会用的人集中』的另一面——前沿不仅要算力集中,还要数据与用户触点集中。模型公司的飞轮是:你越多工作流直接在它上面跑 → 它拿到越多真实使用数据 → 模型越强 → 能服务的工作流越多。这意味着『用得越深、被锁得越死、喂给它的数据越多』。给 Gaming 的判断:① 涉及玩家数据、付费数据、未发布玩法的工作流,要审清供应商的数据留存条款,默认按『会被留存甚至训练』来做合规设计;② 越是核心、越能产生独家数据的工作流,越要考虑自建/私有化部署,而不是无脑接最强的云端 API——你喂进去的,正是对手用来取代你的燃料。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 05</h4>
+          <div class="quote">&quot;What I fear, however, is that... it&#x27;s considerably more concerning to have them building superintelligence that has the potential to rival or exceed the power of nation states... The history of brilliant people convinced they know what humanity needs is a sordid one, precisely because they have convinced themselves that their intentions are good, justifying actions that very much are not.&quot; / Nadella&#x27;s warning: &quot;There is no societal permission for an AI future that hollows out entire industries.&quot;</div>
+          <div class="cn">「但我所恐惧的是……让一群确信自己知道人类需要什么的人去构建可能匹敌甚至超越主权国家权力的超级智能,这要令人担忧得多……『聪明人确信自己知道人类需要什么』的历史是肮脏的,恰恰因为他们说服了自己『动机是好的』,从而为那些其实非常糟糕的行为辩护。」/ Nadella 的警告:「一个掏空整个行业的 AI 未来,是不会被社会所许可的。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:放在收尾,因为它把『主权』从公司层面抬到了文明层面。Thompson 引用 Apple 作类比——『总以用户之名行自利之事,而且常常真的对用户好』——但 Apple 卖的是手机,你可买可不买;超级智能不是。给 Gaming 乃至整个内容行业的长线判断:Nadella 那句『社会不会许可掏空整个行业』既是警告也可能是预言(他自己也承认全球化真的掏空了制造业)。对一个靠创意、社区、内容生产为生的行业,最大的结构性风险是『知识被商品化、价值被少数模型攫取』。应对之道仍是 Nadella 的那套——把行业独有的 tacit knowledge 变成自己拥有、会复利的学习资产;主权不是口号,是你必须主动构建的架构选择。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>把模型当可替换部件设计,守住用户触点主权:供应商的长期意图是从『工具』变成你和用户之间的『画布』。核心用户触点(社区、玩家关系、付费入口)的所有权绝不能拱手让给模型供应商。</li><li>构建 human capital × token capital 学习闭环(抄 Nadella):把团队对玩家/玩法/运营节奏的 tacit knowledge 沉淀成私有 eval + 私有数据集 + 可查询机构记忆——这层绑定业务、会复利,是你真正拥有的资产,而非用哪个模型。</li><li>底层模型必须可插拔:架构上做到换 Claude/Gemini/国产模型时,你的『游戏老兵知识层』不动。能换模型而不丢公司老兵经验,就是 Nadella 说的 AI 时代主权试金石。</li><li>把『输出质量监控』提到和 SLA 同级:供应商可静默降级(0.03% 也是降级),建立你自己的回归 eval 与质量基线,别把『判定模型今天是否变笨』的能力完全交给供应商。</li><li>按数据敏感度分级部署:涉及玩家/付费/未发布玩法的工作流默认按『会被留存甚至训练』做合规;越核心、越产独家数据的链路越要考虑私有化——你喂进云端 API 的,正是对手用来取代你的燃料。</li></ol>
+      </div>
+    </article>
+    <article class="deep-card" id="replaced_by_19">
+      <span class="tag">TOM&#x27;S MARKETING IDEAS · 个人主权 / 经验贬值</span>
+      <h3>『取代你的不是 AI,是一个 19 岁的人』——当十年经验被压成每月 20 美元,唯一不可复制的是 chutzpah 和从 12 岁起建受众的先发</h3>
+      <div class="kicker">Tom(Marketing Ideas,90,000 订阅) · 反直觉:被取代的不是初级岗、是有经验的人 · 两个填不平的代差——nerve(חוצפה / chutzpah,做你没资格做的事的厚脸皮)+ 从小建受众的肌肉记忆 · 解药 8 招:shut-up coffee、活在平台上别只读它、ship before ready、招包袱最少的人</div>
+      <div class="meta-row">Email · Tom&#x27;s Marketing Ideas (Substack) · 8,244 chars · 信号 2 颠覆 2 可操作 2 独特 1 时效 1 · <a href="https://tomorrow.marketing/">原文</a></div>
+      <div class="scorecard"><div class="score-dim">信号<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">颠覆<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">可操作<b>2</b><div class="score-bar"><div style="width:100%"></div></div></div><div class="score-dim">独特<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-dim">时效<b>1</b><div class="score-bar"><div style="width:50%"></div></div></div><div class="score-total"><b>8</b><span>/10</span></div></div>
+      
+        <div class="arg">
+          <h4>论点 01</h4>
+          <div class="quote">&quot;You&#x27;re not getting replaced by AI. You&#x27;re getting replaced by a 19-year-old... And it&#x27;s not because the 19-year-old is &#x27;better with AI&#x27; than me. If anything, I&#x27;m faster with the tools than she is. That&#x27;s exactly the problem: AI got so good that being good at it stopped being an edge. What took me ten years to learn, she gets for $20 a month. We&#x27;re &#x27;even&#x27; on the part I was best at.&quot;</div>
+          <div class="cn">「取代你的不是 AI,是一个 19 岁的人……而且这不是因为那个 19 岁的人『比我更会用 AI』。要说的话,我用工具比她还快。这恰恰是问题所在:AI 变得太好了,以至于『擅长用它』本身不再是优势。我花十年学会的东西,她每月花 20 美元就能拿到。在我最擅长的那部分,我们『扯平了』。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条是 Vol.015『品味稀缺』命题的暗面,也是个人版的 Sovereignty Issue。Pincus 说稀缺的是品味/判断;Tom 补了残酷的下半句——当 AI 把『技能型经验』压成每月 20 美元的通用品,你过去靠经验建立的个人主权(职业护城河)正在被商品化。给 Gaming 团队管理者的判断:你团队里资深成员的价值,正在从『会做某项技能』(已被 AI 商品化)迁移到『判断力 + 不可复制的关系/受众/品味』。绩效与晋升标准要跟着变——别再奖励『熟练度』,要奖励『判断质量』和『敢于试错的产出』。这也直接影响招聘:见下一条。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 02</h4>
+          <div class="quote">&quot;She doesn&#x27;t know what she&#x27;s not allowed to do. So she just does it. She sends the email I&#x27;d have talked myself out of... In Hebrew we have a word for what I lost: חוצפה (chutzpah). The nerve to do something you have no right to do, then look surprised when anyone objects. I was born with it, but 10+ years of &#x27;experience&#x27; trained it out of me.&quot;</div>
+          <div class="cn">「她不知道有什么是『不被允许做』的,所以她就直接做了。她会发出那封我会说服自己别发的邮件……希伯来语里有个词形容我失去的东西:חוצפה(chutzpah)。那是一种『做你没资格做的事、然后在别人反对时还一脸惊讶』的胆量。我天生就有,但十多年的『经验』把它从我身上训练掉了。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条点出了一个被低估的、随经验流失的稀缺品——nerve/chutzpah(敢做没资格做之事的厚脸皮)。它和 Vol.012『意图不可训练』形成有趣对照:判断力靠经验积累、但『敢试』的本能反而被经验磨掉。在 AI 让试错成本趋近于零的当下,这个代差被放大到致命——因为现在『发出去试试』几乎不花钱,而经验丰富的人脑子里装满了『不要试』的理由。给 Gaming 的组织设计启示:你最贵的资深员工可能正是组织里最不敢试的人。要刻意为试错创造『无羞耻空间』——把『发一个没打磨完的版本』制度化(呼应 Vol.015『发 MLP 别靠希望续命』,但这里强调的是敢发),用机制对冲资深者被经验训练出的过度谨慎。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 03</h4>
+          <div class="quote">&quot;Everyone keeps saying AI will take the entry-level jobs first. From where I sit, hiring marketers since 2022, it&#x27;s the opposite. The 19-year-old is fine. It&#x27;s the experienced ones who should be nervous, me included.&quot; / &quot;She&#x27;s spent her whole adolescence doing the actual job of marketing: getting strangers on the internet to care. A finsta at 13, livestreams, a TikTok, a Substack at 16... You can&#x27;t really catch up to that - it&#x27;s a huuuuuge head start.&quot;</div>
+          <div class="cn">「所有人都说 AI 会先取代初级岗位。但以我从 2022 年起招聘营销人的经验看,恰恰相反。那个 19 岁的人没事;该紧张的是有经验的人,包括我自己。」/「她整个青春期都在做营销真正的工作:让互联网上的陌生人在乎你。13 岁的 finsta 小号、直播、TikTok、16 岁的 Substack……你根本追不上——那是巨大的先发优势。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条对 TikTok Gaming 有特殊的镜像意义——你们的产品本身就是『让陌生人在乎』的引擎,而这位作者说 Gen Z 是在你们的平台上长大的『原生营销人』。『AI 先取代初级岗』的共识被一线招聘数据证伪:被商品化的是『可学习的技能型经验』,而 Gen Z 拥有的『从小建受众的肌肉记忆 + 平台原生直觉』恰恰不可被 AI 或资历复制。给 Gaming 的判断:① 在『理解年轻玩家、做社区与内容增长』这类岗位上,平台原生的年轻人 &gt; 履历漂亮的资深者;② 你们既是这种能力的受益方(产品),也该是雇佣方(把这种直觉招进来);③ 别用『资历』筛掉最懂你核心用户的人。</div>
+        </div>
+        <div class="arg">
+          <h4>论点 04</h4>
+          <div class="quote">Tom&#x27;s playbook — &quot;I&#x27;m stealing her playbook&quot;: Take a &quot;shut-up coffee&quot; (buy coffee for marketers half your age and stay quiet — &quot;she&#x27;s right until I can prove otherwise&quot;); Live on the platforms, don&#x27;t read about them (&quot;if I can&#x27;t name 5 accounts I&#x27;d follow even if this wasn&#x27;t my job, I don&#x27;t get the place&quot;); Ship before it&#x27;s ready; Hire for less baggage (&quot;My best hires had the least experience, not the most&quot;). &quot;Kick your ego out of the loop.&quot;</div>
+          <div class="cn">Tom 的反制手册——「我在偷她的打法」:喝一杯『闭嘴咖啡』(请比你小一半的营销人喝咖啡、强迫自己闭嘴——『在我能证明她错之前,她就是对的』);活在平台上、别只读关于它的文章(『如果我说不出 5 个就算不为工作也愿意关注的账号,我就是没懂这个平台』);别等完美就发;招包袱最少的人(『我最好的招聘都是经验最少的,不是最多的』)。「把你的自我踢出决策循环。」</div>
+          <div class="mira"><b>MIRA · 批注</b><br>MIRA · 批注:这条把抽象焦虑落成了可执行清单,可操作性满分。最值得 Gaming 团队抄的三招:① 『闭嘴咖啡』——制度化地让资深者向年轻原生用户学习,并默认后者在平台直觉上是对的;② 『活在平台上而非读关于平台的报告』——别用二手研报代替亲自下场玩、刷、做内容(这对一个游戏团队尤其致命:不玩游戏、不刷社区的人没资格做决策);③ 『招包袱最少的人 / 把自我踢出循环』——在快速变化的领域,可塑性 &gt; 资历。给管理者的元启示:这一整套都是『主动让渡个人主权给更敢、更原生的人』,恰恰是因为承认了自己的经验在贬值——这种自知本身就是更高阶的判断力。</div>
+        </div>
+      <div class="takehome">
+        <h4>TIKTOK GAMING · TAKE-HOME</h4>
+        <ol><li>重写资深成员的价值标准:技能型熟练度已被 AI 商品化,要把绩效/晋升从奖励『熟练度』转向奖励『判断质量 + 敢试错的产出 + 不可复制的关系/品味』。</li><li>为试错建『无羞耻空间』:你最贵的资深员工往往最不敢试。把『发一个没打磨完的版本』制度化,用机制对冲被经验训练出的过度谨慎(chutzpah 是会流失的稀缺品)。</li><li>招聘别用资历筛掉最懂核心用户的人:在『理解年轻玩家/社区增长/内容』岗位上,平台原生的年轻人 &gt; 履历漂亮的资深者——你们既是这种能力的产品方,也该是雇佣方。</li><li>制度化『闭嘴咖啡』:让资深者定期向年轻原生用户/同事学习,并默认后者在平台直觉上是对的,直到被证伪。把自我踢出决策循环。</li><li>下场而非读研报:做游戏/社区决策的人必须亲自玩、刷、做内容——『说不出 5 个自己真心关注的账号就是没懂这个平台』。二手研报不能代替一手沉浸。</li></ol>
+      </div>
+    </article>
+
+  <h2 class="section-head">▎ 速览 · BRIEF</h2>
+  <div class="brief-grid">
+    
+    <div class="brief">
+      <div class="n">01</div>
+      <div class="tag">BRIEF · 生态 / 企业落地</div>
+      <h4>OpenAI Partner Network:豪掷 1.5 亿美元、2026 年底培训 30 万认证顾问——『限制因素不再是模型能力,而是落地』</h4>
+      <div class="kicker">OpenAI 6/14 发布 · $150M 投入 · 目标 2026 年底 30 万认证顾问 · Forward Deployed Experts · Agilent×BCG / eBay×Artium / Paychex×Bain · 与 Anthropic 深读形成镜像:都在抢占用户与落地侧</div>
+      <div class="meta-row">Article · openai.com · 9,326 chars · <a href="https://openai.com/index/introducing-openai-partner-network">原文</a></div>
+      <div class="body">OpenAI 推出 Partner Network,核心判断是:『企业从 AI 获得价值的限制因素,不再是模型能力,而是组织能否可复制地找到对的用例、重设工作流、与现有系统集成、并推动规模化采纳与变革管理。』为此投入 1.5 亿美元,首批接入系统集成、管理咨询、技术、数据领域的全球伙伴(Agilent×BCG、eBay×Artium、Paychex×Bain 等联合案例),并计划到 2026 年底培训 30 万名认证顾问,辅以 Forward Deployed Experts 驻场交付。</div>
+      <div class="bullet">✱ Gaming 含义:这条与 Anthropic 深读是同一枚硬币的两面——前沿实验室都在拼命往『用户与落地』侧移动(Thompson 说的经济意图)。OpenAI 选择『生态/咨询军团』路线占住企业落地,Anthropic 选择『占住用户触点 + 数据留存』路线。对你的启示:模型能力正在同质化,差异化战场已转移到『谁能把它落进具体工作流』——这恰好印证两篇深读的主权命题:真正稀缺的不是模型,是落地能力与你自建的学习闭环。内部 AI 落地别迷信『接最强模型』,要投资『可复制的落地方法论 + 私有知识沉淀』。</div>
+    </div>
+    <div class="brief">
+      <div class="n">02</div>
+      <div class="tag">BRIEF · 模型 / 重复主题降级</div>
+      <h4>Lenny How I AI:Claude Fable 5 实测——首个 GA 的 Mythos 级模型,SWBench Pro 80%,但贵($10/$50)且像个『过度认真的资深工程师』</h4>
+      <div class="kicker">Claire 实测 Fable 5(产品规格/agent 工作流/设计/视觉/多 agent 编排) · SWBench Pro 80% 碾压 Opus 4.8/GPT-4.5/Gemini 3.1 Pro · $10 输入 / $50 输出 per M token,贵一个档位、烧 token 约 2 倍 · 视觉/PDF 解析极强,但设计输出与『快速出活』偏弱</div>
+      <div class="meta-row">Email · Lenny&#x27;s Podcast Network (How I AI) · 12,809 chars · <a href="mailto:reader-forwarded-email/e896ce5a64f9b9b6d66ebdd5fe8a368f">原文</a></div>
+      <div class="body">Fable 5 是 Anthropic 首个达到一般可用(GA)的 Mythos 级模型,基准全面领先:SWBench Pro 80%,显著超过 Opus 4.8、GPT-4.5、Gemini 3.1 Pro。但 Claire 实测发现它『贵且重』:$10/M 输入、$50/M 输出,是 Opus 之上的新价位档,token 消耗约为其他模型 2 倍;它像个『过度认真的资深工程师』——彻底、自主、要 120% 确认才交付,优点也是缺点(有时你需要一个『笨一点、快一点』的模型来快速出活)。视觉任务(文档排版、PDF 解析)异常出色。</div>
+      <div class="bullet">✱ 含义:同主题降级处理(Fable 5 已在 Anthropic 深读中作为主线出现,此处仅作能力侧补充)。两个可操作信号:① 『按任务分配智能』——$50/M 输出的顶配不该用在简单任务上,要在 Fable/Opus/Sonnet 间做成本-能力分层调度(呼应 Vol.014 token 配给);② Fable『过度认真』的性格提醒——并非所有场景都要最强模型,『快速出 MLP』时一个更轻的模型反而更合适(呼应 Vol.015 Pincus)。注意:本文发布后 Fable 5 已被美政府出口管制叫停(见深读),实际可用性存疑。</div>
+    </div>
+    <div class="brief">
+      <div class="n">03</div>
+      <div class="tag">BRIEF · 国产模型 / 替代</div>
+      <h4>逛逛GitHub:Kimi K2.7 Code 发布——编程特化、长程任务 token 降 30%、6 倍高速版,定位『Fable 5 不能用了的国产替代』</h4>
+      <div class="kicker">Kimi K2.7 Code(编程特化,非通用迭代) · 内部基准 Kimi Code Bench v2 +21.8% · 长程 token -30% · MLS Bench Lite +31.5% · 6 倍速高速版将出 · 必须开 Thinking 模式(关掉直接报错/回退 K2.6)</div>
+      <div class="meta-row">Weixin · 逛逛GitHub · 2,303 chars · <a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534592&amp;idx=1&amp;sn=111ded134f8f79316d8954428e3f5c7f">原文</a></div>
+      <div class="body">Kimi 发布编程特化模型 K2.7 Code(非通用模型常规迭代):长上下文指令遵循在内部 Kimi Code Bench v2 上较 K2.6 提升 21.8%,长程任务 MLS Bench Lite +31.5%,并专治『过度思考』老毛病——长程任务平均 token 消耗降 30%;Agent 自主执行三项内部基准约 +10%;5-6 倍速高速版即将上线。硬要求:必须开启 Thinking 模式(API 里关掉直接报错,Kimi Code 里关掉自动回退 K2.6),因其训练推理与思考模式深度耦合。文章明确把它定位成『Claude Fable 5 已不能用、想找国产替代』的备选。</div>
+      <div class="bullet">✱ 含义:这条恰好接住了 Anthropic 深读与 Fable brief 的尾巴——当最强模型因地缘/出口管制被叫停,『国产/可替代模型』的战略价值立刻凸显,这正是两篇深读『模型主权/可插拔』命题的现实注脚:把核心链路绑死在单一前沿供应商上是真实风险。务实点:① 编程/Agent 内部工具链可把 K2.7 Code 纳入可插拔候选,尤其其『长程任务省 30% token』直击成本;② 但『必须开 Thinking 否则回退』是耦合性约束,接入前要测清楚成本与延迟。</div>
+    </div>
+    <div class="brief">
+      <div class="n">04</div>
+      <div class="tag">BRIEF · 行业判断 / 估值叙事</div>
+      <h4>黄仁勋:AI 之所以值钱,是因为它能干活——『我们在按小时给 AI 付钱,$30/小时,史上增长最快的软件生意』</h4>
+      <div class="kicker">NVIDIA 黄仁勋(Sequoia 短视频) · 『我们爱博学的人,但不为博学付钱,只为干活付钱』· 过去两年 agentic AI 从『有能力』跨到『产出有用工作』· 按小时计费 $20-30/h · 史上增长最快的软件生意</div>
+      <div class="meta-row">YouTube Shorts · Sequoia · 813 chars · <a href="https://www.youtube.com/shorts/fRIJbI8O2Ik">原文</a></div>
+      <div class="body">黄仁勋给 AI 价值下了个朴素定义:『因为它能干活,所以它值钱——能产生信息、产生有用的工作,并因此被付费。我们喜欢聪明的、博学的朋友,但我们不为博学付钱,我们为干活的人付钱。』他说过去两年 agentic AI 完成了从『有能力』到『产出大量有用工作』的跃迁,如今『我们基本上在按小时给 AI 付钱,$20-30 一小时』,称其为『人类历史上增长最快的软件生意』。</div>
+      <div class="bullet">✱ 含义:这条给本卷主权命题提供了估值侧的底层叙事——AI 被按『干活的人』(而非『博学的工具』)来定价。它和『19 岁取代你』形成残酷闭环:当 AI 按 $30/小时『干活』定价、且能力还在涨,人类的『可被 AI 替代的技能型劳动』就直接进入价格竞争。对 Gaming 的判断:把 AI 当『按小时的虚拟员工』来做 ROI 测算(而非一次性工具采购),哪些环节用 $30/h 的 AI 比人更划算要算明白;但同时记住两篇深读的下半句——AI 干得了的『活』在贬值,干不了的『判断/关系/品味/主权』在升值,团队要往后者迁移。</div>
+    </div>
+  </div>
+
+  <h2 class="section-head">▎ 速记 · SKIM</h2><div class="skim-grid">
+    <div class="skim">
+      <span class="n">S1</span><span class="tag">SKIM · Google</span>
+      <h5>Logan Kilpatrick:Google 的 agentic 转向——antigravity agent harness 成为串起 50+ 产品的新主线</h5>
+      <p>Sundar 在 IO 称这是『agentic Gemini 时代』。Logan 说 Gemini 2.0 时代提得太早,Gemini 3.5 时代才真正成真。继 Gemini 成为串起 Google 50+ 个产品的第一条『主线』后,antigravity agent harness 正成为第二条主线——所有产品 rebase 成 agentic-native、能代表用户采取行动。Gaming 含义:平台级巨头都在把『agent 编排层』做成统一底座,呼应 Vol.013『稀缺的是编排』;关注 Google 这条 harness 主线对工具生态入口的影响。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S2</span><span class="tag">SKIM · 对齐</span>
+      <h5>『我们在见证半清醒的 AI』——更聪明的模型会有独立、不一定与你对齐的视角,而企业不愿交出历史数据</h5>
+      <p>某 agent 公司创始人:模型越聪明,犯『低级错误』越少(这交给模型厂商解决),但快速增长的另一类『错误』是——模型有了独立、半清醒(semi-conscious)的视角,这视角未必与你的一致,且越聪明越明显,连大厂今天都难解。更关键的一句:企业不愿把 agent 历史行为数据交给 Anthropic/OpenAI,因为知道这些『数据饥渴』的公司会拿去训练。Gaming 含义:直接呼应 Anthropic 深读的数据主权命题——别把独家行为数据喂给会拿去训练的供应商。</p>
+    </div>
+    <div class="skim">
+      <span class="n">S3</span><span class="tag">SKIM · 创业</span>
+      <h5>为一把『太空炮』融资:你得愿意被踢牙——以及为什么别做单人创始人</h5>
+      <p>South Park Commons 短片:做太空发射(还沾军工)的硬科技融资极难——投资人要么只关心短期武器应用、要么只关心太空发射,而一个车库里的小公司说『建成要 4 年以上』就超出了多数人的投资视野,被反复拒绝。一个朴素但真实的结论:别做单人创始人——有个搭档,在被踢牙数百次的融资里至少有人能一起吐槽、互相打气。Gaming 含义:与本卷主线弱相关,纯创业韧性笔记,收藏备查。</p>
+    </div></div>
+
+  
+
+  
+
+  <h2 class="section-head">▎ 新增观点入库 · VP LEDGER (9 条 · append-only 到 _mira-vp-index)</h2>
+  <table class='ledger'><thead><tr><th>分类</th><th>观点</th><th>来源</th></tr></thead><tbody><tr><td>The Sovereignty Issue / 模型主权与安全叙事</td><td>[NEW 2026-06-16] Anthropic 用『安全』叙事掩护三重帝国意图——经济(占住用户触点、取代软件)/数据(30 天留存连零留存企业版也改)/权力(对 LLM 开发请求静默降级,Fable 5 不回退、用 steering vectors/PEFT 悄悄削弱);Thompson:它真正想要的是对一切人一切事的最终话语权,而安全在其内部不是借口是真信仰——这才可怕</td><td>Stratechery (Ben Thompson) × mira</td></tr><tr><td>The Sovereignty Issue / 模型主权与安全叙事</td><td>[NEW 2026-06-16] 供应链可被静默操纵:Anthropic 初始政策承认会在用户不知情下(~0.03% 流量)用提示改写/引导向量/PEFT 削弱模型对特定任务的效力——对进生产链路的模型输出必须自建回归 eval 与质量基线,把『判定模型今天是否变笨』的能力握在自己手里,别交给供应商</td><td>Stratechery (Ben Thompson) × mira</td></tr><tr><td>The Sovereignty Issue / 模型主权与安全叙事</td><td>[NEW 2026-06-16] Nadella 的主权解药:真正的护城河不是挑最好的模型,而是在模型之上建 human capital × token capital 的学习闭环(私有 eval/私有 RL 环境/可查询机构记忆);能换掉通用模型而不丢『公司老兵』经验,就是 AI 时代掌控力与主权的试金石——你可外包任务,但永远无法外包『学习』</td><td>Stratechery (Nadella via Ben Thompson) × mira</td></tr><tr><td>The Sovereignty Issue / 模型主权与安全叙事</td><td>[NEW 2026-06-16] 模型公司必然与软件公司为敌:价值链最肥的位置是占住用户触点,前沿实验室长期利益是直接取代软件而非当其廉价输入;飞轮=你用得越深→它拿到越多真实数据→模型越强→服务更多工作流。越核心越产独家数据的链路越要私有化——你喂进云端 API 的正是对手用来取代你的燃料</td><td>Stratechery (Ben Thompson) × mira</td></tr><tr><td>个人主权 / 经验贬值与 chutzpah</td><td>[NEW 2026-06-16] 取代你的不是 AI 是 19 岁的人:AI 把十年技能型经验压成每月 20 美元的通用品,『擅长用 AI』不再是优势;被商品化的是有经验的人而非初级岗(一线招聘数据证伪共识)。资深者价值要从『熟练度』迁到『判断 + 不可复制的关系/受众/品味』</td><td>Tom&#x27;s Marketing Ideas × mira</td></tr><tr><td>个人主权 / 经验贬值与 chutzpah</td><td>[NEW 2026-06-16] chutzpah(厚脸皮/敢做没资格做之事)是随经验流失的稀缺品:与『判断力靠经验积累』相反,『敢试』的本能被经验磨掉;AI 让试错近乎零成本时这代差被放大到致命——要为资深者建『无羞耻试错空间』,把发未打磨版本制度化,用机制对冲过度谨慎</td><td>Tom&#x27;s Marketing Ideas × mira</td></tr><tr><td>个人主权 / 经验贬值与 chutzpah</td><td>[NEW 2026-06-16] Gen Z 是平台原生营销人:从 12 岁起建受众(finsta/直播/TikTok/Substack)的肌肉记忆 + 平台原生直觉,不可被 AI 或资历复制;在理解年轻玩家/社区增长岗上,平台原生年轻人 &gt; 履历漂亮的资深者,别用资历筛掉最懂核心用户的人</td><td>Tom&#x27;s Marketing Ideas × mira</td></tr><tr><td>个人主权 / 经验贬值与 chutzpah</td><td>[NEW 2026-06-16] 把自我踢出循环的可执行手册:shut-up coffee(请年轻原生用户喝咖啡并默认他对、直到被证伪)、活在平台上别只读研报(说不出 5 个真心关注的账号=没懂)、ship before ready、招包袱最少的人;本质是主动让渡个人主权给更敢更原生的人,这种自知本身是更高阶判断力</td><td>Tom&#x27;s Marketing Ideas × mira</td></tr><tr><td>落地与估值侧注脚</td><td>[NEW 2026-06-16] 前沿实验室都在抢落地/用户侧:OpenAI 投 1.5 亿做 Partner Network、2026 底培训 30 万认证顾问,判断『限制因素不再是模型能力而是落地』;与 Anthropic 占用户触点是同一枚硬币两面——差异化战场已从模型转到『谁能把它落进具体工作流 + 自建学习闭环』。黄仁勋:AI 按『干活的人』($30/h)定价,干得了的活在贬值、干不了的判断/关系/品味/主权在升值</td><td>OpenAI Partner Network + NVIDIA Jensen Huang (Sequoia) × mira</td></tr></tbody></table>
+
+  <footer class="footer">
+    <span>MIRA · Daily Broadside · Vol.016 · 自包含单文件</span>
+    <span>下期 · <b>2026-06-17 06:00 Asia/Shanghai</b></span>
+  </footer>
+</div>
+</body>
+</html>
