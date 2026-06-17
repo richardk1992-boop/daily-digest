@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Apparatus Issue — 模型已是底座,护城河搬到了模型周围的『装置』 — Vol.018</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.018</span>
+      <span class="chrome">2026-06-18 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Apparatus Issue — 模型已是底座,护城河搬到了模型周围的『装置』</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>今天两篇深读指向同一处迁移:当顶级模型能力变成可购买的底座,差异化就从『谁的模型更聪明』搬到了『谁把模型装进了什么装置里』——科学上是能自己跑实验的自动化湿实验室,编程上是把 1M 上下文做成工程可用的注意力结构与 harness。模型是发动机,装置才是车。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>当 GPT-5.4 能独立提出『加 TEMPO 提升 Chan–Lam 偶联』这种连资深药化学家都没想到的假设,科研团队的稀缺资产到底还是不是『想法』?</li><li>GLM-5.2 把『可用的 1M 上下文 + 开源 MIT』做成了商品,Opus 级闭源模型的溢价还能靠什么撑住?</li><li>如果模型本身越来越同质化,你的产品里真正不可复制的那一层(实验室 / harness / 数据闭环)有没有被你当成核心资产来经营?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="ai-chemist">
+      <span class="tag">OPENAI · AI for Science</span>
+      <h3>在模型见到分子之前,先让它把实验跑完</h3>
+      <div class="src">OpenAI(与 Molecule.one 合作) · <a href="https://openai.com/index/ai-chemist-improves-reaction">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●○  ·  9/10</div>
+      <div class="claim">把 GPT‑5.4 接到一个能自主做高通量实验的湿实验室(Maria)上,模型不仅推理,还能提出假设、设计实验、读数据、迭代——并真把一个困难反应的产率显著提高了。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">模型独立提出了非显然的化学假设,而不只是复述文献。</p><p class="w">从『改进 Chan–Lam 偶联』这个开放目标出发,GPT‑5.4 自己锁定了 primary sulfonamides 这一困难高价值底物,并提出 TEMPO 等温和氧化剂可能有效——这是连方向都由模型选的,不是人给定方向让它优化参数。</p></div><div class="pillar"><p class="p">结果不是 demo,是经台架复现的真实产率提升。</p><p class="w">两轮实验后,88% 的硼酸、83% 的磺酰胺产率提升,平均产率 16.6%→25.2%,&gt;30% 产率的反应占比 15.6%→37.5%;人类化学家在 bench scale 重复 14 对底物中 11 对确认提升、多数翻倍以上。微升筛选→实操工作流都站得住。</p></div><div class="pillar"><p class="p">闭环的承重件是实验室,不是模型。</p><p class="w">10,080 个反应的吞吐、自动表征、即时反馈,才是让模型假设能被快速证伪/确认的基础。人类只保留 steering/grading prompt、选提案、基础操作与最终独立验证——人退到了『裁判与质检』,装置承担了『跑』。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这仍是 near-autonomous 而非 autonomous:方向是开放的,但提案筛选、纠错、最终验证都靠人把关;且只在一个反应类上验证,泛化到合成全域仍未证明。真正的瓶颈不是模型够不够聪明,而是有没有一座能让它高频试错的实验室——而这种实验室极贵、极少,正是壁垒所在。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的启示在于:当能力可买,差异化在『闭环装置』。游戏侧最接近『湿实验室』的,是把推荐、匹配、数值、反外挂这些子系统接进一个能自动出假设→灰度实验→读指标→迭代的闭环,让模型在真实玩家流量这座『实验室』里高频试错,而不是离线评测里自我感觉良好。谁先把 A/B 实验平台、日志归因、自动调参打通成一个 agent 能驱动的闭环,谁就把『更聪明的模型』变成了『更快进化的产品』;反之,只换更强的模型而装置还是手工,提升会卡在人能跑多少实验上。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Humans remained in the loop by designing steering and grading prompts and selecting proposals to test.”</p><p class="cn">人类留在闭环里的方式,是设计引导与评分提示、并挑选要测试的提案。</p></div><div class="quote"><p class="en">“The mean yield rose from 16.6% to 25.2%.”</p><p class="cn">平均产率从 16.6% 升到 25.2%。</p></div></div>
+    </article>
+    <article class="deep" id="glm-52">
+      <span class="tag">Z.AI · 开源前沿模型</span>
+      <h3>把『真能用的 1M 上下文』做成开源商品</h3>
+      <div class="src">Z.ai / Hugging Face / Latent Space AINews · <a href="https://huggingface.co/blog/zai-org/glm-52-blog">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●● · 时效 ●●  ·  8/10</div>
+      <div class="claim">GLM-5.2 用 MIT 开源 + 真正工程可用的 1M 上下文,把『接近 Opus 4.8 的编程能力』做成了无地域限制、可自部署的商品,前端编程甚至登顶可用模型第一。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">1M 上下文的价值不在『能塞多少 token』,而在『塞满后还不降智』。</p><p class="w">GLM-5.2 在注意力结构上动刀——IndexShare 让每 4 层稀疏注意力共享同一 indexer,1M 长度下每 token FLOPs 降 2.9×;MRCR/GraphWalk 到 1024K 衰减仍可控。对比『官方号称 1M、实际 70% 就变傻』,它把长上下文从营销数字变成了工程基线。</p></div><div class="pillar"><p class="p">开源模型把闭源前沿的溢价压到了几个百分点。</p><p class="w">Terminal-Bench 2.1 上 81.0 对 Opus 4.8 的 85.0,仅差几分且领先 Gemini 3.1 Pro;FrontierSWE 仅落后 Opus 4.8 1%、反超 GPT-5.5;744B MoE/40B 激活,体量约为 Opus 一半。Code Arena 前端、Design Arena 品味双榜可用模型第一。</p></div><div class="pillar"><p class="p">生态 day-0 就位,迁移成本几乎为零。</p><p class="w">Transformers/vLLM/SGLang/OpenRouter/Ollama/Fireworks 等发布当天支持;Claude Code 用户只需 cc-switch 复制配置、把模型字段改成 GLM-5.2、窗口设 1M、重启即可。换发动机不用换车。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">技术披露偏轻——没有正式 paper,只是 DeepSeek Sparse Attention 的渐进改良;长程基准(SWE-Marathon)仍落后 Opus 4.8 达 13%,超长任务并未追平。且『可用模型第一』有个括号:Fable 5 更强但被封——榜首部分是对手缺席让出来的。开源追平的是『大多数日常编程』,不是全部前沿。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义是成本结构与主权的双重利好。当一个 MIT 开源、可自部署、接近 Opus 的编程模型存在,内部研发 agent、代码迁移、文档/合同批处理这类高频但不需要绝对最强的场景,可以从『按 token 付费给闭源 API』切到『自托管开源权重』,既降本又把数据留在墙内——这正延续了 016 主权、017 模拟的主线:能自托管 = 能掌控。落地动作很轻:挑一两个内部编程/办公自动化场景做 GLM-5.2 vs 闭源的平行评测,只要质量差距在可接受区间,就把基线模型换成开源自托管,把省下的预算投到真正需要 Opus 级的少数硬任务上。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“A 1M context is easy to claim, but much harder to keep reliable under real engineering pressure.”</p><p class="cn">宣称 1M 很容易,难的是在真实工程压力下保持它可靠。</p></div><div class="quote"><p class="en">“An MIT open-source license — no regional limits, technical access without borders.”</p><p class="cn">MIT 开源许可——没有地域限制,技术获取没有国界。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 9 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · AI for Science</div><div class="c"><div class="t"><a href="https://www.latent.space/p/radical-ai">The Self-Driving Lab — Radical AI 的 Joseph</a></div><div class="v">材料科学的护城河是实验室不是模型:没有一个模型能 one-shot 出能量产的材料,真正的 moat 是能自动合成+表征的闭环实验数据——与 AI 化学家同一论点的另一个领域佐证。</div></div></div><div class="row"><div class="k">BRIEF 02 · 编程经济</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=OCEVqy8kl7Q">GitHub 每月如何消化 1700 万个 PR</a></div><div class="v">coding agent 让 PR 量指数增长,GitHub 站在新经济最前线;附带一个所有人都关心的问题——怎么别让 $200/月的 agent 订阅膨胀成 $2000/月的用量账单。</div></div></div><div class="row"><div class="k">SKIM · 机器人</div><div class="c"><div class="t"><a href="https://huggingface.co/blog/allenai/molmomotion">MolmoMotion:语言引导的 3D 运动预测(AllenAI)</a></div><div class="v">从『感知已发生的运动』转向『预测接下来的运动』——给一帧+3D 点+指令,预测未来几秒轨迹,是具身智能/视频生成的前向能力底座。</div></div></div><div class="row"><div class="k">SKIM · 个人 agent</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=H29laIK8q7M">13 分钟把 Codex 变成 AI 人生教练(Peter Yang)</a></div><div class="v">一个文件夹 + 几个 md(skill/plan/learnings/eval)就能搭出越聊越懂你的决策顾问——agent 的护城河同样是『装置』:结构化的目标/原则/复盘文件,而非模型本身。</div></div></div><div class="row"><div class="k">SKIM · 机器人</div><div class="c"><div class="t"><a href="https://huggingface.co/blog/amazon/strands-lerobot-hub-to-hardware">从 HF Hub 到机器人硬件:Strands Agents × LeRobot</a></div><div class="v">AWS 开源 SDK 把『录数据→训练→仿真→部署硬件→多机协同』五件工具收进一个 agent loop,换策略只需改个字符串——机器人栈也在向『统一装置』收敛。</div></div></div><div class="row"><div class="k">SKIM · 行业</div><div class="c"><div class="t"><a href="https://stratechery.com/2026/the-state-of-fable-the-jailbreak-problem-spacex-acquires-cursor/">Fable 现状、越狱问题、SpaceX 收购 Cursor(Ben Thompson)</a></div><div class="v">Fable 被封背后是越狱/安全责任之争(Ben:政府大概率判断错了,但责任终归在 Anthropic);SpaceX 收 Cursor 显示编程 harness 已成战略资产。</div></div></div><div class="row"><div class="k">SKIP · 观点</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/mqLgCM0SnAM">Zuckerberg:中心化 AI 的问题</a></div><div class="v">『进步不靠中心化超级智能,而靠把工具交到个人手里』——立场金句,延续去中心化叙事,但无新论据,略过。</div></div></div><div class="row"><div class="k">SKIP · 速记</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/2RAYJNE467U">雄心二连:DeepMind『AI 让我更有野心』· Lenny『你该少点野心』</a></div><div class="v">一组耐人寻味的对照——AI 把开发者的雄心抬高 10 倍,而做产品的忠告却是『起点要小到尴尬才能找到 PMF』。当口号看,不展开。</div></div></div><div class="row"><div class="k">SKIP · 空内容</div><div class="c"><div class="t">The AI Daily Brief — A Big Shift in the AI Race</div><div class="v">RSS 仅 64 字无正文,无法评估,跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.018 · 新观点 8 · 累计 301 · _mira-vp-index</span>
+    <span>下期 · <b>2026-06-19 06:00</b></span>
+  </footer>
+</div></body></html>
