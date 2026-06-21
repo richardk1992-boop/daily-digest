@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Confirmation Issue — 造模型的人自己承认:模型已不再是产品 — Vol.019</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.019</span>
+      <span class="chrome">2026-06-22 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Confirmation Issue — 造模型的人自己承认:模型已不再是产品</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>今天这批 Latent.Space 积压里有一条压倒性主线:Vol.018『装置才是车』的论点,这次不是旁观者推断,而是造模型的人亲口确认。gdb 直说『模型本身已不再是产品』,AI21 关停模型团队转做 agent,连 DeepSeek 都首次组建 Harness 团队;Fiona Fung 把『不可训练的角落』讲清楚——安排私有现实、把工具递到模型手里、改变客户的工作方式,这些训不进权重,而 intent 比算力还稀缺;OpenAI 干脆下线微调 API,把 80% 的人推向长提示,只剩 top 1% 还在加码开源 RLFT。三篇互不相约,却共同给上一卷盖章。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>当 gdb 这种『大模型至上』阵营的人都改口说『模型本身已不再是产品』,你的产品规划里,是不是还在押注『换个更强的模型就能赢』?</li><li>如果『不可训练的角落』——安排私有现实、递工具、改变客户工作方式——才是真正难复制的那层,那你团队里有多少人在做这件训不进权重的脏活累活?</li><li>OpenAI 下线微调、把 80% 的人推向长提示,而 Cursor/Cognition 反而加码开源 RLFT——你属于 top 1% 还是 bottom 99%?这个判断会决定你该用哪套技术栈。</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="agent-labs">
+      <span class="tag">LATENT.SPACE · 行业拐点</span>
+      <h3>造模型的人改口了:模型本身已不再是产品</h3>
+      <div class="src">Latent Space AINews(gdb / dzhng 等) · <a href="https://www.latent.space/p/ainews-all-model-labs-are-now-agent">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  9/10</div>
+      <div class="claim">在 OpenAI 可能下周递交 IPO 文件的前夕,gdb 直白说出『模型本身已不再是产品』——这是『大模型至上』阵营的一次集体反转;模型公司正一个接一个把 agent 当成产品,模型沦为其中一个被协同训练的部件。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">反转来自阵营内部,而不是外部批评者。</p><p class="w">说『model alone is no longer the product』的是 gdb,曾几乎所有 Team Big Model 的人都持相反立场;dzhng 进一步说顶级产品需要 model&lt;&gt;harness&lt;&gt;product 的共生。当『一切靠模型』的人自己改口,这就不再是观点之争,而是行业承认了产品面在向上层(harness + workflow + UI + memory + economics)迁移。</p></div><div class="pillar"><p class="p">组织结构在跟着改:模型团队关停,Harness 团队新建。</p><p class="w">AI21 关掉模型团队,整体转向 agent;连一向以纯模型著称的 DeepSeek 都第一次组建『Harness 团队』。组织架构是最诚实的信号——公司把人和预算投到哪,哪里才是它真正认定的产品。模型不再是终点,而是要被装进 harness 才能卖。</p></div><div class="pillar"><p class="p">协同训练 model+harness,反而可能让模型更封闭。</p><p class="w">『系统派』会把这当成胜利,但有个反噬:如果你能把模型 posttrain 到只在自家闭源 agent 里才好用,你就能把绝大多数用户导流到 agent、牺牲掉模型/API 的开放。装置赢了,代价可能是模型访问被进一步关死——这是开发者要警惕的下一步。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这条主线有个张力:harness 研究本身正在收敛成『复刻 Claude Code』(teortaxesTex 的担忧),而不是去探索更广的交互形态。也就是说,大家都意识到装置重要,却一窝蜂去抄同一套装置——真正稀缺的不是『做 harness』,而是『做一个别人没想到的 harness』。装置是新战场,但同质化的装置和同质化的模型一样不值钱。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义是:不要把『换更强的模型』当成产品路线图的主轴。模型公司自己都承认模型会同质化,那游戏侧真正该当作核心资产经营的,是模型周围那套别人搬不走的装置——玩家行为数据闭环、匹配/推荐/数值/反外挂的系统协同、把模型接进真实流量做高频实验的 harness。具体动作:盘点现有 AI 能力栈,区分哪些是『买得到的模型』、哪些是『只有我们有的装置』,把研发重心从追模型版本号挪到加厚装置上;同时警惕供应商的封闭化倾向,凡是核心场景都保留模型可移植性,别被 posttrain 锁进某一家的闭源 agent。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“the model alone is no longer the product”</p><p class="cn">模型本身已不再是产品。</p></div><div class="quote"><p class="en">“models cotrained with harnesses does open the door for closing access to models even further.”</p><p class="cn">与 harness 协同训练的模型,反而为进一步关闭模型访问打开了门。</p></div></div>
+    </article>
+    <article class="deep" id="untrainable">
+      <span class="tag">LATENT.SPACE · 不可训练的角落</span>
+      <h3>训不进权重的那层,才是真正的护城河</h3>
+      <div class="src">Latent Space AINews(Fiona Fung / swyx 转述) · <a href="https://www.latent.space/p/ainews-open-models-model-labs-vs">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●○  ·  8/10</div>
+      <div class="claim">Fiona Fung 用『可读性(legibility)』框架把上一卷的装置论讲到了底层:能被复制的终将被训进模型,真正的护城河是『不可训练的角落』——安排私有现实、把工具递到模型手里、改变客户的工作方式;而最稀缺的输入不是算力,是 intent(选择该做什么)。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">『不可训练的角落』靠的是不光鲜的脏活,且永不结束。</p><p class="w">应用赢得这块地的方式,是 unglamorous work:把一家公司的私有现实整理成模型能行动的形态、把工具递到模型手里、和客户一起改变其工作方式。带来这种『翻译』的公司极难被抄,因为翻译永不结束——集成与维护和客户关系一样长,靠的是把领域专精的工程师和工具放到客户身边。这正是模型同质化也吃不掉的那层。</p></div><div class="pillar"><p class="p">今年最被引用的 benchmark 分数,是一张『即将作废』的地图。</p><p class="w">Anthropic 之所以急着用 FrontierCode 做 Fable 发布,正因为可验证的免费 benchmark 一旦人人刷满就失去区分度——『最被引用的分数,是一张即将作废的领土地图,也是一份通知:谁即将失去定义什么算好的资格』。把竞争力寄托在公开榜单上的人,正在被这条规律淘汰。</p></div><div class="pillar"><p class="p">intent 可能是比算力更稀缺的输入。</p><p class="w">Fung 说真正难的是 offense——首先选择该做什么。模型在这件事上帮不上忙:你指哪它打哪,但它没法告诉你什么值得指,而这也无法 benchmark、无法训练。这也解释了为什么在位者吃不下全部——下一个东西总来自某个先于众人找到用途的人。能力可买,但『指向哪里』买不到。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这套框架的张力在于它很难被『努力』直接攻克:Fung 自己说一年只找到大概三次值得做的方向。也就是说,『不可训练的角落』不是一个可以堆人头、堆 GPU 就能填上的工程任务,而是依赖判断力和对真实场景的深入——这恰恰是组织最难规模化、最难考核的东西。承认 intent 稀缺容易,把公司组织成『能持续产出好 intent』很难。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义是把投入从『可训练』挪向『不可训练』。可训练的部分(更强的模型、更高的榜单分)会被整个行业同步追平,押注它等于押注一个必然贬值的资产;真正该加厚的是不可训练的角落——只有我们掌握的玩家私有现实(行为、社交图、消费链路)、把这些整理成模型可行动形态的数据工程、以及和真实业务一起迭代的领域专精团队。落地两步:一是停止用公开 benchmark 当内部 AI 能力的主要 KPI,改用贴近真实业务的私有评测;二是有意识地经营 intent——把『该做什么』当成稀缺资源,保护那些能持续找到新用途的人和小团队,而不是只奖励能把已知指标做得更高的人。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“An application earns its place in the untrainable corner by doing unglamorous work.”</p><p class="cn">应用赢得『不可训练角落』的方式,是去做那些不光鲜的脏活。</p></div><div class="quote"><p class="en">“Maybe intent is an even scarcer input than compute.”</p><p class="cn">也许 intent(选择该做什么)是比算力更稀缺的输入。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 8 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · 技术栈分化</div><div class="c"><div class="t"><a href="https://www.latent.space/p/ainews-the-end-of-finetuning">微调的终结 — OpenAI 下线 finetuning API</a></div><div class="v">微调成了 2026『支线大屠杀』的下一个牺牲品,80% 的人本就在转向长提示;但 top 1%(Cursor/Cognition)反而加码开源模型 RLFT——swyx:『top 1% 和 bottom 99% 的搭法完全不同,想用同一套架构从小做到超大的人注定失败。』先判断自己在哪一档,再选栈。</div></div></div><div class="row"><div class="k">BRIEF 02 · 工程组织</div><div class="c"><div class="t"><a href="https://www.latent.space/p/building-the-most-ai-pilled-engineering-team">打造全世界最 AI-pilled 的工程团队 — Lenny × Fiona Fung</a></div><div class="v">Anthropic 工程师据称用 AI 把出码量做到 8×;这篇是『模型已不是产品』在团队层面的落地版——怎么把工程组织重构成围绕 agent/harness 运转,而不是围绕手写代码。与今日两篇深读同源。</div></div></div><div class="row"><div class="k">SKIM · agent 现实测试</div><div class="c"><div class="t"><a href="https://www.latent.space/p/reality-the-final-eval">Reality: The Final Eval — Andon Labs</a></div><div class="v">当 benchmark 即将作废,真实世界成了最终评测场;Andon Labs 让 agent 在真实物理/经济环境里跑,呼应 Fung『最被引用的分数即将无用』的判断。</div></div></div><div class="row"><div class="k">SKIM · agent 基础设施</div><div class="c"><div class="t"><a href="https://www.latent.space/p/the-age-of-async-agents">异步 agent 时代 — Cognition 的 Walden Yan</a></div><div class="v">agent 从『同步对话』走向『异步长任务』,Cognition($25B 轮)正是加码开源 RLFT 的 top 1% 样本——装置(异步编排+harness)而非模型本身是其产品核心。</div></div></div><div class="row"><div class="k">SKIM · agent 基础设施</div><div class="c"><div class="t"><a href="https://www.latent.space/p/githubs-plan-for-agents">给 agent 一台电脑 — Ahmad of Daytona / GitHub 的 agent 计划 — Kyle Daigle</a></div><div class="v">两场对谈共同指向同一处:agent 要落地需要 sandbox/runtime/PR 流这套装置;GitHub 站在『每月 1700 万 PR』的新经济最前线,把 agent 接进真实工程流的能力比模型更决定成败。</div></div></div><div class="row"><div class="k">SKIM · 终端玩物</div><div class="c"><div class="t"><a href="https://github.com/">慢慢吃掉你的 Claude Code:在终端里养一只黑洞</a></div><div class="v">ghostty-blackhole 把 context-window 用量可视化成一只逐渐吞噬终端的黑洞——小而妙的 token 配给具象化,延续 Vol.014『token 配给』主线,适合当轻松收尾。</div></div></div><div class="row"><div class="k">SKIP · 资讯流</div><div class="c"><div class="t"><a href="https://www.latent.space/p/ainews-cerebras-60b-ipo">本周融资/发布速览(Cerebras $60B IPO · Anthropic $965B/Opus 4.8 · Cognition $1B · Fireworks/Baseten decacorn · Google I/O)</a></div><div class="v">一批 AINews 期号属于行业资金/发布流水,信息密度高但与今日装置主线关系弱,合并速记,不单列展开。</div></div></div><div class="row"><div class="k">SKIP · 空内容/促销</div><div class="c"><div class="t">[Exclusive] $250 off AI Engineer tix · not much happened today · Intel CEO 短讯</div><div class="v">促销、空白日报与 49–506 字无正文短讯,无法评估,跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.019 · 新观点 8 · 累计 309 · _mira-vp-index</span>
+    <span>下期 · <b>2026-06-23 06:00</b></span>
+  </footer>
+</div></body></html>
