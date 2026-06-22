@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Operations Issue — 装置上线之后:瓶颈从『写』搬到了『审、测、发』 — Vol.020</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.020</span>
+      <span class="chrome">2026-06-23 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Operations Issue — 装置上线之后:瓶颈从『写』搬到了『审、测、发』</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>前两卷把账算清了:Vol.018『装置才是车』、Vol.019 造模型的人亲口承认『模型已不再是产品』。今天这卷是承重落地版——当一家 20 年、$200B 的老牌软件公司 Shopify 真的全员押上 AI,它发现的不是『代码写得更多了』,而是瓶颈整体搬了家:从『生成』搬到了『审查、CI/CD、部署稳定性』,AI 写的代码反而可能让生产环境 bug 变多,于是它在 review 上花的钱要超过 generation。swyx 则把『Agent Lab 操作手册』讲清楚:先用前沿模型起步、为领域做专精、等数据/负载/延迟攒够了再训自己的模型——Cursor/Cognition 已经能让用户主动选用自家模型。装置装好了,真正的功夫在运营它。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果 AI 让写代码几乎免费,你团队的瓶颈是不是已经悄悄从『写得够不够快』变成了『审得过不过来、测得稳不稳、敢不敢发』?你为 review 投的资源有没有超过 generation?</li><li>Git / PR / CI-CD 这套为人类手速设计的流程,在代码以机器速度产出时还成立吗?Shopify 说它可能需要一套新隐喻——你的工程流是不是还在用旧地图跑新速度?</li><li>『Agent Lab 操作手册』——前沿模型起步→领域专精→攒够数据再训自己的模型——你现在处在哪一步?是该继续蹭前沿模型,还是数据/负载已经够格训一个自家小模型了?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="shopify-ops">
+      <span class="tag">LATENT.SPACE · 装置上线实录</span>
+      <h3>瓶颈搬家了:Shopify 全员押 AI 后,钱花在审查而不是生成</h3>
+      <div class="src">Latent Space(Mikhail Parakhin, Shopify CTO) · <a href="https://www.latent.space/p/shopify">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">当一家 20 年、$200B 的软件公司真的全员押上 AI,它得到的最反直觉结论是:AI 编程真正的瓶颈不再是『生成』,而是『审查、CI/CD、部署稳定性』——所以聪明的做法是在 review 上花的钱超过 generation,而不是堆更多并行 agent。这是 Vol.018→019 装置论的承重落地版:装置装好之后,胜负在于怎么运营它。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">12 月的『模型质量拐点』之后,采用曲线和工具形态都变了。</p><p class="w">Parakhin 把 Shopify 内部 AI 采用的陡升明确归因到去年 12 月的一次模型质量 inflection——能力越过某条线后,使用不是线性增长而是相变。同时 CLI 风格工具的崛起快过传统 IDE,这是一个信号:当模型够强,人们要的是能塞进自动化流水线的命令行入口,而不是为人类手动操作优化的图形界面。</p></div><div class="pillar"><p class="p">AI 写的代码平均更干净,却可能让生产环境 bug 变多。</p><p class="w">这是全卷最该停下来想的一句。模型单看产出质量不输人类,但产量暴增后,真正承压的是下游:PR 数量、测试失败、部署回滚成了新瓶颈。代码以机器速度被写出来,审查和发布却还是人的速度——于是 Parakhin 说真正的解锁不是『更多并行 agent』,而是『更强的批判循环、更强的模型、在 review 上花得比 generation 多』。Shopify 干脆自建 PR review 流,认为多数现成 review 工具没抓住要点。</p></div><div class="pillar"><p class="p">Git / PR / CI-CD 这套隐喻,可能要为 agent 时代重写。</p><p class="w">当写代码近乎免费,围绕『人类提交-人类审-合并』设计的整套版本控制与持续集成隐喻就开始失配。Parakhin 直言它们可能需要一个新隐喻。这不是工具升级,是工作流的范式问题:谁先想清楚 agent 时代的『提交-审查-部署』该长什么样,谁就握住了下一个工程效率的护城河——而这恰恰是训不进模型权重、要靠组织自己摸索的那层。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:Shopify 能这么玩,是因为它有别人没有的底牌。Tangle(可复现 ML、内容寻址缓存形成跨团队网络效应)、Tangent(自动研究循环,把实验权下放给 PM)、SimGym(用真实历史行为模拟客户)——这三件套之所以是护城河,前提是 Shopify 有二十年沉淀的真实商业数据。换句话说,『在 review 上多花钱』是人人可学的战术,但支撑它的私有数据与内部装置不是。运营装置的能力,本身又依赖一层买不到的资产。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义很直接:别只盯着『让 AI 多写代码/多产内容』这个生成端的指标,要把投入重心移到下游的审、测、发。具体三步:一是重新定义工程与内容生产的瓶颈 KPI——把 PR 吞吐、测试通过率、回滚率、线上事故率当成核心仪表盘,而不是出码量;二是有意识地『在 review 上花得比 generation 多』,自建贴合自家代码库与业务规则的审查/校验流,而不是套用通用工具;三是学 Shopify 的三件套思路,把我们独有的玩家历史行为(留存、付费、社交、对局轨迹)沉淀成可复现、可模拟、可自动实验的内部装置——这才是别人搬不走、也训不进通用模型的那层。当写和生成变便宜,真正稀缺的是『敢发、发得稳』的运营能力。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“the real bottleneck in AI coding is no longer generation, but review, CI/CD, and deployment stability.”</p><p class="cn">AI 编程真正的瓶颈不再是生成,而是审查、CI/CD 与部署稳定性。</p></div><div class="quote"><p class="en">“the real unlock is not more agents in parallel, but better critique loops, stronger models, and spending more on review than generation.”</p><p class="cn">真正的解锁不是更多并行 agent,而是更强的批判循环、更强的模型,以及在审查上花得比生成更多。</p></div></div>
+    </article>
+    <article class="deep" id="agent-lab-playbook">
+      <span class="tag">LATENT.SPACE · 操作手册</span>
+      <h3>Agent Lab 操作手册:前沿模型起步,数据攒够了再训自己的</h3>
+      <div class="src">Latent Space × Unsupervised Learning(swyx / Jacob Effron) · <a href="https://www.latent.space/p/unsupervised-learning-2026">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●● · 时效 ●○  ·  8/10</div>
+      <div class="claim">Vol.019 说『所有模型公司都成了 agent 公司』,这卷给出反方向的操作手册:应用公司怎么有节奏地变成 Agent Lab——先用前沿模型起步、为领域做专精、等数据/负载/延迟攒够再训自己的模型。这不是营销口号,Cursor/Cognition 已经能让用户主动选用自家模型。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">三段式节奏:前沿模型起步 → 领域专精 → 训自己的模型。</p><p class="w">swyx 把『agent lab』路径讲成一条有先后的曲线:第一阶段直接调前沿模型把产品做出来;第二阶段围绕你的领域做专精(搜索、蒸馏、领域微调);第三阶段——只有当数据量、工作负载、用户行为攒够,足以让成本与延迟的节省划算时——才去训自己的模型。关键是顺序和触发条件:训自家模型不是起点而是终点,过早自训是给自己挖坑。</p></div><div class="pillar"><p class="p">自训模型是真生意,因为你能让用户主动选它。</p><p class="w">怀疑者会说『应用公司训模型打不过大厂』。但 Cursor 和 Cognition 证明了:当你掌握工作流入口,你能引导用户去选自家的 in-house 模型——领域专精 + 蒸馏让小模型在特定任务上又快又够好,而入口决定了用户根本不需要在通用榜单上比高低。这就是应用公司对抗前沿实验室垂直扩张的底气:实验室在抢金融/医疗等垂直,但谁拥有工作流和最后一公里,谁就还有地盘。</p></div><div class="pillar"><p class="p">卖给 agent ≈ 把开发者体验做好;基础设施每年重造,应用层反而更稳。</p><p class="w">swyx 的两个旁证很实用:一是『卖给 agent』本质上就是把 API、文档、DX 做到极致——agent experience 多半只是 developer experience 换个名字,pretraining 数据的在位者在 agent-first 世界里复利滚雪球;二是基础设施公司被迫每年重造自己(『skills』可能是 agent 的最小可行打包格式),而应用公司因为离场景近,反而更能扛住模型的剧烈波动。这解释了为什么押注『装置/工作流』比押注『底层设施』对应用方更安全。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于第三阶段的诱惑与陷阱:人人都想成为 Agent Lab、都想训自己的模型,但 swyx 反复强调触发条件——数据、负载、延迟节省必须先到位。错把『训模型』当成身份象征而非经济决策,就会在还没有足够数据闭环时烧钱自训,既追不上前沿、又没有专精优势。手册的精髓不是『要不要训』,而是『什么时候才轮到你训』。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义是给『要不要做自己的模型』装一个决策闸门。落地两点:一是按三段式自检——现在多数 AI 能力应该停在第一/第二阶段(调前沿模型 + 围绕游戏场景做专精与蒸馏),把『自训模型』锁进一个明确的触发条件清单(某个高频场景的私有数据量、调用负载、延迟/成本压力都越线了才开闸),避免为了『我们也有自研模型』的面子提前烧钱;二是把工作流入口当成最高优先级资产——正因为应用层比基础设施更抗模型波动,而入口决定用户用谁的模型,游戏侧真正要守的是玩家进出 AI 能力的那个入口(对局内助手、创作工具、客服),守住入口,自训与否都进退有据。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“starting with frontier models, specializing for your domain, then training your own models once you have enough data, workload, and user behavior to justify the cost and latency savings.”</p><p class="cn">先用前沿模型起步,为你的领域做专精,等到数据、负载和用户行为攒够、足以让成本与延迟的节省划算时,再去训自己的模型。</p></div><div class="quote"><p class="en">“agent experience may mostly just be good developer experience by another name.”</p><p class="cn">所谓 agent 体验,多半只是把开发者体验换了个名字。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 8 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · 安全转向</div><div class="c"><div class="t"><a href="https://www.latent.space/p/gray-swan">Red-Teaming after Mythos — Zico Kolter &amp; Matt Fredrikson(Gray Swan)</a></div><div class="v">当装置上线、agent 接进真实系统,攻击面也跟着搬家。两位对抗性 ML 的核心研究者谈 agent 时代的红队怎么做——呼应 Shopify『部署稳定性才是瓶颈』,安全与可靠性正从模型层下沉到运营层。</div></div></div><div class="row"><div class="k">BRIEF 02 · 开源模型口碑</div><div class="c"><div class="t"><a href="https://www.latent.space/p/glm-5-2">为什么用户在猛夸 GLM 5.2</a></div><div class="v">延续 Vol.018『开源把闭源溢价压到个位数』:GLM 5.2 在真实使用里获得口碑,正是 Agent Lab 手册第二阶段(领域专精 + 可选开源底座)的现实弹药。开源够好,自训的门槛和必要性都被重新标定。</div></div></div><div class="row"><div class="k">SKIM · 模型流水</div><div class="c"><div class="t"><a href="https://www.latent.space/p/ainews-deepseek-v4">DeepSeek V4 Pro(1.6T-A49B)与 Flash(284B-A13B),华为昇腾</a></div><div class="v">DeepSeek 新一代基座+指令模型,跑在华为昇腾上——非 NVIDIA 硬件『突然被认真对待』(swyx 语)的又一注脚。属模型发布流水,合并速记。</div></div></div><div class="row"><div class="k">SKIM · 模型流水</div><div class="c"><div class="t"><a href="https://www.latent.space/p/ainews-gpt-5-5">GPT-5.5 与 OpenAI Codex Superapp · GPT-Image-2 · Tasteful Tokenmaxxing</a></div><div class="v">OpenAI 一连串发布(5.5、Codex 超级应用、图像 2 代)与『品味化 token 堆叠』期号——信息密度高但与今日运营主线关系弱,合并速记不展开。</div></div></div><div class="row"><div class="k">SKIM · 装置佐证</div><div class="c"><div class="t"><a href="https://www.latent.space/p/trajectory-ai">未来每个产品都会是『活系统』 — Ronak Malde, Trajectory.ai</a></div><div class="v">前 Windsurf/Codeium 团队谈持续学习:产品基于用户信号不断自我调整(sui-1 模型)。和 Shopify 三件套同源——产品不再是一次性交付,而是要持续运营的活体,正是『运营装置』主题的另一面。</div></div></div><div class="row"><div class="k">SKIM · 落地与生态</div><div class="c"><div class="t"><a href="https://openai.com/index/daybreak">OpenAI Daybreak/Patch the Planet 安全计划 · 三星给员工上 ChatGPT/Codex · How I AI:写 agent loop</a></div><div class="v">三则落地侧信号:OpenAI 推面向组织的安全计划与开源维护者支持;三星全员接入 Codex(企业采用曲线);Lenny 教在 Claude Code/Codex 里写 agent 循环——都属运营/采用层,合并速记。</div></div></div><div class="row"><div class="k">SKIP · 资讯/短讯</div><div class="c"><div class="t">Ben Thompson 苹果涨价与欧盟 · Intel CEO 短讯 · HeyGen 基于 HTML 建视频 agent</div><div class="v">评论与 583–632 字短讯,与运营主线弱相关或无正文可评估,跳过。</div></div></div><div class="row"><div class="k">SKIP · 论文流/空内容</div><div class="c"><div class="t">takara.ai HF 论文速递(约 10 条,1–2k 字)· NanoClaw Blueprint(64 字空)· Readwise 变更日志 · 逛逛GitHub 音频模型</div><div class="v">HuggingFace 论文 feed 短摘、空白蓝图、产品变更日志与中文短视频稿——信息颗粒过细或无正文,统一跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.020 · 新观点 8 · 累计 317 · _mira-vp-index</span>
+    <span>下期 · <b>2026-06-24 06:00</b></span>
+  </footer>
+</div></body></html>
