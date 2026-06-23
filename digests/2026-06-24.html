@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Trust Issue — 装置在运营之后:风险从『单点出错』搬到了『系统性同时出错』 — Vol.021</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.021</span>
+      <span class="chrome">2026-06-24 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Trust Issue — 装置在运营之后:风险从『单点出错』搬到了『系统性同时出错』</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.020 说装置装好之后真正的功夫在运营它,那今天这卷追问下一个问题:当人不可避免地『松手』之后会怎样?两位 CMU 对抗性 ML 的核心研究者(Gray Swan)给出最尖锐的判断——AI 系统是一类天生不同的、可被『骗』的软件,而真正的新风险是『相关性失效』:全世界都在用 Codex、Claude Code 这少数几个模型,一旦它们被攻破,就是一类全新的、规模化的漏洞,于是 AI 平台旁边必然长出一层独立的安全服务。Google DeepMind 从另一端印证:agent 做得越好,人越容易『自动化偏见』地关掉警觉,而百万 agent 互相交易、委托的经济里,安全要靠可靠的协议与护栏来兜底。装置能跑了,信任本身成了瓶颈。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>你的团队是不是已经在大量复用同样几个模型(Codex、Claude Code、同一家 API)?如果它们身上出现一个漏洞,你会不会和所有人『在同一时刻一起出错』——你为这种相关性失效准备过预案吗?</li><li>agent 做对了 9 件事之后,第 10 件你还在认真审吗?『自动化偏见』——它越靠谱你越松手——是不是正在悄悄把『人在回路』变成『人在睡觉』?</li><li>当 AI 平台越来越集中,安全/红队/可靠性该内建在模型里,还是该作为一层独立服务长在它旁边?你现在把信任押在谁身上?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="gray-swan-security">
+      <span class="tag">LATENT.SPACE · 信任的反面</span>
+      <h3>相关性失效:大家都在用同几个模型,一个漏洞就是全行业的漏洞</h3>
+      <div class="src">Latent Space(Zico Kolter &amp; Matt Fredrikson, Gray Swan / CMU) · <a href="https://www.youtube.com/watch?v=j8BAficRjEc">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">Vol.020 说『部署稳定性才是瓶颈』,这卷把那句话推到尽头:当 AI 真的接进真实系统、自主运营,真正的新风险不是某个 agent 偶尔犯错,而是『相关性失效』——全世界都在用 Codex、Claude Code 这少数几个模型,一旦在它们身上找到漏洞,就等于拿到了一类全新的、可规模化复用的 exploit。AI 是一类天生不同、会被『骗』的软件,所以信任不能默认,安全要被当成一层独立服务来建。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">AI 系统是一类『行为根本不同』的软件——它会像人一样被骗。</p><p class="w">Kolter 的核心论断是:这些系统和我们熟悉的软件本质不同,不是说 AI 能发现软件漏洞(它确实能),而是 AI 系统本身有 inherent 的、新类型的脆弱性——它们能被『tricked』,就像人有时会被骗。所以你需要一套全新的安全心态:不要把模型当成可信实体,而要默认它是 untrusted entity。这把 AI 安全和传统网络安全划清了界限——这不是用 AI 加固你的基础设施,而是理解你引入 AI 时带进来的全新风险。</p></div><div class="pillar"><p class="p">真正的新风险是『相关性失效』:少数模型被所有人共用。</p><p class="w">这是全卷最该停下来想的一句。传统安全里漏洞是分散的;但 AI 时代,全世界其实只在用少数几个模型(Codex、Claude Code)。一旦在『大家都在用的 agent』里找到一个漏洞,你就同时握住了无数个系统的钥匙——这是一类全新的 exploit。当 indirect prompt injection(IPI)能让一个去抓取不可信内容的编程 agent 被劫持、偏离原始目标,这个劫持就不只发生在一个公司,而是发生在所有用同一个模型的公司身上。集中度本身就是风险。</p></div><div class="pillar"><p class="p">新平台出现,旁边必然长出一层独立的安全服务。</p><p class="w">Kolter 说得很克制:模型实验室自己当然在做大量安全工作,但历史规律是——每当一个新平台崛起,几乎总会在它旁边、作为独立服务,长出一套专门的安全系统。AI 现在正处在这个时刻。这就是为什么 Gray Swan 既做研究也做商业:他们运营 15000 人的红队社区(悬赏挑战、gamify 红队目标),还训练了一个专门做自动化红队的模型家族 SHADE——而最反直觉的是,前沿模型本身极不擅长做红队,因为它们内建的安全训练会让它们拒绝去攻击别的模型;真正擅长破解的,反而要专门训练。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:作者亲口承认,他们的自动化红队系统 SHADE『现在已经比人类红队手更强』。这意味着攻防双方都在以机器速度升级——你用 AI 防御,对手也用 AI 进攻,而且专门训练出来的攻击模型比通用前沿模型更狠。于是出现一个递归难题:你要靠一个 AI 去守住另一个 AI,但守门的 AI 同样是会被骗的、同样可能相关性失效的软件。安全不再是一道能一次焊死的墙,而是一场必须持续运营、永不收敛的循环——这正好接上 Vol.020『真正的功夫在运营它』,只是这次运营的对象是信任本身。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义很具体。第一,把『模型集中度』当成一个明确的风险项纳入架构评审:如果对局内助手、创作工具、客服 agent 全押在同一个底座模型上,要主动设计降级路径和多模型冗余,别让一个上游漏洞变成全平台同时停摆。第二,把不可信输入当默认前提——凡是 agent 会去抓取的玩家生成内容、外部网页、第三方工具返回,都按 indirect prompt injection 的攻击面来设计隔离与校验,而不是假设模型会『守规矩』。第三,把红队从一次性合规动作变成持续运营:建立内部或外包的对抗性评估循环(借鉴悬赏社区 + 自动化红队两条腿),在每次模型/prompt 升级后重新跑一遍,因为攻击面会随能力一起搬家。信任不是默认值,是要持续挣来的。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“in a lot of the latest experiments we can do much better than the human red teamers ... a system called SHADE is now actually quite a bit better at breaking models than humans are.”</p><p class="cn">在最近很多实验里,我们已经能做得比人类红队手好得多——一个叫 SHADE 的系统,现在破解模型的能力已经明显强过人类。</p></div><div class="quote"><p class="en">“there&#x27;s actually a few models that everyone is using. And if you find vulnerabilities in the agents that everyone uses, like Codex and Claude Code, you can now essentially have a new class of exploit.”</p><p class="cn">其实是只有少数几个模型被所有人共用。一旦你在大家都在用的 agent——比如 Codex 和 Claude Code——里找到漏洞,你就等于拿到了一类全新的 exploit。</p></div></div>
+    </article>
+    <article class="deep" id="millions-of-agents">
+      <span class="tag">DEEPMIND · 信任的边界</span>
+      <h3>百万 agent 相遇:自动化偏见,与一个需要护栏的新经济</h3>
+      <div class="src">Google DeepMind Podcast(Nenad Tomašev) · <a href="https://www.youtube.com/watch?v=V04bm-3d6EQ">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●● · 时效 ●○  ·  8/10</div>
+      <div class="claim">如果 Gray Swan 讲的是『恶意攻击下的信任』,DeepMind 这集讲的是『日常协作里的信任』。当 agent 从『回答问题』变成『代你行动』,再到百万 agent 之间互相交易、谈判、委托,我们可能迎来一种新经济——但它的命门是:每个动作都有失败率,而人会因为『自动化偏见』在 agent 表现好之后悄悄关掉警觉。信任的护栏,要靠可靠的协议来建。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">agent 与 LLM 的本质区别:它在世界里『采取行动』,而不只是续写。</p><p class="w">Tomašev 把分界讲得很干净:语言模型给你一个 continuation、一个回复;agent 则观察世界的状态、在环境里做出 action。底层仍是 LLM 在生成动作,但外面包了一层 harness 去把提议的动作真正落地执行——于是它有了链接多步决策的自主性。这把用户的角色从『提问者』变成了『决策者/审批者』:你不再亲手发每封邮件,而是审批 agent 替你拟好的一批动作。便利的代价,是你交出了一部分对过程的直接掌控。</p></div><div class="pillar"><p class="p">命门不是『能不能做』,而是『每个动作都有失败率』。</p><p class="w">这是最该停下来想的一句。Tomašev 强调:agent 不是不能做某事,而是它做每件事都不是 100% 准确——和人一样,动作越复杂,期望失败率越高。这意味着 agent 的风险不是二元的『会/不会』,而是连续的、会累积的概率。当你把多步任务交给它,错误可能很明显,也可能非常细微——而细微的错误恰恰最危险,因为它最容易在审批时被放过。</p></div><div class="pillar"><p class="p">最隐蔽的敌人是『自动化偏见』:它越靠谱,你越松手。</p><p class="w">Tomašev 点出一个在别的领域早已存在的老问题:automation bias。当 agent 第一件事做对、第二件也做对,你会逐渐过度信任、开始『关机』——你以为人还在回路里,其实你已经不再认真核验,于是重要的问题从底下溜过去。所以他反复强调:human in the loop 还不够,必须 human engaged——人不仅要在回路里,还要保持『开着的』。这给所有『人在回路』式的合规设计泼了一盆冷水:回路存在不等于信任安全,警觉一旦松懈,护栏就形同虚设。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于自主性与安全的根本权衡:Tomašev 个人的梦想是用 agent 加速科学——让 autonomous research lab 自己排实验、闭环迭代。但他同时承认,在物理世界闭环远比软件闭环难:软件可以写测试来验证,科学却要跑真实的物理实验,而一个设计失误的电池实验可能过热、烧毁硬件、酿成后果。于是出现一个两难:给 agent 越多自主权,科学加速越快;但物理世界没有『撤销键』,越自主就越需要可靠协议与安全护栏来兜底。自主性的上限,由我们能建立多强的信任协议来决定。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义是给『agent 自动化』装一套信任刻度。第一,把『失败率』当成一等公民来设计:任何让 agent 替用户/团队执行动作的场景(自动回复、内容生成、运营操作),都要先估清单步失败率与多步累积失败率,按动作的不可逆程度分级——可逆的放手、不可逆的强制人工确认。第二,主动对抗自动化偏见:不要让审批沦为『一路点同意』,设计强制核验点、抽样复查、异常高亮,让人保持 engaged 而不只是 in the loop。第三,凡是 agent 与真实世界闭环(发布、扣费、对外发消息)的地方,先建协议与护栏再放量——参考 DeepMind『软件靠测试闭环、现实靠协议闭环』的分法,把可逆性和审批粒度写进产品流程,而不是事后补救。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“every single thing that they can do, they don&#x27;t do with 100% accuracy ... the more complex the action, the higher the expected failure rate.”</p><p class="cn">它们能做的每一件事,都不是以 100% 的准确率完成的……动作越复杂,期望的失败率就越高。</p></div><div class="quote"><p class="en">“as soon as you switch off, you&#x27;re rolling the dice ... it&#x27;s important not only to be in the loop, but to really be engaged and be switched on.”</p><p class="cn">你一旦松手,就是在掷骰子……重要的不只是人在回路里,而是真正地投入、保持警觉。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 7 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · 反焦虑手册</div><div class="c"><div class="t"><a href="https://www.lennysnewsletter.com/p/the-new-inner-game-joe-hudson">The new inner game:AI 时代你真正不公平的优势 — Joe Hudson(Lenny&#x27;s Newsletter)</a></div><div class="v">硅谷顶级高管教练(辅导过 Sam Altman 与 OpenAI 研究团队)给『我会被 AI 取代』的恐惧泼冷水:努力与知识这两样我们一生优化的技能正被商品化,但恐惧是糟糕的规划者。和今天的信任主线互补——技术侧讲护栏,人侧讲心态:把信任先建立在自己身上。</div></div></div><div class="row"><div class="k">BRIEF 02 · 装置即护栏</div><div class="c"><div class="t"><a href="https://huggingface.co/blog/cuga">用 CUGA 搭真正的 agent 应用:轻量 harness 上的两打范例 — IBM(HF Blog)</a></div><div class="v">承接 Vol.018→020 的装置/harness 主线:IBM 开源 agent harness CUGA(pip install cuga)把规划、执行循环、工具调用、状态管理都包掉,你只写工具清单和 prompt,且能在生产里以 sovereign/governed 方式运行——治理与护栏不是事后补,而是装置自带的一层。</div></div></div><div class="row"><div class="k">SKIM · 生态短讯</div><div class="c"><div class="t"><a href="https://news.smol.ai/">AINews:SpaceX Neocloud($28B/yr)· huggingface_hub 周更(AI + human-in-loop)· OpenAI×Omio 对话式旅行</a></div><div class="v">三则生态信号:SpaceX 入局云算力、HF 用『AI + 人在回路』做发布流程、OpenAI 进对话式旅行——都属采用/落地层,合并速记。</div></div></div><div class="row"><div class="k">SKIM · 落地佐证</div><div class="c"><div class="t"><a href="https://www.anthropic.com/news/one-year-mcp">GPT-5 帮免疫学家 Derya Unutmaz · One Year of MCP · Brex 的 AI 豪赌</a></div><div class="v">三则应用与生态回顾:GPT-5 进科研(呼应 DeepMind『加速科学』)、MCP 一周年、Brex 全力押 AI——信息密度可,但与信任主线弱相关,合并速记。</div></div></div><div class="row"><div class="k">SKIM · 工具与心态</div><div class="c"><div class="t">Claude Code+Obsidian(逛逛GitHub)· Fiona Fung:让 Claude 读 Slack · AI 焦虑的解药</div><div class="v">三则轻量实操/心态稿:把 Claude Code 接进笔记库、让助手读工作消息、对抗 AI 焦虑——颗粒偏细,合并速记。</div></div></div><div class="row"><div class="k">SKIP · 评论/短讯</div><div class="c"><div class="t">Ben Thompson:内存芯片/中国/微软 · Anthropic/Glean/OpenRouter 的 AI 护城河(Deedy Das,预标 skim)· HeyGen 视频</div><div class="v">付费评论与短讯,正文短或与今日信任主线弱相关,跳过。</div></div></div><div class="row"><div class="k">SKIP · 论文流/空内容</div><div class="c"><div class="t">takara.ai HuggingFace 论文速递(约 50 条,100–610 字)</div><div class="v">HuggingFace 论文 feed 的批量短摘,信息颗粒过细、无完整正文可评估,统一跳过(本日积压量大,占原始抓取过半)。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.021 · 新观点 8 · 累计 325 · _mira-vp-index</span>
+    <span>下期 · <b>2026-06-25 06:00</b></span>
+  </footer>
+</div></body></html>
