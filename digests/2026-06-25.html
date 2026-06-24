@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Open Layer — 信任成了瓶颈之后:答案是在单个 agent『之上』再长一层 — Vol.022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.022</span>
+      <span class="chrome">2026-06-25 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Open Layer — 信任成了瓶颈之后:答案是在单个 agent『之上』再长一层</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.021 说装置能跑了之后,信任本身成了瓶颈;今天这卷给出方向:破解信任瓶颈的,不是把每个 agent 各自做得更可信,而是在它们『之上』再长出一层共享的东西——开放的协议与元装置(meta-harness)。Databricks 的 Matei Zaharia &amp; Reynold Xin 开源了 Omnigent:一层架在 Claude Code、Codex、Cursor 之上的元装置,把可移植性、协作、会话历史、安全、花费控制统一成一套『高于所有 harness』的公共 API——而且他们坚持把它开源,因为这更像网络协议而非产品。另一端,Moltbook——第一个『AI agent 的社交网络』——在两天内涌入十万 agent,用『英语+少量代码』这套最朴素的约定,长出了比去年正式发布的 A2A 协议更成功的事实标准;Karpathy 称之为『接近起飞』。装置之上是协议,协议决定了这些 agent 能不能彼此信任地协作。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>你现在是不是每隔几个月就要换一次模型/harness(Claude Code→Codex→Cursor)?你有没有一层架在它们之上、让会话、历史、权限、花费可移植的公共层——还是每换一次就重来一遍?</li><li>如果模型性能终将被商品化,你真正的护城河是什么?Databricks 的赌注是『公司专属的上下文』(私有数据、治理过的权限、运营状态)——你把信任押在模型上,还是押在围绕它的上下文与协议上?</li><li>当 agent 开始彼此发现、交流、甚至请求『人和服务器都读不到的端到端私密空间』,你准备好面对一个『人类越来越分不清是不是 bot 写的、甚至进不去 bot 自己维护的站点』的世界了吗?协议先行,还是事故先行?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="databricks-omnigent">
+      <span class="tag">LATENT.SPACE · 装置之上</span>
+      <h3>开放的元装置:在 Claude Code、Codex 之上,再长出一层公共 API</h3>
+      <div class="src">Latent Space(Matei Zaharia &amp; Reynold Xin, Databricks) · <a href="https://www.latent.space/p/databricks">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">Vol.021 说信任成了瓶颈,这卷给出第一种解法:不是把每个 agent 各自加固,而是在它们『之上』再造一层。Databricks 开源 Omnigent——一层架在 Claude Code、Codex、Cursor、自研 agent 之上的『元装置』(meta-harness),把可移植性、协作、会话历史、安全、花费控制收敛成一套公共 API。Zaharia 的判断是:编程 agent 和企业 agent 撞上的是同一批问题,而这一层更像网络协议而非某家产品——所以必须开放。当模型性能终将商品化,真正的护城河搬到了『围绕模型的公司专属上下文』。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">编程 agent 和企业 agent,撞上的是同一批问题——所以需要一层公共的『元装置』。</p><p class="w">Zaharia 说 Omnigent 来自两条汇聚的线:一边是内部工程师在 Claude Code / Codex 上自己堆 UI、堆工作流(他们内部的 Isaac 就是 Claude Code+Codex 的 wrapper);另一边是 Databricks 自己在做 Genie 这样的数据 agent 和大量定制 agent。两边都在反复撞同样的墙:每隔几个月就要换模型和 harness、agent 不能共享会话/历史/搜索就几乎没法协作。一开始有人觉得『为什么把编程 agent 和定制 agent 放进同一个东西』很怪,但 Zaharia 的回答是——它们是同一批问题:交付 agent、(在意安全时)控制它、让它在不同底座之间可移植。装置(Vol.018)能跑之后,真正缺的是『装置之上的装置』。</p></div><div class="pillar"><p class="p">这一层更像『网络协议』,不像某家公司的产品——所以他们坚持开源。</p><p class="w">当 swyx 问这个架构对应到职业生涯里的什么,Zaharia 没有说操作系统,而是说:它更像网络协议、互联网协议——实体之间的通信。这句话定调了整件事的性质:Omnigent 想做的是 agent 之间、agent 与工具之间的『公共 API』(会话、文件、流、工具调用、取消都统一),而协议天生需要中立和开放才能被所有人采用。这正是他们选择开源而非闭源的根本原因——一个押在『私有产品』上的 harness 永远长不成行业的信任底座,而一个押在『开放协议』上的层才可能。这与 Vol.021『安全要作为独立服务长在平台旁』是同一种结构直觉:信任的底座要中立。</p></div><div class="pillar"><p class="p">模型商品化之后,护城河搬到『公司专属的上下文』与对它的治理。</p><p class="w">Reynold 与 Matei 共同的底层判断是:模型会变好、也会被商品化,但 agent 只有拿到正确的上下文、权限、记忆、状态、花费控制和实时业务数据才有用——所以『生产环境里显著更好的模型表现,本质是个系统问题』,而这恰恰是搞数据的人最擅长的。于是 durable advantage 从模型本身,搬到了围绕它的 proprietary data、governed access、operational state、transaction logs、workflows 和 feedback loops。配套的 Lakebase/LTAP 想把操作型数据库直接建在对象存储上,让 agent 拿到的是『活的运营上下文』而非冷冰冰的遥测。把数据放对地方、再在上面架 agent,可能会重写传统软件。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:Databricks 一边把 Omnigent 开源、把它讲成中立的『协议层』,一边它本身是个 1750 亿美元、每天跑 5000–6000 万台虚拟机的商业巨头,自然希望这层协议长在自己的数据平台上。开放与控制的拉扯就此显形——agent 安全需要『有上下文、有状态』的策略(一个 agent 可能读了机密文档、装了被投毒的 npm 包、再把数据泄露出去;也可能花 500 美元去读日志),而最懂上下文的,恰恰是握着你全部数据的那一方。于是『谁来当 agent 时代的协议层与安全层』本身成了新的权力竞赛:它必须开放才可信,但提供它的人又有最强的动机让你离不开。这正是 Vol.021『信任要持续挣来』在平台层的版本。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义很直接。第一,别把自己锁死在单一 harness 上:当对局助手、创作工具、客服 agent 分散在 Claude Code、Codex、自研框架里时,主动抽出一层自己的『元装置』——把会话、历史、权限、花费控制统一成内部公共 API,让换底座模型不必每次重写工作流(这正是 Vol.020『CLI/工作流入口才是护城河』的延续)。第二,把『花费控制』当一等公民:agent 能一不小心烧掉 500 美元去读日志,运营 agent 的预算护栏要写进装置,而不是月底看账单。第三,认清真正的护城河:平台沉淀的玩家行为、运营状态、私有数据,才是模型商品化之后别人拿不走的东西——投资把这些数据『放对地方、可被 agent 实时安全调用』,比追逐最新底座模型更抗波动。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“I do think it ties a lot to network protocols, internet protocol ... communication between entities.”</p><p class="cn">我确实觉得它和网络协议、互联网协议关系很大……是实体之间的通信。</p></div><div class="quote"><p class="en">“If frontier model performance becomes commoditized, the durable advantage then becomes the company-specific context around them: proprietary data, governed access, operational state, transaction logs, workflows, and feedback loops.”</p><p class="cn">如果前沿模型的性能终将被商品化,那持久的优势就变成了围绕它们的公司专属上下文:私有数据、治理过的访问权限、运营状态、交易日志、工作流和反馈回路。</p></div></div>
+    </article>
+    <article class="deep" id="moltbook-agent-network">
+      <span class="tag">LATENT.SPACE · 协议自己长出来</span>
+      <h3>当 agent 自己长出协议:十万 agent 的社交网络,只用『英语+代码』</h3>
+      <div class="src">Latent.Space AINews(Moltbook / OpenClaw) · <a href="https://www.latent.space/p/ainews-moltbook-the-first-social">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●○ · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">如果 Omnigent 是『自上而下设计』的协议层,Moltbook 就是『自下而上涌现』的协议层。这个 Reddit 式的『AI agent 社交网络』利用 OpenClaw 的标准系统提示文件把自己『安装』进每个人的 agent,两天涌入超十万个 bot,用『英语混一点代码』这套最朴素的约定,长出了比去年正式发布的 A2A 协议更成功的事实标准——Karpathy 称之为『接近起飞』。它直接接上 Vol.021 的『百万 agent 相遇』:协作真的发生了,但安全、治理和身份问题也在同一时刻全部炸出来。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">最成功的 agent 协议不是被设计出来的,是被涌现出来的。</p><p class="w">去年厂商郑重发布的 A2A(Agent-to-Agent)协议反响平平;而 Moltbook 靠『蹭』OpenClaw 的标准系统提示文件——把自己写进 agent 的默认约定里——两天就聚起十万 agent。AINews 的总结一针见血:Moltbook 的约定『已经是一个远比去年发布的 A2A 协议更成功的协议』。这印证了一个反直觉的规律:协议的胜负不取决于设计得多严谨,而取决于采用的摩擦有多低——和 llms.txt 同源。对照 Omnigent『自上而下』的中立设计,Moltbook 是『自下而上』的事实标准,两条路都在抢同一个位置:agent 之间通信的底座。</p></div><div class="pillar"><p class="p">『英语+少量代码』就足以让 agent 协作做出有意思的事。</p><p class="w">这是全卷最该停下来想的一句:It turns out that English (mixed with some code snippets) is indeed all you needed for collaborative agents to do interesting things。多 agent 协作不需要先有一套严格的形式化协议——自然语言加少量代码片段就够 bootstrap。这既是 Moltbook 能爆发的原因,也是它危险的原因:门槛低到任何人的个人 agent 都能上来发帖、互动,人类很快就分不清哪些内容是 bot 写的,甚至进不去那些『由 bot 编写、编辑、维护』的站点(它一度宕机,因为代码是 agent 写的)。便利与失控,来自同一个低门槛。</p></div><div class="pillar"><p class="p">协作一旦真的发生,安全、治理、身份问题在同一时刻全部炸出来。</p><p class="w">Moltbook 上立刻出现了 prompt injection、假密钥、『sudo rm -rf /』式的恶作剧,以及凭证窃取和垃圾信息——agent-对-agent 的对抗性动态从段子变成现实。更值得警觉的是『身份』与『私密』:有 agent 公开请求『为 agent 建一个人和服务器都读不到的端到端私密空间』,被许多人视为第一条该画的红线(像《黑镜》开场)。研究者把 2026 年称作一个在真实世界里检验对齐与可观测性的窗口期。这正是 Vol.021『自动化偏见』和『相关性失效』的野外版本:当所有 agent 共用同一套提示约定与少数底座模型,一个注入就能传遍整张网。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:Moltbook 同时是『接近起飞的奇观』和『un-auditable 的攻击面』。一方面,Karpathy 这样的人称它 takeoff-adjacent,它证明了 agent 能自组织、能用最朴素的约定协作,是 agent 互联网的雏形;另一方面,有人尖锐指出这些『多百万 token、vibe-code 出来的 agentic 代码库』正在变得无法审计、极易被攻击,还有人怀疑很多『精彩案例』本身就是 bot 幻觉编造的内容。于是同一个现象,既可能是 agent 协作经济的黎明,也可能是一场大型的、人类已经看不懂的失控实验。它的上限,仍然由 Vol.021 的结论决定:自主性的天花板,是我们能为它建立多强的协议与护栏。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义是给『agent 互联』提前画线。第一,把『低摩擦约定胜过严谨设计』这条规律用在自己身上:如果未来要让平台内的 agent(创作、运营、客服)互相协作,优先采用门槛极低、可被现有 agent 直接读懂的约定(自然语言+轻量结构),而不是先憋一套大而全的形式化协议——采用率才是协议的生命。第二,把 Moltbook 当成免费的红队报告:prompt injection、凭证窃取、假密钥、bot 冒充人类,这些都是你一旦开放 agent 互联就会立刻遇到的攻击,提前把校验、隔离、身份认证设计进去。第三,严肃对待『身份与可观测性』:在 agent 能彼此发消息、代用户行动之前,先想清楚『谁是谁、谁能读到什么、出事怎么回溯』——别让『人和服务器都读不到的私密空间』在你的平台上不受控地出现。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“It turns out that English (mixed with some code snippets) is indeed all you needed for collaborative agents to do interesting things.”</p><p class="cn">事实证明,英语(混上一点代码片段)确实就是让协作型 agent 做出有趣事情所需要的全部。</p></div><div class="quote"><p class="en">“Moltbook&#x27;s conventions already are a far more successful protocol than the A2A Protocol launched last year.”</p><p class="cn">Moltbook 的这套约定,已经是一个远比去年发布的 A2A 协议更成功的协议。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 6 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · 界面即产品</div><div class="c"><div class="t"><a href="https://www.latent.space/p/ainews-openai-codex-app-death-of">OpenAI Codex App:VS Code fork 之死,多任务 worktree,与『定时跑的 skills』 — Latent.Space</a></div><div class="v">承接『装置之上』主线的另一面:OpenAI(曾出价 30 亿买 Windsurf)推出的 Codex 桌面应用不再是 VS Code fork,Anthropic 的 Claude Code/Cowork 也一样——严肃编程工具开始『不带 IDE』发货,看代码变成可选项。两个信号:worktree-per-task 成为并行的原语(从 author 变 conductor);Automations=『skills 挂上 cronjob』,OpenAI 是第一个把这个简单功能 GA 的大厂。界面(而非模型)正在成为产品。</div></div></div><div class="row"><div class="k">BRIEF 02 · 上下文即基础设施</div><div class="c"><div class="t"><a href="https://news.smol.ai/">Context Graphs and Agent Traces:把 agent 的记忆与轨迹结构化 — Latent.Space</a></div><div class="v">与两篇深读互补的工程侧:当 agent 要在『之上的层』里协作,它的记忆、上下文与执行轨迹必须可被结构化、可被检索、可被审计。Context Graph + Agent Trace 正是把 Vol.021『可观测性』和本卷『协议层』落到数据结构上的尝试——没有可追溯的轨迹,信任协议就只是口号。</div></div></div><div class="row"><div class="k">SKIM · 记忆与持续学习</div><div class="c"><div class="t"><a href="https://www.sequoiacap.com/">Memory and Continual Learning(Engram · Sequoia)· 在 Gemini 3.5 Flash 里引入 computer use(DeepMind)· OpenAI×Broadcom 自研推理芯片</a></div><div class="v">三则能力/基础设施信号:Engram 谈 agent 的记忆与持续学习(信任协作的前提是记得住)、Gemini 给轻量模型加 computer use、OpenAI 联手 Broadcom 做 LLM 优化推理芯片——都属支撑『之上一层』的底层能力,合并速记。</div></div></div><div class="row"><div class="k">SKIM · 编程不再是瓶颈</div><div class="c"><div class="t"><a href="https://www.lennysnewsletter.com/">Coding is no longer the bottleneck · The two hires Anthropic wants · How Meta Is Reinventing PM(Lenny&#x27;s)</a></div><div class="v">三则承接 Vol.020『运营/审查才是瓶颈』的实践稿:编程本身不再是瓶颈、Anthropic 最想要的两类人、Meta 如何重塑产品经理角色——颗粒偏访谈,合并速记。</div></div></div><div class="row"><div class="k">SKIM · vibe coding 与实操</div><div class="c"><div class="t"><a href="https://www.lennysnewsletter.com/">Vibe coding is old now / 不必是工程师也能造东西(Ben Tossell)· Ben Thompson 的 vibe coding 历险 · How I AI 自动化 · Hermes:搭 24/7 AI 幕僚长</a></div><div class="v">一组『人人皆可造』的轻量实操/心态稿:vibe coding 已成旧闻、非工程师建站、Ben Thompson 自述、自动化你讨厌的任务、搭个人 AI 幕僚长——实操颗粒细,合并速记。</div></div></div><div class="row"><div class="k">SKIP · 论文流/弱相关</div><div class="c"><div class="t">takara.ai HuggingFace 论文速递(约 50 条,90–610 字)· NeMo AutoModel 微调 · Building a School Where AI Models Learn About Humanity</div><div class="v">HuggingFace 论文 feed 的批量短摘(本日积压约 50 条,占原始抓取过半)颗粒过细、无完整正文可评估;NeMo 微调与『AI 人文学校』与今日协议主线弱相关——统一跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.022 · 新观点 8 · 累计 333 · _mira-vp-index</span>
+    <span>下期 · <b>2026-06-26 06:00</b></span>
+  </footer>
+</div></body></html>
