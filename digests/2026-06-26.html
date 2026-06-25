@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Coworker Era — 装置之上长出协议之后:工作的最小单位,从『对话』变成了『被托付的任务』 — Vol.023</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.023</span>
+      <span class="chrome">2026-06-26 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Coworker Era — 装置之上长出协议之后:工作的最小单位,从『对话』变成了『被托付的任务』</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.022 说,破解信任瓶颈的答案是在 agent『之上』再长一层开放的协议与元装置。今天这卷接着问:那一层一旦长出来,会把『工作』本身变成什么样?答案是——知识工作的最小单位,正在从『一次对话』变成『一段被托付的、长达数小时的任务』,而 agent 也正从『工具』变成『同事』。OpenAI 用自家一年的内部数据给出最硬的证据:到 2026 年 6 月,Codex 已占公司全部输出 token 的 99.8%,连法务、财务、招聘都把它当成主力工具,非开发者用量一年涨了 137 倍,99 分位用户每天让 Codex 跑超过 60 小时的并行 agent 工作。另一端,Latent Space 宣布『元装置之夏』——Omnigent 式的开源架构正在一千家 AI 公司被独立地重新发明,而 Anthropic 的 Claude Tag 把 agent 直接嵌进 Slack、给它独立身份与凭证,被 Karpathy 称为『组织级装置』、被 random_walker 称为『一个什么都记得、按思考计费的同事』。装置之上是协议,协议之上,是一个『把任务托付给同事』的新工作形态。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>你现在跟 AI 的交互,还是『一问一答』的对话,还是已经变成『把一整段活儿托付出去、几小时后回来收结果』?如果还停在前者,你是不是正在用聊天框的尺度,丈量一件本该按『任务』计量的事?</li><li>当一个 agent 拥有自己的身份、凭证、记忆,能被集中授权也能被集中吊销——它到底是你的『工具』,还是你团队里的一个『同事』?你为人类同事建立的那套入职/权限/问责/离职流程,准备好套到 agent 身上了吗?</li><li>如果非技术岗(法务、财务、招聘)用 agent 做掉了四分之一本该交给工程师的活儿,那么『岗位边界』还剩多少意义?当跨边界做事的成本被 agent 抹平,你的团队该按『职能』组织,还是按『能托付给 agent 的任务』组织?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="openai-agents-transforming-work">
+      <span class="tag">OPENAI · 工作的最小单位变了</span>
+      <h3>当 Codex 吃掉 99.8% 的 token:知识工作的单位,从『对话』变成了『被托付的任务』</h3>
+      <div class="src">OpenAI News(How agents are transforming work / Economic Research) · <a href="https://openai.com/index/how-agents-are-transforming-work">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">Vol.022 论证了『装置之上的开放协议层』为什么必须存在;这卷给出它一旦存在后最直接的后果——工作的最小单位变了。OpenAI 用自家一年的内部遥测给出迄今最硬的证据:到 2026 年 6 月,Codex 已占公司全部输出 token 的 99.8%,工程师 99%、连法务/财务/招聘也把它当成主力工具;非开发者用量一年涨了 137 倍(组织用户 189 倍);99 分位的重度用户每天让 Codex 跑超过 60 小时的并行 agent 工作。这不是『聊天机器人用得更多了』,而是知识工作的计量单位,从『一次几分钟的对话』,变成了『一段几小时、可被托付、可并行编排的任务』。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">交互的单位从『短对话』变成了『长任务』——而且越来越长。</p><p class="w">OpenAI 开篇就把话说死:agentic AI 改变了知识工作的单位,从『单次交互』变成『被托付的长程任务』。聊天是短的、自包含的;agent 能独立跑几分钟到几小时,自己编排工具调用、与环境交互、迭代逼近答案。数据印证了这条曲线:到 2026 年 5 月,80.6% 的个人用户至少发起过一次『相当于人类 30 分钟工作量』的 Codex 请求,70.2% 超过 1 小时,25.6% 超过 8 小时——且 8 小时这一档增长最快。换句话说,人们不再问『给我一个答案』,而是把整段活儿丢出去。这正是 Vol.020『运营/编排才是瓶颈』在使用侧的镜像:当单位是任务,用户的角色就从 author(作者)变成 conductor(指挥)。</p></div><div class="pillar"><p class="p">agent 不再是工程师的专属工具,它在抹平岗位边界。</p><p class="w">最反直觉的一组数字在非技术岗:自 2025 年 8 月起,非开发者个人用户涨了 137 倍、组织用户 189 倍——增速全面超过开发者。OpenAI 内部,工程最先迁移(到 2025 年 12 月,工程师 99% 的输出 token 已走 Codex),但法务、财务、招聘在 2026 年 4 月前后才跨过临界点,转得更晚却更快,如今也有 85% 以上的输出 token 跑在 Codex 上。更关键的是『跨边界』:在业务职能里,超过四分之一用 Codex 完成的活儿本身就是工程/编码。agent 降低了跨任务边界的成本,让一个人能顺手做掉过去必须找专人才能做的相邻工作——岗位描述正在被侵蚀。</p></div><div class="pillar"><p class="p">这是一份『前沿用户在前沿工具上』的预演,不是普通公司的今天,但可能是它的明天。</p><p class="w">OpenAI 诚实地标注了样本的特殊性:这是『frontier users adopting frontier tools』——拥有最强模型、最低使用摩擦、最早可及的一群人。但他们的论点恰恰是:当你给人们『广泛、低摩擦、能干活』的 agent,随着工具变强,人们就会拿它做更长、更复杂、更跨职能的工作——『随着时间推移,这很可能就是未来工作的样子』。研究方法本身也带着 agent 时代的味道:任务时长是用 LLM-as-judge 读 Codex 执行轨迹估出来的,作者明确说这是『方向性而非精确』。这与 Vol.021『可观测性/轨迹』一脉相承——你要先能审计 agent 的轨迹,才能量化它干了多少活儿。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:这份数据既是『未来工作的样板』,也是『一家芯片+模型+产品全栈自有公司的内部营销』。一方面,99.8% 的 token 占比、137 倍的非开发者增长,确实是任何一家公司在『把任务托付给 agent』这件事上能看到的最极致样本;另一方面,OpenAI 是世界上唯一一家『员工用的 agent、跑 agent 的模型、跑模型的芯片(同周发布的 Jalapeño)』全部自有的公司——它的内部采用曲线,被零摩擦、零成本焦虑、零供应商锁定顾虑的环境严重加速过,普通公司既没有这种可及性,也要直面 Vol.021/022 反复敲打的那些账:一个共享 agent 一旦深嵌组织,随之而来的是 tacit-knowledge 锁定、prompt injection、按『思考』计费的预算不透明。样板诱人,但样板的地基是别人没有的全栈自有。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义,是逼自己换一把尺子。第一,别再用『对话轮次/提问数』衡量 agent 的价值,改用『被成功托付出去的任务』——一次跑通的对局数据分析、一份自动生成的运营周报、一条端到端修好的工单,才是真正的产出单位;KPI、工具设计、预算都该围绕『任务』而非『消息』重建(这正是 Vol.020『把花费控制写进装置』的延续)。第二,主动把 agent 推过工程师的边界:运营、客服、市场岗最该拿到能干活的 agent,因为非技术岗的边际收益最大(OpenAI 的 137 倍就长在这里),让他们顺手做掉过去要排期等工程的活儿。第三,清醒看待样板:你没有 OpenAI 的全栈自有与零摩擦环境,所以真正能照搬的不是它的采用速度,而是它的方向——把『低摩擦可及 + 任务级托付 + 可审计轨迹』三件事补齐,采用率才会自然长出来。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Agentic AI changes the unit of knowledge work from single interactions to delegated, long-horizon tasks.”</p><p class="cn">Agentic AI 把知识工作的单位,从单次交互,变成了被托付的、长程的任务。</p></div><div class="quote"><p class="en">“Codex accounts for 99.8% of weekly output tokens generated within OpenAI.”</p><p class="cn">Codex 占了 OpenAI 内部每周生成输出 token 的 99.8%。</p></div></div>
+    </article>
+    <article class="deep" id="meta-harness-summer-coworker">
+      <span class="tag">LATENT.SPACE · 同事化与元装置之夏</span>
+      <h3>元装置之夏:当 agent 拿到自己的身份与凭证,它就从『工具』变成了『同事』</h3>
+      <div class="src">Latent Space AINews(It&#x27;s Meta-Harness Summer) · <a href="https://www.latent.space/p/ainews-its-meta-harness-summer">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●○ · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">如果说 OpenAI 的数据是『任务化』的证据,这篇 AINews 就是『同事化』的现场。它给 Vol.022 的『元装置』补了两块:其一,Omnigent 式的开源元装置架构正在一千家 AI 公司被『独立地重新发明』——这种自发收敛,往往是某个抽象注定要赢的信号;其二,Anthropic 的 Claude Tag 把 agent 直接嵌进 Slack、给它独立身份与凭证、行为可按身份审计、权限可集中吊销,被 Karpathy 称为『组织级装置』、被 gallabytes 形容为『从结对伙伴变成管理一个团队』。装置之上长出协议之后,协议之上长出的,是一个把 agent 当『同事』来入职、授权、问责的新形态。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">元装置正在被『独立地重新发明』——这通常意味着这个抽象注定要赢。</p><p class="w">AINews 给元装置列了一份简史:Conductor、Zed 的 ACP,然后 OpenInspect、Cloudflare 的 Flue、Vercel 的 Eve 和 HarnessAgent、Heypi……再到 Matei Zaharia 押注的 Omnigent(架在 Claude Code、Codex、Pi、agent SDK 之上、可组合、带实时协作与控制策略的开源元装置)。作者的判断很关键:不确定 Omnigent 是否具备让 MCP『注定成功』的那些要素,但在架构层面,某种长这样的开源架构『大概率会赢,哪怕只是因为它正在一千家 AI 原生公司被独立地重新发明』。一个抽象在无数地方被各自重新发明,正是它即将成为事实标准的前兆——这与 Vol.022 Moltbook『低摩擦约定胜过严谨设计』是同一条规律的另一面。</p></div><div class="pillar"><p class="p">agent UX 正从『工具』滑向『同事』——而最难的部分是身份、权限与锁定。</p><p class="w">几条推文汇聚到同一个判断:Claude 嵌进 Slack/团队工作流的意义被低估了。Karpathy 说它不是『又一个功能』或 Slack bot,而是组织级的 harness;gallabytes 描述了体验上的跃迁——从把 Claude Code 当『结对伙伴』,到把 Tags 当『管理一个团队』;dabit3 更进一步:最终你可能连显式 @ 都不需要。Anthropic 给出的身份模型是:Claude 拥有自己的凭证,行为以该身份被审计,访问可被集中吊销。这把『agent 是不是同事』从比喻变成了工程问题——一旦它有了工号、有了权限、有了可追溯的行为档案,你为人类设计的入职/授权/问责/离职,就必须套到它身上。</p></div><div class="pillar"><p class="p">同事化一旦发生,锁定、注入与预算不透明,在同一时刻全部到账。</p><p class="w">random_walker 一句话点破代价:Claude Tag 像『一个什么都记得、按思考计费的同事』,他警告三件事——一旦某个共享 agent 深嵌组织工作流,就会带来 tacit-knowledge(隐性知识)锁定、prompt-injection 风险、以及按『思考』计费的预算不透明;KentonVarda 则指出『为每个 agent 显式配权限』根本不可扩展,主张 capability-based、任务级细粒度授权;JubbaOnJeans 担心写操作的归属/问责会变模糊。于是开源/自建阵营立刻给出回应:Hugging Face 晒出内部 Slack 编码 agent『Moon Bot』,强调自托管、自定义工具、可审计会话、零锁定——许多团队想要 agent-native 的体验,但宁可自己拥有装置与记忆层,也不愿把组织智能外包给厂商。这正是 Vol.021『信任要持续挣来』在『同事』身上的版本:你不会把公司钥匙交给一个你无法审计、无法吊销、还按思考收费的同事。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:『把 agent 当同事』既是生产力的跃迁,也是一笔你还没算清的负债。一方面,组织级装置让 agent 从『结对工具』升级成『可管理的团队成员』,这是把 Vol.022 开放协议层真正落到日常工作的关键一跳;另一方面,人类同事会离职、会被审计、会对自己的写操作负责,而 agent 同事『什么都记得、按思考计费、归属模糊、权限难以细粒度收口』——你获得了一个永不遗忘、可并行复制的同事,却也接手了一个隐性知识被它垄断、预算随它思考膨胀、出事难以归因的新治理难题。更尖锐的是路线之争:厂商版(Anthropic 中心化身份)便利但锁定,自建版(HF Moon Bot)自主但要自己扛安全与记忆——这恰是 Vol.022『开放才可信,但提供者最有动机让你离不开』在团队层的重演。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义是:在让 agent 上岗前,先把『同事』的制度补全。第一,给 agent 设计一套真正的『HR 流程』:独立身份与凭证、最小权限、可集中吊销、写操作可追溯到具体 agent 身份——别让一个共享 agent 用着某个人的账号在系统里乱跑(这是 Vol.021 身份/可观测性的硬要求)。第二,正视『元装置正被独立重新发明』这条信号:与其等某个厂商标准,不如现在就抽出自己的一层薄元装置(统一会话、记忆、权限、花费),保留把底座在 Claude Code/Codex/自研之间切换的自由——采用率与可移植性,比押注某一家更重要。第三,在『厂商便利』与『自建自主』之间做清醒取舍:核心的玩家数据与组织记忆,倾向自托管+可审计(HF Moon Bot 路线);边缘、低敏感的协作场景可以用厂商版换效率——但无论哪条路,『隐性知识锁定』和『按思考计费的预算护栏』都要提前写进合同与装置。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Some open source architecture that looks like this will probably win, if only because it is currently being independently rediscovered at 1000 AI native shops.”</p><p class="cn">某种长这样的开源架构大概率会赢,哪怕只是因为它正在一千家 AI 原生公司被独立地重新发明。</p></div><div class="quote"><p class="en">“Claude Tag is a coworker that remembers everything and bills by the thought.”</p><p class="cn">Claude Tag 就是一个什么都记得、按思考计费的同事。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 6 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · 全栈自有</div><div class="c"><div class="t"><a href="https://openai.com/index/openai-broadcom-jalapeno-inference-chip">OpenAI×Broadcom 发布 Jalapeño:首颗自研 LLM 推理芯片,9 个月从设计到流片 — OpenAI</a></div><div class="v">与深读一互为表里:支撑『99.8% token 跑在 agent 上』的,是 OpenAI 把栈往下扎到硅。Jalapeño 是 OpenAI 第一颗自研推理芯片(与 Broadcom 合作),performance-per-watt 显著优于现状,9 个月从设计到流片(据称被自家模型加速),将以吉瓦级部署。社区逆向估算接近 reticle 尺寸、约 216GB HBM3E、~10 PFLOPS FP4。信号很直白:全栈自有(芯片→模型→产品)让 compute 经济与产品行为不再受制于第三方 GPU 供给——这正是深读一那条采用曲线背后的『零摩擦地基』。</div></div></div><div class="row"><div class="k">BRIEF 02 · 设计与 AI</div><div class="c"><div class="t"><a href="https://stratechery.com/2026/an-interview-with-figma-ceo-dylan-field-about-design-and-ai/">Figma CEO Dylan Field 谈设计与 AI:当人人都能造,设计的价值反而在升 — Ben Thompson / Stratechery</a></div><div class="v">与『同事化』正交的另一面:当 agent 能把想法直接变成可用的东西,设计/品味/判断力这些『人类该保留的部分』反而更稀缺。Field 在这场长访谈里复盘从 Thiel Fellow 到 Figma 的路径,以及 AI 时代设计工具的走向——承接 Vol.022『界面即产品』:模型把执行商品化之后,产品与设计(而非编码本身)成为差异化所在。颗粒偏个人叙事与战略,列为简报。</div></div></div><div class="row"><div class="k">SKIM · 记忆与世界模型</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=fpAthTtha8c">Mark Chen(OpenAI 首席研究官)谈 AGI/o1/Evals/Scaling(Latent Space)· Qwen-AgentWorld 语言世界模型 · HF 混合模型 token 预测</a></div><div class="v">三则能力侧信号:Mark Chen 的『下厨』长访谈聊 AGI 与 scaling laws(轻松外壳下的研究判断)、阿里 Qwen-AgentWorld 把 7 类环境塞进单一『语言世界模型』并开源 35B-A3B、HF 分析混合模型在哪些 token 上预测更好——都属支撑『agent 能被托付更长任务』的底层能力,合并速记。</div></div></div><div class="row"><div class="k">SKIM · 工程实操与成本</div><div class="c"><div class="t"><a href="https://huggingface.co/blog/vllm-jobs">What AI coding costs engineers(Lenny&#x27;s)· Run a vLLM Server on HF Jobs in One Command · HF Moon Bot 自建 Slack agent</a></div><div class="v">三则实操/成本侧:Lenny&#x27;s 短片谈 AI 编码对工程师意味着的隐性成本、HF 一行命令起 vLLM 推理服务、HF 自建 Slack 编码 agent『Moon Bot』(自托管/零锁定,深读二已引)——颗粒偏操作,合并速记。</div></div></div><div class="row"><div class="k">SKIM · 营销与产品观察</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=EpxZEvvOTL8">5 Ways Claude Tag Could Change How You Use AI(AI Daily Brief)· 我长期跟踪的 9 家营销灵感公司(Tom&#x27;s Marketing Ideas)</a></div><div class="v">两则偏观察/营销的轻量稿:AI Daily Brief 谈 Claude Tag 的五种用法(深读二已覆盖其核心)、一封营销灵感订阅邮件列举 9 家值得跟踪的公司——与今日『同事化/任务化』主线弱相关,合并速记。</div></div></div><div class="row"><div class="k">SKIP · 论文流/弱相关</div><div class="c"><div class="t">takara.ai HuggingFace 论文速递(约 50 条,80–290 字)· 各类 CV/RL/医学影像短摘</div><div class="v">HuggingFace 论文 feed 的批量短摘(本日约 50 条,占原始抓取 61 条的绝大多数)颗粒过细、无完整正文可评估,且与今日『工作形态/同事化』主线弱相关——统一跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.023 · 新观点 8 · 累计 341 · _mira-vp-index</span>
+    <span>下期 · <b>2026-06-27 06:00</b></span>
+  </footer>
+</div></body></html>
