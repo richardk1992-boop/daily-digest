@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Org-Design Era — 当 agent 成了同事之后:决定 AI 成败的,不再是选哪个模型,而是谁来负责、怎么织进组织 — Vol.024</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.024</span>
+      <span class="chrome">2026-06-27 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Org-Design Era — 当 agent 成了同事之后:决定 AI 成败的,不再是选哪个模型,而是谁来负责、怎么织进组织</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.023 说,工作的最小单位从『对话』变成『被托付的任务』,agent 从『工具』变成『同事』。今天接着问:同事化一旦发生并加深,决定一家公司能不能把它兑成价值的,到底是什么?同一天两份硬数据给出同一个答案——不是模型,是组织设计。其一,OpenAI 自家一年内部遥测:到 2026 年 6 月,内部 Codex 输出 token 的中位用量较 2025 年 11 月,研究部门涨了 56 倍、客服 32 倍、工程 27 倍,连法务也涨了 13 倍;agent 基础设施开始为『跑几天几周的持久长任务』而非『聊天延迟』而优化——同事化是一条正在每个部门加深的真实曲线。其二,KPMG 季度脉搏调研:75% 的高管说 CEO 已把 AI 当成自己亲自负责的战略优先级;有清晰问责归属的组织,报告出 AI ROI 的概率是别人的 3 倍,而 CEO 亲自负责时『已建立 ROI』的比例是 14% 对 4%。装置之上是协议,协议之上是同事,而同事之上——是一道必须由 CEO 亲自来解的组织设计题。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>你现在评估 AI 价值,还盯着『我们上了哪个模型、跑分多高』,还是已经在问『谁为这件事负责、它织进了哪条工作流』?如果还停在前者,你是不是把一道组织设计题,当成了一次 IT 选型?</li><li>你的组织里,AI 到底是谁的活儿?是某个中台、某个工程负责人,还是 CEO 亲自挂帅?KPMG 的数字很直白:问责越清晰、CEO 越亲自负责,ROI 越高——你愿意把它当成『一把手工程』,还是继续让它在部门缝隙里自生自灭?</li><li>用量在涨,但你看得见成本吗?只有三分之一的组织对自己的 AI 运营成本有完整可见性。当 token 效率时代到账、补贴退潮,你是先建起成本监控,还是等账单先教育你一次?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="openai-codex-internal-growth">
+      <span class="tag">LATENT.SPACE · 采用在加深</span>
+      <h3>Codex 内部用量一年涨 13–56 倍:同事化不是口号,是正在每个部门加深的曲线</h3>
+      <div class="src">Latent Space AINews(OpenAI reports median internal Codex output tokens grew 56x in Research…) · <a href="https://www.latent.space/p/ainews-openai-reports-median-internal">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●○ · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">Vol.023 论证了『工作单位从对话变成被托付的任务、agent 从工具变成同事』。这卷用 OpenAI 自家一年的内部遥测,给同事化补上『正在加深』的硬证据:到 2026 年 6 月,内部 Codex 输出 token 的中位用量,较 2025 年 11 月,研究部门涨了 56 倍、客服 32 倍、工程 27 倍,连转得最慢的法务也涨到了 13 倍。更关键的不是数字本身,而是加深的方向——agent 基础设施正集体从『压低交互式聊天延迟』,转向『让 agent 能稳定跑几天、几周的持久长任务』。同事化不是一句比喻,是一条在每个部门同时向上弯的曲线。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">加深是全员的,而且最猛的不是工程,是研究。</p><p class="w">直觉会以为编码工具的用量增长应该由工程师领跑,但 OpenAI 的数据反过来:研究部门的中位用量涨幅最大(56 倍),工程(27 倍)反而落在客服(32 倍)之后,法务也有 13 倍。这印证了 Vol.023『agent 在抹平岗位边界』的判断——当一个 agent 能被托付一整段活儿,知识密集、但过去被工程门槛卡住的岗位,边际收益反而最大。OpenAI 自己的总结是:agents 正在『每一个部门』改变工作,Codex 被用于更长、更跨职能的任务。换句话说,同事化不是工程团队的内部现象,而是一次全组织的角色重排。</p></div><div class="pillar"><p class="p">agent 基础设施正从『低延迟聊天』转向『可持久的长任务』。</p><p class="w">AINews 这天的另一条主线,是一批创业公司不再为聊天延迟优化,而专为『跑得久』优化:Sail 融资 8000 万美元,主打给『跑数天甚至数周』的耐心 agent 提供低成本推理与沙箱,号称『每美元 10 倍智能』;Hyperagent 给每个 agent 配一台自己的云机器,带持久浏览器与代码执行;LangChain 的 Fleet 给出一把好用的尺子——工作以『一个答案』收尾,就用通用聊天;工作有『可重复的形状与持久的上下文』,就用专用 agent。这正是 Vol.023『单位是任务、用户从 author 变 conductor』在基础设施层的回声:当单位变成长任务,底座要解决的就不再是响应快不快,而是状态、持久与成本。</p></div><div class="pillar"><p class="p">真正的采用,长在『能支撑评审循环、工具与持久工作流』的地方。</p><p class="w">外部评论(gdb、reach_vb、eliebakouch)把增长归因到 research 团队的 token 消费,以及 skills、并发 agent 这些模式上。但 AINews 给的实操结论很冷静:重点不是『agent 很神奇』,而是真实采用出现在那些『组织能支撑评审循环(review loops)、工具链与持久工作流』的地方。这与 Vol.021『可观测性/轨迹』、Vol.020『编排才是瓶颈』完全咬合——能力到位之后,采用率不是被模型决定的,是被组织有没有把评审、工具、流程搭起来决定的。这也正好为今天的深读二埋下伏笔:加深的用量,要靠组织设计才能兑成价值。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:这条 13–56 倍的曲线,既是『同事化正在加深』迄今最硬的证据,也长在一个普通公司没有的温室里。OpenAI 自己点破了样本的怪异之处——员工一直拥有无限额度的访问,却直到 2025 年晚期都还在严重少用 AI;所谓 56 倍,很大程度是『终于让他们热起来了』的结果,而不是一条可以照搬的时间表。再加上 Vol.023 已反复敲打的:OpenAI 是世界上唯一一家芯片、模型、产品全栈自有、零摩擦、零成本焦虑的公司,它的内部加深速度被这套环境严重加速过。所以这份数据真正能外推的,是方向(同事化会沿着持久长任务加深),而不是斜率(你的组织不会在七个月里涨 56 倍)。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义,是把注意力从『我们用得多不多』挪到『我们为持久长任务准备好了没有』。第一,别再用聊天的尺度衡量采用——研究、运营、数据这些知识密集岗,才是边际收益最大的地方(OpenAI 的 56 倍就长在研究),应该优先把『能被托付一整段活儿』的 agent 推给他们,而不是默认只给工程团队。第二,按 LangChain Fleet 那把尺子分流自己的场景:以一个答案收尾的(临时查询、单次分析)留给聊天,有可重复形状+持久上下文的(每周运营报表、对局数据流水线、端到端工单)才架成专用 agent,并为它准备状态持久与成本结构,而不是硬塞进聊天框。第三,记住采用率不是模型给的,是评审循环、工具链、持久工作流给的——先把『agent 干完活谁来 review、它调用哪些工具、上下文存在哪』这三件事补齐,加深曲线才会自然长出来。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“By June 2026, median use was 56 times higher than in November 2025. Customer Support rose 32 times and Engineering rose 27 times, while Legal grew more gradually but still reached 13 times its November level.”</p><p class="cn">到 2026 年 6 月,(研究部门的)中位用量是 2025 年 11 月的 56 倍;客服涨了 32 倍、工程 27 倍,法务增长更缓但也达到了 11 月水平的 13 倍。</p></div><div class="quote"><p class="en">“Use general-purpose chat when work ends with an answer; use specialized agents when the work has a repeatable shape and durable context.”</p><p class="cn">工作以一个答案收尾,就用通用聊天;工作有可重复的形状与持久的上下文,就用专用 agent。</p></div></div>
+    </article>
+    <article class="deep" id="kpmg-ceo-owns-ai-3x-roi">
+      <span class="tag">AI DAILY BRIEF · AI 是组织设计题</span>
+      <h3>CEO 亲自负责 AI 的公司,ROI 高 3 倍:决定成败的,不再是选哪个模型</h3>
+      <div class="src">The AI Daily Brief(Companies Where CEO Leads AI See 3X the ROI / KPMG 季度脉搏调研) · <a href="https://www.youtube.com/watch?v=VICrf_yV0co">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  9/10</div>
+      <div class="claim">如果说深读一证明了同事化在加深,这篇就回答了『加深之后,谁来负责把它兑成价值』。KPMG 的季度脉搏调研给出一组很硬的相关性:75% 的高管说 CEO 已把 AI 当成自己亲自负责的战略优先级;有清晰问责归属的组织,报告出 AI ROI 的概率是别人的 3 倍;而当 CEO 亲自负责时,『已建立 ROI』的比例是 14% 对 4%,『AI 正在带来实质业务价值』是 57% 对 21%。结论很直白:AI 的成败决定点,已经从『选哪个工具』上移到了『组织设计与问责』——这是一道一把手必须亲自下场的题。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">AI 已经不是 IT 选型题,而是组织设计题。</p><p class="w">数据在系统性上移:认为 AI 在组织层面带来实质价值的高管,从 64% 跳到 76%(+12pt);优先级则从『效率 AI』整体退潮——更快决策从 41% 降到 36%、生产力从 42% 降到 35%、降本从 31% 降到 29%——转向『机会 AI』,人机协作、负责任治理、适应力、生态合作全在上升。AI Daily Brief 引用的一句话点破了本质:『如何在你的组织里用 AI,越来越是组织设计与战略决策,而不是 IT 选择——你怎么把 agent 整合进公司?要外包哪些智能?公司的边界在哪?人的角色是什么?』这正是 Vol.023『按能托付给 agent 的任务、而非纯职能来重组』的管理层版本。</p></div><div class="pillar"><p class="p">问责归属是 3 倍 ROI 的开关,而 CEO 是最强的那一个。</p><p class="w">KPMG 发现,真正有单一问责点的组织很少,问责通常分散在 CEO、执委会、某个 C-suite 高管或治理小组之间。但无论怎么组合,有清晰问责归属的组织,报告出 ROI 的概率高出 3 倍。而当问责落到 CEO 身上时,差距更刺眼:『已建立 ROI』14% 对 4%,『AI 正带来实质价值』57% 对 21%,『有信心让 AI 战略面向未来』60% 对 22%。这给了一个反直觉但清醒的判断——价值不是从模型里长出来的,是从问责结构里长出来的;同样的模型、同样的工具,挂在 CEO 名下和散在部门缝隙里,产出会差出三倍。</p></div><div class="pillar"><p class="p">下一个瓶颈是成本可见性——token 效率时代正在到账。</p><p class="w">调研里悄悄浮现了补贴退潮的信号:对『低成本 LLM』的关注从 15% 跳到 22%,『证明价值的压力』从 19% 升到 24%。但最该警惕的是基础设施缺口——只有约三分之一的组织对自己的 AI 运营成本有完整可见性并主动监控;约一半组织已经因为『成本超过预期价值』而重新分期过 AI 部署。目前 54% 有成本评审环节、53% 有成本看板、40% 设了 token 预算。这与 Vol.020『把花费控制写进装置』、Vol.022/023『按思考计费的预算不透明』一脉相承:用量加深之后,看不见成本的组织,会被账单反过来教育。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:CEO 亲自负责 = 3 倍 ROI,是相关性,不是因果。很可能的反向解释是——本来就更会用 AI、组织能力更强的公司,CEO 才更愿意亲自挂帅;问责清晰未必是 ROI 的原因,而是『强组织』的共同症状。再加上这是一份高管自评的调研,而几乎所有研究都显示老板会系统性高估 AI 的采用与成效,数字本身要打个折。但即便打了折,它和深读一仍然互为印证:深读一证明用量在加深,深读二证明价值取决于问责与成本治理——两条线指向同一个判断,加深的 token 不会自动变成 ROI,中间隔着一整套组织设计。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义,是把 AI 从『某个团队的工具实验』升级成『一把手工程』。第一,先把问责画清楚:每条关键 AI 工作流——对局数据分析、运营自动化、客服 agent——都要有一个明确的、最好能上溯到高层的负责人,因为 KPMG 的 3 倍 ROI 不是来自更好的模型,而是来自更清晰的问责(这也是最便宜的一个『quick win』)。第二,正视成本可见性这道下一道坎:在用量加深之前,先把成本监控、成本看板、token 预算这三件事建起来,别等补贴退潮、账单暴涨才补——只有三分之一的组织做到了,先做到就是优势。第三,把 AI 决策当组织设计而非采购来谈:要回答的不是『买哪个模型』,而是『哪些智能外包、哪些自建,agent 怎么嵌进流程,人留在哪个环节』——这正好接上 Vol.022『开放才可信、但提供者最有动机让你离不开』的厂商 vs 自建之争。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Organizations that had clear accountability were 3x more likely to report ROI from their AI.”</p><p class="cn">有清晰问责归属的组织,报告出 AI ROI 的概率,是其他组织的 3 倍。</p></div><div class="quote"><p class="en">“Decisions about how to use AI in your organization are increasingly organizational design and strategy decisions, not IT choices.”</p><p class="cn">如何在你的组织里使用 AI,越来越是组织设计与战略决策,而不是 IT 选型。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 5 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · 评估的钱尺度</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=AZrU6y3pUcU">Noam Brown 谈传统 benchmark 为何失效:模型能力成了『你投多少钱』的函数 — No Priors</a></div><div class="v">与深读一互为表里的能力侧根因:OpenAI 研究科学家 Noam Brown 指出,test-time compute 时代,单点 benchmark 网格已经失效——同一个模型,给 10 美元预算和给 1000 万美元预算,能力天差地别,『模型能力是你投入多少钱的函数』。于是真正的一等问题变成:该在哪个预算档位评估一个模型?现有的前沿框架与责任扩展政策都没回答这件事。这正解释了深读一里『用量为何能涨 13–56 倍』的底层:能力可以靠砸算力持续放大,长任务因此值得被托付。颗粒偏研究判断,列为简报。</div></div></div><div class="row"><div class="k">BRIEF 02 · 分析师的夏天</div><div class="c"><div class="t"><a href="https://stratechery.com/2026/summer-vibes/">Stratechery『Summer Vibes』:Ben Thompson 的 vibe coding 冒险与几则战略判断 — Ben Thompson</a></div><div class="v">一期轻松但有料的周更合集:Ben Thompson 复盘自己用 vibe coding『整理车库』式的实操体验,顺带几则硬判断——内存芯片三巨头给中国厂商开门可能会后悔、微软极有动机改用中国模型、Apple 因 DMA 之争不在欧洲发 Siri AI。与今日『组织/成本』主线弱相关但承接全栈与成本叙事,且颗粒偏个人叙事,列为简报。</div></div></div><div class="row"><div class="k">SKIM · 开源模型与计算机使用浪潮</div><div class="c"><div class="t"><a href="https://www.latent.space/p/ainews-openai-reports-median-internal">GLM-5.2 登顶前端编码 · Ornith-1.0 自改进 RL 编码家族 · Liquid LFM2.5-230M · Google 把 computer use 做进 Gemini 3.5 Flash</a></div><div class="v">能力侧一组速记:Z.ai 的 GLM-5.2 Max 在 Code Arena 前端拿到 1595 超过 Opus 4.8;Ornith-1.0 以 MIT 协议放出 9B–397B 的 agentic 编码家族,亮点是『连驱动 rollout 的任务脚手架一起优化』的自改进 RL;Liquid 的 LFM2.5-230M 主打机器人/电商低延迟工具调用;Google 把 computer use 做成 Gemini 3.5 Flash 的一等内置能力,带敏感操作显式确认的 human-in-the-loop——都属支撑『agent 能被托付更长任务』的底层能力,合并速记。</div></div></div><div class="row"><div class="k">SKIM · 中文开源与营销</div><div class="c"><div class="t"><a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534811&amp;idx=1&amp;sn=586f01a6bb405581f15dc216908fdc5d">逛逛GitHub 三连(5万 Star 设计平台让 AI 读懂设计稿 / 2.1万 Star AI 工作流更新 / 4 个热门开源项目)· 一封冷启动邮件营销稿</a></div><div class="v">颗粒偏资讯/操作的轻量稿合并速记:逛逛GitHub 的三条公众号推送(一个 5 万 Star、让 AI 直接读懂设计稿的开源设计平台;一个 2.1 万 Star 的 AI 工作流项目更新;以及近期讨论较多的 4 个开源项目),外加一封讲『如何写完美冷启动邮件』的营销订阅邮件——与今日『组织设计/同事化』主线弱相关,合并速记。</div></div></div><div class="row"><div class="k">SKIP · 论文流/弱相关</div><div class="c"><div class="t">takara.ai HuggingFace 论文速递(约 50 条,150–290 字)· 各类 CV/RL/PDE/医学影像短摘</div><div class="v">HuggingFace 论文 feed 的批量短摘(本日约 50 条,占原始抓取 60 条的绝大多数)颗粒过细、无完整正文可评估,且与今日『组织设计/同事化』主线弱相关——统一跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.024 · 新观点 8 · 累计 349 · _mira-vp-index</span>
+    <span>下期 · <b>2026-06-28 06:00</b></span>
+  </footer>
+</div></body></html>
