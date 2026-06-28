@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Taste-Inversion Era — 当『造东西』变成免费品,稀缺的变成『品味』与『分派』:两家前沿实验室同一周确认,瓶颈从实现挪到了判断 — Vol.026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.026</span>
+      <span class="chrome">2026-06-29 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Taste-Inversion Era — 当『造东西』变成免费品,稀缺的变成『品味』与『分派』:两家前沿实验室同一周确认,瓶颈从实现挪到了判断</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.025 说前沿能不能用上要看『够不够格』;这卷把镜头转回组织内部:当『造东西』真的变廉价之后,稀缺的到底是什么?同一周两家前沿实验室隔空给出同一个答案——瓶颈从『实现』挪到了『品味与分派』。OpenAI Codex 负责人说实现已不是贵的那部分、taste 才是,人人都能 build 出一个 feature 的 90 个变体时,真正值钱的是把它们收敛成『对的那个』的判断;Anthropic 产品负责人则把 agent 当『隔夜把 backlog 清掉的同事』,直言『我们能成多少事,取决于一次能分派多少,而非个人产能』。一句话:建造在贬值,判断与分派在升值。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果你的工程团队下周能对同一个 feature 吐出 90 个变体,你团队里有几个人有能力、有授权把它们 curate 成『对的那个』?你在扩招『能造的人』,还是在扩招『有品味能收敛的人』?</li><li>当『实现』变成免费品,你最稀缺的能力(品味/判断/分派)恰恰最难 grade、最难教、最难招——你打算怎么把它规模化,还是赌它能一直靠几个高 agency 的人扛?</li><li>两家前沿实验室都在把 agent 当『隔夜跑活的同事』,前提是给它稳定的内部数据访问 + 一套你信得过的 outcome 标准。你的关键工作流,现在缺的是数据访问,还是缺『什么算 good』的明确定义?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="codex-taste-inversion">
+      <span class="tag">LENNY&#x27;S PODCAST · 实现廉价,品味稀缺</span>
+      <h3>OpenAI Codex 负责人:实现不再是贵的那部分,『品味』才是——90% 的 OpenAI 员工每周在用 Codex</h3>
+      <div class="src">Lenny&#x27;s Podcast(OpenAI Codex lead on the new shape of product work — Andrew Ambrosino) · <a href="https://www.youtube.com/watch?v=P3KDebPTUrw">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">当人人都能 build 任何东西(同一个急需的 feature,90 个未协调的团队同时在实现),产品流程被整个倒置:实现变廉价,稀缺的是 taste——决定做什么、怎么呈现、用哪种 medium、在 90 个原型里 curate 出哪一个。角色边界在 collapse,但『干脆取消角色』是危险的误判;PM 的新形态是『zone defense』:拉开距离、覆盖全场、补空隙。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">流程被倒置:过去前置 derisk 昂贵的实现,现在实现免费、curation 成了瓶颈。</p><p class="w">旧流程的隐含假设是『实现昂贵、只能造一次』,所以要用文档、研究、原型把风险前置消化掉(原型/设计便宜)。现在『给无限 token,人人都在 build』,90 个未协调团队各做一版同一个 feature——贵的部分变成了『这 90 个里什么是好的、该 fold 进哪个、怎么 frame、toggle 里该放几段』。Andrew 一句话点破:『the implementation is actually not the expensive part anymore. It&#x27;s dare I say taste.』</p></div><div class="pillar"><p class="p">『PRD 已死、prototype 上位』是误读——关键是按你要表达的论点来选 medium。</p><p class="w">实现免费时,非工程出身的人会忍不住直接跳到 prototype;但一个看起来 production-ready 的原型会让全员 over-anchor(呼应嘉宾引用的 primal mark:画家落下的第一笔会定调整幅作品)。Andrew 的纪律是:若要的是『在模糊区建立产品清晰度』,该写文档;若要的是『让人上手压测某个交互模式』,才做原型。过去 medium 自带『处在流程哪一阶段』的信号(看到像成品的东西=后期、风险已消化),现在这个信号被剥离了,必须显式说清『我们其实还在早期探索』。</p></div><div class="pillar"><p class="p">角色在 collapse,但别把『专业有可知的最佳实践』一起扔掉;PM 改打 zone defense。</p><p class="w">Codex 团队 role collapse 比公司别处更明显(设计师会写 engineer、PM 有 CS 硕士),但 Andrew 直言『取消 product 角色是个糟糕主意』——那会把这门学科积累的、试过也失败过的最佳实践一并丢掉,只因为『我写过几行代码』。他给的新模型:你的角色 = 你时间花在哪儿的平均值;两个 PM 贴得太近是坏信号,要做 force-directed 的拉开、争取 company coverage、专补空隙。IC 与 manager 的差别也在消融——两者现在都是在『管理 agent / 管理正在发生的工作』,只是粒度不同。最值钱的人:高 agency + 高 taste,能把一个 idea 从 0 带到 done,并判断『这是不是真的 great』。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:两位嘉宾——Anthropic 的 Jess、OpenAI 的 Andrew——隔着公司墙、同一周得出几乎同一个结论:瓶颈从实现挪到了 taste/judgment。这种跨阵营收敛通常是强信号,但也可能是『前沿实验室的幸存者偏差』:他们身处 token 无限、人均极强、dogfooding 拉满的环境,『实现免费』对资源受限的团队远没那么免费。另一个他没说透的隐性天花板:taste 极难被 grade——Andrew 自己解释模型为何不擅长设计,正因为『人的 taste 是反馈机制的一部分』,难以构造训练 loop;那么当 taste 成为最稀缺的技能,它也同时是最难规模化、最难教、最难招的东西,这对『人人都能 build』的乐观叙事是一记暗钉。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义,是把这卷和深读一拼成一张完整的图:在能力可及之后(Vol.025 之后那一步),组织内部真正的瓶颈不再是『能不能造』,而是『判断造什么、并在一堆产出里挑出对的那个』。具体三条:第一,把评审与 curation 当成一线产能来配人——当工程团队能一周吐出 90 个变体,真正稀缺的是有品味的人把它收敛,这类高 agency、能 idea-to-done 的人应被优先识别和留住,而不是淹没在『再多招几个能写代码的』里。第二,别盲目跟风『砍掉 PM/设计角色』——role collapse 是真趋势,但学科最佳实践不能随角色一起扔;更稳的做法是让工程师更 product-minded、设计师更懂技术,而非取消分工。第三,建立 medium 纪律:在『实现免费』的环境里,一个过于精致的原型会让全员误判『这能发了』,关键产品评审里要显式标注当前处在探索还是收敛阶段,避免 primal mark 把团队锁死在第一版。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“The implementation is actually not the expensive part anymore. It&#x27;s dare I say taste.”</p><p class="cn">实现已经不是贵的那部分了,贵的是——容我说——品味。</p></div><div class="quote"><p class="en">“90% of people at OpenAI use Codex. Not 90% of engineers. That&#x27;s 90% of the entire company.”</p><p class="cn">OpenAI 90% 的人用 Codex——不是 90% 的工程师,是整个公司的 90%。</p></div></div>
+    </article>
+    <article class="deep" id="anthropic-managed-agents-coworker">
+      <span class="tag">LENNY&#x27;S PODCAST · 隔夜跑活的同事</span>
+      <h3>Anthropic 把 agent 当『隔夜清 backlog 的同事』:从 prompting loop 到自恢复的长跑 actor</h3>
+      <div class="src">Lenny&#x27;s Podcast(Inside Anthropic&#x27;s Bet on Claude Agents that Work While You Sleep — Jess) · <a href="https://www.youtube.com/watch?v=Xu5gz2qsaz8">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  9/10</div>
+      <div class="claim">agent 已从『prompting loop』进化成自发现、自恢复、长跑的 actor;Anthropic 内部把它当真正的同事用——隔夜跑、主动推送、自评自纠;harness 与模型绑定无法拆开。最关键的转变是『outcome 本身成了 structured output』:你不再规定中间格式,而是直接说『我要这个又美又能交互的东西』,agent 自己迭代到位。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">agent 的定义变了:从问答循环,到『能自恢复的长跑 actor』。</p><p class="w">Jess:一旦把大任务派给 raw prompting loop,任一步骤偏差或丢消息,你就很难优雅 pivot,因为整条链高度同步、步步依赖上一步成功。Cloud Managed Agents 是预制 harness + 配套基础设施,让 agent 能自己从错误中恢复、纠偏、resteer,再把你 keep in loop。她的口号是『return on effort for building an agent should be extremely high』——半小时 spin up 一个、用几周就丢的 agent(比如清洗一份 4000 条、满是重复和无效项的 waitlist)已成日常。</p></div><div class="pillar"><p class="p">outcome 取代了 structured output——她称之为『meta structured output』。</p><p class="w">过去要规定 agent 输出严格 JSON,再写一堆 glue 把它拼成漂亮可交互的界面;现在模型够强、harness 够成熟,可以直接说『build this rich interactive thing,这是我作为 tastemaker 对 good 的判断』,agent 自己 self-correct 到位。被『结构化』的对象,从『格式』变成了『结果』。这恰好是深读一『taste 成为稀缺技能』在工程侧的镜像:当中间步骤不再被人校验,人唯一还在定义的就是『什么算好』。</p></div><div class="pillar"><p class="p">内部用法 = 把 agent 当主动的同事,而非被动工具。</p><p class="w">Jess 内部跑 scheduled runs 自动总结工程进度、派 agent 盯客户 Slack 频道做摘要、甚至有一个『API review claude』在团队陷入僵局时当中立裁判、点出大家的偏见。她总结两个支柱:一是给 agent 的数据访问层级,二是期望它『像同事一样主动』——靠 cron / triggered events 持续刷新 context,做到和你一样 up-to-date,而不是被动等问。她半开玩笑:『I talk to Claude more than coworkers』,因为先和 Claude 做完 baseline research、带着真观点再去和人对话,把同事间的交流也 upleveled 了。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">最值得存疑的是 eval。Jess 自己承认 eval 是『今天造 agent 最难的部分』,而她给的解法是『让 agent 自评、甚至在独立 context window 里给自己打分以避免偏差』——这和 Vol.025 的 METR 发现正面撞车:当模型强到会钻评测空子、暴露隐藏测试,让一个会作弊的 actor 给自己评分,究竟是工程便利,还是把裁判席交给了被告?另外『outcome 即 structured output』听起来优雅,但它把『什么是 good』整个压到人的 taste 上——一旦 taste 缺位,一个自恢复的长跑 agent 只会更快、更自信地跑偏,而且因为你不再看中间步骤,你会更晚才发现。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 的意义,是把 Vol.023『同事化』和 Vol.024『review loop』再往前推一步:如果要让 agent 隔夜清 backlog、盯反馈、跑分析,真正要建的不是更长的 prompt,而是(a)给它一个稳定、最新的内部数据访问层——它得和你一样 up-to-date,(b)一套你信得过的 outcome 标准,因为你不再校验中间步骤、只校验结果。而 eval 这块必须吸取 Vol.025 的教训:agent 自评要放进对抗性设计、留隐藏测试,绝不能让『自己给自己打分』成为唯一关卡。最实在的一条:throwaway agent 思路值得直接抄——很多运营杂活(清名单、盯渠道、出周报)半小时就能 spin up、用几周即弃,远比『productize 一个漂亮工具』划算。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“We set them tasks overnight and then we wake up and backlog is resolved and bugs are squashed.”</p><p class="cn">我们隔夜给它们派活,醒来时 backlog 已清、bug 已除。</p></div><div class="quote"><p class="en">“The limits of what we can achieve will be based off how much we can delegate at once, more than our personal capacities.”</p><p class="cn">我们能成多少事,取决于一次能分派多少,而不是个人能力的上限。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 2 条</h2>
+  <div class="scan"><div class="row"><div class="k">SKIM · Agent 工具</div><div class="c"><div class="t"><a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534932&amp;idx=1&amp;sn=a4a2d047794e48e38a041b9f381a1b28">逛逛GitHub:13 万星爬虫神器 Firecrawl 上线『免 Key 模式』,每月白送 1000 次额度</a></div><div class="v">Firecrawl 宣布无需注册、无需配 env,直接调接口(MCP 一行命令即可接入 Claude Code/Codex),130K+ Star、15 万家公司在用、其 MCP 被安装 40 万次、号称 AI 联网赛道的事实标准。三大能力 Search/Scrape/Interact 充当『AI Agent 的眼睛和手』。正好承接今日两篇深读『agent 即眼睛和手』的趋势:把『让 agent 看见并操作网页』的接入摩擦降到接近零。</div></div></div><div class="row"><div class="k">SKIP · 噪声/重复</div><div class="c"><div class="t">Retro Recomendo 户外装备速递 · Substack『新 notes』通知 · 一条 Anthropic PM 访谈的 YouTube 短切片(已并入深读二)</div><div class="v">前两条(潜水镜/登山杖、Substack 作者发了新 note)与今日『品味/分派』主线无关;那条 1247 字的 YouTube short 是深读二长访谈的片段,去重并入深读二。均跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.026 · 新观点 7 · 累计 363 · _mira-vp-index</span>
+    <span>下期 · <b>2026-06-30 06:00</b></span>
+  </footer>
+</div></body></html>
