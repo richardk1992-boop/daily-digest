@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Commoditization Era — 当『模型』和『读者』双双换成机器:供给侧模型在商品化(GLM-5.2 开源到达生产级),需求侧读者在机器化(给 AI agent 写的定价页) — Vol.027</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.027</span>
+      <span class="chrome">2026-06-30 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Commoditization Era — 当『模型』和『读者』双双换成机器:供给侧模型在商品化(GLM-5.2 开源到达生产级),需求侧读者在机器化(给 AI agent 写的定价页)</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.026 说建造变廉价、品味变稀缺;这卷把视线移到价值链两端,发现它们正同时『去人化』。供给侧:GLM-5.2 证明开源权重已到生产级——$3.36 跑完 45 分钟自主编码,选型从『能力天花板』变成『成本/控制/供应商依赖』,你赖以构建的模型正在商品化、可路由。需求侧:AI agent 开始替人比价下单,最前沿公司已给机器单发一份 .md 定价页——你服务的『读者』正在变成机器。两端的人本假设同时松动,价值往哪挪?</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果你赖以构建的模型在 12 个月内变成可随时替换的商品(开源权重摸到 Opus 级、成本低一个数量级),你今天的技术栈里有多少是把模型供应商硬编码进去、换一家就要改应用代码的?你的『对冲』是真能执行,还是 PPT 上的一句话?</li><li>当推荐你产品的越来越是 agent 而非人,你最关键的对外页面(定价/文档/政策)在被机器读取时还剩多少准确信息?你有没有任何指标在监测『AI 搜索/推荐里我们排第几、被怎么描述』——还是这部分获客正悄悄发生在你的 analytics 之外?</li><li>benchmark 越接近,你越要靠它测不到的东西做决定(GLM 在 SWE Bench 逼近 Opus,却在你的真实 React 工况里更不稳)。你团队现在是拿跑分做选型,还是拿『它在我们自己的真实工况里稳不稳』做选型?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="glm52-open-weight-production">
+      <span class="tag">LENNY&#x27;S / HOW I AI · 开源到达生产级</span>
+      <h3>GLM-5.2 实测:开源权重做到 Opus 级编码,$3.36 跑完 45 分钟自主任务——选型从『能力天花板』变成『成本/控制/供应商依赖』</h3>
+      <div class="src">Lenny&#x27;s Newsletter · How I AI(Claire Vo — GLM-5.2 live review in a real codebase) · <a href="https://www.chatprd.ai/how-i-ai/glm-5-2-review-open-weights-model">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  9/10</div>
+      <div class="claim">开源权重模型已跨过『生产级』门槛——GLM-5.2(北京 Z.ai)在真实 codebase 里做到 Opus 级编码,$3.36 跑完一段 600 万 token、45 分钟的自主 bug 猎杀任务,还揪出两个人工监控漏掉的 P0。选型问题从『能力天花板』彻底变成『成本、控制、供应商依赖』。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">开源权重不再是爱好者玩具,而是生产级替代品。</p><p class="w">GLM-5.2 在 SWE Bench Pro 上逼近 Claude Opus 4.8、超过 GPT-5.5,百万 token 上下文,完整支持 reasoning / function calling / structured output / context caching。Claire 在自己 ChatPRD 的真实 codebase 上跑代码审计、UI 重设计、以及一段 45 分钟的自主任务——不是 demo,是把它放进真实关键路径上压测。她一句定性:『this is not a toy.』</p></div><div class="pillar"><p class="p">自托管/开源权重把供应商权力关系整个翻转。</p><p class="w">open-weight 意味着训练权重公开,团队可在自有硬件推理、用私有数据 fine-tune、绕开任一 provider 的 API 条款。前沿厂商一改价改策,用开源权重的团队换个 inference provider 即可,不动一行应用代码——『你没被锁死』。这正面接续 Vol.025『把用得上的主动权抢回来』:那卷是姿态,这卷是可量化的工程现实。</p></div><div class="pillar"><p class="p">成本曲线结构性不同,长 agent 会话越跑越省;但具体工况仍要逐个压测。</p><p class="w">$3.36 / 600 万 token(含整段 45 分钟自主任务),72% cache 命中助力,但即便全价,Open Router 上的开源推理也远低于 Opus / GPT-5.5。对累积长上下文的 agent(前沿模型成本复利最快的工况),这是结构性更优的曲线。代价:React 在多步 agentic 压力下不稳(Claire 估自己 98% 工况是 React),HTML/CSS 才靠谱。她的建议是『put it in rotation, not in the spotlight』。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:『生产级』这词被一排跑分撑着,但 Claire 最诚实的那句是『React under agentic pressure is shakier』——而她 98% 的工况恰恰是 React。换句话说,开源权重在『模型能不能做』上追平了,却在『你这套具体工况稳不稳』上仍要逐个压测;benchmark 越接近,真正的决策权越落回到那条 benchmark 测不到的可靠性曲线上。这与今日 No Priors 那条短评互为镜像——他们直言『能力=你投进多少 test-time compute 预算』,该按哪个预算评估,现有 policy 根本没回答;两边指向同一句话:跑分早就不告诉你它自以为告诉你的事了。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,GLM-5.2 把 Vol.025『开源自托管是战略对冲』从一句姿态推成了可量化的工程决策:当开源权重在编码上摸到 Opus 级、成本低一个数量级,问题不再是『敢不敢用开源』,而是『哪些工作流的成本/控制收益大到值得迁移、哪些工况(如重 React 链路)必须先压测才敢上』。具体两条:第一,把『模型供应商』当可替换组件来设计你的 agent 基础设施——把 API key 路由层(如 Open Router)、base URL、模型名做成配置而非硬编码,这样换模型不动应用代码,这才是真正可执行的对冲,而不是一句口号。第二,别被跑分骗着一把梭——迁移前用你自己的真实 codebase 跑一个长时自主任务(像 Claire 那样拉 72 小时 Sentry + Vercel 日志做优先级修复计划),用『它在你的工况里稳不稳』而非『它在 SWE Bench 上多少分』来做最终决定。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“The decision is no longer about capability ceilings but, instead, about cost, control, and vendor dependency.”</p><p class="cn">决策不再关乎能力天花板,而关乎成本、控制与供应商依赖。</p></div><div class="quote"><p class="en">“$3.36 for 6 million tokens, including the full 45-minute agentic session.”</p><p class="cn">600 万 token 只花 3.36 美元——含整段 45 分钟自主任务。</p></div></div>
+    </article>
+    <article class="deep" id="pricing-page-for-robots">
+      <span class="tag">TOM&#x27;S MARKETING IDEAS · 给机器写的界面</span>
+      <h3>大家都在给机器人写定价页:当 AI agent 成了买家,最前沿的公司开始给机器单发一份 .md 定价</h3>
+      <div class="src">Tom&#x27;s Marketing Ideas(Everyone is writing a pricing page for robots) · <a href="https://read.readwise.io/read/01kw8zc21gse8wrbcrnd2y8eb8">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">AI agent 正在成为真实买家——它们替人比价、甚至直接下单,而你的页面是给人眼写的;最前沿的公司已经开始给机器单独发一份机器可读的 pricing(.md 文件),因为『能不能被 agent 读懂并推荐』正在变成新的获客入口。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">购买决策正在前移到 agent,且发生在你的 analytics 之外。</p><p class="w">买家在 ChatGPT 里问『X 品类最便宜的工具』,AI 查几个 pricing page 选个赢家、有时直接买下;竞品被推荐、你没有,而这一切都不进你的流量分析。文中那段 HubSpot 广告本身就是证据——市场上已经长出一个新品类:『在 AI 搜索里你的品牌排第几、竞品有没有取代你』。</p></div><div class="pillar"><p class="p">机器读你的 pricing page,通常只读到代码里埋着的价格、或啥都读不到。</p><p class="w">人眼页面对机器是噪声。解法是复制一份机器能读的 pricing:Buffer 在常规套餐下放一行『See machine-readable pricing (for AI agents)』,点开是 .md 纯文本,且比网页更详尽——把分级量价做成干净表格,机器能读出 1 / 10 / 50 channels 的确切月费。</p></div><div class="pillar"><p class="p">这是一套正在成形的『给 agent 的接口规范』,不止价格。</p><p class="w">Flowdown 给机器发多个文件(pricing.md + docs + 一条『区域 App Store 价格为准』的提示),省得 agent 报错价;Resend 用『Are you an AI agent?』的措辞专门招呼机器。网站正在长出一层 machine-native 的平行界面——人看一版、agent 读另一版,后者是结构化、无歧义、为『被正确引用』而优化的。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:这看起来是个小聪明的 marketing trick,实则是 Vol.026『taste / curation』的需求侧续集——但它把一个尴尬问题摆上台面:当推荐你的是 agent 而非人,你优化的对象从『打动人的叙事』变成『让机器无歧义地引用』,这两者经常打架(对人要故事和情绪,对机器要表格和确定性)。而且一旦大家都发 .md,这层很快会变成新的 SEO 军备竞赛——agent 凭什么信你那份 .md?可验证性、第一方数据、甚至给 agent 的『可信源』认证,会是下一个战场,而它目前完全无标准、无问责,正像 Vol.025 那套『临时 AI 许可制度』的商业镜像。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这条提示一个容易被忽略的渠道转移:当用户(尤其开发者、广告主、公会运营)越来越多地用 AI agent 来调研『哪个平台/工具/变现方案最划算』,你的产品文档、价格、分成政策能不能被 agent 准确读取和引用,正在变成一个真实的获客/留存变量,而且它不出现在现有漏斗分析里。具体两条:第一,审计你面向外部的关键页面(开发者文档、变现/分成政策、API 定价)在『被机器读取』时还剩多少信息——把核心事实做成结构化、无歧义、第一方可信的机器可读版本,而不是把价格埋在 JS 渲染的组件里。第二,开始把『在 AI 搜索/推荐里我们排第几、被怎么描述』当成一个要监测的指标,因为这部分决策正发生在你的 analytics 之外;早一步建立监测,就早一步知道竞品在 agent 眼里是不是正取代你。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Your pricing page is probably built for human eyes. When a robot reads it, it usually gets a pile of code with the price buried inside, or nothing at all.”</p><p class="cn">你的定价页多半是给人眼写的;机器来读,通常只看到一堆代码里埋着的价格,或者啥都没有。</p></div><div class="quote"><p class="en">“See machine-readable pricing (for AI agents).”</p><p class="cn">查看机器可读定价(供 AI agent 使用)。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 6 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF · 评估</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/ta3Y6AdfGxI">No Priors:AI 跑分根本不告诉你它以为告诉你的事</a></div><div class="v">一针见血:模型能力=你投进多少 test-time compute——$10 预算和 $1000 万预算是两个模型。『该按哪个预算评估?』现有 preparedness framework / RSP 根本没回答。与今日深读一(GLM 跑分追平 Opus 却在真实 React 工况更不稳)互为镜像,接续 Vol.025 METR『评估本身正在失效』。</div></div></div><div class="row"><div class="k">BRIEF · 企业</div><div class="c"><div class="t"><a href="https://openai.com/index/hp-frontier-partnership">HP × OpenAI 启动 Frontier 战略合作:从试点到全员规模化</a></div><div class="v">一个工程师几周内跨 43 个项目跑完 122 个 PR;安全团队一天修完原本要一个月的 bug。HP 把 Frontier 当统一平台来管『谁能访问什么、用哪些 context、被允许做什么动作、结果怎么评估』——access/context/governance/eval 的连接层。正接 Vol.024 组织设计、Vol.025 前沿可及性。</div></div></div><div class="row"><div class="k">SKIM · 政策</div><div class="c"><div class="t"><a href="https://openai.com/index/mapping-ai-jobs-transition-eu">OpenAI 把『AI 工作转型框架』搬到欧盟</a></div><div class="v">用 ESCO 职业分类 + Eurostat 数据:12% 岗位或随 AI 增长、14% 高自动化、27% 会重组、47% 短期变化不大;EU 高自动化暴露面比美国小;卢森堡/瑞典/荷兰偏增长,德国/希腊/意大利偏自动化。是规划地图,非预测。</div></div></div><div class="row"><div class="k">SKIM · 可观测</div><div class="c"><div class="t"><a href="https://tldr.takara.ai/p/2606.27609">HF:训练 agent 主动暴露内部状态以便监督(Observable Control Policies)</a></div><div class="v">让 agent 在执行中显式吐出可观测的内部状态/控制信号,便于人或系统监督——正接今日深读暗线『评估与可观测』,也呼应 Vol.025 别让 agent 自评成为唯一关卡。</div></div></div><div class="row"><div class="k">SKIM · 工具</div><div class="c"><div class="t"><a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247534961&amp;idx=1&amp;sn=94c2bc136f5bf55bcba6b171551c6957">逛逛GitHub:一句话让 Claude Code 生成轻量动画动效</a></div><div class="v">一条上手即玩的 Claude Code 动效生成小工具,适合做 demo/原型时快速加轻量动画。</div></div></div><div class="row"><div class="k">SKIP · 噪声/重复</div><div class="c"><div class="t">Lenny&#x27;s『taste to know what to build』短切片 · 两篇 HF 理论 · Readwise 6月刊 · Ben Thompson 暑假停更</div><div class="v">『taste』短切片是 Vol.026 Codex 深读的片段,去重;DiScoFormer / From Tokens to States 两篇 HF 理论与今日主线无关;Readwise 月刊与 Ben Thompson 停更通知为运营噪声。均跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.027 · 新观点 6 · 累计 369 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-01 06:00</b></span>
+  </footer>
+</div></body></html>
