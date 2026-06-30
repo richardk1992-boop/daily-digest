@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Specialization Turn — 当通用变廉价,赢家回到『契合』:模型层的专精化(No Free Lunch 定理)与人的杠杆阶梯(把别人的通用 AI 变成你的专属产出) — Vol.028</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.028</span>
+      <span class="chrome">2026-07-01 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Specialization Turn — 当通用变廉价,赢家回到『契合』:模型层的专精化(No Free Lunch 定理)与人的杠杆阶梯(把别人的通用 AI 变成你的专属产出)</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.027 说供给侧模型在商品化、通用能力越来越便宜。今天来的是它的反作用力:当『通用』本身不再稀缺,价值会回流到『契合(fit)』。机器层——一篇综述用 No Free Lunch 定理证明『普适通用是个神话』,专精化不是偏好而是有限资源下的必然;人层——一份杠杆框架把『用别人的通用 AI』拆成三道阶梯,谁能把通用能力调成自己工况的专属产出,谁就拿到剩下的溢价。两端都在说同一句:通用退潮,契合上岸。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果通用能力正在变成谁都能买到的商品(Vol.027),你和你的产品真正不可替代的『契合点』是什么——是某个被你压到极致的窄场景,还是你还在赌『样样都能做一点』?No Free Lunch 定理说后者在有限资源下数学上必输。</li><li>同样一段『用 AI 完成任务』,你停在哪一级阶梯:让 AI 帮你写、让 AI 替你做你来审、还是让 AI 跑完多步还自检?把你本周最耗时的三件事各放到这把尺子上——你卡在低阶,是因为任务真不需要往上爬,还是因为你没接好连接器、没把工作流固化成可复用的 skill?</li><li>当模型发布周期已经快到『没人真正知道它能力上限在哪』(Noam Brown),你团队拿什么做选型和验收——是仍然信跑分,还是承认评估本身在失效、转而押注『它在我们这个窄工况里到底稳不稳』?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="specialization-is-inevitable">
+      <span class="tag">HF / DHARMA-AI · 通用是神话</span>
+      <h3>Why Specialization Is Inevitable:用 No Free Lunch 定理证明『普适通用是个神话』——专精化不是偏好,是有限资源下的必然</h3>
+      <div class="src">Hugging Face Blog · Dharma-AI(解读 Goldfeder/Wyder/LeCun/Shwartz-Ziv 2026《AI Must Embrace Specialization》) · <a href="https://huggingface.co/blog/Dharma-AI/why-specialization-is-inevitable">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●○ · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">『模型越强应该越通用』是个直觉错误。优化理论、生物学、市场、机器学习四条完全不同的路径,在有限资源下都收敛到同一结论:契合(fit)击败广度(breadth)。1997 年的 No Free Lunch 定理把它钉成数学事实——专精化不是一种策略偏好,而是『有限资源遇上性能要求』时必然涌现的结构。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">No Free Lunch 定理:在所有可能问题上平均,没有任何通用算法能胜过其它——通用不是性能优势。</p><p class="w">Wolpert &amp; Macready 1997 证明:跨越每一个可设想的问题取平均,所有算法表现完全相同、同样平庸。一个算法在某类分布上变强,必然在另一类上变弱——性能是被重新分配,而非被放大。定理没说通用不可能,而是说『通用不带来性能优势』;通往超越的唯一稳定结构路径是集中:用广度换契合。叠加有限资源更尖锐——任务集无限扩张时,每个任务能分到的资源趋近于零。</p></div><div class="pillar"><p class="p">三个互不相干的领域独立得出同一结论,所以这不是巧合,是证据。</p><p class="w">生物学:泛化者样样通、样样松,自然选择偏好与局部环境精确匹配的特化者,『特化不是生物学的意外,是有限资源+竞争目标的可预测后果』。市场:广撒资源、样样平庸的组织被淘汰、被更契合的对手替代,选择单位虽不同(组织/产品/策略而非物种),结构压力一样。机器学习:negative transfer——多任务训练里任务互相争夺表征容量、梯度打架时,单项表现反而低于专用系统;广度的收益变成深度的代价。</p></div><div class="pillar"><p class="p">最关键的澄清:domain specialization ≠ domain knowledge——Bitter Lesson 反对的是前者的反面,不是这条。</p><p class="w">Sutton 的 Bitter Lesson 说『手工编码的领域知识终将被规模化算力打败』,这是对的,但它打击的是 domain knowledge(硬编码特征、人工先验)。domain specialization 是另一回事:把系统的资源/架构/训练指向一个有界任务集的『范围决策』。规模化改变系统能从数据里学到什么,但不改变『把资源集中在有限任务集上,胜过摊薄到无限范围』这一约束。原文:随着规模化推进,我们会需要更少关于蛋白质的知识来造折叠系统,但这系统仍然受益于专注蛋白质本身。两者可同时为真。MoE 和 AlphaFold 正是佐证——前者靠把输入路由给专精子网络来实现广度(通用系统在内部偷偷恢复了专精),后者靠窄聚焦实现蛋白质预测的阶跃。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:这篇是 Dharma-AI(一家卖专精化方案的公司)对一篇 arXiv 论文的解读+编辑性综合,立场天然偏向『专精化』,要小心把论文的『结构性预测』读成『所以现在就该全押专精模型』——论文证明的是『有限资源下契合胜过广度』,没证明『今天每个场景都该弃用通用大模型』。事实上当下大量场景里,通用前沿模型的绝对能力还高到让『专精的相对优势』在工程上不划算。真正可操作的不是『通用 vs 专精』的站队,而是它和昨天 Vol.027 合起来给的那张地图:通用能力在商品化(便宜、可路由),所以你的差异化不可能再建在『我也能调通用模型』上——它必须建在某个被你压到极致、别人摊薄资源做不到的契合点上。专精化是『通用商品化』之后,溢价唯一还能停泊的地方。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,把这篇和 Vol.027 叠起来看会得到一个反直觉但重要的结论:当通用模型能力越来越强、越来越便宜(谁都能接),你能不能赢就越来越不取决于『你用没用上最强的通用模型』,而取决于『你有没有一个被压到极致的专精契合点』——No Free Lunch 在数学上保证了:试图样样都做的系统,在有限资源下必然在每件事上都不够好。具体两条:第一,盘点你的 AI 能力布局,区分哪些是『用通用模型做通用的事』(这部分正在快速商品化,别指望它构成护城河),哪些是『把模型+数据+工作流集中投向一个你独有的窄场景』(比如某品类的内容审核、某地区的变现优化、某种作弊模式的识别)——后者才是 No Free Lunch 允许你持续领先的地方。第二,警惕 negative transfer 的组织版本:别让一个团队/一个系统去背太多互相打架的目标,有限资源摊给无限任务,数学上注定每件都做不到顶尖;该拆专精的就拆。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Universal generality is a theoretical concept, but in practical terms it is a myth.”</p><p class="cn">普适通用是个理论概念,但在实践层面它是个神话。</p></div><div class="quote"><p class="en">“Specialization is not a preference. It is what emerges when finite resources meet the requirement to perform.”</p><p class="cn">专精化不是一种偏好。它是有限资源遇上性能要求时必然涌现的东西。</p></div></div>
+    </article>
+    <article class="deep" id="ladders-of-leverage">
+      <span class="tag">LENNY&#x27;S · 三道杠杆阶梯</span>
+      <h3>How top PMs increase their leverage with AI:把『用别人的通用 AI』拆成三道阶梯——谁能爬到高阶,谁就把通用能力调成了自己的专属产出</h3>
+      <div class="src">Lenny&#x27;s Newsletter · Colin Matthews 客座(三道杠杆阶梯框架) · <a href="https://read.readwise.io/read/01kwccf26kvdedv0mcs0sng4qt">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">顶尖 PM 用 AI 的方式可以拆成三道独立的『杠杆阶梯』——个人(替你勾掉待办)、产品(加速你把对的东西做出来)、系统(把流程固化成可复用、可外包的步骤)。每道阶梯三级:第一级 AI 协助你做、第二级 AI 替你做你来审、第三级 AI 跑完多步还自检。每爬一级,杠杆约多一个数量级;但终点不是『人人都爬到顶』,而是为眼前这件事挑对那一级。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">三道阶梯各管一种杠杆,三级各差一个数量级——这是把『用 AI』从模糊口号变成可定位的坐标系。</p><p class="w">个人杠杆:Rung1 用 AI 写文本(PRD/邮件,你来回粘贴)→ Rung2 让 AI 直接产出制品(幻灯片、Excel 模型、原型)→ Rung3 接好连接器(PostHog/Amplitude/Drive/Notion),让 AI 跑完一件本来要交给同事的完整待办(读完客服工单、跑完 A/B 留存分析)。产品杠杆:Rung1 网页原型(只能沟通,代码没价值)→ Rung2 用 Claude Code/Codex 基于你的真实 codebase 出原型(用真实组件、真实设计模式)→ Rung3 让 agent 直接提 PR 到生产,工程师评审合并。</p></div><div class="pillar"><p class="p">最高阶的解锁开关是『连接器(MCP)』和『把工作流固化成 skill』——这是把通用模型调成你专属产出的关键动作。</p><p class="w">要让模型替你完成完整任务,得通过 MCP 把 LLM 接到你常用的产品(Figma/Amplitude/PostHog/Pendo),Claude/ChatGPT/Gemini 都有 connectors 市场,接一次永久可用。第一次结果往往令人失望——不是模型不行,是它还不知道你的标准;持续迭代到满意后,直接让 LLM 把这段对话固化成一个 skill。这一步正是 Vol.027『把模型当可替换组件』的人层对应:模型可换,但你沉淀的连接器+skill+标准,才是你专属的、不随模型商品化而贬值的资产。</p></div><div class="pillar"><p class="p">真正稀缺的技能不是『会用 AI』,而是『判断该用哪一级』——这是建造变廉价之后唯一升值的判断力。</p><p class="w">原文反复强调:不是每件事、每个工作流、每家公司都需要爬到最高阶,『对的那一级,关乎眼前这件事最好的 AI 用法』。作为 PM,花时间去当一个比团队工程师更差的工程师没有意义;知道何时该写文档、何时该出原型、何时该提 PR,和有能力完成这些一样重要。PR 适合文案改动、小的 UI/UX 调整、用现有后端的视图改动;真要动基础设施或跨团队集成,就不该硬上。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力有两层。其一是商业动机:这篇是一门付费课程的发布软文,系统杠杆那道阶梯的完整内容被付费墙挡住——你拿到的是『为什么要爬』和前两道阶梯的实操,最高阶的『系统化』恰恰是留给课程的钩子,读时要意识到框架被裁过。其二更本质:文章把『爬得越高越好』讲得很顺,但它自己也承认『对的那一级是最适合眼前工作的那一级』——这其实和今天深读一是同一件事的人层版本:盲目追求最高阶杠杆,就像盲目追求最通用的模型,是另一种 negative transfer——你把有限的注意力摊到『把所有事都自动化到 Rung3』,反而在真正该深耕的窄场景上做不到顶尖。杠杆的价值不在高,而在契合。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这把『三道阶梯』可以直接当成团队 AI 能力的自评尺和路线图,而不必买那门课。具体两条:第一,给团队每个角色(PM/设计/运营/分析)画一张『当前在哪一级、下一步该爬哪级』的地图——大多数人其实卡在个人杠杆 Rung1(只让 AI 写文本),而真正的产出跃迁发生在 Rung3(接好连接器、让 AI 跑完整任务):优先投入把高频内部工具(数据分析、工单、A/B 实验)通过 MCP 接进来,这是 ROI 最高的一步。第二,把『判断该用哪一级』当成比『会不会用工具』更要培养的能力——在建造成本趋零、通用模型商品化的当下,稀缺的不是执行,而是判断:这件事到底该写文档、出原型、还是提 PR;该深耕专精、还是用通用模型快速过一遍。这正是 Vol.026 taste、Vol.027 commoditization 一路下来的落点:当人人都能让 AI 做事,赢家是那个知道该让它做哪件、做到哪一级的人。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“As you ascend each ladder rung, you get an order of magnitude more leverage.”</p><p class="cn">每往上爬一级阶梯,你拿到的杠杆就多一个数量级。</p></div><div class="quote"><p class="en">“The right rung on each ladder is about the best use of AI for the work in front of you.”</p><p class="cn">每道阶梯上对的那一级,关乎眼前这件事最好的 AI 用法(而非一味爬到最高)。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 7 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF · 评估</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/-kMLjDGZ33o">No Priors:没人真正知道这些模型的能力上限</a></div><div class="v">OpenAI 的 Noam Brown 直言:模型每两三个月发一版,而把一个模型压到极限要两三个月——于是没人真正知道能力天花板在哪。某模型发布一周后,大家才发现有任务它要跑一周才完成。要真正评估只能拖慢发布,但竞争压力不允许。接续 Vol.027『跑分不告诉你它以为告诉你的事』+ Vol.025 METR『评估正在失效』——也正是深读一『靠它测不到的契合度做决定』的现实注脚。</div></div></div><div class="row"><div class="k">BRIEF · 组织</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/sHzkDArM5dk">Anthropic Jess:每个员工都该是一家『一人创业公司』</a></div><div class="v">很多企业一上来就想自动化那种跨 20 个团队、要数月协调的庞大流程——很激动人心,但 Jess 主张更好的起点是『先解锁个体』:让任何团队的任何个人凭借 agents 把单兵能产出的上限抬高,不必再发依赖请求。你未必摧毁了那个人人都恨的多季度合规流程,但你在组织里种下了创造力和自主性的种子。接续 Vol.026 Anthropic Jess 深读,也是深读二『杠杆阶梯』的组织动机:专精+杠杆先落在个体身上。</div></div></div><div class="row"><div class="k">BRIEF · 硬件</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=f6D_aiy8qyU">Dylan Patel(SemiAnalysis):软硬件协同设计才是 AI 真正的 100x</a></div><div class="v">最大的增益不来自更快的芯片,而来自把模型、kernel、硅片一起优化——这儿 2x、那儿 2x 协同起来就是 100x;DeepSeek 的 experts 就是为 Nvidia 硬件量身塑形的。这是深读一『专精化』在硅片层的镜像:co-design 本质就是放弃通用、把整条栈集中契合一个目标,fit over breadth 一路贯穿到底层。</div></div></div><div class="row"><div class="k">SKIM · 格式</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/9ukb1zmyvs8">Lenny&#x27;s:PRD 没有死</a></div><div class="v">实现变廉价后,很多人忍不住直接跳去做原型(尤其非工程师),工程师则忍不住写一堆没人读的文档。要点恰恰是:实现充裕时,挑对表达格式才关键——要厘清模糊地带的产品判断,可能就该是文档;要让人上手试、压测交互,才用原型。别让一个本是探索的原型因为『看着像能上线了』而被过度锚定。修正 Vol.026『PRD 已死』的误读,呼应深读二『判断该用哪一级/哪种格式』才是稀缺技能。</div></div></div><div class="row"><div class="k">SKIM · 数据/政策</div><div class="c"><div class="t"><a href="https://openai.com/index/how-chatgpt-adoption-has-expanded">ChatGPT 采用扩张 · AI 经济 $175B 年化 · Mythos 的事实许可制</a></div><div class="v">OpenAI Signals:ChatGPT 全球采用持续增长,用户用得更多、探索更多能力,跨地区跨语言扩张。AI Daily Brief:Exponential View 估 AI 年化运行率约 $175B,同时 Anthropic Fable 传出基于额度、需身份验证的访问引发隐私争议,参议院草案盯上 agent 中立性与『忠实义务』。另一条:商务部授权对 Anthropic Mythos 的有限、经审查访问,形成事实上的前沿模型许可制;OpenAI 预览 GPT-5.6(Sol/Terra/Luna)走可信合作伙伴 rollout。三条合看 = 需求在涨、钱在涌、门槛在以『许可制』形式收紧,正接 Vol.025 gated-frontier。</div></div></div><div class="row"><div class="k">SKIM · 评估/工具</div><div class="c"><div class="t"><a href="https://huggingface.co/blog/eee-community-evals">HF 模型页直接挂 Every Eval Ever 结果 · 逛逛GitHub:Google 2 万 Star 开源神项目</a></div><div class="v">HF 把社区评测(Every Eval Ever)结果直接展示在模型页上,让『这个模型到底好在哪』更可比——接续今日 No Priors / Vol.027 跑分主线。另一条是一份上手向的 Google 开源 GitHub 项目推荐,适合找工具时翻。</div></div></div><div class="row"><div class="k">SKIP · 噪声/窄域</div><div class="c"><div class="t">ScarfBench(Java 迁移基准) · Nano Banana 2 Lite / Gemini Omni 发布 · Latent Space『今天没啥大事』</div><div class="v">ScarfBench 是企业 Java 框架迁移的窄域基准,与本卷主线无关;Nano Banana 2 Lite / Gemini Omni 是产品发布通告;Latent Space 自陈『a quiet day』。均跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.028 · 新观点 6 · 累计 375 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-02 06:00</b></span>
+  </footer>
+</div></body></html>
