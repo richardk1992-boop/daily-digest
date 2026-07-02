@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Software Factory — 从『和 agent 交互写代码』到『经营一条自动化产线』:当整个行业收敛到一个词 Loop,单位不再是提示词,而是循环 — Vol.029</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.029</span>
+      <span class="chrome">2026-07-02 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Software Factory — 从『和 agent 交互写代码』到『经营一条自动化产线』:当整个行业收敛到一个词 Loop,单位不再是提示词,而是循环</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.028 说通用商品化之后价值回流到『契合』。今天从 AI Engineer World&#x27;s Fair 传回的信号,是这条线的下一站:当模型、harness 都在快速商品化,行业整周只在谈一个词——Loop(循环)。软件工程正从『人和 agent 交互式写代码』转向『经营一条自动化产线』:triage→spec→实现→评审→验证→部署→监控自动串成环,人只在选定的节点介入。两篇深读一台一里:机器/组织层是『软件工厂』(Warp、Cursor、Factory 同时押注同一隐喻),人/资产层是『循环即产品』——当模型可换,真正沉淀下来、不贬值的是把你的判断固化成可迭代的 agent recipe。两端说的是同一句:未来的护城河不在某次生成,而在你拥有的那条循环。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>你现在用 AI 的单位是什么——是一次次提示词(交互式),还是一条会自己 triage、实现、评审、验证的循环(自动化)?把你团队最高频的一条软件/内容生产流程画出来,它里面有多少步还需要人手动搬运?这些搬运正是『软件工厂』要吃掉的部分。</li><li>如果模型和 harness 都在商品化、随时可换(Vol.027),那你团队真正沉淀下来、换个模型也不贬值的资产是什么?是散落在各人脑子里的经验,还是被固化成 evals、judges、可迭代的 agent recipe——一份能让新 agent 直接接手『你们为什么这么做』的可移植配方?</li><li>在这条自动化循环里,你打算把人放在哪个节点?全自动代码评审,还是只让高风险改动过人手?『决定该盯什么』(OpenClaw 的 Steinberger 说这是他如今最大的挑战)正在取代『把活干完』成为最稀缺的能力——你有没有把注意力预算显式地分配到这件事上?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="software-factories">
+      <span class="tag">LATENT SPACE / AIEWF · 软件工厂</span>
+      <h3>The Software Factory:从『和 agent 交互写代码』到『经营一条自动化产线』——AIEWF 整周收敛到一个词 Loop,连 Warp、Cursor、Factory 都在独立押注同一个隐喻</h3>
+      <div class="src">Latent Space · AIEWF Daily Dispatch(swyx『Loopcraft』)+ Warp/Zach Lloyd + Cursor 前沿部署工程 VP Pauline Brunet · <a href="https://www.latent.space/p/software-factories">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  9/10</div>
+      <div class="claim">AI Engineer World&#x27;s Fair 这一整周,几乎所有主舞台讨论都指向同一个词:Loop(循环)。它标记着一次范式切换——软件工程正从『工程师交互式地和 agent 一起写代码』转向『经营一条自动化产线(software factory)』:把软件工程的主循环(triage→规格→实现→评审→验证→部署→监控)自动串成闭环,人只在你选定的节点被拉进来。多家立场各异的公司(Warp、Cursor、Factory、微软 Foundry、OpenAI Codex)独立收敛到同一隐喻,本身就是信号。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">范式在切换:从『交互式开发』到『自动化开发』,基本单位从提示词变成循环。</p><p class="w">swyx 在开场演讲 &#x27;Loopcraft: The Art of Stacking Loops&#x27; 里把 AI 工程的演化史概括为『从 chat 到 tools 到 goals,再到今天全是 automations、cron jobs 和 loops』。Warp CEO Zach Lloyd 的论点更直接:『软件工程将变成工厂工程(software engineering will become factory engineering)』。这不是把 agent 跑得更快,而是把工程的整条主循环——triage、spec、implementation、review、verification、shipping、monitoring——自动串成一个持续运转的环。Allie Howe 在软件工厂专场引用了 Geoffrey Huntley 那篇影响很大的 &#x27;everything is a ralph loop&#x27;:把一个 coding agent 反复对着同一份 spec 重启,就把它变成了一个不知疲倦的持续工人。</p></div><div class="pillar"><p class="p">『工厂』不是比喻噱头,而是一套要你显式做出的配置决策:哪些环节自动化、人在哪几个节点介入。</p><p class="w">Lloyd 描述 Warp 的 Oz 平台:进入后你会被引导『搭建你的工厂』——选仓库、选软件生命周期里要自动化的环节、选哪些点必须把人拉回环里。不同组织、不同代码库偏好不同:代码评审要不要全自动?高风险改动是否强制过人手?系统据此生成循环:从 Jira/Linear 拉 issue、让人从 Slack/Teams 提需求、允许开发者从 GitHub 重定向一个 agent。Cursor 的 Pauline Brunet 讲的是同一件事的企业落地版:FDE(前沿部署工程师)团队进驻客户系统,把『AI 软件工厂』铺到规划、设计、编码、测试、评审、部署、维护的全生命周期——今天这些阶段分属设计/开发/PM 各自为战、各自用 AI 提效但流程割裂,工厂化就是把这条割裂的链缝成一条长跑 agent 贯穿的环。</p></div><div class="pillar"><p class="p">人的角色上移:从『把活干完』变成『决定该盯什么、把人放在哪个节点』。</p><p class="w">OpenClaw 的 Peter Steinberger(现于 OpenAI)说他如今设计循环来管理 agent,而最大的挑战已经变成『决定该把注意力放在哪』,未来是『更好的循环』来解决这个问题。OpenAI 的 Embiricos 点出循环设计的关键:『如果你能把 agent 连到你要做的事、以及它为什么要做,它就能开更多的工;再连到你之后要做的评审和部署,它就能落更多的工。』——换句话说,循环的价值不在 agent 本身多强,而在你有没有把『上下文(为什么做)』和『收尾(评审/部署)』两端接进去。这正好接上 Vol.028 的落点:稀缺的不是执行,是判断——在工厂时代,判断具体化成了『把人放在循环的哪个节点』。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">两层张力。其一是术语热的通胀:一个词在同一个会场被 Warp、Cursor、Factory、微软、OpenAI 同时高频使用,既是真实趋势的信号,也是一场叙事竞赛——每家都在把自己的产品栈重新包装成『工厂的某一层』,Lloyd 自己也坦承『我并不在乎这个词会不会留下来』。要把『工厂正在成为主流架构』和『各家都在抢占工厂叙事的定义权』分开看。其二更实际:自动化循环的收益高度依赖『验证』这一环是否可靠——triage 和实现可以自动,但如果 evals/评审跟不上,你得到的是一条高速产出 slop(垃圾)的产线。Introspection 的 Gavrilescu(见今日深读二)正是把这一点当成核心问题:循环能否让 agent 承担更多工作而不制造更多 slop,取决于你能否定义对的反馈信号。所以真正可操作的不是『赶紧搭工厂』,而是先想清楚:在你的场景里,哪一环的验证足够可靠到可以放手自动化。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,把这条和 Vol.028 叠起来看会得到一个清晰的路线图:通用商品化(027)之后价值回流到契合(028),而『软件工厂』回答了契合具体沉淀在哪里——沉淀在你独有的那条自动化循环里。具体两条。第一,别再用『我们也在用 AI 写代码/做内容』来衡量投入,那已经是商品化的起点能力;真正的跃迁是把某条高频生产流程(比如某类活动页的搭建、某类内容的审核、某种作弊模式的巡检)从『每步都要人搬运』改造成『triage→实现→验证→上线自动串环、人只在高风险节点介入』。先挑一条验证环最可靠、最容易定义『对/错』的流程动手,ROI 最高。第二,把组织设计问题当成工厂设计问题来问:这条循环里,哪些环节全自动、哪些强制过人手、人被拉回环的触发条件是什么——这套决策一旦定下来并固化,就是别人抄不走的资产,因为它编码了你对自己业务风险的判断,而不是某个通用模型的能力。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Software engineering will become factory engineering.”</p><p class="cn">软件工程将变成工厂工程。</p></div><div class="quote"><p class="en">“If you can connect the agent to not only the work that you have to do, but why it has to be done, that&#x27;s how you can get the agent to begin much more work.”</p><p class="cn">如果你能把 agent 连到你要做的事、以及它为什么要做,它才能开始承担多得多的工作。</p></div></div>
+    </article>
+    <article class="deep" id="autoresearch-loop-is-product">
+      <span class="tag">LATENT SPACE / AIEWF · 循环即产品</span>
+      <h3>『循环就是产品』:当模型和 harness 都在商品化,真正沉淀、换模型也不贬值的资产,是把你的判断固化成可迭代的 agent recipe</h3>
+      <div class="src">Latent Space · Introspection / Roland Gavrilescu(前 xAI agent 基础设施)『Autoresearch in the Wild』 · <a href="https://www.latent.space/p/autoresearch-introspection">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●○ · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">如果说『软件工厂』是外形,那 autoresearch 就是它的内核动力学。Introspection 的联合创始人 Gavrilescu 提出三条正在成形的新蓝图:第一,循环本身就是产品(the loop is the product)——关注点已从模型、到 harness、再到循环;第二,循环沉淀下来的东西叫 agent recipe(agent 配方),一个比 skill 更大的容器,把 evals、judges、信号处理和人的专业打包成可移植、可迭代的格式;第三,优化目标是让系统随时间既更好又更便宜,把前沿模型的能力逐步蒸馏进『你自己拥有、为你环境定制』的系统里。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">关注焦点的三级跃迁:模型 → harness → 循环;循环才是能持续产生价值的那个单位。</p><p class="w">Gavrilescu 把行业注意力的迁移讲得很清楚:早期大家盯模型,然后盯 harness(agent 的执行框架),现在真正的产品形态是 loop。核心问题变成:你能否定义对的反馈机制,让 agent 承担更多工作而不制造更多 slop?autoresearch 就是构建一个『外层循环(outer loop)』,让 agent 借助反馈信号、evals 和人的输入去维护并改进主系统本身,随时间推进而不被人类反复卡住瓶颈。这与今日深读一的软件工厂是同一件事的两个视角:工厂是它的组织外形,autoresearch 是驱动它自我改进的引擎。</p></div><div class="pillar"><p class="p">agent recipe:一个比 skill 更大的容器,把『人为什么这么做』固化成可移植、provider-agnostic 的配方。</p><p class="w">Gavrilescu 用了一个精准的类比:『假设明天你突然拿到了 Devin 的代码库,光有代码其实帮不上多少忙——如果你看不到这个团队是怎么一步步走到当前版本的。你会想理解那些失败。』agent recipe 借鉴了模型后训练里的 data recipe 概念:它描述你的 harness 如何搭配不同模型、你用哪些 evals、你造了哪些 judges、你捕获了哪些人的专业、以及哪些失败催生了新的 eval。行业已经从 agent tools 走到 agent skills,recipe 是再上一层的容器。这正是 Vol.028 人层结论(MCP 连接器 + 把工作流固化成 skill 才是不贬值的资产)的升级版:skill 是一个动作,recipe 是整条循环连同它的判断标准和失败史。</p></div><div class="pillar"><p class="p">优化方向是『蒸馏 + 拥有』:把前沿能力逐步蒸馏进你自己拥有、为你环境定制的系统,越用越好、越用越便宜。</p><p class="w">第三条模式关乎优化目标:系统如何随时间既变得更好又更便宜。Gavrilescu 指出 Cursor、Cognition 已经证明这类产品能跑通,下一阶段是让它们更普及、更快、更便宜,并把前沿模型的能力逐步蒸馏进『你拥有、为你环境定制』的系统。这条与今日 China 简报(企业转向模型组合、用便宜开源模型做默认路径、只在高风险用前沿模型)在经济学上完全同构:前沿模型是你偶尔调用的高价能力,而你真正长期依赖的是被蒸馏、被定制、成本可控、且归你所有的那条循环。换个模型不影响它,因为沉淀在 recipe 里的是你的判断和反馈机制,不是某家的权重。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于成熟度和动机的双重折扣。其一,Introspection 是一家刚成立、正在卖『部署自改进系统的基础设施』的新公司,agent recipe 目前更像一个有说服力的框架而非被广泛验证的标准——它把 Cursor/Cognition 的成功归因于『循环』,但这两家的护城河里有多少是循环、有多少是分发和资本,并不清晰。其二,自改进循环最诱人也最危险的地方在于『让 agent 做架构决策、少被人卡瓶颈』——但 Gavrilescu 自己也强调,自主软件工厂必须先向人类学习:反馈信号、judges、eval 的质量决定了这条循环是自我改进还是自我强化偏差。换句话说,recipe 的价值上限,取决于你一开始喂进去的人类判断有多好——这又绕回 Vol.026 的 taste 和今日 Lenny&#x27;s 简报『taste 不只是审美,更是系统思维』。循环不会凭空产生判断,它只会放大你已有的判断,好的坏的都放大。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这条给出的是比深读一更底层的资产观:当模型可换、harness 可换、连搭工厂的工具都在商品化,你唯一带不走也换不掉的,是那条循环里沉淀的判断——你的 evals、你的验收标准、你踩过的坑变成的新检查项。具体两条。第一,从今天起,把『把某流程自动化』的产出定义从『能跑通』升级为『留下一份 recipe』:每做一条自动化循环,显式沉淀四样东西——它用什么模型/harness、验收用哪些 eval、哪些判断交给了 judge、哪些线上失败催生了新的 eval;这份 recipe 才是换模型不贬值的资产,散在个人脑子里的经验不是。第二,警惕『循环放大偏差』:上自动化之前先确认反馈信号的质量,尤其是内容审核、变现这类高风险场景——先投入把『对/错』的判定标准和人类反馈机制做扎实,再让循环跑起来,否则你造的是一台高速生产 slop、并且把早期偏差越滚越大的机器。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“The loop is the product. We have moved from focusing on models, to harnesses, and now to loops.”</p><p class="cn">循环就是产品。我们已经从关注模型,到关注 harness,再到关注循环。</p></div><div class="quote"><p class="en">“The code alone would not necessarily be that helpful if you could not see how the team arrived at the current version. You would want to understand the failures.”</p><p class="cn">光有代码未必帮得上忙——如果你看不到团队是怎么一步步走到当前版本的。你会想理解那些失败。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 6 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF · 格局</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/iCkXLU1RZks">China&#x27;s AI strategy is working:企业转向『模型组合』,便宜开源模型正成为默认路径</a></div><div class="v">一条被广泛转发的观点:在前沿 API 价格上『token maxing』(什么都用最贵模型)在经济上不成立——Uber 4 个月烧光全年 AI 预算、微软把工程师迁离 cloud code。企业转而用模型组合:高风险用前沿闭源,日常默认切到便宜的中国开源模型。Coinbase 靠切到 GLM/Kimi 把 AI 开销砍近一半,Airbnb、Pinterest 用 Alibaba Qwen。结论:中国开源策略在美国公司里抢走前沿模型份额,且全栈(能源/数据中心/华为国产芯)推进更快。这既接 Vol.027 商品化,也给 Vol.025 gated-frontier 加了一记反证——把最好的模型锁进可信名单,只会把更多公司推向开源替代。也正是今日深读二『蒸馏进你自己拥有的系统』的宏观版本。</div></div></div><div class="row"><div class="k">BRIEF · 判断力</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/F4y64akVDjI">Lenny&#x27;s:Taste 不只是审美,更是系统思维</a></div><div class="v">Linear 产品负责人的一条推子引出的讨论:人们过度强调 taste 的审美面(拿 Paul Graham 举例说他有品味但穿沙滩短裤)——但 taste 更大的部分是系统思维:这东西如何嵌进整个系统?我们要往哪去、它属于哪个主题?怎么呈现它?真正的 taste 问题在于更宽的上下文。直接续 Vol.026 taste-inversion 深读,也是今日深读二的注脚:循环不会凭空产生判断,recipe 的质量上限取决于你喂进去的 taste——而 taste 本身就是系统级的判断,不是挑好看的皮肤。</div></div></div><div class="row"><div class="k">BRIEF · 架构</div><div class="c"><div class="t"><a href="https://www.latent.space/p/the-coolest-diffusion-research-isnt">Genesis Molecular AI:最酷的扩散(diffusion)研究不在 LLM,在药物发现</a></div><div class="v">带 Llama 2/3 预训练的 Sergey Edunov 离开 Meta 加入 Genesis。观点很尖锐:自 &#x27;Attention is all you need&#x27; 以来 LLM 架构再无根本性新意,整个领域都是同一想法的变体(MoE 算有用的例外)。真正激动人心的新架构工作发生在结构预测/co-folding——Genesis 的旗舰模型 PEARL 在 OpenBind 拿到零样本胜绩,并常态化越过真实应用所需的精度阈值,而社区基准此前基本是『把 AI slop 当成够好了』。这是 Vol.028『专精化/契合胜过广度』在科研架构层的又一佐证:窄聚焦一个有界问题,反而逼出了通用 LLM 给不了的架构突破。</div></div></div><div class="row"><div class="k">SKIM · 成本/产品</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=ztCLWKwyMJY">OpenAI 把推理成本砍半(据传)· Fable 5 回归</a></div><div class="v">The Information 报道 OpenAI 研究者发现一项优化技术,把现有模型的推理需求砍半——应用到未登录 ChatGPT 用户后,整段用户仅用 100 张 GPU 服务;技术细节未披露(猜测是量化/缓存优化/批处理/路由到低功耗模型)。AI Daily Brief 同期报道 Fable 5 正式回归、多个必试用例。两条合看 = 全行业当下的主旋律:在能力见顶不确定的同时,疯狂压 token 效率与成本,正是今日 China 简报『token maxing 不成立』的供给侧对应。</div></div></div><div class="row"><div class="k">SKIM · 开源/工具</div><div class="c"><div class="t"><a href="https://huggingface.co/blog/cerebras-gemma4-voice-ai">HF × Cerebras 把 Gemma 4 带进实时语音(开放级联 speech-to-speech)· 逛逛GitHub:Agnes 免费烧 5 万亿 token 后出一站式创作平台 Pavo</a></div><div class="v">HF 与 Cerebras 演示全开放、模块化、可替换的级联语音栈:Parakeet 识别 → Cerebras 上跑 Gemma 4 31B → Qwen3TTS 合成,组成一个完全开放、每层可换的 speech-to-speech『循环』——又是今日 loop 主题在语音侧的镜像,且每层可替换正是 Vol.027 可替换组件的体现。另一条:Agnes 免费开放文/图/视频模型、单周被调用 5 万亿 token 后,推出 PC 端一站式创作平台 Pavo,把图片/视频/短剧塞进一条工作流 + 一个 Agent 总指挥(从剧本→人设→分镜→成片的产线)——消费级创作侧的『软件工厂』。</div></div></div><div class="row"><div class="k">SKIP · 窄域/无正文</div><div class="c"><div class="t">机器人 Prototype-to-Production(South Park Commons)· 两条无字幕 YouTube(Codex 日用 / Fable jacuzzi)</div><div class="v">South Park Commons 的机器人创业『从原型到量产』线下活动,与本卷软件工厂主线关联弱,跳过;&#x27;How Every&#x27;s Head of Consulting Uses Codex&#x27; 与 &#x27;LET&#x27;S RIP FABLE TOKENS FROM THE JACUZZI&#x27; 两条 YouTube 抓取无有效字幕正文,跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.029 · 新观点 6 · 累计 381 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-03 06:00</b></span>
+  </footer>
+</div></body></html>
