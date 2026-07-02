@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>Humans in the Loop — 软件工厂的反作用力:当整周都在谈 Loop,周三 AIEWF 集体为『人的能动性』辩护——inner loop 是能力,outer loop 是能动 — Vol.030</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.030</span>
+      <span class="chrome">2026-07-03 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>Humans in the Loop — 软件工厂的反作用力:当整周都在谈 Loop,周三 AIEWF 集体为『人的能动性』辩护——inner loop 是能力,outer loop 是能动</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.029 说整个行业收敛到一个词 Loop、软件工程变成经营自动化产线。今天来的是它的反作用力:周三 AIEWF 主舞台成了一场为『人的能动性(agency)』的集体辩护。Addy Osmani 一句话定调——『inner loop 是能力,outer loop 是能动』:agent 可以吃掉越来越多的内层执行,但设定目标、判断结果、承担责任的外层循环仍是工程本身。Notion 的 Geoffrey Litt 直接反对『工厂』这个隐喻并抛出残酷分化:理解的人继续出下一个大想法,把理解外包出去的人会被 agent 取代。Impeccable 的 Paul Bakaus 给出操作版:skill engineering 是给 agent 一套可被精确操控的专业词汇,而不是一键自动——『没有 auto,也不会有 auto』。两篇深读一虚一实:一篇是这场能动性反潮的全景,一篇是把它落到『技能工程』这门新手艺。合起来接上 Vol.029:工厂照建,但你要显式决定哪个节点必须留人。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>Vol.029 让你去『搭工厂、把内层执行自动化』;今天的问题是反过来的——在你那条自动化循环里,哪个节点必须留给人?不是『每条输出都人工复核』,而是设定目标、判定什么算好、为结果负责这个外层节点。你有没有把它显式圈出来,还是默认让循环连这层一起吞掉?</li><li>Litt 说未来会极度分化:理解系统的人继续出大想法,把理解外包给 agent 的人会和 agent 一样被替换。照这条看你的团队——你在培养『理解系统的人』,还是在培养『会把活丢给 agent 的人』?后者正在变得和 agent 本身一样可替换,你的招聘/晋升信号对齐了吗?</li><li>每个模型都有默认审美,『到头来就是建模团队的品味』;大家用同一套 skill 和模型,产出就会收敛成同一个样子。你团队的内容/产品,有没有正在悄悄向供应商的默认审美靠拢?那关键的最后 20%——你独有的视角和判断——是谁在注入,还是根本没人注入?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="agency-counter-current">
+      <span class="tag">LATENT SPACE / AIEWF · 能动性反潮</span>
+      <h3>Humans in the Loop:软件工厂的反作用力——周三 AIEWF 集体为『人的能动性』辩护,inner loop 是能力,outer loop 是能动</h3>
+      <div class="src">Latent Space · AIEWF Daily Dispatch(Richard MacManus)——Addy Osmani(Agency Ladder)/ Geoffrey Litt(Notion)/ Paul Bakaus(Impeccable)/ Nicole Brichtova(Google gen-media)/ Shane Gu / Carlos Sanchez(Adobe) · <a href="https://www.latent.space/p/aiewf-daily-dispatch-agency">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  9/10</div>
+      <div class="claim">周二 AIEWF 收敛到『软件工厂/Loop』的共识(见 Vol.029),周三主舞台就来了它的反作用力:一场为『人的能动性(human agency)』的集体辩护。核心是 Addy Osmani 的一句定调——agent 可以吃掉越来越多的内层执行循环(inner loop),但设定目标、判断结果、承担责任的外层循环(outer loop)仍是工程本身:『inner loop 是能力,outer loop 是能动。』多位讲者(Osmani、Notion 的 Geoffrey Litt、Impeccable 的 Bakaus、Google gen-media 的 Brichtova、Shane Gu、Adobe 的 Sanchez)从工程、设计、生成式媒体、Web 四个方向,独立收敛到同一句话:人必须留在循环里。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">Osmani 的 Agency Ladder:把循环劈成两层——内层是能力,可以交给 agent;外层是能动,必须留给人。</p><p class="w">Addy Osmani(前 Google 工程负责人)明确区分:『Agent 可以运行多得多的内层执行循环,但那个外层循环仍然是工程。』他的总结更直接:『inner loop 是能力(capability),outer loop 是能动(agency)。』这与 Vol.029 深读二的 autoresearch 形成正面张力——Gavrilescu 主张构建一个『外层循环』让 agent 去维护和改进系统本身,而 Osmani 恰恰要把外层循环守在人手里。Anthropic 做 Claude Code 的 Thariq Shihipar 从另一角度呼应了连续适应:『模型是长出来的,不是开发出来的,我们边用边和模型一起摸索。』——即便能力在长,判断权还在人。</p></div><div class="pillar"><p class="p">Litt 反对『工厂』隐喻,并抛出一条残酷分化:理解者继续出大想法,外包理解者被 agent 取代。</p><p class="w">Notion 的 Geoffrey Litt 在设计工程专场吸引大量听众,主题是『人为什么仍需理解自己的代码』。他转发并赞同的一条推子把周二的工厂叙事顶了回去:『「工厂」是一种令人沮丧的未来图景,隐喻是有分量的。』Lily Zhang 记下的关键结论最尖锐:『未来会极度分化——理解的人会继续拥有下一个大想法;把理解外包出去的人会被 agent 取代。』Litt 承认 agent 能力在涨,但坚持人要保持理解:『你可以去学 agent 在做什么,以确保自己是创作过程里的主动参与者。』这不是反自动化,是反『把理解权一起外包』。</p></div><div class="pillar"><p class="p">生成式媒体与 Web 侧同样收敛:模型有默认审美,容易造却难以决定造什么——得把创作视角/品味重新接回循环。</p><p class="w">Google gen-media(含 Nano Banana)的 Nicole Brichtova 区分了『平均偏好』与『被磨练过的专业』:『磨过手艺的人,专业水平完全不同——他能看到普通人看不到的东西。』她点破每个模型都有默认审美,而『到头来那就是我们、就是建模团队的品味』,因此建模方需要更多地和有强烈创作视角的人合作,把 art director 接回循环。Shane Gu 说得更普适:哪怕 AI 生成已经够用,也永远别满足,『始终保持你的敏感度』。Adobe 的 Carlos Sanchez 演示实时为每位访客组装页面的『agentic sites』(一到两秒、每页一两美分),却也警告:『用 AI 很容易造东西,但很难知道该造什么』——不能整站放手生成,否则会偏出品牌边界。四条线同一个母题:能力越强,决定权和品味越要显式留在人这一侧。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">两点存疑。其一,这是一篇由对『人的能动性』立场明显同情的记者写的会议日报——它天然会挑选、放大那些替焦虑者说话的声音,给『我不会被取代』提供情绪安慰。要小心把『一场有倾向的叙事』读成『定论』:同一个会场周二刚为工厂欢呼,周三就集体反工厂,与其说是趋势反转,不如说是同一批人对同一件事的两种投射。其二更实质——『外层循环必须留人』这句话本身是有争议的:Vol.029 的 Gavrilescu 明确要把 agent 放进那个维护系统的外层循环。所以真问题不是二选一的『外层归人还是归 agent』,而是:外层循环里哪些决策会复利、哪些错误会滚大、哪些结果需要一个能负责的主体——把这些节点留给人,其余尽管自动化。Osmani 的 capability/agency 之分,真正可操作的版本不是『守住整个外层』,而是『守住外层里那个定义目标、承担责任的节点』。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这条和 Vol.029 正好合成一个完整动作:Vol.029 让你去搭工厂、把内层执行自动化;Vol.030 让你显式决定哪个节点必须留人。具体三条。第一,自动化一条高频管线时,人的持久角色不是『复核每条输出』(那会被循环稀释掉),而是拥有外层循环——定义什么算『好』、判定结果、为它负责;把这个节点写进流程设计,而不是默认让循环连它一起吞掉。第二,Litt 的分化是一个现在就要对齐的用人信号:投入在『理解系统的人』身上,而不是『把活丢给 agent 的人』——后者正在变得和 agent 本身一样可替换;你的招聘、晋升、培训信号要奖励理解与判断,而不只是产出速度。第三,内容与创作侧的默认审美收敛是真实风险:如果各团队都靠同一套现成 skill 和模型,产出会悄悄向供应商的默认品味靠拢、变得千篇一律——你的差异化就在最后那 20% 的独有视角,要有意识地安排『谁来注入品味』,并把它当成不可外包的环节。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“That inner loop is capability. The outer loop is agency.”</p><p class="cn">内层循环是能力,外层循环是能动。</p></div><div class="quote"><p class="en">“Those who understand will keep having the next big idea. Those who delegate understanding will be replaced by the agent.”</p><p class="cn">理解的人会继续拥有下一个大想法;把理解外包出去的人会被 agent 取代。</p></div></div>
+    </article>
+    <article class="deep" id="skill-engineering-no-auto">
+      <span class="tag">LATENT SPACE / AIEWF · 技能工程</span>
+      <h3>Skill engineering 与反对一键设计:给 agent 一套可被精确操控的专业词汇,而不是自动驾驶——『没有 auto,也不会有 auto』</h3>
+      <div class="src">Latent Space · Paul Bakaus(Impeccable 创始人)专访 / AIEWF workshop『skill engineering 的暗黑艺术』 · <a href="https://www.latent.space/p/skill-engineering-design">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">如果说深读一是能动性反潮的全景,这一篇就是它的操作落地。Impeccable 的 Paul Bakaus 提出:『skill engineering(技能工程)』正在成为一门独立手艺——它的目的是给 agent 一套精确的专业词汇,让人能把意图操控到位,而恰恰不是为了一键/自动设计。他对『软件工厂』那种把人从工程里彻底移除的愿景『旗帜鲜明地反对』,并把自己的产品哲学压成一句:『没有 auto,也不会有 auto。』</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">技能 = 被压缩的专家词汇:把『变大胆』这种模糊形容词翻译成可执行的专业含义。</p><p class="w">一个未经辅助的模型被要求『让页面更 bold』,往往会加渐变、霓虹、玻璃拟态;Impeccable 则把 boldness 定义成层级、尺度、果断的排版——在不打破既有设计系统的前提下抓注意力。Bakaus 的金句:『一个背后什么都没有的形容词,只是个漂亮的撇号。你必须告诉 agent 你到底指什么。』他把这些词称为『被灌注了含义』的词——模型本来就对 bold/quiet 有模糊概念,skill 把它翻译进具体的专业领域。关键证据:同一个模型,设计师和工程师做出的东西差别巨大,仅仅因为设计师知道怎么articulate想要的结果。skill engineering 就是把专家的这套语言压缩进系统,让不是专家的人也能表达到位。</p></div><div class="pillar"><p class="p">这是一门有『暗黑艺术』的真手艺:要对抗模型收敛、要跨 harness 适配、要在 skill 内部做 MoE 式路由。</p><p class="w">Bakaus 的 workshop 探讨了搭 skill 的门道。其一,模型/skill 会收敛:『大多数 skill、大多数模型都不太有创造力,它们朝一个方向靠拢——如果所有人都用同一套 skill 做前端,东西最后长得都一样』(正是深读一的默认审美问题)。其二,要处理 harness 与模型差异:Codex 和 Claude 处理 subagent、权限的方式不同,一个想跨 Claude Code / Cursor / Copilot / Codex 运行的 skill 不能假设它们能力一致。其三,他在 skill 内部试验路由:把多个能力组合起来、把任务导向相关指令,类比 mixture-of-experts,既省 token 又提升有效性。这三点合起来,正是 Vol.029『agent recipe』那个抽象容器底下,真正要动手打磨的具体工艺。</p></div><div class="pillar"><p class="p">80/20 + 向上移一层:AI 做费力的前 80%,人拥有注入品味的后 20%;设计/工程/PM 的边界在坍缩,大家都往『做什么』这一层挪。</p><p class="w">Bakaus 拒绝两个极端——既不是继续纯手工设计,也不是 loopmaxxing 到完全放手;『真相在中间』:让 AI 快速产出够格的布局与基础实现,人则拥有最后 20%——品味、上下文、独特视角在这里进入产品。『人需要目的感,想在自己创造的东西里扮演角色;和 agent 一起工作时,你会对产品更有主人翁感。』与此同时职业边界在坍缩:『设计师在往代码走,工程师在往设计走,这些世界在相撞。』纯翻译层的工作(把 Figma 转成代码、把界面弄得看起来还行)面临自动化,而『做什么(the what)』和判断会活下来——所以设计师要『向上移一层去想 what』,PM 和设计师的角色正在合流。Impeccable 里一半用户其实是设计师,他们把它当成通往代码的桥,因为它用他们的语言说话。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">最大的存疑是:Bakaus 在卖 Impeccable,『不会有 auto』既是设计哲学,也是产品定位——它押注『中间地带』是持久的,而非一个会被模型能力抹平的过渡站。如果模型在品味/判断上继续变强(正是 Vol.026 taste-inversion 的轨迹),『最后 20% 永远归人』这条线是可能被侵蚀的。但要把定位和一个更深的、不只是定位的洞察分开:默认审美的收敛是结构性的——越多人共享同一套 skill 和模型,差异化就越依赖那个特异的、个人的视角。这一点绕回 Vol.028 的『契合』和 Vol.026 的 taste:当能力商品化,溢价停在你独有的判断上;skill 能把专家词汇压缩、复制、扩散,但它复制不了『该往哪个方向 bold』这个决定本身。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这条是深读一的可操作补丁:如果你在搭工厂(Vol.029),skill engineering 就是你把判断编码进工厂的方式——但要把它做成一套操控词汇,而不是自动驾驶。两条具体。第一,当你把一条工作流固化成 skill,重投入在『词汇层』:把你的领域术语操作化——把『合规/在品牌调性内』『高信号』『高风险』定义成可检查的具体含义,让一个非专家操作员也能像你的专家那样操控 agent。这套被压缩的词汇既是可迁移的资产,又天然充当循环里的 eval / judge(直接接上 Vol.029 的 recipe)。第二,警惕收敛陷阱:如果各团队都靠同一批现成 skill 和模型,产出会向供应商的默认审美同质化;边缘在最后 20% 的视角上,所以要配置并奖励『注入视角』的人,并把『向上移一层去想 what』当成那些工作原本是翻译层的人真正的再培训路径——而不是让他们和被自动化的翻译工作一起沉没。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“An adjective with nothing behind it is just a nice apostrophe. You really have to tell the agent what you mean.”</p><p class="cn">一个背后什么都没有的形容词,只是个漂亮的撇号——你必须告诉 agent 你到底指什么。</p></div><div class="quote"><p class="en">“There is no auto, and there will be no auto.”</p><p class="cn">没有 auto,也不会有 auto。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 6 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF · 反炒作</div><div class="c"><div class="t"><a href="https://www.latent.space/p/aiewf-daily-dispatch-agency">Please stop the AI Confidence Theater(Lenny&#x27;s / Elena&#x27;s Growth Scoop)</a></div><div class="v">一条被大量转发的反炒作檄文:满屏『AI 改变了我人生』的 LinkedIn/X 帖子制造集体焦虑,而作者(在 AI 公司、全天用 AI)开始对每个这么说的人只回一句『Cool. Show me.』——多数时候看到的只是总结 Slack、回邮件、跑定时扫描这类基础工作流,真正『拿走就会让你工作崩掉』的极少。危害不是无害的:虚假吹捧在偷走人们与 AI 工具真实『啊哈时刻』的机会,让人一看演示不 work 就断定 AI 全是 BS。这条是今日能动性主题的情绪侧翼,也直接呼应深读一 Shane Gu『别满足于够用、保持敏感度』——诚实展示真实影响、给团队训练与迭代的时间,才是把 AI 用在真业务问题上的前提。</div></div></div><div class="row"><div class="k">BRIEF · 判断力</div><div class="c"><div class="t"><a href="mailto:reader-forwarded-email">Shreyas Doshi:产品构建者的根本认知偏差</a></div><div class="v">Shreyas 点出几乎每个有激情的产品人都有的复合偏差,由四条信念拧在一起:『我的产品很好,只是营销/分发不行』『对手成功主要靠营销/分发』『我的产品比对手好』『只要不断把产品做得更好就能成功』。从合格到卓越的产品人,前提是在自己身上看见这个偏差、理解每条陈述如何各自站不住、并识破贯穿其间的基本逻辑错误——而这通常只随硬碰硬的经验才来,且有经验的人也未必能到达。放在今日语境里,这是深读一『判断/理解不能外包』在产品决策层的注脚:AI 能加速执行,消不掉这个需要自我反省才能破的认知盲区;它续着 Vol.026 taste / Vol.028 契合——真正稀缺的是看清自己产品到底好不好的判断力。</div></div></div><div class="row"><div class="k">BRIEF · Web</div><div class="c"><div class="t"><a href="https://www.latent.space/p/the-website-of-the-future">Adobe『agentic sites』:未来的网站可能为每位访客实时组装(audience of one)</a></div><div class="v">Adobe 首席科学家 Carlos Sanchez 在 AIEWF 演示『agentic site』:根据访客意图实时从公司既有内容里检索、组装并个性化整页——一个对露营感兴趣的人看到的咖啡机站会围绕『户外做咖啡』重排文案与选品;延迟控制在一到两秒,每页推理成本约一到两美分,且『只会更便宜更快』。但他给出与深读一同频的警告:『用 AI 很容易造东西,但很难知道该造什么』;当 agent 代表品牌生成体验时不能整站放手,否则会偏出品牌边界——既有内容是 grounding 语料,系统是检索而非凭空发明。是 loop/自动化主题在 Web 侧的镜像,也是『人定义目标、守边界』这一能动性论点最贴地的一个落点。</div></div></div><div class="row"><div class="k">SKIM · 能源/算力</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=5Xvbq_zvOQ4">No Priors:核能如何解锁能源充裕(Valar Atomics 创始人 Isaiah Taylor)</a></div><div class="v">Valar Atomics 宣称已用一座在运核反应堆直接给一块 NVIDIA Blackwell 供电、驱动了『全球首个核能供电网站』,以此对比整个核能行业还停在仿真与纸面设计。与本卷能动性主线关联弱,但它是 AI 算力→能源约束这条长线的一个具体信号点:模型/工厂/循环的尽头是电力,谁能更快把核能从纸面推到裂变实机,谁就握住下一层的成本曲线。放 skim,供关注算力-能源耦合的读者存档。</div></div></div><div class="row"><div class="k">SKIM · 重复</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=ztCLWKwyMJY">Fable 5 回归全家桶(AI Daily Brief / Tom&#x27;s Marketing / YouTube)+ autoresearch 原访谈重现</a></div><div class="v">多条围绕 Claude Fable 5 回归的实操内容(AI Daily Brief『Fable 回来了先试什么』、Tom&#x27;s Marketing『顶级营销人拿 Fable 5 做什么』、YouTube『7 月 7 日前别浪费 Fable 5 的五个用例』)——出口管制解除后 Fable 5 在 Claude 订阅内免费到 7/7、用满 50% 周额度即停,催生越狱、护栏收紧与监管不透明的讨论。这批是 Vol.029 skim『Fable 5 回归』的延续与展开,归重复不再深挖。另:Introspection/Gavrilescu 的 autoresearch 原访谈在窗口内再次出现(source 同 Vol.029 深读二 https://www.latent.space/p/autoresearch-introspection),已在上一卷作为深读处理,本卷不重复。</div></div></div><div class="row"><div class="k">SKIP · 安静日/无正文</div><div class="c"><div class="t"><a href="https://www.latent.space/p/ainews-not-much-happened-today-900">Latent Space [AINews]『今天没什么发生』· 两条薄内容播客</a></div><div class="v">Latent Space 的 AINews 明确标注又是安静的一天,无实质增量;『Why is AI so bad at design?』与『Codex App 若在 2025 年 11 月发布就会失败』两条 Lenny&#x27;s Podcast 抓取正文不足 1KB、无有效转写,跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.030 · 新观点 6 · 累计 387 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-04 06:00</b></span>
+  </footer>
+</div></body></html>
