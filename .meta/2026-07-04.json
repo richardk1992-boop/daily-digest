@@ -1,0 +1,10 @@
+{
+  "date": "2026-07-04",
+  "vol": "031",
+  "title": "The Loops Debate — 自动化循环到底 work 不 work:AIEWF 收官日的一场诚实审判,以及 Vercel『agent 是一种新软件』给出的和解",
+  "subtitle": "loops 的炒作和真正 work 的东西之间有没有落差?正方说循环不可逆、可验证性才是核心;反方说炒作跑赢纪律、该往下降一个抽象层、买再多 token 也编排不掉你的问题。Amplify 调查坐实矛盾:95% 用 agent、89% 能写数据,却没人搞定控制层、59% 担心 AI 代码在造长期负债。Vercel 的 Andrew Qu 给出和解:agent 是一种新软件,答案不是全自动也不是全人工,而是为每个任务选一个合适的反馈循环。承接 Vol.029 工厂、Vol.030 能动性,这是第三拍:放大规模前先诚实测一测你的循环 work 不 work。",
+  "deep_count": 2,
+  "brief_count": 3,
+  "skim_count": 3,
+  "skip_count": 0
+}
