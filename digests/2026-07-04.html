@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Loops Debate — 自动化循环到底 work 不 work:AIEWF 收官日的一场诚实审判,以及 Vercel『agent 是一种新软件』给出的和解 — Vol.031</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.031</span>
+      <span class="chrome">2026-07-04 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Loops Debate — 自动化循环到底 work 不 work:AIEWF 收官日的一场诚实审判,以及 Vercel『agent 是一种新软件』给出的和解</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.029 全行业收敛到一个词 Loop,Vol.030 集体为『人的能动性』辩护;Vol.031 是这条弧线的第三拍——AIEWF 收官日把它送上辩论台做一场诚实审判:loops 的炒作和真正 work 的东西之间,到底有没有落差?正方(Ralph Loop 作者 Geoffrey Huntley、Keycard 的 Ian Livingstone)说循环不可逆、可验证性(verifiability)才是核心;反方(HumanLayer 的 Dex Horthy、Subroutine 的 Greg Pstrucha)说炒作跑在纪律前面、该往下降一个抽象层、买再多 token 也编排不掉你的问题。Amplify 年度调查坐实了这个矛盾:95% 用 agent、89% 能写数据,却『没人搞定控制层』、40% 被成本卡住、59% 担心 AI 代码在制造长期负债。第二篇深读是 Vercel 的 Andrew Qu 给这场辩论的和解——agent 是一种新软件,答案不是全自动也不是全人工,而是『为每个任务选一个合适的反馈循环』。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>loops 辩论的核心不是『循环好不好』,而是 Horthy 说的『在哪个抽象层操作』。回看你正在自动化的那条管线——你是在往上跳一层(让 agent 编排整件事),还是像 Horthy 建议的往下降一层、先在小处迭代把直觉建起来?你有没有『还没真正碰过问题就把它整条自动化』的地方?</li><li>Livingstone 把可验证性(verifiability)拎成核心:一个循环只有在你能验证它的输出时,才值得去加速。你那条循环里,agent 的产出你是真的能验证,还是只是『看起来对』?你是先有 eval / 验证,还是先有吞吐量?</li><li>Amplify 调查里 59% 的人担心今天的 AI 代码正在制造长期负债。你的团队用更低成本做了更多软件——但你在衡量长期可维护性,还是只在衡量速度?那笔正在累积的技术负债,现在谁在替你记账?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="the-loops-debate">
+      <span class="tag">LATENT SPACE / AIEWF · 收官辩论</span>
+      <h3>The Loops Debate:自动化软件工厂现在到底 work 不 work——AIEWF 收官日把炒作和纪律摆上台对质,『我们现在像火车司机,活儿就是让火车别脱轨』</h3>
+      <div class="src">Latent Space · AIEWF Daily Dispatch(Richard MacManus)——正方 Geoffrey Huntley(Ralph Loop)/ Ian Livingstone(Keycard);反方 Dex Horthy(HumanLayer)/ Greg Pstrucha(Subroutine);主持 Allie Howe;附 Mike Krieger(Anthropic Claude Tag)/ Barr Yaron(Amplify 调查)/ Theo Browne / Garry Tan(YC) · <a href="https://www.latent.space/p/aiewf-daily-dispatch-locomotives">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">Vol.029 让整周收敛到『软件工厂/Loop』的共识,Vol.030 是它的反作用力(人的能动性辩护),Vol.031 则是这条弧线的第三拍——收官日主持人 Allie Howe 一句话把它送上辩论台:『loops 背后的炒作,和实践中真正 work 的东西之间,到底有没有落差?』这不是又一次为循环欢呼或反对,而是一场诚实的对质:正方说循环不可逆、可验证性才是本质;反方说炒作跑在纪律前面、真正需要的是往下降一个抽象层。Amplify 的年度调查把整场矛盾坐实成数字——能力全面起飞,控制层却没人搞定。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">正方:循环不可逆,可验证性才是核心;而且『试—学—用』本来就是软件开发的循环,问题只是能多快加速它。</p><p class="w">Ralph Loop 作者 Geoffrey Huntley 开场就定调:『它不可逆,会一直在。我不觉得自己会回到手写代码。』Keycard CEO Ian Livingstone 给出更本质的论证——真正重要的是可验证性(verifiability),而验证可以对任何代码做,不管它是怎么产生的;并且『一个循环本就是「我试一个东西、我学到一个东西、我应用一个东西」的核心;我们谈的无非是能多快加速这个过程』。Huntley 还贡献了本卷的封面比喻——loopmaxxing 之下人的角色:『我们现在有点像火车司机了。我们的活儿,就是让火车别脱轨。』人没有离开循环,而是从『开车的』变成『守着别脱轨的』。这条正好落在 Vol.030『outer loop 是能动』的延长线上。</p></div><div class="pillar"><p class="p">反方:炒作跑在纪律前面;别往上跳一个抽象层,反而该往下降一层——买再多 token 也编排不掉你的问题。</p><p class="w">HumanLayer 的 Dex Horthy 先把立场划清:『核心不是循环好不好——Kubernetes 就建在控制循环上,但那是确定性的循环。』他真正的忧虑是『炒作正在跑赢纪律』:『我没看到证据说我们已经到了可以直接往上跳一个抽象层(让 agent 掌管写代码)的地步;真要说,我反而认为我们该往下降一层。』他反对工厂式的端到端自动化,因为那样『你永远碰不到问题本身』,主张从小处开始、用 agent 循环迭代、把直觉建起来,而不是一上来就整条自动化。Subroutine 的 Greg Pstrucha 从经济性补刀:agentic 循环的成本不可持续,你『没法靠买更多 token 把问题编排掉』。连正方 Huntley 都承认工厂『还没在市场里跑通,这是前沿思考』。</p></div><div class="pillar"><p class="p">Amplify 年度调查把这场辩论坐实成数字:能力翻倍起飞,控制层却没人搞定,近六成人担心在制造长期负债。</p><p class="w">Barr Yaron 的 2026 AI 工程师调查给了辩论一个现实底座:95% 的受访者现在用 agent(约为去年两倍),用 agent 的团队里 89% 说 agent 能写数据(去年是 52%)——『agent 不再只是读、总结、起草,它们在系统内部采取行动了。』但控制手段仍原始:人工审批和权限是仅有的两大护栏,『没有人搞定 agent 的控制层』。成本是真约束:40% 说 AI 成本经常限制他们用 AI 的野心,token 用量已是第二受关注的生产指标。最尖锐的一条:59% 的人担心今天的 AI 生成代码正在制造长期负债——实验更便宜、产量更多,和质量、可维护性并不是一回事。Anthropic 的 Mike Krieger 谈内部模型 Claude Tag(更委派、更异步、更主动)时也承认,团队正『卡在审查上,卡在人把事情想清楚的能力上』——这就是早期软件工厂在实践中的真实瓶颈。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这是一篇辩论日报,两边其实都在卖自己的书:Huntley 卖 loopmaxxing、Horthy 的 HumanLayer 卖『人在循环里』的工具,立场天然对立。但别把它读成一场势均力敌的口水战——真正有信息量的是 Horthy 那句『核心不是循环好坏,而是你在哪个抽象层操作、那个循环是不是确定性的』。Kubernetes 也是循环,但它是确定性、可验证的循环;今天的争议在于把不确定的 agent 循环直接架到最高抽象层,却没有配套的验证与控制。所以正反两方其实指向同一个答案:可验证 + 确定性的环节可以放心加速(Livingstone),不可验证 + 需要直觉的环节要先降一层、把问题摸透(Horthy)。那个哭笑不得的收尾细节最能说明问题——辩论结束要举手投票,舞台灯太亮,主持和辩手都数不清有几只手举起来,一次纯粹的『人类失败』;真需要自动化的,或许是先把灯调暗这种确定性小事,而不是把整个判断层一口气交出去。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这条把三卷合成了一个完整闭环:Vol.029 让你搭工厂、把内层执行自动化;Vol.030 让你显式守住外层那个定义目标、承担责任的节点;Vol.031 则要求你在放大规模之前,诚实测一测你的循环到底 work 不 work。三条具体做法。第一,采纳 Horthy 的纪律:任何一条你打算端到端自动化的管线,先从小处迭代、在真实问题上把直觉建起来,别在还没碰过问题时就整条交给 agent——买更多 token 编排不掉一个你根本没理解的问题。第二,把可验证性当成加速的闸门(Livingstone):一个环节只有当你能独立验证它的产出时才值得让循环全速跑;所以先建 eval / 验证,再谈吞吐——没有验证的循环,跑得越快脱轨越狠。第三,盯住那个 59% 的负债信号:更便宜的实验和更多的代码不等于更好的系统;把长期可维护性、而不只是交付速度,列进你的生产指标,否则今天省下的时间会变成明天要还的技术负债。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“The hype is outrunning the discipline. I actually think we need to step down an abstraction level, if anything.”</p><p class="cn">炒作正在跑赢纪律。真要说,我反而认为我们该往下降一个抽象层。</p></div><div class="quote"><p class="en">“You can&#x27;t orchestrate your problems away by buying more tokens.”</p><p class="cn">你没法靠买更多 token 把你的问题编排掉。</p></div></div>
+    </article>
+    <article class="deep" id="agents-new-software">
+      <span class="tag">LATENT SPACE / AIEWF · Vercel</span>
+      <h3>Vercel 的 Andrew Qu:agent 是一种新软件——给 loops 辩论的和解,答案不是全自动也不是全人工,而是『为每个任务选一个合适的反馈循环』</h3>
+      <div class="src">Latent Space · 专访 Andrew Qu(Vercel Chief of Software,MCP 库 / skills.sh / eve 框架作者) · <a href="https://www.latent.space/p/vercel-agents-new-software">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">如果深读一是把 loops 辩论摆上台对质,这一篇就是给它的和解。Vercel 的 Chief of Software Andrew Qu 提出:agent 是一种真正的新软件——它不像 web app 那样可预测,交互、界面、输出都远更动态,因此需要一套新的原语(context / tools / resumability / long-running)。而对『该全自动还是留人在循环里』这个把辩论撕成两半的问题,他给出的答案不是二选一,而是一句工程判断:『为每个任务选一个合适的反馈循环。』</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">agent 是新软件,不是又一种 app:基础设施看着像,但交互/界面/输出的动态性逼你换一套原语。</p><p class="w">Qu 直言:『我认为 agent 是一种新型软件。它们不像 web 应用那样可预测。基础设施可以长得类似,但交互、界面和输出要动态得多。』这改变了你构建它们的方式——你需要为上下文、工具、可恢复性(resumability)、长时任务准备不同的原语。Vercel 的框架 eve 正是从自家 vibe-coding 产品 v0 的一堆『纸割伤』里长出来的:切换模型/供应商、加 fallback、让运行可恢复——这些现成工具都没解决,于是被沉淀成可复用的原语再组装成 eve。他还给了一条挑选标准:适合交给 agent 的,往往是『重复但仍需要一点推理』的任务——不是固定自动化,因为系统得解读情境、决定怎么做。这正是 Vol.029『软件工厂』落到框架层的具体形态。</p></div><div class="pillar"><p class="p">对 loops 辩论的正面和解:不是全自动、也不是全人工,而是为任务选一个合适的反馈循环。</p><p class="w">面对深读一那场撕裂的辩论,Qu 给的答案冷静而可操作:『我不认为未来是全自动循环,也不认为是全程人在循环里。关键是选一个契合任务的反馈循环。』具体判据——如果任务定义清晰、你知道最终产出该长什么样,让循环一直跑到完成是合理的;而对更需要小心、更外科手术式的工程工作,你应该时不时回来检查、确保自己在正确地引导模型。这句话把 Vol.030 的『人的能动性』从一句立场翻译成了设计动作:能动性不是『永远守着整个外层』,而是『按任务的可定义性和风险,决定这条循环要不要人、在哪个点插进来』——恰好与深读一 Livingstone 的可验证性、Horthy 的『降一层』收敛到同一处。</p></div><div class="pillar"><p class="p">Skill = 给模型『前向纠错』过时知识;而 web 正在分叉成两套体验——给人看的视觉版,给 agent 读的结构化版。</p><p class="w">Qu 给了 skill 一个 Vol.030 没强调的功能:前向纠错(forward-correct)。模型常带过时信息——比如还在推荐 Vercel 几年前就弃用的 Postgres;一个 skill 可以直接告诉 agent『它已废弃』并把它导向当前方案。『在公司能审计并更新每一份旧内容之前,skill 提供了一种给模型前向纠错的办法。』这把 skill 从 Vol.030 的『被压缩的专家词汇』补上了另一半:它也是让快速变化的组织事实跑在模型陈旧训练之前的维护手段。更前瞻的一条是 agent 可读的 web:Vercel 的报告显示 bot 流量在涨、人类流量停滞,于是他们已经在做——检测到是 agent 发的请求就直接返回 Markdown,而不是逼它去解析给视觉浏览器写的 HTML;未来一份内容两套体验,人拿视觉版,agent 拿机器可读版。他的收尾很直接:『Vercel 自己正在变成一个 agent。』</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">要把洞察和定位分开:Qu 是 Vercel 的人,eve 框架、skills.sh、『把平台本身变成 agent』既是判断也是生意,『agent 可读的 web』这条尤其押注在 bot 流量经济学会持续这个前提上——如果 agent 访问没有转化成价值,这套双体验可能只是成本。但两个洞察不依赖它的定位也成立。其一,『为任务选反馈循环』是对深读一那场二元辩论最干净的拆解——它把『自动 vs 人工』从意识形态之争降维成一个按可定义性与风险来做的工程决定,与 Livingstone 的可验证性、Horthy 的降一层完全同构。其二,skill 作为前向纠错,正面回答了深读一里 59% 的负债焦虑的一个侧面:模型的陈旧知识本身就是一种持续负债,而 skill 是把组织的当前事实喂回循环、按住这种漂移的低成本手段。这两点绕回 Vol.028 的契合与 Vol.026 的 taste——能力商品化后,溢价停在你对『这条任务该配哪种循环、该纠正哪条过时事实』的判断上。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这条是深读一的落地补丁,把辩论变成三个可执行动作。第一,别再问『要不要全自动』——对每一条工作流单独问『它配哪种反馈循环』:定义清晰、产出可验证的(接上 Livingstone),让循环一路跑到底;模糊的、外科手术式的,就设检查点、由人来 steer。这就是深读一那场辩论的操作版答案,一条一条地判,而不是整体站队。第二,把 skill 当成前向纠错工具用:盘一遍你的产品/领域里模型最容易搞错、最过时的事实(废弃的 API、改过的口径、新的合规要求),写成 skill 把 agent 导向当前真相——这正是那批担心『长期负债』的人缺的维护纪律,模型的陈旧知识本身就是负债的一种。第三,如果你的产品有内容或 API 面向外部,认真对待 agent 可读这件事:当越来越多访问来自 agent,给它们返回结构化/Markdown 而不是给人看的 HTML,是一笔现在就值得观察、可能很快要下注的基础设施投资。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“I don&#x27;t think the future is all autonomous loops, and I don&#x27;t think it is all human-in-the-loop. It is about choosing a feedback cycle that fits the task.”</p><p class="cn">我不认为未来是全自动循环,也不认为是全程人在循环里。关键是为任务选一个合适的反馈循环。</p></div><div class="quote"><p class="en">“Agents are a new type of software. They are not as predictable as web applications.”</p><p class="cn">agent 是一种新型软件,它们不像 web 应用那样可预测。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 6 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF · 开源工具</div><div class="c"><div class="t"><a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247535003&amp;idx=1&amp;sn=e73f8a0003f62a7a972188835a222c7e">逛逛GitHub:又挖到 3 个项目(intelligent-terminal / Claudian / book-to-skill)</a></div><div class="v">三个都踩在本卷主线上。① 微软 intelligent-terminal——Build 2026 发布的 Windows Terminal 实验分支,把 AI Agent 原生塞进命令行,Agent 面板自动读 Shell 输出、命令跑挂一键喂错误上下文;基于 Agent Client Protocol(ACP)做到协议无关,Copilot / Claude Code / Codex / Gemini CLI 平等支持,只做本地传输层不调云、不持久化会话。② Claudian——把 Claude Code 嵌进 Obsidian vault、让整个笔记库变成 agent 工作目录,7 个月 1.3 万 Star(正是本观点索引 _claudian-vp-index 血脉里的那个 Claudian)。③ book-to-skill——把技术书『编译』成符合 Agent Skills 标准的结构化技能,路线与 RAG 相反(『RAG indexes a shelf, book-to-skill masters a spine』),作者自测答一题从 ~77,866 token 降到 ~5,000,省 15.6 倍。三者合起来是深读二『skill 作为可移植知识』的三个现成注脚。</div></div></div><div class="row"><div class="k">BRIEF · 开源工具</div><div class="c"><div class="t"><a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247535021&amp;idx=1&amp;sn=49cc9d7231f38185eac083f876c2fd26">逛逛GitHub:browser-use 团队新开源 video-use(AI 剪视频 Skill)</a></div><div class="v">做出 10 万 Star 明星项目 browser-use 的团队,把同一套方法论搬到视频剪辑:装进 Claude Code / Codex,说一句『剪成发布视频』,它扫素材→提方案→等确认→出 final.mp4。最有意思的是绕开视频帧——20 分钟素材按帧喂多模态要 4500 万 token 且信噪比烂透;video-use 改用 ElevenLabs Scribe 做词级时间戳转写,打包成约 12KB markdown 作为 LLM 主视图,只在拿不准时才按需调 timeline_view 合成图(与 browser-use 给 LLM 结构化 DOM 一脉相承)。整条流水线转写→打包→推理→EDL→渲染→自评估,SKILL.md 里 12 条规则把一次性生成变成有质量兜底的工程。但作者诚实给了差评:『效果感觉一般』,不能恰当地为某句话挑画面、画质还变模糊——正好是深读一『炒作跑赢纪律』的一个民间实测样本。</div></div></div><div class="row"><div class="k">BRIEF · 判断力</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/fciOhYZOZuo">Lenny&#x27;s:为什么产品这个角色必须留下来</a></div><div class="v">一条短评把 Vol.030 的分化焦虑接到了组织层:『我听到很多公司说要取消产品这个角色,让所有人都变成 builder——我觉得这是个糟糕透顶的主意。』危险不在于少一个岗位,而在于取消角色会顺手取消掉『某件事是一门有可知最佳实践的专业』这个认知——产品这门被积累起来的学科、那些真实试过和失败过的流程,会因为『我也写了点代码』就被整个抛弃。作者点了工程师常犯的傲慢:『工程有技艺(写代码),别的角色只是在 vibing』——但『你会用 Excel,不等于你能在财务团队干活』。是深读一 Horthy『炒作跑赢纪律』和 Vol.028 专精化在组织人事层的注脚:能力普及不等于专业消失。</div></div></div><div class="row"><div class="k">SKIM · 生成式媒体</div><div class="c"><div class="t"><a href="https://deepmind.google/blog/google-deepmind-and-a24-announce-first-of-its-kind-research-partnership/">Google DeepMind × A24 宣布首创式研究合作</a></div><div class="v">DeepMind 与以『导演优先』著称的电影厂牌 A24 达成一项聚焦研究的合作,跨多个项目、随时间演进,让艺术家参与塑造面向电影工作流的新工具与技术;Google 同时对 A24 做了投资。初期焦点是弥合前沿技术与下一代娱乐之间的落差,具体的技术产出与创作里程碑会随双方研究者并肩迭代而演化。与本卷 loops 主线关联弱,但它是 gen-media 从演示走向真实创作流程(把创作者的判断接回工具设计)这条线的一个机构级信号点,供关注生成式媒体落地的读者存档。</div></div></div><div class="row"><div class="k">SKIM · 入门/赞助</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=NDTWK6vIgmM">I Tested Gemini Spark:Google 的 AI agent 21 分钟能干什么(赞助内容)</a></div><div class="v">一条实测视频,把 Gemini Spark 定位成『最适合新手的个人 agent』,论点是 9 亿 Gemini 月活是从聊天机器人过渡到 agent 的天然桥梁,而目前只有约 0.04% 的人真正用上了 agent。内容对已经在做 agent 工程的读者增量有限,且为赞助视频、立场偏正面,归 skim。它的价值是提供了本卷辩论的另一端坐标:当行业在争论自动化循环 work 不 work,绝大多数普通用户其实连 agent 的门都还没进——炒作与渗透率之间的落差不只在工程圈。</div></div></div><div class="row"><div class="k">SKIM · 重复</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/F23u22awHjo">No Priors:NVIDIA 的 AI 芯片现在跑在核能上(Valar Atomics)</a></div><div class="v">Valar Atomics 称已用一座在运核反应堆直接给一块 NVIDIA Blackwell 供电、驱动了『全球首个核能供电网站』,页面还实时显示为送达这张网页裂变了多少铀原子。这是 Vol.030 skim『核能解锁能源充裕』的同源重复片段,归重复不再深挖;它仍是 AI 算力→能源约束这条长线的信号点——模型/工厂/循环的尽头都是电力。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.031 · 新观点 6 · 累计 393 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-05 06:00</b></span>
+  </footer>
+</div></body></html>
