@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Dumb-Pipe Problem — 当循环真的 work 之后:agent 成为软件的默认用户,不被 agent 发现的产品会沦为一根哑管 — Vol.032</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.032</span>
+      <span class="chrome">2026-07-05 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Dumb-Pipe Problem — 当循环真的 work 之后:agent 成为软件的默认用户,不被 agent 发现的产品会沦为一根哑管</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>周末轻卷,只有一条主线但接得很紧:Vol.031 把『循环到底 work 不 work』摆上台审判,Vol.032 顺着 Vercel 那条『agent 可读的 web』往前推了一步——当循环真的 work,谁在用你的软件?答案是 agent,不再是人。今天唯一的深读来自一条短视频:agent 正在成为大多数网站和应用的默认用户,Cloudflare 数据显示 bot 流量已超过人类流量;而绝大多数产品仍在为『人点按钮』而设计,于是面临一个残酷前景——沦为 agent 的『哑管(dumb pipe)』,就像当年有线电视沦为互联网应用的哑管。给现有 app 套一个聊天机器人救不了它:一个被困在单个应用、只有该应用上下文的 chatbot,竞争不过一个带着你个人上下文、能跨多个 app 干活的 agent。真正的生存线是:你的产品能不能通过 API / CLI / MCP 被 agent 发现并操作。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>把你的产品想象成一个只有 agent 会来访问的服务——它还能被『发现』吗?一个 agent 想完成用户的目标,它能通过 API / CLI / MCP 找到你、调用你、拿到结构化结果吗,还是只能对着一个为人眼设计的界面干瞪眼?如果是后者,你已经在成为哑管的路上了。</li><li>『给产品加个 AI 聊天机器人』是过去一年最流行的动作。但视频里的判断是:一个困在单应用、只有本应用上下文的 chatbot,打不过带着用户全局上下文、能跨 app 编排的外部 agent。回看你自己或你在用的产品——那个 chatbot 是在真正帮用户跨系统完成目标,还是只是一个更花哨的站内搜索?</li><li>如果 bot 流量确实在结构性地超过人类流量,那你为『人』优化的每一分投入(视觉、交互、点击路径)与为『agent』优化的投入(结构化输出、可调用接口、机器可读内容)之间,比例对吗?你上一次认真问『我的东西对 agent 好不好用』是什么时候?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="agents-default-user">
+      <span class="tag">SHORT · agent 经济</span>
+      <h3>Agents will use apps more than humans:agent 正在成为软件的默认用户,不被 agent 发现的产品会沦为一根哑管</h3>
+      <div class="src">YouTube Short(作者见原视频)——论点:agent 取代人类成为网站/应用的默认用户;Cloudflare 数据佐证 bot 流量已超人类流量 · <a href="https://www.youtube.com/shorts/79DPXhipR8I">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  8/10</div>
+      <div class="claim">这条短视频只讲一件事,但它是 Vol.031 那条『agent 可读的 web』的自然下一拍:当自动化循环真的 work 起来(Vol.031 的审判结论),软件的默认用户就不再是人,而是 agent。作者的判断很直接——大多数产品仍在为『人点按钮』设计,但 AI agent 很快会代替我们去读、写、买、浏览、操作软件;Cloudflare 的数据显示 bot 流量已经超过人类流量。于是每个传统 app 都面临一个生存问题:要么被 agent 通过 API / CLI / MCP 发现并调用,要么沦为一根只负责传输、不再被人直接触碰的『哑管』。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">默认用户正在换人:agent 会代替人去读、写、买、操作软件,而 bot 流量已经超过人类流量。</p><p class="w">作者开门见山:『大多数人还没意识到,agent 将成为大多数网站和应用的默认用户,而不是真人。』很多产品今天仍然是为人点按钮而设计的,但 AI agent 很快会越来越多地代替我们去读、写、买、浏览和操作软件。他给的硬证据是 Cloudflare 的数据——网站的 bot 流量已经超过了人类流量;并且这与他自己的体感一致:他依赖 Hermes、Codex 这类 agent 替他浏览网站、操纵传统应用。这正是 Vol.031 Vercel 深读里『bot 流量在涨、人类流量停滞』那条趋势的独立佐证,只是这次把结论说得更硬:换人不是未来时,是进行时。</p></div><div class="pillar"><p class="p">不被 agent 发现的传统 app,风险是沦为『哑管』——就像有线电视沦为互联网的哑管。</p><p class="w">作者用了一个很锋利的类比:如果你只用 Codex 帮你编辑 Google 文档,你可能再也不会打开 Google Docs 的界面本身——于是今天的 app 有沦为『明日 agent 的哑管(dumb pipe)』的风险,正如当年有线电视沦为互联网应用的哑管:管子还在,钱和注意力却流到了跑在管子上的那层。这把 Vol.031『agent 可读的 web』从一个基础设施选项,升级成一条竞争生死线——当价值捕获点上移到 agent 那一层,只提供底层能力、却不被 agent 直接发现和调用的产品,利润和用户关系都会被上面那层抽走。</p></div><div class="pillar"><p class="p">给 app 套个聊天机器人救不了它:困在单应用的 chatbot,打不过带全局上下文、能跨 app 编排的 agent。</p><p class="w">作者点名了过去一年最流行的自救动作并判它无效:『很多现有 app 基本上是在给产品加一个 AI chatbot,但我认为这行不通。』原因是上下文的不对称——一个被困在单个应用、只有该应用上下文的 chatbot,竞争不过一个带着用户个人上下文、能跨多个 app 完成工作的 agent(如 Hermes、Codex)。他举了自己的例子:每天早上的 morning brief 由 Hermes 从日历、邮件、Slack 三个应用拉取信息合成——单个 app 的 chatbot 在这种跨系统任务上根本没法比。结论落到行动上:『如果你的产品不能被 agent 通过 API、CLI 和 MCP 发现,它可能等于不存在。』</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这是一条观点鲜明的短视频,不是研究报告,得打两个折扣。其一,作者有明显的立场——他日常重度依赖 Hermes / Codex 这类 agent,视角天然偏向『agent 优先』的世界,容易把自己的前沿用法当成大众现状;而 Vol.031 的 skim 恰恰提醒过,普通用户里只有约 0.04% 真正用上了 agent,渗透率远没到『默认用户已换人』。其二,『bot 流量超过人类流量』这个 Cloudflare 数字里,相当一部分历来是爬虫、扫描、攻击流量,不等于都是替人干活的 agent——把它直接读成『agent 已接管』是过度解读。但剥掉夸张,内核依然硬:价值捕获点正在上移到 agent 那一层(这与 Vol.031 Vercel『Vercel 自己正在变成一个 agent』完全同构),而『哑管』这个类比精准命中了平台竞争史反复验证过的规律——谁拥有用户关系和上下文,谁就把只提供底层能力的一方压成管道。所以这条的正确读法不是『明天就成真』,而是『方向确定、时点存疑』:该现在就为 agent 可发现性下注,但别按作者的时间表恐慌。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这条把前几卷的抽象讨论落到一个具体的产品拷问上:当循环真的 work(Vol.031),你的每一个面向用户的产品/服务,默认用户可能正在从人变成 agent——现在就该为这件事做三件事。第一,做一次『agent 可发现性』体检:挑一个核心用户目标,假装你是一个只能用 API / CLI / MCP 的 agent,看它能不能不碰你的可视界面就把这件事干成;干不成的地方,就是你正在沦为哑管的地方。第二,别把『加个站内 chatbot』当成 AI 战略——一个只有本产品上下文的 chatbot 打不过带全局上下文的外部 agent;更值钱的投入是把你的能力做成结构化、可被外部 agent 调用的接口,以及把你独有的上下文/数据变成 agent 拿不到的护城河。第三,重新看你为『人』和为『agent』分配的资源比例:如果 bot 流量的趋势对你的品类成立,那么结构化输出、机器可读内容、稳定 API 这些『给 agent 用的东西』,应该从边缘需求挪进主干路线图——这正是 Vol.031 Vercel『一份内容两套体验』在产品侧的具体待办。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Today&#x27;s apps really risk becoming tomorrow&#x27;s dumb pipes for agents, the same way that cable became a dumb pipe for internet apps.”</p><p class="cn">今天的应用真的有沦为明日 agent 的哑管的风险,就像当年有线电视沦为互联网应用的哑管一样。</p></div><div class="quote"><p class="en">“Your product might as well not exist if it&#x27;s not discoverable by agents through APIs and CLIs and MCPs.”</p><p class="cn">如果你的产品不能被 agent 通过 API、CLI 和 MCP 发现,它可能等于不存在。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 2 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF · 开源工具</div><div class="c"><div class="t"><a href="https://mp.weixin.qq.com/s?__biz=MzUxNjg4NDEzNA==&amp;mid=2247535071&amp;idx=1&amp;sn=0da3535ca936aedd3ac618e4179aa756">逛逛GitHub:6 月牛项目盘点(17 个),多 agent 编排 / skill 生态 / 省 token 三条线继续加密</a></div><div class="v">月度盘点,踩在本卷主线上的有几条:① OpenMontage 自称『全球首个开源智能体视频生产系统』,12 条流水线、52 个工具、500+ Agent 技能,单月涨近 3 万 Star——视频类 Skill 复杂度比文本高一个数量级(时间轴/素材/剪辑决策都要建模),正是 Vol.031 video-use 那条线的放大版。② orca(Agent Development Environment)和 herdr(住在终端里的 Agent 多路复用器,Rust,类 tmux)双双主打『并行跑一支 agent 舰队』——当单个 agent 要跑几十分钟,多 agent 管理成了 AI Coding 工具链的必然演化,接上 Vol.031 收官辩论里『loopmaxxing 之下人是调度者』的角色转变。③ pm-skills(68 个 PM Skill + 42 条链式工作流,打包 9 插件)和 codebase-memory-mcp(把代码库索引成持久知识图谱,号称省 99% token)是深读二/Vol.030『skill 作为可移植知识』的两个新注脚;pm-skills 还印证了 Vol.031 book-to-skill 提到的跨 harness marketplace 协议(Claude / Codex 原生、Cursor 复制目录即用)。④ Apple 官方开源 Container(Swift,为 Apple Silicon 优化,每容器一个轻量 VM),单月 2 万+ Star,与 AI 主线弱相关但值得存档。</div></div></div><div class="row"><div class="k">SKIM · GTM/AEO</div><div class="c"><div class="t"><a href="mailto:reader-forwarded-email/7942583ec46665c306e68daf2d3dae34">Substack(Emily Kramer):把 GTM 工具接进 Claude,以及 AEO 的第一步</a></div><div class="v">一条 Substack 笔记推送,两个信号点。其一,7/28 有一场活动,6 家 GTM 公司现场演示各自与 Claude 的连接器(connectors)——是本卷主线『产品要能被 agent 发现/调用』在 GTM 赛道的一个具体落地场景:工具厂商开始把『能接进 Claude』当卖点。其二,提出 AEO(Answer/Agent Engine Optimization)的第一步是『搞清楚 Claude 对你公司了解什么』——SEO 时代优化搜索引擎怎么看你,agent 时代要优化 agent 怎么理解你,正是深读『不被 agent 发现等于不存在』的营销侧对应物。内容偏预告/营销,增量有限,归 skim。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.032 · 新观点 4 · 累计 397 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-06 06:00</b></span>
+  </footer>
+</div></body></html>
