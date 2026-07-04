@@ -1,0 +1,10 @@
+{
+  "date": "2026-07-05",
+  "vol": "032",
+  "title": "The Dumb-Pipe Problem — 当循环真的 work 之后:agent 成为软件的默认用户,不被 agent 发现的产品会沦为一根哑管",
+  "subtitle": "Vol.031 把『循环到底 work 不 work』摆上台审判,Vol.032 顺着 Vercel『agent 可读的 web』往前推一步:当循环真的 work,软件的默认用户从人换成 agent。Cloudflare 数据显示 bot 流量已超人类流量;为『人点按钮』设计的产品面临沦为 agent 哑管(dumb pipe)的风险,就像有线电视沦为互联网的哑管。给 app 套聊天机器人救不了它——困在单应用的 chatbot 打不过带全局上下文、能跨 app 编排的 agent。生存线:能不能被 agent 通过 API / CLI / MCP 发现并调用。周末轻卷。",
+  "deep_count": 1,
+  "brief_count": 1,
+  "skim_count": 1,
+  "skip_count": 0
+}
