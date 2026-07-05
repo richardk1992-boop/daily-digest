@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Inverted PDLC — 当 build 趋近于零成本:产品开发生命周期被倒置,PM 从写文档的人变成综合上下文、设护栏的人 — Vol.033</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.033</span>
+      <span class="chrome">2026-07-06 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Inverted PDLC — 当 build 趋近于零成本:产品开发生命周期被倒置,PM 从写文档的人变成综合上下文、设护栏的人</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Vol.032 说 agent 正在成为软件的默认用户;Vol.033 走进一个真把这件事当真的团队内部——OpenAI 的 Codex 组——看它带来的组织后果。当 build 的边际成本趋近于零,产品开发生命周期(PDLC)被倒置:过去是先花大量前置时间规划、确保工程师只做最重要的事,现在反过来『先什么都做出来,再决定哪些该留』;工程师一个早上就把功能建成既成事实,PM 看完才决定要不要 ship。连带 PM 的角色也翻转:从『想点子、写 PRD 的人』变成『综合上下文 + 设护栏的人』——几个 PM 靠 Codex 综合每天几百个数据点,覆盖大量领域,把时间从写文档挪到做取舍和跟客户对话。心法是『把野心调到 10x 荒谬,它大概能做到 90%』;而最大的未开发红利卡在想象力而非能力。要打的折:OpenAI 是重度 dogfooding 的极端样本,浓度不能直接外推。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果 build 一个可玩原型的成本趋近于零,你团队里『先写 spec 再开工』的默认流程还成立吗?哪些低风险模块可以立刻换成『先让 agent 做出来、再决定去留』?你上一次因为『做出来比讨论快』而跳过一份文档是什么时候?</li><li>把 PM(或你自己)的时间账拉出来看:有多少花在『生产 artifact』(slides / PRD / prototype),有多少花在『综合上下文 + 做取舍 + 跟客户对话』?如果前者能被 agent 大幅吃掉,你愿意把省下的时间挪到哪里——这决定了你在 agent 时代还值不值钱。</li><li>Rohan 说最大瓶颈不是模型能力,而是用户不敢提足够有野心的要求。回看你自己用 agent 的方式:你是在让它做你本来就会做的小事,还是在试探『10x 荒谬』的边界?你有没有一个『如果这能自动化就太疯狂了』的念头,是还没真正丢给 agent 试过的?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="inverted-pdlc">
+      <span class="tag">PODCAST · agent-native org</span>
+      <h3>OpenAI PM Reveals How He Uses Codex:PDLC 被倒置,PM 从写文档的人变成综合上下文、设护栏的人</h3>
+      <div class="src">YouTube 播客访谈(Rohan Varma,OpenAI Codex 产品经理;对谈者为一位从业十余年的 PM)——主题:一个 agent-native 团队内部,agent 如何重塑 PM 的日常与整个产品开发流程 · <a href="https://www.youtube.com/watch?v=fAdFE7y6K2o">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●○  ·  9/10</div>
+      <div class="claim">如果说 Vol.032 是从外部下判断——agent 正在成为软件的默认用户,那这条访谈是从内部给证词:Rohan Varma 作为 OpenAI Codex 组的 PM,描述了一个把『agent 默认用户』当真之后的团队会变成什么样。核心结论有两层,一层是流程:产品开发生命周期(PDLC)被倒置——过去先规划再动手、确保工程师只做最重要的事,现在反过来,『先什么都做出来,再决定哪些该留』;另一层是角色:PM 从『想点子、写 PRD 的人』收敛成『综合上下文 + 设护栏的人』,把大量生产 artifact 的活交给 agent,自己回到判断与取舍。这正是 Vol.032『默认用户换成 agent』落到一个真实组织里的具体形态。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">PDLC 被倒置:从『先规划、后执行』变成『先什么都做出来、再决定哪些该留』。</p><p class="w">Rohan 的原话是产品开发生命周期在很多方面被倒置了(inverted):以前是花大量前置时间做规划,确保工程师只投在最重要的事情上;现在则是反过来——『do everything and then let&#x27;s figure out what actually should go through and in what ways』。他举了 in-app browser 的例子:团队工程师 Adam Fraser 某个早上直接把浏览器建了出来,来上班时对他说『我建了个这个,你觉得呢』,PM 看完才决定『这太棒了,我们该想办法 ship 它』。机制很清楚:当 build 一个可用原型的边际成本趋近于零,前置规划的相对价值就下降,而『看着一堆已经跑起来的解、决定哪个该进产品』的筛选价值上升。所以他说团队现在花很多时间的是 looking at solutions and deciding if we want to ship it,而不是提前把路线图钉死——他甚至想给 roadmap 换个词,因为它暗示了一个 12 个月的远期承诺,而他们其实是『4 周计划』:知道这几周的优先级,执行,4 周后再看新的优先级。</p></div><div class="pillar"><p class="p">PM 角色翻转:从产出 artifact 的人,变成综合上下文、定义护栏的人。</p><p class="w">他说 PM 历史上的核心其实是 information synthesis——围绕大量与客户的交互构建想法。OpenAI 的 Codex 团队 PM 很少却要覆盖很多领域,他直言『只因为有 Codex 才可能』:每天有成百上千个来自企业客户、Twitter 的问题、数据点和 bug,Codex 在前端极其擅长把这些海量信息综合起来,让一个人能带着远超以往的 context 运作。他被临时拉进一个全新项目,20 分钟内就能拿到加入之前发生的所有背景,因为 Codex 接进了 Notion、Linear、email、Google Drive。于是生产 slides / prototype / docs / PRD 这些过去很费劲的 artifact 现在大量交给自动化,PM 得以把时间挪去做真正重要的事——决策、想清楚问题、跟客户对话。当一个项目启动,他做的是想清楚『哪些是关乎产品是否 cohesive、是否契合整体战略的最重要决策』,把它们当作护栏(guardrails)定下来;此外工程师和设计师自主快跑,PM 退到两端——前端的战略规划和后端的 go-to-market。</p></div><div class="pillar"><p class="p">心法是『把野心调到 10x 荒谬』,而最大的未开发红利卡在想象力而非能力。</p><p class="w">访谈开场的金句就是方法论:『aim for something that seems 10x more ridiculous than you ever think it could and it probably can do like 90% of it』。他观察到即便在大型企业,也只有最前沿 5-10% 的工程师在最大化利用 Codex,长尾还停在 pair programming、少委派;而非开发者则『这几年一直只有 ChatGPT』,他们向 chat 提的问题,和真正可以 delegate 给 Codex 的事情,完全不是一个量级。所以他判断产品与 enablement 的最大机会,是让人敢提更有野心的要求——『几乎所有你专业上需要做的事,都应该立刻让 Codex 开始做』。这给 Vol.031 那条 skim(普通用户仅约 0.04% 真正用上 agent)补了一个机制解释:瓶颈主要不在模型能力,而在用户的委派习惯和想象力天花板——能力曲线已经跑到需求曲线前面去了。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这条的最大折扣来自样本:OpenAI 的 Codex 团队是全世界最极端的 dogfooding 现场——他们自己造 Codex、全员 AI-pilled、工程师本身就极其 product-minded,Rohan 说『在办公室里从 A 走到 B 都能听到有人提 Codex』,甚至断言『如果 Codex 挂了,公司会很难受』。这种浓度是幸存者偏差的教科书,不能直接外推到普通组织:大多数公司既没有『工程师一个早上建出一个功能』的人才密度,也没有把整个工具链(Notion / Linear / email / Drive)接进一个 agent 的基础设施。而且『PDLC 倒置』在他们那里 work,一部分前提是每个产品线只有一两个工程师、human-to-human 协作开销极低——一旦团队变大、跨团队依赖变重,『先做完再筛选』的浪费会迅速反噬。此外访谈本身是 Codex 的营销场,乐观是内建的。但剥掉这些,内核依然硬且可迁移:当 build 成本趋近于零,价值就从『生产』转移到『判断与综合上下文』——这与 Vol.032『带全局上下文的 agent 打败困在单应用的 chatbot』完全同构,只是这次把镜头从产品竞争拉到了组织内部的角色分工。正确读法是:方向(PM/团队的价值重心从产出转向判断)确定,而它落地的速度取决于你所在组织的 AI 渗透度与协作复杂度。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这条把 Vol.032 那个抽象的『agent 默认用户』命题,翻译成了对自己团队运作方式的三个具体拷问。第一,做一次 PDLC 体检:挑一个低风险的功能或实验,试着把默认流程从『先写 spec、评审、再排期开工』换成『先让 agent/工程师做出一个可玩原型,再拉着大家决定去留』,亲手感受一下当 build 变便宜之后,前置规划里有多少其实是可以省掉的仪式——省下来的判断力才是稀缺的。第二,重画 PM(以及策划、运营等偏 synthesis 的角色)的时间账:把花在生产 artifact(周报、PRD、对齐材料、汇报 deck)上的时间标出来,问哪些能被 agent 综合掉,然后把腾出的时间明确投向『综合跨系统上下文 + 做取舍 + 跟真实用户对话』——因为当产出被自动化,一个角色的价值就压缩到它做判断和定护栏的那部分。第三,把『把野心调到 10x 荒谬』当成一条团队练习:让每个人写下一个『如果这能自动化就太疯狂了』、但还没真正丢给 agent 试过的念头,挑一个当周去试——Rohan 的判断是,真正的瓶颈不是模型不行,而是我们不敢提足够大的要求,而这个『敢不敢』恰恰是可以刻意训练的。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“The product development life cycle is kind of inverted in a lot of ways, because before it was spend all this upfront time planning; now it&#x27;s do everything and then figure out what actually should go through.”</p><p class="cn">产品开发生命周期在很多方面被倒置了:以前是把所有前置时间都花在规划上,现在是先什么都做出来,再去弄清楚哪些真正应该进产品。</p></div><div class="quote"><p class="en">“Aim for something that seems 10x more ridiculous than you ever think it could, and it probably can do like 90% of it.”</p><p class="cn">把目标定到比你以为的还要荒谬 10 倍的程度,它大概能做到其中的 90%。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 3 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF · agent 能力</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/MBQLYAWhlO4">How Codex learnt to edit videos(Lenny&#x27;s Podcast Short):agent 自建工具——Codex 不是剪辑器,却给自己造了个 Premiere Pro 扩展</a></div><div class="v">一条很短但信号很强的花絮,是本卷深读的能力侧注脚。Codex 本身完全不是视频编辑器、没有任何剪辑 UI,但 OpenAI 的 DX videographer Brent 只是好奇它能不能剪片,Codex 就自己想通了:他用的是 Premiere Pro,于是 Codex『给自己造了一个能装进 Premiere Pro 的扩展』,再通过这个扩展对 Premiere Pro 下指令(比如改时间轴上的 marker)——团队看到这一幕时的反应是『pretty nuts』。这条的意义在于把 Vol.032『不被 agent 发现等于不存在』又往前推了一层:当 agent 能自建缺失的 primitive、自行搭桥,产品方『我没提供官方 API / MCP』就不再是护城河——它照样能绕过你没给的接口来操作你(深读里 Rohan 的 Notion→Sites 例子同理:Notion MCP 没暴露取图能力,Codex 就自己开浏览器进 DOM 抠图)。也顺势接上 Vol.031 的 video-use 那条线。</div></div></div><div class="row"><div class="k">SKIM · 花絮</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/I9QUP8PP6to">I use Codex for everything at OpenAI(YouTube Short):深读访谈的高光切片</a></div><div class="v">深读那期访谈的一个短视频切片,内容是 Rohan 那句被反复引用的『There&#x27;s no way to keep track of all of it — Codex is my only way』:开会时、任何听到不懂的术语或没听说过的事,他就让 Codex 去把上下文全拉回来,一天里好几次发现『有人在做某件我完全不知道、但特别厉害的事』。观点与深读完全重合(PM 靠 agent 做跨系统 context-synthesis),作为独立条目无新增信息,归 skim repeat。</div></div></div><div class="row"><div class="k">SKIM · 冷知识/开源</div><div class="c"><div class="t"><a href="https://github.com/LinXiaoTao/FuckClaude">逛逛GitHub:FuckClaude——一键自测你的浏览器环境有多像 Claude Code 眼中的中国用户</a></div><div class="v">一个小众开源工具(github.com/LinXiaoTao/FuckClaude),把浏览器的六个特征做成 100 分打分模型来估你『看起来有多像中国用户』:系统时区 30 分(如 Asia/Shanghai)、浏览器语言 24 分(zh-CN/zh-Hans)、已装中文字体 20 分(canvas 宽度探测微软雅黑 / PingFang SC)、Intl 区域 10 分、时区偏移 8 分(UTC+8)、Emoji 渲染风格 8 分(推断系统厂商),每项 0-1 相似度乘权重累加,给出 Low/Medium/High 判定。与本卷主线无关,存档为一条关于『客户端指纹如何被用于地域判定』的技术冷知识。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.033 · 新观点 4 · 累计 401 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-07 06:00</b></span>
+  </footer>
+</div></body></html>
