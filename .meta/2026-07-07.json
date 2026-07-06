@@ -1,0 +1,10 @@
+{
+  "date": "2026-07-07",
+  "vol": "034",
+  "title": "The Judgment Premium — 当生成近乎免费:模型质量在商品化,稀缺的变成 taste 与管理",
+  "subtitle": "Vol.033 走进 agent-native 组织,看到价值从『生产』移向『判断与综合上下文』;Vol.034 用两档 How I AI 播客补两个可操作落点。其一(Claire 的 Sonnet 5 评测):当模型质量开始商品化——Sonnet 5 定在便宜中间带、并不自动替代谁——稀缺能力从『生成』移到『评估』;她跑 64 次盲测发现 LLM-as-judge 太宽容、往量表中间聚,人的 taste 在第一眼截图就抓到判官漏掉的坏原型,而让 benchmark 真正 matter 的是可复现(冻结输入、固定 rubric)。其二(Alessio 从手机管理自主 agent):真正的解锁是从『agent prompter』变成『agent manager』——按任务记 token 账、定期精简 skills 文件、用 Linear 当异步状态机。合起来:当生成变便宜,瓶颈移到评估与管理,把品味与积累的上下文固化下来才是护城河。折扣:样本是极度 AI-forward 的 builder,单人 taste、模型迭代快导致快照易过时。",
+  "deep_count": 1,
+  "brief_count": 1,
+  "skim_count": 2,
+  "skip_count": 4
+}
