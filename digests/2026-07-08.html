@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Human Bottleneck — 六月改写了 AI 的成本与主权底座,而真正卡住价值的不是模型,是组织与人 — Vol.035</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.035</span>
+      <span class="chrome">2026-07-08 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Human Bottleneck — 六月改写了 AI 的成本与主权底座,而真正卡住价值的不是模型,是组织与人</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>六月被复盘为后 ChatGPT 时代最关键的一个月:成本上从 token 补贴切到 token 稀缺,治理上政府用出口管制直接干预前沿模型访问——两条线一起把瓶颈从『模型够不够强』推向『组织与人能不能吸收』;而这场转变的人力代价,是一份把科技从业者劈成 amplified 与 shaken 两半的情绪调查。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果访问最强模型随时可能因成本预算或政府许可而中断,TikTok Gaming 的 AI 工作流有没有『主权与成本』的第二条腿——还是全部押在单一闭源前沿模型上?</li><li>我们团队每周有多少时间其实花在『bot sitting』(喂上下文、查输出、重跑)上?这部分隐形工时若不显性化,增效数字是不是被高估了?</li><li>当 AI 把人劈成 amplified 与 shaken 两组,而『AI 对自我认同做了什么』比职级更能预测去留——我们是在主动帮 shaken 的人过渡,还是只在喊『用 AI 否则淘汰』然后照样裁员?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="june-inflection">
+      <span class="tag">THE AI DAILY BRIEF · 稀缺与主权</span>
+      <h3>六月:成本切到稀缺、政府切进主权,瓶颈从模型移到组织</h3>
+      <div class="src">The AI Daily Brief(NLW),六月复盘 · <a href="https://www.youtube.com/watch?v=WUeMqk_ABmY">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">六月同时改写了 AI 的经济底座(补贴→稀缺)与治理底座(政府直接干预访问),使得决定价值的不再是模型能力,而是组织在模型周围沉淀的 harness、上下文与变革管理能力。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">成本维:token 补贴时代结束,token 纪律成为一等约束。</p><p class="w">agentic 负载比查询式用法消耗多得多的智能,企业开始踩刹车——Walmart 从内部工具无限用量转向 token 预算,Uber 设每人每月 $1,500 上限,越来越多公司关掉『token 排行榜』。效率、低成本模型、开放权重成了六月的主旋律。</p></div><div class="pillar"><p class="p">主权维:一次窄口 jailbreak 触发政府用出口管制直接停用前沿模型,催生临时许可制。</p><p class="w">美国政府要求 Anthropic 对外国人停用 Fable 5 / Mythos 5,Anthropic 称唯一合规方式是对所有人关停;GPT-5.6 被连带延迟、拆成三档逐波审批。这给企业加了第二个架构维度——不只是成本,还有『会不会被单一供应商或一纸指令切断访问』的主权风险。</p></div><div class="pillar"><p class="p">瓶颈维:capability overhang 不会被更强的模型消化,只会被放大,只有变革管理能解。</p><p class="w">Glean 报告识别出『bot sitting』——员工平均每周 6.4 小时花在喂上下文、查输出、重跑上;KPMG 调查显示 CEO 亲自为 AI 负责的组织,拿到实质业务价值的概率是 2 倍以上。Nadella 在 Fable 下线后发文主张建 learning loop:拥有围绕使用而复利的 context、决策、评估与制度记忆,比选对模型更重要。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这是一份高度美国视角、且以 NLW 个人叙事串起来的月度复盘,型号名(Fable 5 / GLM-5.2 / Opus 4.8)与事件时间线带有播客体的戏剧化和取整;『政府临时许可制』究竟会固化成常态还是很快松绑,现在下判断为时过早。但即便剥掉具体型号,两条结构性线索——成本从补贴转稀缺、访问从纯市场转受治理——方向是清楚的,值得据此做架构对冲。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 而言,这一卷把『别把命脉押在单一闭源前沿模型上』从口号变成了有事件支撑的风险管理动作。成本侧,值得现在就给核心 AI 工作流建 token 账本、识别哪些负载可以下沉到更便宜或开放权重的模型而不牺牲质量;主权侧,应假设『最强模型随时可能因预算或许可而不可用』,预留路由与降级路径,让业务在 fallback 模型上仍能跑。更关键的是把 Nadella 那条 learning loop 当真:真正难被抄走的不是我们接了哪个模型,而是我们围绕它沉淀的评审历史、上下文库、评估标准与制度记忆——以及有没有勇气显性化那 6.4 小时的 bot sitting,把它当成需要治理的成本而非增效的免费副产品。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“New models are going to make the capability overhang worse; it&#x27;s only going to be solved by real change management.”</p><p class="cn">新模型只会让 capability overhang 更严重,唯有真正的变革管理才能解决它。</p></div><div class="quote"><p class="en">“Firms didn&#x27;t just need to choose the right model. They needed to own the compounding context, decisions, evaluations, and institutional memory that surrounded the usage of models.”</p><p class="cn">公司不只是要选对模型,更要拥有围绕模型使用而不断复利的上下文、决策、评估与制度记忆。</p></div></div>
+    </article>
+    <article class="deep" id="workforce-split">
+      <span class="tag">LENNY&#x27;S NEWSLETTER · 人力代价</span>
+      <h3>被 AI 劈成两半的职场:amplified 还是 shaken,比职级更决定你怎么想</h3>
+      <div class="src">Lenny&#x27;s Newsletter,2026 年度科技从业者情绪调查 · <a href="https://www.lennysnewsletter.com">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">AI 把科技从业者劈成 amplified 与 shaken 两个现实,而『AI 对你自我认同做了什么』比角色、级别、公司规模之和更能预测一个人对职业的感受——这是上一篇宏观瓶颈论在个体层面的代价账单。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">AI-identity 立场是数据集里最强、效应最大的分裂线。</p><p class="w">49% 觉得被 AI『放大』、约 19% 觉得被『撼动/削弱』;回归中 AI-identity 对职业乐观度的标准化 β=+0.39、对是否推荐本行业 β=+0.60,强过角色+级别+公司规模之和。amplified 与 diminished 两组在乐观度上 Cohen&#x27;s d≈1.55,是著名『创始人效应』(d≈0.56)的约三倍——数据集里最大的效应。</p></div><div class="pillar"><p class="p">整体在恶化:burnout 升、乐观降、超半数不推荐后来者入行。</p><p class="w">显著 burnout 一年内从 44.7% 升到 55.7%,职业乐观从 54.8% 跌到 48.7%,行业 NPS = -39;连自认乐观的人里也有三分之一不推荐本行业——『水温挺好,但你别下来』。恐惧的重心不是失业(22%),而是被要求同薪做更多(51%)、陷入不可持续的节奏(46%)、工作质量下滑(41%)。</p></div><div class="pillar"><p class="p">生产力提升是真的,但可能以敏锐度为代价;而 manager 质量仍是幸福感最强的杠杆。</p><p class="w">82% 说 AI 让自己更高产,但很多人担心增益来自牺牲工作与工作者的『sharpness』;聚类出的四类人(Energized 41% / Conflicted 35% / Disoriented 12% / Resentful 12%)里,Resentful 全都勾了『被迫使用 AI』。跨所有变量,manager 质量依旧是 burnout 最强驱动因子——组织层面可干预的抓手仍在管理者身上。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">样本是自选的、偏产品/科技从业者的读者群,情绪题本身受近期舆论氛围影响大,横截面调查也只能给相关、给不了因果——『是 AI 撼动了他们,还是本就悲观的人更容易觉得被撼动』无法从这份数据里分辨。但把它和上一篇并读,价值不在精确数字,而在方向一致:宏观说瓶颈在人与组织,微观就真出现了 amplified/shaken 的鸿沟与飙升的 burnout。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这份调查是把前一篇『组织吸收能力才是瓶颈』翻译成一张 HR 与团队管理的行动清单。既然『AI 对自我认同做了什么』比职级更能预测去留,那就不能只发『用 AI 否则淘汰』的通知——那恰恰在批量制造 Resentful。更该做的是:主动识别谁在被撼动、给 shaken 的人具体的过渡路径与新角色定义,把 bot sitting 那类隐形工时算进产能而非假装不存在,并且重投 manager 能力建设——因为数据说它是幸福感最强的杠杆。在一个人人都增效、却半数 burnout、超半数不敢推荐后来者入行的行业里,能留住并激活人的组织,才真正把前一篇说的『learning loop』跑起来了。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“The question that best predicts how a tech worker feels about their work, in 2026, is no longer &#x27;What do you do?&#x27; or &#x27;Where do you work?&#x27; It&#x27;s &#x27;What has AI done to your sense of who you are?&#x27;”</p><p class="cn">2026 年最能预测科技从业者感受的问题,不再是『你做什么』或『你在哪工作』,而是『AI 对你的自我认同做了什么』。</p></div><div class="quote"><p class="en">“The water&#x27;s fine; don&#x27;t come in.”</p><p class="cn">水温挺好,但你别下来。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 10 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · 方法论</div><div class="c"><div class="t"><a href="https://www.latent.space/p/ainews-the-field-guide-to-fable">The Field Guide to Fable(Latent Space / Thariq)</a></div><div class="v">祛除 hobbling:模型的约束多来自我们给的 harness 与 prompt,遇到新一类模型就该主动拆掉旧限制;配套技巧 blindspot pass、wildly-different 设计方向、interview-me、implementation-notes.md——是本卷『护城河在模型周围』的操作手册。</div></div></div><div class="row"><div class="k">BRIEF 02 · 战略叙事</div><div class="c"><div class="t"><a href="https://stratechery.com/2026/a-script-for-mark-zuckerberg/">A Script for Mark Zuckerberg(Stratechery / Ben Thompson)</a></div><div class="v">Thompson 替扎克伯格写的虚构财报电话稿,论证 Meta 为何要在 AI capex 上豪掷——从 Facebook 史讲到『拥有算力与分发就是拥有未来』,与本卷『被单一供应商锁死是风险』互为镜像的另一面(自建者视角)。</div></div></div><div class="row"><div class="k">SKIM · Zipline</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=6bGxm8gX41o">Inside Zipline&#x27;s Autonomous System: 140M Miles(Sequoia)</a></div><div class="v">自主无人机物流的 140M 英里零事故复盘:beachhead 市场(卢旺达送血)+『客户唯一的抱怨是想要更多服务』=PMF 信号。硬件自主系统故事,离本卷 AI-agent 主线较远,存档为『自主系统安全工程』样本。</div></div></div><div class="row"><div class="k">SKIM · 生态</div><div class="c"><div class="t"><a href="https://huggingface.co/blog/microsoft/foundry-managed-compute">Hugging Face Models on Foundry Managed Compute(HF / Microsoft)</a></div><div class="v">微软 Build 2026:HF 开放权重模型每周精选、一键部署到 Foundry,权重预置 Azure、运行时由微软构建扫描并带企业级治理计费。是本卷『开放权重 + 企业主权化部署』趋势的落地产品,信息型公告。</div></div></div><div class="row"><div class="k">SKIM · 案例</div><div class="c"><div class="t"><a href="https://openai.com/index/australian-payments-plus">Australian Payments Plus moves faster with ChatGPT &amp; Codex(OpenAI)</a></div><div class="v">厂商背书案例:77% 员工每周省 2+ 小时、80% 报告创造力/质量提升、Codex 把复杂对账排查从数天降到 30 分钟。数字漂亮但是营销口径,存档为『企业采用增效声明』样本。</div></div></div><div class="row"><div class="k">SKIM · Codex</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/Byo9MEL0GHA">Codex helps me manage my meetings(YouTube Short / Rohan Varma)</a></div><div class="v">Vol.033 深读同一 Rohan Varma 访谈的切片:把 Coda/Codex 当私人 chief of staff,周初让它看日程、合并会议、腾出 focus block。主旨重合,skim repeat。</div></div></div><div class="row"><div class="k">SKIP · 短视频</div><div class="c"><div class="t"><a href="https://www.youtube.com/shorts/-XAkew33hns">Priscilla Chan: Diseases Nobody is Trying to Cure(No Priors Short)</a></div><div class="v">谈罕见病长尾『把工具交到更多人手里去分散攻关』,191 字切片,与本卷 AI-agent/职场主线无关,跳过。</div></div></div><div class="row"><div class="k">SKIP · 工具</div><div class="c"><div class="t"><a href="https://github.com/hasaneyldrm/exercises-dataset">exercises-dataset 登上 GitHub 热榜(逛逛GitHub)</a></div><div class="v">土耳其开发者的 1324 个健身动作结构化数据集(含 GIF),三个月 6800 star;推荐把 repo 丢给 agent 5 分钟生成健身小程序。轻工具向,与主线无关,跳过。</div></div></div><div class="row"><div class="k">SKIP · 生态</div><div class="c"><div class="t"><a href="https://huggingface.co/blog/amazon/one-click-to-sagemaker-studio">From Hugging Face to Amazon SageMaker Studio in one click(HF)</a></div><div class="v">HF 与 SageMaker 深链集成,从模型发现一键落到 Studio 工作流(模型预载、环境配好)。开发者体验型公告,无策略信号,跳过。</div></div></div><div class="row"><div class="k">SKIP · 无字幕</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=PnEWo_AKzIU">AI Focused Companies Are Hiring More(The AI Daily Brief)</a></div><div class="v">YouTube 未提供字幕、正文仅 9 字无法解析内容,跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.035 · 新观点 4 · 累计 409 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-09 06:00</b></span>
+  </footer>
+</div></body></html>
