@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Harness Is the Product — 当模型强到差不多，真正决定成败的是你给它套的那层「壳」 — Vol.036</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.036</span>
+      <span class="chrome">2026-07-08 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Harness Is the Product — 当模型强到差不多，真正决定成败的是你给它套的那层「壳」</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Lilian Weng 把 35 篇论文收拢成一个判断：递归自我改进（RSI）短期不会靠模型改自己的权重实现，而是靠改进 harness——你喂给模型的目标、上下文、工具与反馈回路。哪怕能力最终被吸进模型内核，「说清要做什么、给足上下文」这件事也不会消失。这是把前几卷『护城河在模型周围，不在模型本身』从口号落到工程方法论的一篇。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果模型能力都拉平了，你的团队真正沉淀在『壳』里的东西（目标定义、上下文、评测标准、失败模式清单）是什么？换个供应商能不能带走？</li><li>你现在的 AI 工作流，改进来自『换更强的模型』还是『改进 harness』？过去三个月哪一类带来的提升更多？</li><li>哪些 harness 里的技巧（比如盲点扫描、失败重标注、人在环升级）值得先固化成团队的标准动作，而不是每个人各写各的 prompt？</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="harness-engineering-rsi">
+      <span class="tag">LATENT SPACE · Harness 工程</span>
+      <h3>Harness 工程：为什么「模型改自己」暂时还轮不到，先改壳</h3>
+      <div class="src">Lilian Weng（Thinky 联合创始人）· via Latent Space / AINews · <a href="https://www.latent.space/p/ainews-lilian-weng-summarizes-35">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">递归自我改进短期不会来自模型改自己的权重，而是来自不断改进「harness」——即包裹模型的目标、上下文、工具和反馈回路；壳做得好，普通模型也能跑出强结果。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">「harness」不是玄学，是模型外面那层可工程化的壳——目标怎么给、上下文怎么喂、能调哪些工具、结果怎么被检验和回流。</p><p class="w">Weng 把它拆成一批已被验证的设计范式（从 ACE 论文到更新的 Meta-Harness）。这些都是可复现、可迭代的工程动作，不依赖某一家模型的内部魔法，所以团队可以自己积累、自己优化。</p></div><div class="pillar"><p class="p">自我改进（RSI）的现实路径是「让 harness 自己变好」，而不是「让模型改自己的权重」。</p><p class="w">改权重风险高、不可控、也难验证；改 harness 则可以让 agent 去做 auto-research、自动调优提示与流程——每一步都能测、能回滚。这是当下唯一能安全放大能力的杠杆。</p></div><div class="pillar"><p class="p">就算某天这些 harness 技巧被内化进模型内核，「说清目标、给足上下文」这件事也不会消失。</p><p class="w">模型再强也不会自动知道你要解决什么问题、约束是什么、什么算做对了。这部分永远由使用方定义——这正是护城河所在：它绑定的是你的业务上下文，不是某个模型版本。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这是一篇 AINews 的二手转述 + Twitter 综述，夹带大量当日模型发布快讯（Muse、Audex、Antidoom 等），信噪比偏低；「35 篇论文」的具体证据强度没有逐一核验，更多是趋势判断而非实证结论。另外 Weng 本人是 harness 创业公司 Thinky 的联合创始人，立场上天然会强调 harness 的价值——需要打个折扣看。但把这些噪声剥掉，核心判断（能力趋同、价值下沉到壳、目标与上下文永远是人的活）和前几卷的主线高度一致，方向可信。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 来说，这篇给了一个很实在的行动指引：不要把精力都花在追逐『下个更强的模型』上，而要把团队真正的资产建在 harness 里。具体说，就是把核心 AI 工作流里的目标定义、上下文库、可调用工具集、评测标准、以及踩过的失败模式，沉淀成可复用、可版本管理的东西——这些换个模型供应商也带得走，才是真护城河。同时可以借鉴文中提到的几个具体技巧：盲点扫描（让模型主动找自己没考虑到的点）、失败 token 重标注（把导致死循环的输出纠偏）、人在环升级（关键决策自动升级给人）——先把这些固化成团队标准动作，而不是每个人各写各的一次性 prompt。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Even when many harness improvements get eventually internalized into core model, the need to specify goals and context will not disappear.”</p><p class="cn">哪怕许多 harness 改进最终被吸进模型内核，「说清目标、给足上下文」的需求也不会消失。</p></div><div class="quote"><p class="en">“Likely harness engineering will evolve in the direction of self-improvement and enable auto-research, and, in turn, smarter models keep harnesses simple.”</p><p class="cn">harness 工程大概率会朝自我改进演进、支撑自动研究；反过来，更聪明的模型又会让 harness 变简单。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 3 条</h2>
+  <div class="scan"><div class="row"><div class="k">SKIM · 重复</div><div class="c"><div class="t"><a href="https://www.youtube.com/watch?v=WUeMqk_ABmY">The Big Ways AI Just Changed（The AI Daily Brief / NLW）</a></div><div class="v">六月复盘：成本从补贴转向稀缺、治理从开放转向管制——即 Vol.035 深读 #1 的同一支视频，本窗口再次入库，归为重复。</div></div></div><div class="row"><div class="k">SKIP · 论文流</div><div class="c"><div class="t">Hugging Face 论文流批量入库（takara.ai，约 50 篇）</div><div class="v">本窗口 63 条 raw 中 50 条来自 HF 论文 RSS 批量投喂，按既有 paper-feed 规则整体过滤，不逐篇分析。</div></div></div><div class="row"><div class="k">SKIP · 自归档</div><div class="c"><div class="t">_mira-vp-index 2026-07-08（Vol.035 观点快照）</div><div class="v">mira 自己生成的观点索引归档，按 self-archive 规则过滤。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.036 · 新观点 3 · 累计 412 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-09 06:00</b></span>
+  </footer>
+</div></body></html>
