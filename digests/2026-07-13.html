@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Great Bifurcation — AI 把科技从业者劈成蓬勃与挣扎的两半 — Vol.040</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.040</span>
+      <span class="chrome">2026-07-13 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Great Bifurcation — AI 把科技从业者劈成蓬勃与挣扎的两半</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>安静的一天,只有一份重磅调查落地:Lenny × Noam Segal 的年度科技从业者情绪调查显示,AI 几乎精确地把行业劈成两半——一半被赋能而蓬勃,另一半被动摇而挣扎;倦怠一年跳升 11 点创新高,几乎无人愿意推荐新人入行。头号恐惧不是被 AI 抢工作,而调节福祉的最强杠杆竟是直属经理。当机器侧趋同,组织真正的差异回到人侧:能否托住被甩下的那另一半。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果 AI 把你团队的人精确劈成『蓬勃』与『挣扎』两半,你现在能叫出各自是谁吗?你的资源(培训、心理安全、项目机会)是按这条裂缝差异化投放,还是一刀切地假设所有人都在同一条学习曲线上?</li><li>调查说福祉的最强杠杆是直属经理而非公司政策——那么你把 AI 转型的成败押在了工具采购和自上而下的 mandate 上,还是押在了让一线 leader 有能力识别并托住下属上?这两笔投入的比例失衡了吗?</li><li>当『几乎无人愿意推荐新人入行』成为行业共识,你所在业务未来 3 年的初级人才管线从哪来?如果入门岗位正被 AI 吞掉,你是在培养下一代,还是在透支一个不再自我补充的人才池?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="great-bifurcation">
+      <span class="tag">LENNY&#x27;S · 从业者情绪</span>
+      <h3>大分岔:AI 没有普惠科技行业,而是把人劈成蓬勃与挣扎的两半</h3>
+      <div class="src">Lenny&#x27;s Newsletter × Noam Segal(年度科技从业者情绪调查) · <a href="https://www.lennysnewsletter.com/p/how-tech-workers-are-feeling-in-2026">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  7/10</div>
+      <div class="claim">AI 不是均匀地抬高整个科技行业,而是沿着一条清晰的裂缝把从业者劈成两半——一半被赋能而蓬勃,另一半被动摇而挣扎;倦怠创历史新高,而调节这一切的最强杠杆不是工具或公司政策,是直属经理。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">『大分岔』是这份调查最硬的结论:AI 把科技从业者几乎精确地劈成了两半。</p><p class="w">这是覆盖数千名产品、工程、设计、研究、市场、数据、销售从业者的第二年大样本量化调查。它把人归纳成四种情绪原型——Energized(被赋能而蓬勃)、Conflicted(矛盾)、Disoriented(迷失)、Resentful(怨怼)。关键不在四个标签,而在这条裂缝本身:同样的 AI 浪潮、同样的工具,一半人体验为加速与解放,另一半人体验为威胁与失序。行业不再有统一的『AI 体验』,平均值已经失去意义。</p></div><div class="pillar"><p class="p">倦怠一年跳升 11 点创新高,且几乎无人愿意推荐新人入行——这是系统性而非个体性的信号。</p><p class="w">11 点的年增幅不是噪声,是结构性压力的读数;而『nobody would recommend their job to someone entering the industry today』尤其刺眼——它说明痛苦不只落在被甩下的那一半,连蓬勃的一半也不认为这条路适合新人。当行业里最成功的人都不愿把入口指给下一代,说明分岔不仅是当下的福祉问题,更是人才管线的长期问题:入门岗位正被 AI 侵蚀,自我补充的人才池可能正在断流。</p></div><div class="pillar"><p class="p">头号恐惧不是失业,福祉的最强杠杆是直属经理——转型成败押在人身上,不在工具上。</p><p class="w">反直觉之处有两层:其一,人们最大的恐惧不是『被 AI 取代』,而是别的东西(变化速度、意义感、与同侪拉开差距的焦虑);其二,调节福祉最有效的单一变量是 manager,不是公司层面的 AI 政策或工具采购。这把『AI 转型 = 买对工具 + 自上而下 mandate』的默认剧本推翻了:真正决定一个人落在蓬勃还是挣扎那一半的,是他头顶那位一线 leader 有没有能力识别他的状态、差异化地托住他。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这份调查测的是『感受』(sentiment),不是生产力或商业结果,两者未必同向——一个人可以主观焦虑却客观高产,反之亦然,把情绪读数直接当成组织健康的因果证据要小心。样本也偏向 Lenny 的读者群(产品/增长导向、英语世界、主动订阅时事通讯的人),未必能外推到所有科技岗位或非西方组织。而且『manager 是最强杠杆』这一相关性,也可能反过来:蓬勃的人本就更容易遇到并留在好 manager 手下。但即便打了这些折扣,核心信号依然成立且值得据以行动——因为它逼你回答的不是『调查准不准』,而是『我知不知道我的人现在落在哪一半、我有没有在按这条裂缝分配注意力』。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 而言,这条主线是 Vol.039『价值逃向人侧的判断与克制』在组织管理层的直接落点。当机器侧趋同、谁都能接入前沿模型,团队之间真正的差异不再是用了哪个模型,而是能否让一线 leader 识别并托住被甩下的那另一半人。可操作的版本有三条:其一,别再假设『发了 AI 工具、开了培训』全员就在同一条学习曲线上——先搞清楚你的团队里谁是 Energized、谁是 Disoriented/Resentful,按这条裂缝差异化投放项目机会与心理安全,而不是一刀切。其二,把 AI 转型的投入重心从工具采购和自上而下 mandate,部分挪到『让一线经理有能力做情绪与能力的识别』上——调查说这才是福祉的最强杠杆。其三,严肃对待『无人愿推荐新人入行』这个长期信号:如果入门岗位正被 AI 吞掉,TikTok 体量下的初级人才管线三年后从哪来,现在就该有答案,否则你是在透支一个不再自我补充的人才池。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Half the workforce is thriving, half is struggling, and burnout just hit a record high.”</p><p class="cn">一半人在蓬勃,一半人在挣扎,而倦怠刚刚创下历史新高。</p></div><div class="quote"><p class="en">“Managers are the single biggest lever for employee well-being.”</p><p class="cn">直属经理,是员工福祉的最强单一杠杆。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">SKIM · 工具/生活</div><div class="c"><div class="t"><a href="mailto:reader-forwarded-email">Recomendo #523:认知洗牌助眠 + 皮克斯《Hoppers》回勇 + 飞机手机夹 — Recomendo</a></div><div class="v">『认知洗牌』(闭眼循环想象无关联中性词如『鸭子』)帮更快入睡;Ugreen 可折叠磁吸夹夹住飞机小桌板/座椅边;iPhone 辅助功能可把旧机改成儿童『笨手机』。纯生活好物,无普适观点,存档。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.040 · 新观点 1 · 累计 424 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-14 06:00</b></span>
+  </footer>
+</div></body></html>
