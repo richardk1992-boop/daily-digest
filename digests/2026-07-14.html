@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>The Loop Is the Moat — 当前沿模型趋同,护城河退守到编排与循环层 — Vol.041</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.041</span>
+      <span class="chrome">2026-07-14 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>The Loop Is the Moat — 当前沿模型趋同,护城河退守到编排与循环层</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>又是安静的一天,唯一的重磅是 Lenny『How I AI』三集连播,却意外汇成同一句反直觉的结论:模型本身已经不是护城河了。Claire 拆解 harness(把 agent 包起来的代码)——她的判断是通用 agent 现在最好用来『编排』专用 harness,而不是亲自干每件事;Alex Finn 用一队本地机器 7×24 跑 AI,把『无限推理』而非 ROI 作为理由,并直言循环(loop)是最后的竞争壁垒;GPT-5.6 Sol 评测里最刺眼的一句是『超级聪明和真能交付之间的鸿沟是真实存在的』。三集共同把价值从『用哪个模型』推向『怎么包、怎么循环、怎么按任务匹配模型』——这是 Vol.039『价值逃向人侧』在工程侧的镜像:机器侧趋同后,差异回到编排层。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果你现在把团队最强的前沿模型换成第二强的,你的产出质量会掉多少?如果答案是『掉不了多少』,那说明你的护城河根本不在模型上,而在你有没有把它包进一个稳定的 harness、跑进一个持续的 loop——你在这一层的投入,配得上它的重要性吗?</li><li>Alex 的规则是『本地模型当 BDR、Claude Code 当 closer』:让便宜模型每 20 分钟扫一遍出量,让前沿模型一天判一次出判断。你现在是不是反过来了——用最贵的模型干最琐碎、最该被廉价循环吞掉的活,同时又舍不得为『判断环节』留出真正贵的算力?</li><li>『超级聪明和真能交付之间的鸿沟是真实的』——你选型时到底在优化哪一个?如果你一直在追榜单上最聪明的模型,却发现真正能拿给 stakeholder 看的产物来自那个『taste 分更高但不是最聪明』的模型,你的评测标准是不是该从『智商』换成『交付品味』?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="loop-is-the-moat">
+      <span class="tag">HOW I AI · 编排层</span>
+      <h3>循环即护城河:harness、本地机队与 Sol 评测,三集同证『模型不再是差异』</h3>
+      <div class="src">Lenny&#x27;s Newsletter · How I AI(Claire Vo × Alex Finn 三集连播) · <a href="https://www.lennysnewsletter.com/">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  8/10</div>
+      <div class="claim">三集互不相干的『How I AI』——什么是 harness、如何 7×24 跑本地 AI、GPT-5.6 Sol 评测——却收束到同一个反直觉结论:前沿模型本身已经不再是护城河,真正的差异退守到了编排层:你怎么把模型包进 harness、怎么让它在 loop 里持续跑、怎么按任务智能度匹配模型。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">harness 就是『包住 agent 的代码』,而通用 agent 现在最好的用法是去编排专用 harness,而不是亲自干每件事。</p><p class="w">Claire 给 harness 祛魅:它不神秘,就是你为让 AI 更擅长某个具体活而写的代码——Cursor 是复杂 harness,Claude Code 是复杂 harness,你的可以只是八个文件加一个终端界面。判断何时该建:一个活既有确定的部分(固定步骤、固定工具),又有不确定的部分(AI 自己找根因、写报告)。而她真正的认知转弯是这句:『通用 agent 现在更适合用来编排专用 harness,而不是自己做每一份工作』——给受约束的 agent 一个专用 harness,比给强大 agent 一个开放提示框,产出更稳定。这把 Vol.036『harness 才是产品』推进了一步:harness 不只是产品,它是通用智能的调度对象。</p></div><div class="pillar"><p class="p">本地 AI 的理由不是 ROI,是『无限推理』;而让机队真正有用的技能,是按模型智能度分配任务。</p><p class="w">Alex Finn 用 Mac Studio、DGX Spark、RTX 5090 组了一支 7×24 的本地机队。他算得很清楚:$10000 的 Mac Studio 对比 $20 的 ChatGPT 订阅,只有当你让 agent 一天跑 24 小时时才不疯——那种规模下云 API 会迅速变贵,而本地模型持续跑打开了原本经济上不成立的用例(每 20 分钟一次的安全扫描、代码审查、社交信号监控)。更关键的是分工原则:GLM 5.2 是 Opus 级但极慢,派给耐延迟的深度活;Qwen 3.6 快且够用,派去读 Twitter 抓产品信号;Ornith 1.0(带 RL 的 Qwen 编码微调)在每个 eval 上都赢过 Qwen。『到处都用最聪明的模型』是浪费——把模型智能度匹配到任务复杂度,才是让常驻 AI 在经济上说得通的那门手艺。</p></div><div class="pillar"><p class="p">『本地模型当 BDR、Claude Code 当 closer』,以及『超级聪明 ≠ 真能交付』——价值从智商转向交付品味。</p><p class="w">Alex 的混合范式最能落地:本地模型(GLM 5.2)每 20 分钟扫一遍代码、把发现丢进 Markdown;Claude Code 一天读一次那份报告、判断哪些是真问题值得修。廉价模型出量,前沿模型出判断——若反过来让 Claude Code 每 20 分钟跑一次,一个月要烧掉数千美元。而 Claire 的 GPT-5.6 评测给了这条线最锋利的注脚:她的五项基准里,Sol 拿了最高的 taste 分,尽管 Fable『理论上更聪明』——『超级聪明和真能交付之间的鸿沟是真实的』。选型标准从『谁最聪明』变成了『谁的产物我真敢拿给 stakeholder 看』。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这三集是播客回顾,不是一手研究或可复现的实验:样本是 Claire 和 Alex 两个人的主观工作流,GPT-5.6 的模型名(Sol / Fable / Terra / Sonnet 5)与评测口径都带强烈个人色彩(70% 人评 / 30% 机器),外推到你的场景要打折。Alex『循环是最后的护城河』本身也可能是自我合理化——Claire 当场就给了反解:大多数人对 loop 含糊其辞不是因为它是机密,而是因为他们的 loop 很无聊,含糊比具体更能博互动。此外『本地机队』的前提是你有能力也有意愿维护五台机器和多 agent 冗余(三 Hermes + 两 OpenClaw,常有三个坏掉靠另两个修),这对绝大多数团队是负资产而非护城河。但即便如此,核心信号依然成立:当谁都能接入前沿模型,你在编排层——harness、loop、模型路由——的功夫,才是别人抄不走的部分。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 而言,这条主线是 Vol.039『价值逃向人侧的判断与克制』在工程侧的镜像:那边讲机器趋同后价值逃向人的判断,这边讲机器趋同后差异退守到编排层。可操作的版本有三条。其一,别再把预算和注意力押在『追最新最强的模型』上——做个诚实的测试:把你产品里最强的模型换成第二强的,若产出质量掉得不多,说明护城河根本不在模型层,该把工程投入挪到 harness 和 loop 的稳定性上。其二,照抄 Alex 的分层经济学:识别那些『高频、可容忍粗糙、出量为主』的活(内容安全扫描、玩家反馈聚类、社群信号监控),用便宜/本地模型每隔一段跑一遍出量,只把『判断环节』留给前沿模型一天判一次——不要用最贵的模型干最该被廉价循环吞掉的活。其三,把选型标准从榜单智商换成『交付品味』:像 Claire 那样为你的真实产物(PRD、原型、审查报告)建一套自己的五项基准,按『敢不敢拿给 stakeholder 看』打分,而不是按谁在公开 benchmark 上更聪明。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“General-purpose agents are now better used to orchestrate specialized harnesses than to do every job themselves.”</p><p class="cn">通用 agent 现在更适合用来编排专用 harness,而不是自己去做每一份工作。</p></div><div class="quote"><p class="en">“That gap between &#x27;hyper-intelligent&#x27; and &#x27;actually ships&#x27; is real.”</p><p class="cn">『超级聪明』和『真能交付』之间的那道鸿沟,是真实存在的。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">SKIM · 市场/PR</div><div class="c"><div class="t"><a href="mailto:reader-forwarded-email">你正在流失媒体报道,而修复成本是 0 元 — Tom&#x27;s Marketing Ideas</a></div><div class="v">核心是把媒体资料包(press kit)做到零摩擦:像 Ramp 那样点 logo 即可复制 SVG/媒体包/新闻菜单;press kit 必须 100% 公开(Rippling 因为要求记者申请 Google Drive 访问权而白白流失报道);Stripe『Fast Facts』把可速览的统计数据(2024 年处理 $1.4T+)直接摆出;Buffer 的 /open 实时看板;Okta 把 press/newsroom/news 全部导向同一页。纯市场战术,无普适观点,存档。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.041 · 新观点 1 · 累计 425 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-15 06:00</b></span>
+  </footer>
+</div></body></html>
