@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>打破干旱:一套可复制的『AI 内容机器』架构,与一场关于『假装思考』的表演学 — Vol.048</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.048</span>
+      <span class="chrome">2026-07-21 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>打破干旱:一套可复制的『AI 内容机器』架构,与一场关于『假装思考』的表演学</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>连续 5 卷无深读后终于有一篇够格。①Lenny&#x27;s How I AI:Morning Brew 创始人 Alex Lieberman 在 Claude 里搭的内容系统不是玄学而是工程——Oracle 选题、voice.md 锁个人语气、六人采访团逼出真素材、lessons 文件让系统越用越少犯错、Writer&#x27;s Council 打分不到 9/10 不放行;核心洞见是『AI slop 是人的问题不是模型问题:模型在塑泥,泥不好雕不出好东西』。②Tom&#x27;s Marketing:把『Loading…』改名『Thinking…』成了 2026 年最廉价的『变身 AI 公司』手法(GitHub 相关 commit 从 59 飙到 2 万),背后是真实的『劳动错觉』心理学,但正解是展示你独有的真实进度,而非集体伪装。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>Alex 的内容机器把『写』这件事拆成了选题(Oracle)、萃取(六人采访团)、定调(voice.md)、评审(Writer&#x27;s Council)、进化(lessons 文件)五个可外包给 AI 的环节,唯独『被采访时你说了什么有趣的东西』无法外包——如果把这套结构搬到你的团队,真正的瓶颈会落在哪个环节?是工具,还是『人有没有值得被萃取的想法』?</li><li>『AI slop 是人的问题不是模型问题』——当生成成本趋近于零,团队里被重新定价的不再是『会不会用 AI 产出』,而是『喂进去的原始想法够不够独特』。你在评估内容/产品时,考核的是产出的精致度,还是输入端想法的密度?</li><li>Tom 的观察是:两万个开发者用『Thinking…』和 sparkle 图标伪装 AI 感,而真正有效的是『Scanning 2,000 reviews…』这种没人能伪造的、属于你自己的真实进度。把这条用在产品设计上:你们展示给用户的『AI 在努力』信号,是可被任何竞品复制的通用戏法,还是只有你的数据/流程才能讲出的具体故事?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="D1">
+      <span class="tag">AI 工作流 · 内容系统</span>
+      <h3>How I AI: How the founder of Morning Brew built a Claude content machine that never runs out of ideas</h3>
+      <div class="src">Lenny&#x27;s Newsletter / How I AI(嘉宾:Alex Lieberman, Morning Brew &amp; Tenex 联创) · <a href="https://read.readwise.io/read/01ky01yjvpp0v2b4qynm41yjzy">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●● · 时效 ●○  ·  8/10</div>
+      <div class="claim">高质量 AI 内容不是靠更强的模型 prompt 出来的,而是靠一套把『选题—萃取—定调—评审—进化』拆成可外包环节的系统工程搭出来的;模型只负责塑形,真正的稀缺变量是喂进去的原始想法。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">选题而非写作才是真正的瓶颈,所以系统的第一环是一个『Oracle』而不是一个写手。</p><p class="w">Alex 的 Oracle 每天扫描 7 天内的 Slack / Notion / Gmail / 会议记录,外加他关注的 X 与 LinkedIn 账号,产出 15 条排序过的『内容爆点』(一半来自内部、一半来自外部)。他的判断很直白:写是容易的,知道该说什么才是大多数人卡住的地方——把 AI 用在消灭空白页,而不是用在替你打字。</p></div><div class="pillar"><p class="p">个人语气必须被固化成一个 Markdown 文件,系统才能校准到『你怎么写』而不是『互联网平均怎么写』。</p><p class="w">voice.md 收录他表现最好的帖子、hook 公式、内容结构,甚至像『self-deprecating confidence』这样的具体语言模式。所有草稿都对着这个文件校准;再叠加一个 lessons 文件——每篇发布后系统对比初稿与终稿、抽取可泛化的教训、询问是否要永久写入,于是同样的错误越犯越少。这是绝大多数人从不搭建的反馈回路。</p></div><div class="pillar"><p class="p">质量的守门不靠人力巡逻,而靠两道 AI 评审关卡把标准变成系统属性。</p><p class="w">采访环节部署六个采访者人格(Tim Ferriss / Joe Rogan / Gayle King / Howard Stern / Barbara Walters / Michael Barrow)追问到逼出足够具体的细节为止,Alex 用 Wispr Flow 语音作答,保证终稿每句都能追溯到他真说过的话;发布前再过 Writer&#x27;s Council 六个写手人格(含一个叫『AI slop allergist』的角色)各自打分并循环改写,不到 9/10 不放行。评分机制让系统在他赶时间时也守得住标准。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这套系统的强度高度依赖『被采访者本身有货』——Alex 自己承认唯一产出 slop 的情形就是受访者在采访里没分享出足够有趣的想法。换句话说它放大信号但不创造信号,对一个想法平庸的人,这套精密流水线只会更高效地生产精致的平庸。另外它是重度定制的个人系统(七源 Oracle、六人采访团、双评审团),迁移成本不低;show notes 给的是架构骨架,真正的调参细节仍在音频与 chatprd.ai 的分解文里。它更像一个『值得照着搭』的参考架构,而非开箱即用的模板。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 而言,这套架构的迁移价值不在『内容营销』本身,而在它示范了一种把创作者/运营的隐性判断显性化、并用 AI 放大的组织方法。游戏生态里最稀缺的从来不是把素材做精致的产能,而是『知道该主打哪个玩法爆点、该用什么语气跟哪一类玩家说话』的判断力——正是 Oracle(选题)与 voice 文件(定调)对应的环节。真正值得借鉴的是那个 lessons 强化回路:把每次运营复盘沉淀成一个可被系统读取、越用越准的文件,而不是散落在一次次事后总结里。而『AI slop 是人的问题』这句提醒最该被内化——当 AI 把内容/关卡/活动的生产成本压到近零,团队评估的重心应从『产出够不够精致』移到『输入端的想法够不够独特』,否则只会更快地量产平庸。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“The model is shaping clay, not inventing ideas. If the clay is bad, the sculpture will be bad.”</p><p class="cn">模型是在塑泥,不是在发明想法。泥不好,雕出来的也不会好。</p></div><div class="quote"><p class="en">“The blank page is the real enemy of consistent content, and an AI Oracle makes it disappear.”</p><p class="cn">空白页才是持续产出的真正敌人,而一个 AI Oracle 能让它消失。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · 产品心理学 / AI 表演学</div><div class="c"><div class="t"><a href="https://read.readwise.io/read/01kxz1n8s95wjezpj47zg248yp">Congrats, you&#x27;re an AI startup now 🎉 — Tom&#x27;s Marketing Ideas</a></div><div class="v">把『Loading…』改名『Thinking…』成了 2026 年最廉价的『变身 AI 公司』手法:GitHub 上带 thinking 指示器的 commit 从 2023 前的 59 个飙到约 2 万,sparkle 图标约 3.5 万、AI badge 约 1.6 万,甚至有人『Add simulated delay… for a more realistic experience』伪造等待。背后是真实的『劳动错觉』心理学(一月的研究显示无可见思考过程的 bot 被读作更冷漠、更敷衍),但 Tom 的正解是:展示你独有的真实进度(如『Scanning 2,000 reviews…』),因为没人能伪造属于你的具体细节——通用戏法人人可抄,真实的具体才是护城河。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.048 · 新观点 1 · 累计 427 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-22 06:00</b></span>
+  </footer>
+</div></body></html>
