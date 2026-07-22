@@ -1,0 +1,105 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>当执行成本趋零,被重新定价的是判断力与理解力——两个顶尖实践者的同一面镜子 — Vol.050</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.050</span>
+      <span class="chrome">2026-07-23 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>当执行成本趋零,被重新定价的是判断力与理解力——两个顶尖实践者的同一面镜子</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>今日两篇独立深读在同一结论上收敛,收敛本身就是信号。①Stripe 的 Kevin Yien(Lenny&#x27;s Newsletter / The Skip)——工程师朋友叫停他用 agent 修本地化字符串:『你为什么把 calories 花在改一个字符串上,我需要你做的是未来 1-3 年业务要转的那五度方向偏移』;任何人都能修 typo,团队唯独无法从别人那里得到 direction call。他把 PM 的新『piano scales』定义为学 agent 本身 + 用截图对比培养『区分 slop 与 high-grade 的 vocabulary』,并指出写作已裂成两个受众:写给人是说服(LLM 做不了),写给 agent 是精确指令。②Karpathy 在 Sequoia AI Ascent 2026——AI coding 在 2025 年 12 月经历『信任相变』,但他反复回到一句『You can outsource your thinking but you can&#x27;t outsource your understanding』;当 agent 接管执行,人退回成 director,瓶颈变成『为什么做、该做什么、怎么 direct』。这是 039『价值逃向人侧』/041『护城河退守编排层』/043『稀缺=能建+能判的复合人』/048『生成成本趋零后重定价输入端』这条主线的第 5 面镜子,也是最直白的一面:两个完全不同岗位的顶尖实践者,独立指认出了同一块无法外包给 agent 的人类残差——方向/说服(Kevin)= 理解/taste/spec(Karpathy)。新增观点 1(累计 428)。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>Kevin 的工程师朋友那句『别把 calories 花在改字符串上,我要的是五度方向偏移』——把它挪到你自己的岗位上:你过去一周里,有多少产出是『任何人(或任何 agent)都能替你做』的,又有多少是『只有你、基于你对业务与相关方的理解才能做』的?如果前者占了大头,那被 AI 重新定价的,恰恰就是你现在花时间最多的那部分。</li><li>Karpathy 说『你可以外包思考,但无法外包理解』。这句话最刺的地方在于:用 agent 快速产出会制造一种『我懂了』的错觉,而理解只能靠自己走一遍才能长出来。你最近一次让 agent 直接给出结论、你照单全收的场景——如果三个月后有人就那个结论追问你为什么,你答得上来吗?</li><li>两篇都点到同一个陷阱:Kevin 的『promotion theater』(做了十个原型、零用户、零真实决策被改变)和 Karpathy 的『可验证性决定能力锐钝』。迁移到 TikTok Gaming:当 AI 把关卡/活动/内容生产压到近零,团队的验收线该不该从『产出的数量与精致度』移到『第一个真实用户的真实决策被改变』?如果换这把尺子,你手上正在推进的项目里,哪些会立刻现出原形?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 2 篇</h2>
+  
+    <article class="deep" id="01ky5pa9pfjxj273wb12rvqw1q">
+      <span class="tag">AI 时代产品 · PM 角色</span>
+      <h3>Inside product at Stripe——当人人都能 build,PM 唯一无法被外包的是 direction call</h3>
+      <div class="src">Lenny&#x27;s Newsletter / The Skip(嘉宾 Kevin Yien, Stripe) · <a href="https://read.readwise.io/read/01ky5pa9pfjxj273wb12rvqw1q">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●● · 时效 ●○ · 8/10</div>
+      <div class="claim">当『执行成本趋零、人人都能用 agent 产出』从差异化变成门槛,PM 被重新定价的不再是『会不会用 AI 交付』,而是那层无法外包给 agent 的人类残差——方向判断与说服力。任何人都能修 typo、改字符串;团队唯独无法从别人那里得到一个 direction call。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">把旧的『地板级』工作全部交给机器,自己退到方向层</p><p class="w">Kevin 的工程师朋友直接叫停他用 agent 修本地化字符串——『你为什么把 calories 花在这上面,我需要你做的是未来 1-3 年业务要转的那五度方向偏移』。执行既然趋零,PM 的稀缺性就只剩在『该往哪走』这个 agent 不知道你目标与品味、替不了的判断上。</p></div><div class="pillar"><p class="p">PM 的新『piano scales』:学 agent 本身 + 养出区分 slop 与 high-grade 的 vocabulary</p><p class="w">他指出几乎所有人都跳过了『真正去学会驾驭 agent』这一步;而判断力要靠刻意练习——用截图反复对比好坏产出,才能长出『一眼看出这是 slop 还是精品』的词汇与品味。这是新的基本功,不是自然会的。</p></div><div class="pillar"><p class="p">写作裂成两个受众:写给人是说服,写给 agent 是精确指令</p><p class="w">写给 agent 是自然语言伪代码,追求无歧义;写给人的核心问题永远是『相关方信不信』,这是说服,LLM 做不了,因为它不承担关系与信任。混淆两者,就会把该说服人的场合写成了给机器的规格书。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">Kevin 自己承认 Stripe 内部采用极不均衡(他称之为『uneven Gaussian』,是一张 preview 而非 report card)——也就是说,这套『退到方向层』的叙事更多是先行者的自我要求,而非已被组织验证的普遍现实;它无法反驳主持人押的反向赌注:几年后连 direction call 本身也可能被自动化。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming:当 AI 把关卡、活动、素材的生产压到近零,团队 KPI 的重心必须从『产出的精致度与数量』迁到两件事——方向判断的质量,以及把隐性理解显性化、能说服相关方的能力。同时要警惕 Kevin 说的 promotion theater:做了十个原型、零用户、零真实决策被改变,在旧尺子下像是高产,在新尺子下是空转。新的验收线应该是『第一美元 / 第一个真实用户的真实决策被改变』,而不是产出量。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Why are you wasting any of your calories on fixing this localization string when what I need from you is to figure out the directional five-degree shift the business needs over the next one to three years?”</p><p class="cn">你为什么要把精力浪费在改这个本地化字符串上?我需要你做的,是想清楚业务在未来 1-3 年需要转的那五度方向偏移。</p></div><div class="quote"><p class="en">“Anyone can fix a typo. What the team can&#x27;t get from anyone else is the direction call.”</p><p class="cn">任何人都能修一个 typo。团队唯独无法从别人那里得到的,是方向判断。</p></div></div>
+    </article>
+    <article class="deep" id="01kqf19zfhyjef9wczmvm9kjaa">
+      <span class="tag">AI 范式 · agentic engineering</span>
+      <h3>Karpathy @ Sequoia AI Ascent 2026:你可以外包思考,但无法外包理解</h3>
+      <div class="src">Sequoia AI Ascent 2026 / Andrej Karpathy(中文精读 digest via Cowork) · <a href="https://read.readwise.io/read/01kqf19zfhyjef9wczmvm9kjaa">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●○ · 独特 ●● · 时效 ●● · 9/10</div>
+      <div class="claim">AI coding 在 2025 年 12 月经历了一次『信任相变』(从需要不断纠错,到能完全放手),人由此退回成 director;瓶颈随之从『怎么做』移到『为什么做、该做什么、怎么 direct』——而这些恰恰是 agent 不知道你的目标与品味、无法替代的部分。核心是一句:你可以外包思考,但无法外包理解。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">能力的锐钝取决于『可不可验证』,而非自然演化</p><p class="w">Karpathy 用 mental model 把 LLM 描述成『召唤出的统计幽灵』(jagged、无内驱、骂它没用),其能力在哪一块锐利、哪一块愚钝,取决于该任务可否验证,以及 labs 是否主观去 shape 它——GPT 下棋的飞跃是因为有人决定加数据,不是模型自己长出来的。</p></div><div class="pillar"><p class="p">vibe coding 抬地板,agentic engineering 保天花板</p><p class="w">vibe coding 让 amateur 也能做出东西(地板抬高);但要扛住质量、漏洞、技术债,靠的是 agentic engineering(天花板守住)。两者不是一回事,混为一谈会让人误以为『能跑』就等于『能上线』。</p></div><div class="pillar"><p class="p">人退回成 Director,价值落在 taste / spec / oversight</p><p class="w">当 agent 接管执行,人的增量价值就集中在定义『做什么、为什么、验收标准是什么』以及对产出的品味判断上。agent 不知道你的目标与审美,这层替不了——这也是理解无法外包的具体落点。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">Karpathy 自己承认『幽灵』比喻带一点 philosophizing 的成分,taste 作为护城河『没有根本阻碍,只是 labs 暂时没优化 aesthetics』——换言之,理解/taste 的不可外包性是当下事实而非物理定律;他同样没能反驳主持人押的反向赌注:几年后连 understanding 与 taste 也可能被自动化。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming:把 agent 当执行层放手可以极大抬高团队的产出地板,但天花板(质量、稳定性、长期技术债)必须由 agentic engineering 的规范去守;更关键的是,团队的增量价值要主动向 director 角色迁移——把『为什么做这个玩法、成功长什么样、验收标准是什么』这类 spec 与 taste 显性化沉淀下来,因为这是 agent 替不了、也是理解无法外包的地方。谁把理解外包出去图一时之快,谁就会在三个月后为答不出『为什么』付出代价。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“You can outsource your thinking but you can&#x27;t outsource your understanding.”</p><p class="cn">你可以外包你的思考,但你无法外包你的理解。</p></div><div class="quote"><p class="en">“We&#x27;re not building animals, we&#x27;re summoning ghosts.”</p><p class="cn">我们不是在驯化动物,而是在召唤幽灵。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 0 条</h2>
+  <div class="scan"></div>
+
+  <footer class="footer">
+    <span>Vol.050 · 新观点 1 · 累计 428 · _mira-vp-index</span>
+    <span>下期 · <b>2026-07-24 06:00</b></span>
+  </footer>
+</div></body></html>
