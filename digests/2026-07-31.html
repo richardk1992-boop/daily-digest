@@ -1,0 +1,79 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>轻读日:别再玩品牌原型,写一份能喂给 AI 的『说话手册』 — Vol.058</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.058</span>
+      <span class="chrome">2026-07-31 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>轻读日:别再玩品牌原型,写一份能喂给 AI 的『说话手册』</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>今日 24h 窗口 2 raw:1 篇为昨日 Vol.057 观点索引自归档(已过滤),1 篇为 Tom&#x27;s Marketing Ideas 的付费墙促销信。这封信的真内容锁在订阅墙后,可见的核心观点只有一小撮:品牌原型(archetypes)workshop 华而不实、开完就没人再打开;顶级品牌给新人的 messaging guide 其实极简——只讲『我们怎么说话、用什么词、各渠道语气、绝不说什么』,十分钟能读完就能上手;而这份『说话手册』如今最大的用途,是拿来教 AI 始终用你的口吻写作。本质促销、正文被墙,归速览。无新增观点,累计维持 432。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>Tom 说顶级品牌的 messaging guide 之所以有用,是因为它极简、可落地——十分钟读完就能写 LinkedIn、写邮件。回到你团队:你们对外表达有没有一份『任何新人都能立刻照着用』的说话手册,还是全靠个人手感、每次都从零猜?</li><li>他把品牌原型 workshop 归为『在会议室里好看、开完再没人打开』的一类东西。你最近做的哪些对内产物(战略卡片、价值观、tone 指南)也是这个命运——当场热闹、事后吃灰?区别到底在哪?</li><li>『一份好的 voice 文档,如今是你教 AI 始终像你一样说话的方式』——把这句话当真:如果要给 AI 写一页,让它替 TikTok Gaming 发声而不露怯,你能写出『我们绝不说的话』那一栏吗?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 0 篇</h2>
+  
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF · 品牌 / 内容 · Tom&#x27;s Marketing Ideas</div><div class="c"><div class="t"><a href="https://read.readwise.io/read/01kys3zyryh7fp5tj4h2ww73ey">别再玩品牌原型,写一份能喂给 AI 的极简『说话手册』</a></div><div class="v">付费墙促销信,正文锁在订阅后。可见观点:brand archetypes workshop 华而不实(『你是 Lover 还是 Explorer』这类占卜卡),开完就没人再看;作者向十几家顶级品牌 CMO 要来给新人 day-one 的 messaging guide,共同点是极简——只答『我们怎么说话 / 用什么词 / 各渠道语气 / 绝不说什么』,十分钟可上手;他据此做了一份 fill-in-the-blank 模板(Wiz / Canva / Stripe / Amazon 实例)。真正的时代性观点是最后一句:这份 voice 文档如今最大用途是『教 AI 始终用你的口吻写作』——与 Vol.057『真实经验/人格化表达是 AI 难复制的护城河』遥相呼应,但本篇是促销、正文被墙,无实质论证。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.058 · 新观点 0 · 累计 432 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-01 06:00</b></span>
+  </footer>
+</div></body></html>
