@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>「我们遗憾 PM 这个职能存在」:AI 时代靠更少、更资深、亲自下场的人取胜 — Vol.060</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.060</span>
+      <span class="chrome">2026-08-03 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>「我们遗憾 PM 这个职能存在」:AI 时代靠更少、更资深、亲自下场的人取胜</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Whatnot CPO Tom Verrilli 的反直觉建团前提:不为庞大 PM 队伍自豪,而把 PM 当「不得已的协调税」。当 AI 把执行成本压到接近零,组织稀缺的不再是人手而是判断力——跑赢的是 fewer, more senior PMs doing real IC work,而非按比例堆协调岗。配一套「play the accordion」心智:该收时亲自钻进细节、该放时给空间,反对「授权即消失」的伪放权。这是人类残差主线从『个人判断』推到『组织设计』的一次续写。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>Tom 说他们「遗憾 PM 这个职能存在」——把 PM 当协调税而非战功。回到你团队:现有的 PM/运营编制里,有多少是在『亲手做判断』,有多少只是在『协调别人的产出』?如果砍掉后者,谁来补那道跨团队对齐的缝?</li><li>他的赌注是『少数资深人亲自下场』跑赢『按比例配一堆人』。但资深人从哪来?如果你也只招资深、砍掉初级协调岗,三年后你的人才梯队会不会断档——这套赢家配方对『还在爬坡、人才不厚』的团队真的可复制吗?</li><li>『play the accordion』——该拉近时亲自钻进高风险决策,该推远时给空间。诚实回答:你上一次『拉近』是什么时候?你更常犯的错是抓太紧(微操),还是『授权后消失』式的假放权?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="V060-D1">
+      <span class="tag">组织设计 / PM 哲学 · Lenny&#x27;s Newsletter × Whatnot</span>
+      <h3>「我们遗憾 PM 这个职能存在」:更少、更资深、亲自做 IC 活的人如何跑赢比例配置</h3>
+      <div class="src">Lenny&#x27;s Newsletter — Tom Verrilli (CPO, Whatnot) · <a href="https://read.readwise.io/read/01kz185d6vjg0mvwqkb5v0gvzh">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●○ · 独特 ●○ · 时效 ●●  ·  7/10</div>
+      <div class="claim">当 AI 把执行成本压到接近零,组织的稀缺资源从「人手」变成「判断力」;与其按比例配一堆协调型 PM,不如用更少、更资深、亲自下场做 IC 活的人。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">ratio-driven org 追求的是覆盖,不是质量</p><p class="w">按工程师/PM 比例配人,本质是把组织当流水线、用编制去『盖住』每个模块;Tom 的反命题是 fewer, more senior PMs doing real IC work——少数资深人亲自写文档、看数据、做取舍,产出的是决策质量而非会议覆盖率。</p></div><div class="pillar"><p class="p">AI 抹平执行成本,单人判断量成为新的产能单位</p><p class="w">他明确说 AI 已重塑 Whatnot 的 data science 与 PM 角色:写代码、做分析的边际成本趋近零,执行不再是瓶颈;于是『只协调不下场』的中层价值被稀释,能亲手做出好判断的人被放大。</p></div><div class="pillar"><p class="p">「hire great people and get out of their way」是伪智慧</p><p class="w">放手 ≠ 无为。他用 play the accordion 的心智模型替代它:资深 leader 要在集中与放权之间动态伸缩——该收拢时亲自深入细节,该放开时给空间,而不是授权后消失。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这是一套典型的『赢家/幸存者配方』。Whatnot 正处在 $8B GMV 的高速增长期,有资本吸引顶级资深人才;『只招资深、砍掉初级协调岗』对增长停滞或人才梯队薄弱的组织未必成立,反而可能掐断人才培养管道——资深 IC-PM 究竟从哪里长出来?而且『we regret PM exists』本身带姿态营销成分:真落地时,被砍掉的跨团队对齐与优先级仲裁并不会凭空消失,只是从『便宜的协调岗』转嫁给了『更贵的资深人』。正文锁在付费墙后,可见的只是访谈提要与论点骨架,无逐条证据支撑。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这套论点提供的是一把审视组织的尺子而非现成答案。第一,该问自己现有的 PM/运营配置是不是『ratio-driven』——我们是否在用『增加协调岗』去解决本该靠『减少层级、提升单人判断密度』来解的问题;编制的增长到底买来了决策质量,还是只买来了更多会议。第二,AI 带来的执行降本红利,应优先投到『让资深的人亲自下场做关键判断』,而不是养更多在中间传话的角色——降本省下的不是裁员额度,而是把最贵的脑力从协调里解放出来做高杠杆决策。第三,给 leader 层引入 play the accordion 的自我校准:定期显式地问『此刻我该拉近还是推远』,用它对冲两种常见失灵——既不做微操型的抓太紧,也不做『授权即消失』式的假放权。这与前几卷的人类残差主线一脉相承:V057(Elena)说真实经验是内容的护城河,是个人层面的判断残差;V060 把同一逻辑推到组织层面——AI 抹平执行成本后,组织该压缩的是协调层,该保留和放大的是判断层。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“We regret that product management exists.”</p><p class="cn">我们遗憾『产品经理』这个职能存在。</p></div><div class="quote"><p class="en">“Fewer, more senior PMs doing real IC work outperform any ratio-driven org structure.”</p><p class="cn">更少、更资深、亲自做一线执行(IC)活的 PM,跑赢任何按比例配置的组织结构。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">SKIM · 工具 / 消费 · Recomendo #526</div><div class="c"><div class="t"><a href="https://read.readwise.io/read/01kz0vxfgz2ets12780m1d1ca0">Reading Maps / Days Since / NearbyWiki 等 6 条周荐</a></div><div class="v">Cool Tools 出品的第 526 期(10 周年)6 条轻推荐:Reading Maps(把经典小说/电影里角色的旅程画成地图,可按 海/陆/河/铁路 等分类)、Countdown Days Since &amp; Until(记录『距上次…多久』的 iOS 计时 app)、NearbyWiki(在地图上显示你所在位置附近有维基词条的地点)、一支钢笔配 Leuchtturm 1917 120gsm + Noodler&#x27;s Nightshade 墨水、Anthropic 官方 20 分钟 Claude 编码教程(『他们训练自家程序员用 Claude 的那套』)、iNaturalist Observations 实时物种目击流(『比 Instagram 更好逛的自然信息流』)。纯工具/消费向,无需深读。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.060 · 新观点 1 · 累计 433 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-04 06:00</b></span>
+  </footer>
+</div></body></html>
