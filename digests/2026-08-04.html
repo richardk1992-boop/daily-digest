@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>「yapper&#x27;s API」:执行不再是瓶颈,上下文的带宽与延迟成了 AI 产品的胜负手 — Vol.061</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.061</span>
+      <span class="chrome">2026-08-04 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>「yapper&#x27;s API」:执行不再是瓶颈,上下文的带宽与延迟成了 AI 产品的胜负手</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>OpenAI 的 Nick Baumann 在 Lenny 的 How I AI 现场演示了一套 AI-native 工作流:Codex Voice 一边听你说话一边操作电脑,多 thread 并行订票/报销/查日历,heartbeats 配置常驻 agent,ChatGPT Sites 在搭模板的时间里发布真站点。两个反直觉判断:其一,voice 是「yapper&#x27;s API」——人自由地『唠』给出的上下文,比盯着空白输入框『努力精确措辞』更多、更真;当执行被 AI 抹平,『哪种界面能让人以最低门槛吐出最多上下文』成了新护城河。其二,一旦模型拿到了足够工具,latency 会超过『再多一点推理质量』成为产品主轴。这是人类残差主线从个人经验(V057)、组织设计(V060)推到『交互界面』层的一次续写。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>「yapper&#x27;s API」——你团队里那些『AI 用不顺』的人,到底是能力问题,还是你逼他们把需求写成精确 prompt、而他们其实更擅长『说』?如果给他们一个 voice/对话式入口,产出会不会立刻不一样?</li><li>Nick 说模型一旦够用,速度就比『再聪明一点』更重要。回到你的产品:你上一次为『让 AI 感觉即时』砸资源是什么时候?你是不是还在默认『用户会等』,而把预算全压在追更强模型上?</li><li>heartbeats + always-on agents 很爽,但它要读你的屏幕、邮件、扣款记录。诚实回答:你愿意把哪些判断权交给一个『常驻后台、被事件唤醒、自己组织上下文』的 agent?哪条线你无论如何不会交?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="V061-D1">
+      <span class="tag">AI 工作流 / 人机交互 · Lenny&#x27;s How I AI × OpenAI</span>
+      <h3>「yapper&#x27;s API」与延迟主轴:当 AI 能边听边操作,人类残差退回『上下文 + 判断』</h3>
+      <div class="src">Lenny&#x27;s Newsletter (How I AI) — Nick Baumann (OpenAI) · <a href="https://read.readwise.io/read/01kz434qezb21hv6gesa94dtdw">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●○ · 独特 ●○ · 时效 ●●  ·  7/10</div>
+      <div class="claim">当 AI 能一边听你说话一边操作电脑,执行不再是瓶颈,人类的贡献收敛为『提供上下文和判断』;于是『说』(voice)作为更高带宽、更低门槛的上下文注入方式胜出,而一旦模型拿到足够工具,延迟会超过『再多一点推理质量』成为产品决策的主轴。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">voice 是「yapper&#x27;s API」——自由地说 &gt; 努力精确措辞</p><p class="w">人对着空白输入框『想清楚该怎么打字』时,会因为要求精确而给出更少的上下文;而自由地『唠』移除了这道心理税。跨 two-person voice chat、手机口述、Codex orb,同一规律反复出现:能说的人给 AI 的 context 更多,更多 context 通常带来更好的产出。当执行被 AI 抹平,『哪种界面能让人以最低门槛吐出最多真实上下文』本身就成了护城河。</p></div><div class="pillar"><p class="p">latency 正在超过 intelligence 成为产品主轴</p><p class="w">Nick 常用 Voice 的最高智能档,但他明确指出:一旦模型已经拿到它需要的工具,速度比『再多一点点推理质量』更重要。大量 AI 产品仍建立在『等待不可避免』的假设上;当这个假设被打破,『感觉即时』的工具会拿到巨大优势,尤其对那些嫌 AI 太慢、不敢放进实时工作流的用户。</p></div><div class="pillar"><p class="p">always-on / 并行是助手的下一形态</p><p class="w">heartbeats(可疑扣款、包裹临近、重要邮件主动通知,全程 no-code)+ thread-forking(任务变复杂时 Codex 自己开新线程、从旧对话拉上下文)指向的不是『问一句答一句』,而是『常驻后台、被事件唤醒、自己组织上下文』的 agent 群——人从『操作者』退到『下达意图 + 审校结果』。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这是 OpenAI 自家人演示自家产品,天然带 dogfooding / 营销滤镜——demo 的顺滑度不等于日常鲁棒性。always-on agents 的误报率、隐私代价(读屏幕/读邮件/读扣款)、以及『把判断权交给后台 agent』的失控风险,都被演示的爽感掩盖。而且『voice 更高带宽』对需要精确措辞的场景(写代码、法律条款、财务指令)未必成立:自由地『唠』同样可能引入更多噪声,把模糊需求原样喂给模型。正文是访谈提要 + workflow 链接,可见的是论点骨架与 demo 描述,无独立复现证据,故按骨架论证、不逐条夹译。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这期给的是三把可以马上用的尺子。第一,审视自家 AI 工具的『上下文注入界面』:我们是不是在逼用户把需求写成精确 prompt,而真正该做的是引入 voice / 对话式入口,降低门槛去换取更多真实上下文——那些『AI 用不顺』的同事,很可能不是能力问题,而是被输入框的『精确税』卡住了。第二,把 latency 当一等产品指标:在『工具已经够用』的场景(客服、运营查询、素材初剪),优先砸资源做『感觉即时』,而不是无止境追更强的模型;用户对『快』的感知,常常比对『再聪明一点』的感知更能决定他敢不敢把 AI 放进实时工作流。第三,用 heartbeats / 并行 thread 的思路重构内部工作流:把监控、运营、素材生产从『人盯着操作』改造成『事件唤醒 + agent 自组织上下文 + 人审校』,把最贵的人力从操作里解放到『定义意图 + 兜底判断』。这与前几卷一脉相承:V057 说残差在个人真实经验,V060 说组织该压缩协调层、放大判断层,V061 补上关键一环——决定这些残差能否高效流入 AI 的,是交互界面的『上下文带宽』与『响应延迟』。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“People often get more useful results when they talk freely than when they stare at an empty prompt box trying to be precise.”</p><p class="cn">比起盯着空白输入框努力保持精确,人们自由地说出来时,往往能得到更有用的结果。</p></div><div class="quote"><p class="en">“Once a model has the tools it needs, speed can matter more than another small jump in reasoning quality.”</p><p class="cn">一旦模型拿到了它需要的工具,速度可能比『再多一点点推理质量』更重要。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">SKIM · 营销 / 转化 · Tom&#x27;s Marketing Ideas</div><div class="c"><div class="t"><a href="https://read.readwise.io/read/01kz3chx0ym6abtsthkq5jmj3m">「book a demo」页的 7 个转化快赢(付费墙截断)</a></div><div class="v">面向 SaaS 的 demo 落地页 CRO 清单:(1) 表单砍到只留 work email(每个必填星号都在流失完成率,拿到邮箱后用 LinkedIn/Clearbit/Apollo 补全即可),反对开放式文本框;(2) 按钮别写『Submit / Request a demo』,改成结果导向的『See [Company] / Choose a time』;(3) 表单旁放 G2/Trustpilot 星级并突出评价数量(『4.8 from 5,809 reviews』比孤零零的『4.8』更有说服力),但徽章别做成外链;(4) 明确告诉访客『提交后会发生什么』(走查还是硬推销、2 小时还是 2 天)。第 5-7 条(含一个把 demo 请求提升 30% 的实验)锁在付费墙后。纯执行向 CRO 战术,无认知增量,归速览。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.061 · 新观点 1 · 累计 434 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-05 06:00</b></span>
+  </footer>
+</div></body></html>
