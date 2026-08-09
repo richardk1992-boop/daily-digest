@@ -1,0 +1,79 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>付费墙后的招聘术:又一轻读日 — Vol.067</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.067</span>
+      <span class="chrome">2026-08-10 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>付费墙后的招聘术:又一轻读日</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>今日 24h 窗口 2 raw、无自归档:一篇 Lenny × Adam Ward(Cursor 招聘负责人)谈『高人才密度』团队的播客,但正文锁在付费墙后、仅存节目提纲(『funnel of doom』式漏斗招聘、scoping/mapping/relentless pursuit 三步法、forward deployed engineer 崛起);一篇 Recomendo 复古消费推荐(YNAB/Kiva/Zelle)。两篇都无可承重的认知增量,归速览/跳过。今日无深读、不新增观点,累计维持 436。轻读日只出扫读区。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>Cursor 把每个岗位都当『executive search』来做、宣称『caring 才是招聘最大的不公平优势』——当 AI 让候选人筛选与外联都能自动化时,『真的在乎一个人』这种反规模化的动作,会不会反而成为高人才密度团队唯一的护城河?</li><li>『funnel of doom』的批评是:传统漏斗(海投→筛选→面试)天然导向平庸雇佣。可如果放弃漏斗、只做定向猎取(mapping + relentless pursuit),团队在早期就锁死了人才画像——这套打法在什么规模、什么阶段会从『精英』变成『近亲繁殖』?</li><li>连续两天空窗后今天回到 2 篇、却又都卡在付费墙或纯消费推荐——你的信息源里,有多少『看起来高质量』的订阅其实只在标题和提纲层面给你信号,真正的 substance 永远在 paywall 后?这种『提纲级信息』该不该继续占用每日注意力?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 0 篇</h2>
+  
+
+  <h2 class="section-head">▎ 其余值得一扫 · 2 条</h2>
+  <div class="scan"><div class="row"><div class="k">SKIM · 组织 / 招聘 · Lenny × Adam Ward(Cursor Head of Talent)</div><div class="c"><div class="t"><a href="https://read.readwise.io/read/01kzk8ww1qd64xy4g3xgxcgfvn">高人才密度团队的招聘 playbook(正文付费墙锁定,仅存提纲)</a></div><div class="v">Adam Ward(前 Growth by Design 创始人,20+ 年精英团队招聘)在 Lenny 播客谈 Cursor 如何建高人才密度团队:批评传统招聘漏斗为『funnel of doom』(海投导向平庸),主张三步法 scoping → mapping → relentless pursuit、把每个岗位当 executive search 来做、并称『caring 是招聘最大的不公平优势』;还谈 forward deployed engineer 的崛起与创始人招第一个 recruiter 的最大错误。但本期正文锁在付费墙后(『Subscribe to unlock the rest』),可见的只有节目提纲与推荐书单(Emotional Intelligence / High Growth Handbook / Scaling People),无可承重的论据细节。Lenny 系近期反复出现的信源,teaser 级信息、无认知增量,归速览。</div></div></div><div class="row"><div class="k">SKIP · 消费 / 生活 · Recomendo #527</div><div class="c"><div class="t"><a href="https://read.readwise.io/read/01kzjwnvbnxr5gtmmj4xs3tqjv">Retro Recomendo:Money Stuff(理财/支付工具推荐合辑)</a></div><div class="v">KK/MF/CD 的复古消费推荐合辑,主题为『钱』:YNAB(信封制家庭预算)、Kiva(向发展中国家创业者放微额贷款,&lt;0.1% 坏账)、Salary Transparent Street(街头薪资透明短视频)、Notarize.com(在线公证 $25/份)、DonorsChoose(资助公立学校教师采购)、Zelle(免费银行间 P2P 大额转账)。纯生活/消费向清单,与工作主线无关、无认知或战略增量,归跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.067 · 新观点 0 · 累计 436 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-11 06:00</b></span>
+  </footer>
+</div></body></html>
