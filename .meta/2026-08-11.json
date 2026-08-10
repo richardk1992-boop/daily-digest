@@ -1,0 +1,10 @@
+{
+  "date": "2026-08-11",
+  "vol": "068",
+  "title": "审查即瓶颈:让 AI 审 AI,把判断做成门禁",
+  "subtitle": "24h 窗口仅 1 篇、非付费墙:Lenny『How I AI』周更 —— Claire 用 Vercel Eve 一个 Codex session 搭出『Merge Mommy』code review bot。洞见不在工具而在运营模型:AI 写掉大部分代码后瓶颈从『写』移到『审』,让 AI 审 AI(配 6 维风险门禁 + 逐条 eval)反而更快、revert 更低(Intercom 验证提速 5x)。1 深读、+1 观点,累计 437。",
+  "deep_count": 1,
+  "brief_count": 0,
+  "skim_count": 0,
+  "skip_count": 0
+}
