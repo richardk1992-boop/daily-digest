@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>审查即瓶颈:让 AI 审 AI,把判断做成门禁 — Vol.068</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.068</span>
+      <span class="chrome">2026-08-11 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>审查即瓶颈:让 AI 审 AI,把判断做成门禁</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>今日 24h 窗口仅 1 篇、非付费墙:Lenny『How I AI』周更,核心是 Claire 用 Vercel Eve 在一个 Codex session 里搭出『Merge Mommy』——一个给 PR 打风险分、自动放行低风险、把可疑项丢 Slack 的 code review bot。真正的洞见不在工具,而在运营模型:当 AI 写掉大部分代码,瓶颈从『写』移到『审』;而让 AI 审 AI(配 6 维风险门禁 + 逐条 eval)反而比逐个人工 review 更快、revert 更低(Intercom 已在规模上验证提速 5x)。今日 1 深读、+1 观点,累计 437。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>当写代码的 agent 和审代码的 agent 出自同源模型,它们很可能共享同一盲区——『AI 审 AI』在系统性错误面前,到底还算不算真正独立的第二双眼睛?你会给哪类改动强制留一道人类闸门?</li><li>案例把『能否跳过人工』压成 6 维风险分(&lt;24 放行、&gt;64 送人)。这套阈值本身由谁调、多久 recalibrate 一次?在提速 KPI 的压力下,低风险线会不会被悄悄上移、把中风险误放进自动通道——反直觉红利何时会反噬?</li><li>文中反复强调 legible(可读)、logged(可记录)、eval(可复核)是自动化与合规不对立的前提。如果一个团队没有『给每个 review 打分再复核』的 eval 肌肉,它到底该不该上自动批准?没有 eval 的自动化和没有刹车的加速有什么区别?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="V068-1">
+      <span class="tag">工程 · AI 协作</span>
+      <h3>Merge Mommy:当审查成为瓶颈,把风险判断做成可复算的门禁</h3>
+      <div class="src">Lenny『How I AI』· Claire × Vercel Eve · <a href="https://read.readwise.io/read/01kzp3yrq6ccx80cn1fqjz8g74">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  8/10</div>
+      <div class="claim">当 AI 写掉大部分代码,工程的瓶颈从『写』移到『审』;而反直觉的答案是——让 AI 审 AI 写的代码,只要把模糊的判断变成可复算、可审计、可 eval 的风险门禁,反而比逐个人工 review 更快、revert 更低。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">『不必人工 review 每个 AI PR』不是鲁莽,而是有硬数据的运营模型</p><p class="w">Intercom 已在规模上验证:其 AI 系统批准的 PR 比人工 review 的快 5 倍、revert 率更低——AI 审过的代码不只 ship 更快,进生产后更不需要返工。速度与质量在这里不是取舍关系。</p></div><div class="pillar"><p class="p">关键动作是把『能否跳过人工』从拍脑袋变成可复算的风险打分</p><p class="w">案例风险模型沿 6 维打分——改动大小 / 爆炸半径(blast radius)/ 可逆性 / 数据与安全影响 / 运营影响 / 测试与 CI 是否完成;&lt;24 分低风险由 agent 放行、&gt;64 分强制送人工。具体数字不重要,重要的是把一次性的模糊判断转成可重复、可解释的系统。</p></div><div class="pillar"><p class="p">合规(SOC 2)与自动批准 PR 不天然对立,前提是流程『可读』</p><p class="w">风险模型写进公司 code-review 与安全政策、每个决策都 log、审计轨迹易查易辩;安全团队的角色是帮忙设计正确框架而非因陌生就一票否决。而 Merge Mommy 本身『不 merge』——它只贴灰色 check + 发 Slack 提示,把最终动作与问责显式留在人身上。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">整套叙事严重依赖两个隐藏前提:一是有 Intercom / Vercel 这类工程成熟、eval 纪律强的组织背书;二是风险阈值持续被人调校并被 eval 盯着(Intercom 让工程师逐条评估 agent 打分是否正确)。一旦组织缺了『给每个 review 打分再复核』的 eval 肌肉,低风险阈值就会在提速压力下悄悄上移,把中风险误放进自动通道,红利反噬。更深的一层文中回避了:当写码 agent 与审码 agent 同源,它们可能共享同一盲区,『AI 审 AI』在系统性错误面前未必是真正独立的第二双眼。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 而言,真正该抄的不是『上一个自动批准 bot』,而是先把 code review 从个人手艺升级成一张可复算、可审计的风险门禁:沿改动规模 / 爆炸半径 / 可逆性 / 数据安全 / 运营影响 / CI 完成度打分,低风险走 agent 快车道、高风险强制人工,每次决策 log 下来喂给 eval 回环。落到 Gaming 这种直接触碰营收链路与支付合规的场景,阈值应设得更保守、爆炸半径与数据安全两维权重加大,并对涉及计费与风控的改动强制保留人类闸门。把『最终 merge 与问责』显式留给人,既满足合规审计,又能把工程师从routine review 的认知负担里解放出来去做真正需要判断的改动——这正是把判断力系统化、而非把判断力外包。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“PRs approved by its AI system move five times as fast as human-reviewed ones and have a lower revert rate.”</p><p class="cn">其 AI 系统批准的 PR 比人工 review 的快 5 倍,且 revert 率更低。</p></div><div class="quote"><p class="en">“The exact numbers matter less than turning a vague judgment call into a repeatable system.”</p><p class="cn">具体数字不重要,重要的是把一次模糊的判断变成一套可重复的系统。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 0 条</h2>
+  <div class="scan"></div>
+
+  <footer class="footer">
+    <span>Vol.068 · 新观点 1 · 累计 437 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-12 06:00</b></span>
+  </footer>
+</div></body></html>
