@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>注意力的人类残差:当建产品与发内容都归零,创始人『为什么』成了唯一稀缺信号 — Vol.069</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.069</span>
+      <span class="chrome">2026-08-12 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>注意力的人类残差:当建产品与发内容都归零,创始人『为什么』成了唯一稀缺信号</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>今日 24h 窗口 2 篇邮件(另 1 篇为本管线自归档,过滤)。深读锚定 Lenny&#x27;s Newsletter 客座长文(Kristen Lowe,executive ghostwriter):当 AI 把『从想法到产品』和『批量产出内容』双双压成零成本、X/LinkedIn 被 soulless AI slop 淹没,唯一无法被自动化的稀缺信号,是创始人那句『我为什么开始』的诚实叙事——把它系统化成 comms strategy,是当下最低成本、最高杠杆的注意力工具。作者把创始人『为什么』映射到三种原型(Problem 让人被看见 / Insight 让人变聪明 / Vision 让人有希望),各配可复用 playbook 与反模式。另一篇 Tom&#x27;s Marketing Ideas 是纯 beta 招募推广,跳过。今日 1 深读、+1 观点,累计 438。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>当所有创始人都照同一套 playbook 去讲『origin story』,真诚本身会不会被批量生产成新一轮 slop?作者推崇的『高重复场景化叙事』在规模化模仿下会不会迅速通货膨胀——你如何判断一个『为什么』是真实残差,还是又一层人设工程?</li><li>文章把『为什么』当作可被 ghostwriter 代笔、可被策略封装的资产;但真正打动人的恰恰是不可外包的部分。comms strategy 与『人设工程』的边界在哪里?一旦叙事被外包和优化,它是否就会变成它想对抗的那种 AI slop?</li><li>三原型框架把创始人对号入座,但作者也警告『很多 Insight founder 把自己误当 Vision founder』。原型自认的偏差本身会误导整个 comms 战略——你会用什么外部信号(而非自我感觉)来校准自己究竟属于哪一类?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="V069-1">
+      <span class="tag">品牌 · 创始人沟通</span>
+      <h3>注意力的人类残差:当 AI 抹平『建』与『发』,创始人的『为什么』成了唯一无法自动化的信号</h3>
+      <div class="src">Lenny&#x27;s Newsletter · Kristen Lowe(executive ghostwriter / Scribe) · <a href="https://read.readwise.io/read/01kzrh3yxbr01r0e0axfg9vmqy">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  6/10</div>
+      <div class="claim">当 AI 把『从想法到产品』和『批量产出内容』双双压成零成本、渠道被 soulless AI slop 淹没,真正稀缺、无法被自动化的,是创始人那个『我为什么开始』的诚实叙事——把它系统化成 comms strategy,是当下最低成本、最高杠杆的注意力工具。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">创始人的障碍不是『讨厌写作』,而是『不知道说什么』——而答案几乎总是那句『我为什么开始』</p><p class="w">作者作为 executive ghostwriter,发现头号求助原因不是讨厌写作,而是 “I have no idea what to say”。她的处方是:多数人只需回答『我为什么创办这家公司』。创业是重排整个人生、且失败率极高的赌注;当初足以说服你自己的理由,就足以让别人 care——因为人们关心和支持的是『人』,不是实体或 widget。这把『注意力』重新锚定到一个 AI 无法代生成的原点。</p></div><div class="pillar"><p class="p">把『为什么』映射到三种原型,各自唤起一种关系与情感,并决定四个战略选择</p><p class="w">Problem founder(自己就是客户,让人『被看见 / 我懂你』)、Insight founder(比别人早看到,让人『变聪明 / 我信你』)、Vision founder(想象一个不存在的世界,让人『有希望 / 我追随你』)。原型不回答『多久发一次』这类战术问题,而决定 goal(要达成什么)/ voice(该怎么发声)/ messaging pillars(该讲什么)/ success conditions(怎么知道有效)四个战略维度。对号入座看似反直觉,却把模糊的『做个人品牌』变成可执行的分支。</p></div><div class="pillar"><p class="p">每种原型都有可复用 playbook 与高频反模式,真诚是靠『细节』而非『姿态』兑现的</p><p class="w">Problem 用 Taylor Swift 式场景化细节讲 origin story——不是『现有方案不行』,而是『我在车里哭』;忌泛化、滑入 CEO 腔、过度分享私生活。Insight 靠『helpful 而非总是对』建慢而durable的信任,鼓励承认不确定;忌让人觉得蠢、只发无推理的 hot takes。Vision 的核心不是讲愿景本身,而是耐心地『x 并非必然』地拆解现状假设;忌蔑视现状、把自己当主角、只谈规模不谈形状。判断有效的信号也各异:评论区从『great post!』变成读者主动讲自己的经历 / 你的措辞被别人复述 / 人们用自己的话把你的世界描述回来。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">把『讲故事』工程化成可复用模板,风险恰在于:当所有创始人都照同一套 playbook 产出『origin story』,真诚本身会被批量生产成新一轮 slop——作者推崇的『高重复场景化叙事』在规模化模仿下会迅速通货膨胀,今天的差异化打法就是明天的噪音底噪。更深一层:文章把『为什么』当作可被 ghostwriter 代笔、可被策略封装的资产,但真正打动人的恰恰是不可外包的那部分;一旦 comms strategy 滑向『人设工程』,它就会变成它想对抗的那种 AI slop。此外,全文关于『如何用 AI 参与内容生产而不失真』的关键章节恰好被付费墙截断——最该给的那味处方缺席了。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 而言,可迁移的不是『多发帖』,而是先把『我们为什么做这个产品 / 功能 / 团队』这个 human residual 说清楚,再倒推渠道与节奏。面对越来越多同质化、AI 批量生成的游戏内容与营销素材,差异化不来自又一套自动化文案,而来自主播 / 产品 / 团队背后可被识别、可被信任的真实叙事——把它当作运营资产去沉淀,而非临时的 campaign 素材。落到个人:当执行层被 AI 抹平,护城河是把自己的判断来源与独特视角(对应 Insight 原型)讲成别人愿意借用的语言;先想清楚自己究竟是让人『被看见 / 变聪明 / 有希望』中的哪一种,再选长文 / 短视频 / 演讲的渠道组合。真正该抄的是那个诊断动作——先定位『为什么』与原型,而不是照搬某个爆款的表达形式。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“It&#x27;s never been easier to start a company. It&#x27;s also never been harder to get someone to care that you did.”</p><p class="cn">创办一家公司从未如此容易,而让别人在意你创办了它,也从未如此艰难。</p></div><div class="quote"><p class="en">“Founder communications work because people care about and root for other humans, not entities or widgets.”</p><p class="cn">创始人沟通之所以奏效,是因为人们关心和支持的是『人』,不是实体或 widget。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">SKIP</div><div class="c"><div class="t"><a href="https://read.readwise.io/read/01kzr8v7g7w958ych047d722jt">I trained an AI agent on 500 of my marketing ideas</a></div><div class="v">Tom&#x27;s Marketing Ideas 的纯推广邮件:为其 MarketingIdeas.ai 招募 50 名 beta 测试者(annual 订户、8/14 截止)。无观点密度、纯营销转化文案,跳过。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.069 · 新观点 1 · 累计 438 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-13 06:00</b></span>
+  </footer>
+</div></body></html>
