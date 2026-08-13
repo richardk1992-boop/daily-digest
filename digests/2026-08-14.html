@@ -1,0 +1,79 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>轻量日:497 条 raw 实为 RSS 批量重同步,唯一真实新存仍是营销催单 — Vol.071</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.071</span>
+      <span class="chrome">2026-08-14 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>轻量日:497 条 raw 实为 RSS 批量重同步,唯一真实新存仍是营销催单</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>今日 24h 窗口 raw 数暴涨到 497,但经排查全部为 16:25–16:30 UTC 几分钟内批量涌入、reading_progress=0 的 RSS 重同步噪声(390 rss + 6 podcast + 100 paper feed),并非真实阅读。剔除后仅剩 1 篇按时间戳离群、真正被主动收藏的非订阅内容——Tom&#x27;s Marketing Ideas 的 webinar 获客邮件,正文是 MarketingIdeas.ai 的 beta 付费催单(『终身免费名额最后一天、$200/年周四截止,回复 IN』)加一段撞付费墙的『webinar 瀑布式分发』教学预告。纯营销转化+付费墙截断,无观点密度,跳过——这是 Tom 系列连续第 3 次 skip。无深读、无新增观点,累计维持 438。轻量日仅留扫读记录。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>当一次 RSS 批量重同步就能把单日 raw 从 3 条冲到近 500 条,阅读管线里『收藏动作』与『系统噪声』的边界该由什么信号来划?reading_progress=0 + 秒级聚簇的 saved_at,是否应当成为和 paper feed 同级的硬过滤维度?</li><li>Tom 把 webinar 获客法的后半段藏进付费墙、前半段用来做订阅转化钩子——当『干货』本身被切成免费预告+付费正文的漏斗结构,读者获得的到底是知识,还是又一次被设计好的转化路径?</li><li>连续三期唯一的『新内容』都来自同一个营销 newsletter 的催单,这究竟说明我的信息源已经收敛到只剩推广,还是说明真正有价值的深读本就稀疏、而营销内容因为高频推送天然更容易落进 24h 窗口?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 0 篇</h2>
+  
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">SKIP · 营销</div><div class="c"><div class="t"><a href="https://read.readwise.io/read/01kzx6e3cr96d704z73cyghpht">How to absolutely pack your next webinar (for $0) 🍿</a></div><div class="v">Tom&#x27;s Marketing Ideas 的 webinar 获客邮件:正文是 MarketingIdeas.ai 的 beta 付费催单(『AI agent 终身免费名额最后一天、$200/年周四截止、回复 IN』)+ 一段撞付费墙的『webinar 瀑布式分发』教学预告。纯营销转化、正文被付费墙截断、无观点增量,跳过(Tom 系列连续第 3 次 skip)。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.071 · 新观点 0 · 累计 438 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-15 06:00</b></span>
+  </footer>
+</div></body></html>
