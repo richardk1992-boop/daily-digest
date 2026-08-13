@@ -1,0 +1,10 @@
+{
+  "date": "2026-08-14",
+  "vol": "071",
+  "title": "轻量日:497 条 raw 实为 RSS 批量重同步,唯一真实新存仍是营销催单",
+  "subtitle": "今日 24h 窗口 raw 暴涨到 497,经排查全部为 16:25–16:30 UTC 几分钟内批量涌入、reading_progress=0 的 RSS 重同步噪声(390 rss + 6 podcast + 100 paper feed)。剔除后仅剩 1 篇按时间戳离群、真正主动收藏的非订阅内容——Tom's Marketing Ideas 的 webinar 获客邮件,正文是 MarketingIdeas.ai 的 beta 付费催单加撞付费墙的教学预告,纯营销转化、无观点密度,跳过(连续第 3 次)。无深读、无新增观点,累计维持 438。",
+  "deep_count": 0,
+  "brief_count": 0,
+  "skim_count": 0,
+  "skip_count": 1
+}
