@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>断供后首更:OpenAI 设计负责人谈 AI 时代的人类残差(用户理解 / 发明 / 视角) — Vol.074</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.074</span>
+      <span class="chrome">2026-08-17 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>断供后首更:OpenAI 设计负责人谈 AI 时代的人类残差(用户理解 / 发明 / 视角)</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>6 天断供后的首条真内容:Lenny&#x27;s Newsletter 专访 OpenAI 产品设计负责人 Ian Silber。核心是一条与本简报主线高度共振的判断——当 AI 把执行成本压到近零,设计的瓶颈从『产出』迁移到『判断』,人类仍然领先的残差是 user understanding、invention、point of view;反直觉建议是『Just do less』。需注意原文是播客 show notes(观点以议题清单形式给出),完整论证在音频里。另有 Recomendo #528 消费推荐周报(拼字游戏 / 制冰机 / Amazon 价格历史)速览留档。今日 +1 观点 → 累计 439,主线延伸至 V074。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>Ian 说『史上做设计的最好时代』,可同一场对话又承认『工程师被 AI 放大了 10 倍、设计没有』——当一个岗位的产能没被 AI 放大,这到底是它更安全(价值在判断而非产能),还是它更危险(增长停滞、议价权下降)?这句乐观叙事,到底对谁成立?</li><li>如果『品味 / point of view』是 AI 时代设计的护城河,而 AI 恰恰越来越擅长模仿聚合品味——个体视角的差异化,是一种可持续的稀缺,还是会像『创始人叙事』一样在规模化模仿下迅速通胀?</li><li>『Just do less』在个人产能被 AI 抹平的当下听起来很对,但组织考核往往仍在数功能、数产出——当『少做但做对』与『可见的产出量』冲突时,一个 builder 该如何为『我砍掉了什么』这件不可见的判断力定价?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="01m059p7eem8vbe2m5h0fpbpdw">
+      <span class="tag">设计 · 人类残差</span>
+      <h3>OpenAI 设计负责人 Ian Silber:史上做设计的最好时代,以及 AI 之外人类还赢在哪</h3>
+      <div class="src">Lenny&#x27;s Newsletter · <a href="https://read.readwise.io/read/01m059p7eem8vbe2m5h0fpbpdw">原文</a></div>
+      <div class="badge">DEEP</div>
+      <div class="claim">当 AI 把执行成本压到近零,设计的瓶颈从『产出』整体迁移到『判断』——人类仍然领先的残差,是用户理解(user understanding)、从 0 到 1 的发明力(invention),以及不可外包的品味与视角(point of view)。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">『工程师被 AI 放大了 10 倍,设计团队却没有』的反差,恰恰暴露了设计的价值从来不在产能。</p><p class="w">若 AI 只放大『产出速度』而设计没被同等放大,说明设计的核心从来是判断 / 品味 / 用户共情这类不可被产能替代的东西;被 AI 抹平的是执行,不是判断。这一步把『设计没被放大』从坏消息重解为对设计本质的证明。</p></div><div class="pillar"><p class="p">Ian 的反直觉建议『Just do less』把杠杆点从『多做功能』移到『少而高信念的下注』。</p><p class="w">当生成一个方案的边际成本趋零,稀缺的不再是方案数量,而是『敢砍』的判断力;少做,是在产能过剩时代重新为品味定价——它对抗的正是 AI 让人无脑多产出的诱惑。</p></div><div class="pillar"><p class="p">人类仍然赢在三处——user understanding、invention、point of view。</p><p class="w">这三者都需要『在场的人』:理解真实用户的语境、发明尚不存在的东西、为『什么值得做』给出一个有立场的答案,都无法从聚合数据里插值出来;它们是残差,不是被 AI 替换后的剩余,而是 AI 结构上够不到的部分。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">但这套『品味即护城河』的叙事有个内在裂缝——如果 AI 越来越擅长模仿聚合品味,个体的 point of view 究竟是持久的差异化,还是同样会被均值回归抹平?而且需要诚实标注:本期原文只是播客的 show notes(观点以议题清单形式给出),完整论证在音频里。把『史上最好时代』这类乐观断言当结论前,值得对『对谁最好』保持警惕——被 10 倍放大的与被抹平的,可能是同一批人里的不同人。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Product-Gaming 而言,这条残差直接指向路线图哲学:当 AI 让做功能、做素材、做原型都近乎零成本,团队的护城河不再是『这季度发布了多少功能』,而是对玩家语境的深度理解、敢于发明尚不存在的玩法(0→1),以及一个能被识别的产品视角。『Just do less』是对功能工厂式路线图的正面反驳——在产能过剩时,少而高信念的下注,比又一批 AI 生成的同质玩法与素材更能建立差异化。它也回应了个人层面的老问题:当执行被抹平,你的议价权来自你能把哪些别人看不见的判断(砍掉什么、为谁做、为什么现在)讲清楚。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Why engineers 10x&#x27;d with AI but design teams haven&#x27;t”</p><p class="cn">为什么 AI 把工程师放大了 10 倍,设计团队却没有</p></div><div class="quote"><p class="en">“Where humans still win: user understanding, invention, and point of view”</p><p class="cn">人类仍然胜出的地方:用户理解、发明力,以及视角(point of view)</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">SKIM · 工具 / 生活</div><div class="c"><div class="t"><a href="https://read.readwise.io/read/01m04x9q1qztp0tmwwvvajekmq">Recomendo #528:Beeswax 拼字游戏 / Chompy 制冰机 / Amazon 价格历史</a></div><div class="v">Kevin Kelly 团队的消费推荐周报:两分钟每日拼字游戏 Beeswax、Pearl L1 Max 『chompy ice』制冰机、Amazon 原生『价格历史』按钮(可替代 CamelCamelCamel)、以及免费同行评审的『女性哲学家概念百科』。生活 / 工具向,专业信号低,速览留档。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.074 · 新观点 1 · 累计 439 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-18 06:00</b></span>
+  </footer>
+</div></body></html>
