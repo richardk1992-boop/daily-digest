@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>『prompt 即 spec』:单人创始人用 Codex 造时尚品牌,与人类残差的下一层 — Vol.075</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.075</span>
+      <span class="chrome">2026-08-18 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>『prompt 即 spec』:单人创始人用 Codex 造时尚品牌,与人类残差的下一层</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Lenny&#x27;s『How I AI』专访 Yana Welinder——一个没有工程团队的单人创始人,用 ChatGPT + Codex 把手绘草图变成产品图、操作专业 3D 时尚软件(CLO)、联系制造商、搭起带投票与支付的电商站。核心洞察:当执行被 AI 抹平,瓶颈迁移到『把 good 定义清楚』——prompt 就是 spec,而 spec 就是一切;设计师的护城河不是产出惊艳,而是精确忠于自己的 vision。另有 Tom&#x27;s Marketing Ideas 复出,拆解『假装发错邮件再道歉』的冷启动话术(brief)。今日 +1 观点 → 累计 440,主线延伸至 V075。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果『prompt 即 spec』成立,那么真正稀缺的能力就从『会不会做』变成『能不能把 good 说清楚』——可是把品味显式化成 prompt 的过程,本身会不会反过来磨平品味的隐性部分(那些说不清、只能靠手感的东西)?能被写成 spec 的品味,还是护城河吗?</li><li>Yana 用 Codex 操作了她从没学过的 CLO 专业软件——当『掌握工具』不再是门槛,行业的准入壁垒会怎样重构?是让更多有 vision 的人涌入(供给爆炸、价值稀释),还是让『有 vision』本身成为唯一稀缺?</li><li>这一集和昨天 Ian Silber 那集拼在一起:两位都说人类赢在 vision / point of view。但如果所有人都被 AI 赋能去表达自己的 vision,市场会不会从『执行过剩』直接进入『vision 过剩』——那时区分度又回到哪里?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="01m084sr3zew4x03xntkrqh967">
+      <span class="tag">AI 工作流 · 人类残差</span>
+      <h3>How I AI:单人创始人如何用 Codex + ChatGPT 造出一个没有工程师的时尚品牌</h3>
+      <div class="src">Lenny&#x27;s Newsletter · <a href="https://read.readwise.io/read/01m084sr3zew4x03xntkrqh967">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●○ · 时效 ●●  ·  8/10</div>
+      <div class="claim">当 AI 把执行成本压到近零,创造的瓶颈从『会不会做』整体迁移到『能不能把 good 定义清楚』——prompt 就是 spec,而 spec 就是一切;人类的杠杆点不是产出,而是那份足够清晰、足够有立场的 vision。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">『prompt 即 spec』:在生成任何一张图之前,先写一份详尽的『fashion prompt』——描述廓形、面料如何垂坠与运动、甚至它应该发出什么声音。</p><p class="w">这份前置的『把 good 说清楚』的功夫,直接决定了输出质量;而且这条经验远超时尚——一个人越能清晰定义什么算『好』,AI 和人都能交付得越好。稀缺的不再是执行,而是把标准显式化的能力。</p></div><div class="pillar"><p class="p">对设计师而言,『忠于 vision』比『产出惊艳』更值钱。</p><p class="w">很多图像模型都能生成漂亮的衣服,但往往像已经存在的东西;而 ChatGPT Images 2.0 能紧贴 Yana 的原始草图。对有明确 point of view 的创作者,准确跟随设计的价值,远高于生成一个花哨但泛化的结果——差异化来自忠实,不来自炫技。</p></div><div class="pillar"><p class="p">AI agent 让专业软件无需多年训练即可上手,并移除了此前让好点子无法落地的瓶颈。</p><p class="w">Yana 用 Codex 操作了她从未学过的专业 3D 软件 CLO、生成 3D 打印所需的 CAD 文件;她那件受 Ruth Asawa 启发的雕塑感礼服,过去难以实现的瓶颈不是缺 3D 打印,而是海量 CAD 工作——AI 把这个瓶颈抹掉了。类似的隐形瓶颈几乎藏在每个行业里。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">张力在于:把品味显式化成 prompt / spec,可能反噬品味本身——那些说不清、只能靠手感的隐性部分,一旦被要求写成规格,会不会被磨平?更深一层,当『掌握工具』不再是门槛,准入壁垒坍塌,有 vision 的人会大量涌入,市场可能从『执行过剩』滑向『vision 过剩』,区分度又得重新寻找落点。另需诚实标注:本期原文是播客 show notes(takeaways 清单),不是完整文字稿,完整案例细节在音频里。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Product-Gaming 而言,这条最直接的迁移是:当做原型、做美术、做玩法验证的执行成本被 AI 压平,团队真正的杠杆点变成『把想做的东西定义清楚』的能力——一份能让 AI 和人都照着交付的、有立场的 spec,比又一批快速产出的同质内容更能拉开差距。它和昨天 Ian Silber 那集(用户理解 / 发明 / 视角)是同一枚硬币:昨天说人类赢在 point of view,今天补上了方法——把 point of view 前置成 prompt/spec,是让 AI 放大而不稀释你判断力的操作路径。对个人:与其比谁做得快,不如练『把 good 说清楚』这项越来越稀缺的元能力。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“The prompt is the spec, and the spec is everything.”</p><p class="cn">prompt 就是 spec,而 spec 就是一切。</p></div><div class="quote"><p class="en">“For creative professionals with a specific point of view, accurately following the design is far more valuable than generating something flashy.”</p><p class="cn">对有明确视角的创作者,准确忠于设计,远比生成一个花哨的东西更有价值。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">BRIEF 01 · 营销</div><div class="c"><div class="t"><a href="https://read.readwise.io/read/01m07cgp67t49868yks2t935gd">Tom&#x27;s Marketing Ideas:『假装发错邮件,再道歉』的冷启动话术</a></div><div class="v">Tom 复出,这次是真内容而非 beta 催单:拆解『先发一封明显有错的邮件(死链 / 错日期 / Lorem Ipsum),几分钟后再发道歉信补上真正的 pitch 和优惠码』的套路。两条支撑:(1) 心理——人无法忽略『更正』,『哎呀我忘了』显得很人性,你会不假思索点开;(2) 反垃圾——带链接的冷邮件进垃圾箱概率高 10 倍,尤其第一封,而『道歉』给了合理的第二次触达机会。Virgin Voyages、Ramp 都被点名用过。可操作但窄且伦理灰,归 brief 留档。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.075 · 新观点 1 · 累计 440 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-19 06:00</b></span>
+  </footer>
+</div></body></html>
