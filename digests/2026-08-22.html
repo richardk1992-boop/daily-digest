@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>当反馈循环拉到十年:Waymo 如何把 PM 这份工作重造一遍 — Vol.078</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.078</span>
+      <span class="chrome">2026-08-22 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>当反馈循环拉到十年:Waymo 如何把 PM 这份工作重造一遍</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>Waymo CPO Saswat Panigrahi 用十年一个产品的视角谈:当 AI 把执行抹平、反馈循环从『下周看数据』拉长到『十年才验证』,PM 的工作被迫重心迁移——从『发功能看指标』变成『把 good 定义清楚』,把评估器当成一等产品来做,再用下周就能核对的 checkpoint 撑住一个没有天花板的 mission。这是 V075『把 good 定义清楚』这条命题在物理级赌注、十年尺度上的实证验收。深读 1,新增观点 +1 → 441。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>当一个问题『无法 A/B 测、没有 dashboard 可看、只能靠问才能学到』时(Waymo 的乘客到底是焦虑还是享受,没有任何仪表盘能显示),我手上有多少关键判断其实也落在这个象限却被我当成有数据可看?我是不是在用『能测的代理指标』掩盖『真正该定义清楚却没定义』的东西?</li><li>Saswat 说任何组织都已经知道自己最大的问题(『去问午餐队伍,他们会告诉你』),真正杀死公司的不是无知,而是那个已知答案被塞进多季度 OKR 流程、被推到『明年 Q5』——我的团队里,那个人人都知道、却在等一个规划周期来批准的最大问题,是什么?</li><li>这是一篇幸存者故事:Waymo solved driving,所以它十年豪赌的方法论被追认为正确。但如果同一套『忠于 semi-spiritual mission + 训练到失败点』用在一个最终失败的十年赌注上,我该如何在事前区分『值得坚持的远见』和『该及时止损的执念』?checkpoint 纪律是不是唯一能把两者分开的东西?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="V078-1">
+      <span class="tag">产品方法论 / 人类残差 · Saswat Panigrahi(Waymo Chief Product Officer,via Lenny&#x27;s Newsletter × The Skip『Inside PM』系列)</span>
+      <h3>To Invent Waymo, They Had to Reinvent PM</h3>
+      <div class="src">Lenny&#x27;s Newsletter · <a href="https://read.readwise.io/read/01m0gthht9bjqpe89h942px88g">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  10/10</div>
+      <div class="claim">当 AI 把执行成本压到近零、而真正重要的问题反馈循环长达数年、赌注是物理性的(软件推上路,孩子会走进来),传统『本 sprint 发布、下周看数据』的 PM 打法整个失效;这份工作被迫重造——重心从『发功能、让用户打分』迁移到『把 good 显式定义清楚』,把评估器当成一等产品来运营,再用下周就能核对的 checkpoint 撑起一个没有天花板的 mission。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">评估器本身成了一款产品,要专门配 headcount。</p><p class="w">多数团队的『衡量』是免费的:发功能、看指标、让用户打分。但 AI 产品的核心悖论是 Saswat 那句近乎哲学的话——『如果你能完美说清每种情况下什么是对的行为,你其实已经解决了问题』。既然无法预先完备规约『什么算好』,就只能把造评估器当成一等工作:让 evaluator 变难→逼 driver 追上→driver 变强后再升级 evaluator,始终保持它是『恰当难度的批评者』(leapfrog)。Waymo 为此设了纯 eval PM,『他们的全部工作就是提高指标的保真度,让别的团队能被恰当地问责,并且有个可以爬的坡』。缩到任何团队的 dashboard 上,同一条卫生线成立:每个数字可不可信,以及更高是不是真的更好。</p></div><div class="pillar"><p class="p">愿景越大,checkpoint 必须越短——否则退化成『布朗运动』。</p><p class="w">光有 vision 会失败:给团队灌满能量却不给结构,得到的是一群充满使命感却原地震动、哪也去不了的布朗运动。伟大产品领导者的能力是『激发愿景,然后极快地把这股能量导进三条、四条具体轨道』,而『纯远见型的人往往栽在第二步』。Waymo 的做法是把宏愿倒推成可核对的事实:想要五千辆无人车?先『把一辆车上的安全员拿掉』;再往回拆——计算机不能每三小时崩一次、传感器要能自清洁、行人检测要达到某个具体精度、下周要完成什么、下月要完成什么。Saswat 十年被一个理论产品驱动,让它保持诚实的从来不是那个梦,而是下周的 checkpoint。</p></div><div class="pillar"><p class="p">当里程碑多年不存在,leadership 只能靠 competence / courage / compassion 筛,而非 title 或 OKR 周期。</p><p class="w">Saswat 大半天都在听比他更专业的人汇报,他反复问自己『凭什么这些人要跟随我的决策』——title 回答不了。三要素按序:competence(专家汇报时是惊讶于你懂,还是得从 101 讲起);courage(敢在团队拼命数月后说『我不放心,这版不能推』;更关键的第二面是 agency——看到已知的最大问题就冲上去,不等规划周期批准,因为杀死公司的正是把已知答案塞进多季度 OKR、推到『明年 Q5』);compassion(敢叫停一个赌注需要勇气,但如何叫停同样重要——一个把三年后长周期元器件预测得离谱的 PM 站到全组面前复盘道歉,反而更值得信任下一次预测,因为长任务需要一支『对失败有弹性』的团队)。Waymo 多年没有传统里程碑可排序,于是提前十年就在筛『executive builder』。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这是一篇彻头彻尾的幸存者叙事:因为 Waymo 最终 solved driving(2.2 亿英里无安全员、重伤率据称是人类的 1/16),它十年豪赌的一整套方法论才被追认为『对的』。可绝大多数十年赌注是失败的,而失败者同样会讲『忠于 semi-spiritual mission』『训练到失败点』——事前几乎无法把『值得坚持的远见』和『该止损的执念』分开,文中唯一给出的分界线其实就是 checkpoint 纪律本身(下周能不能核对)。更隐蔽的前提是 Alphabet 级别的无限耐心资本:十年不看财务回报的跑道,绝大多数团队根本没有,所以『feet on the ground』对多数人是财务约束而非可选纪律。另需诚实标注:本文是 newsletter 对一场播客对谈的精编 takeaways + 引用,非完整逐字稿,细节论证在音频里。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这篇的钩子恰好卡在我们最难受的地方。AI 正在把玩法原型、美术资产、数值 tuning 的执行成本坍塌掉,但『这个玩法到底好不好玩』『这套 LiveOps 节奏健不健康』『这个新模式值不值得留存』——这些恰恰是无法预先完备规约、也没法一个 sprint 就测完的判断,正落在 Saswat 说的『eval 即产品』象限:reality 会告诉你 DAU 掉了(相当于车撞了),但告诉不了你玩家是在心流里还是在忍耐。值得认真考虑把『定义什么算好』当成一等工作来配人:给关键体验指标找一个像 eval PM 那样的 owner,专门负责这些数值可不可信、更高是不是真的更好,而不是默认发版就能看数据打分。同时对『做一款有长线留存的新玩法』这种跨季度愿景,与其用一个半年 OKR 把已知的最大问题拖到明年,不如立刻倒推出下周、下月、下季能核对的 checkpoint——愿景越大,breadcrumb 越要密。这也是 V075『把 good 定义清楚是新的稀缺元能力』在物理级赌注、十年尺度上的一次硬验收:执行被抹平后,人类残差不在产出速度,而在那份能让 AI 和人照着爬坡的、足够清晰的 good 的定义。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“If you knew perfectly what&#x27;s the right driving behavior in every situation, you&#x27;ve already solved the problem.”</p><p class="cn">如果你能完美说清每种情况下什么是对的驾驶行为,你其实已经解决了这个问题。</p></div><div class="quote"><p class="en">“I may be hopelessly unequipped to deal with this problem, but I see a problem, and I will run towards it.”</p><p class="cn">我也许完全没能力应付这个问题,但我看到了它,我会朝它冲过去。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 0 条</h2>
+  <div class="scan"></div>
+
+  <footer class="footer">
+    <span>Vol.078 · 新观点 1 · 累计 441 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-23 06:00</b></span>
+  </footer>
+</div></body></html>
