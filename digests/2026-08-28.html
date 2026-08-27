@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>写给 10 万订阅者的 newsletter:没有『research 阶段』,并行生产,而 AI 永不下笔 — Vol.084</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.084</span>
+      <span class="chrome">2026-08-28 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>写给 10 万订阅者的 newsletter:没有『research 阶段』,并行生产,而 AI 永不下笔</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>今日唯一实质内容来自 Tom&#x27;s Marketing Ideas(非 Lenny&#x27;s,难得换源):作者庆祝 10 万订阅,拆解自己的写作生产模型——没有独立的 research 阶段(研究早在 2-3 年里一行行攒进 notes 库)、像 SpongeBob 那样 10+ 篇并行生产、打磨到偏执(subject line 常比正文更费工),而 AI 永不下笔、只当 research assistant 和最严厉的 editor,art 100% 由人完成。核心残差是 taste 与把单案例 generalize 成通用 playbook 的判断力。呼应人类残差主线。深读 1、速览 0,新增观点 +1 → 444。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>如果我把内容 / 活动创意也当成一个常年积累的 notes 库,而不是临到 deadline 才 brainstorm——我现在有没有这样一个持续在长的 idea 库?我上一次好点子,是憋出来的还是攒出来的?</li><li>在我的工作流里,AI 到底在替我做 creation(下笔 / 出方案)还是 editing(查漏 / 删冗 / 找更好的例子)?如果我把这条线划得像作者一样清——AI 永不下笔——我的产出质量和我自己的 taste,会变强还是被暴露?</li><li>作者说他真正的工作是 generalize:把一个公司做的具体动作,翻译成任何品牌 / 任何量级都能偷的 play。我团队里那些『看别人做了什么』的复盘,有多少停在『他们做了 X』,又有多少真的走到了『我们该怎么偷 X』?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="V084-1">
+      <span class="tag">内容生产方法论 / 人类残差 · Tom Orbach(Tom&#x27;s Marketing Ideas)via Substack</span>
+      <h3>写给 10 万订阅者的 newsletter:没有『research 阶段』,并行生产,而 AI 永不下笔</h3>
+      <div class="src">Tom&#x27;s Marketing Ideas · <a href="https://read.readwise.io/read/01m11551f77c5ctabcy76a4bxa">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●○ · 可操作 ●● · 独特 ●○ · 时效 ●○  ·  7/10</div>
+      <div class="claim">一个 10 万订阅 newsletter 的真实生产模型不是『选题→研究→写作』的线性冲刺,而是:研究早在过去 2-3 年一行行攒进 notes 库、文章像 SpongeBob 那样 10+ 篇并行生产、打磨到 obsess(subject line 常比正文还费工);而在整条流水线里,AI 只做 research assistant 和最严厉的 editor、永不下笔,art 100% 由人完成——真正稀缺的人类残差是 taste、判断和把单个案例 generalize 成任何品牌可跑的 playbook 的能力。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">『没有 research 阶段』——研究早在过去 2-3 年一行行完成,内容护城河是长期积累的 notes 库而非临时冲刺。</p><p class="w">作者把每一个 marketing idea 都记进 Obsidian:看到好案例记一行、洗澡想到记一行,数千条 notes 常年在长。等他坐下来写时,note 已经是文章的大半;真正触发成文的是一个『why now』——现实里某公司刚好做了这件事(可以用热案例开头),或同一个问题在每周 live Q&amp;A 反复被问。这把写作从『憋出一篇』变成『等一个已经准备好的东西熟了』,也解释了为什么『每篇文章技术上要花好几年写』。</p></div><div class="pillar"><p class="p">并行生产(偷自 SpongeBob)+ 打磨到偏执:同时写 10+ 篇,90% 时间花在删词,subject line 常比正文更费工。</p><p class="w">作者少年时震惊于『一集 SpongeBob 要做近一年』,后来明白是多集同时生产——他的 newsletter 正是如此:任何时刻都有 10+ 篇在写,大部分构思在散步 / 洗澡时完成、回来一次成稿;某几周一个字都写不出也没关系,总有一篇接近 ready。成稿后是他最讨厌的 rewrite(删段落、换案例、问同行缺了什么),再是把 preview 发给自己几十遍、在每种设备和邮箱客户端上模拟不同阅读场景。而 subject line——10 万人都看到、却只有一部分人打开的那 5-10 个词——某些周的改稿量超过正文本身。</p></div><div class="pillar"><p class="p">AI 永不写作,只做 research assistant 和最严厉的 editor;art 100% human——人类残差是 taste 与判断。</p><p class="w">作者直言『我对 AI 生成的文字过敏,你也一样』,每天用 AI 但从不用于 creation,真实 prompt 是『这篇我漏了什么 / 有没有更好的例子』『能删什么 / 哪里重复打断阅读流』。一张配图要 2-3 周、4-5 个像素画师,明知 AI 能生成也坚持人做,因为『我就是喜欢这个 art』。追踪什么在爆他也宁可要 human taste 而非 AI——甚至雇一个 150 美元/月的实习生替他 doomscroll。这把 AI 时代的分工划得很清:执行可外包,taste 不可。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这是一篇达成 10 万订阅的庆祝兼自我叙事,幸存者偏差极强。它把『做十年』包装成方法论,但真正驱动成功的可能是不可复制的初始条件:2023 年 Substack 的早期红利、作者卡位成『The Marketing Ideas Guy』后 idea 主动送上门、以及已有的观众基数与人脉(他自陈通过 Noah Kagan 的慈善抽奖、又通过类似方式认识 Lenny Rachitsky)。更微妙的是,『没有 research 阶段』其实是『我已经积累了 3 年』的另一种说法——对真正从零起步的人,这反而是最劝退的门槛,而非可立刻套用的技巧。整套方法的可复制性还默认了一个前提:你自己的 taste 已经足够强——AI 只做 editor 的纪律,只有当你的判断力本身过硬时才成立,否则就是让一个平庸的编辑去修一篇平庸的稿。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这篇最该被借走的不是『怎么写 newsletter』,而是它对『AI 时代内容 / 创意生产里,人类残差到底在哪』的清晰划界。执行层——扫全网找什么在爆、生成初稿、做配图、查漏删冗——可以交给 agent 或实习生;但 taste、判断『这个 play 换个品类 / 换个量级别人还能不能偷』、以及把一个具体案例 generalize 成任何品牌都能跑的 playbook,这些是残差,是别人送 idea 上门时你才配得上的那份定位。落到游戏的内容运营 / 活动策划 / 社区,同一套分工可直接用:让 agent 做 doomscroll(监测哪些梗 / 玩法在爆)、做 harshest editor(查逻辑漏洞、删重复),但把『这个玩法能不能迁移到我们的品类、什么 why now 值得做』这类判断留在人手里。它的 notes 库思路也值得抄——与其临到活动才 brainstorm,不如常态化维护一个 idea 库,等 why now 出现时一次成型。这是 V074(设计 craft)、V082(能量与择业)之后,人类残差主题在『内容创作 craft』尺度上的又一次落地:当 AI 把产出成本压到接近零,稀缺的不是写得出,而是知道什么值得写、以及自己那份别人一眼认得出的 taste。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“I&#x27;m allergic to AI-generated text, and so are you. I do use AI daily, just never for creation. It&#x27;s my research assistant and my harshest editor.”</p><p class="cn">我对 AI 生成的文字过敏,你也一样。我每天都用 AI,只是从不拿它来创作——它是我的研究助理,和最严厉的编辑。</p></div><div class="quote"><p class="en">“When I sit down to write an article, the research is already done. It happened over the previous 2-3 years, one line at a time.”</p><p class="cn">当我坐下来写文章时,研究早就做完了——它是过去 2-3 年里,一行一行攒出来的。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 0 条</h2>
+  <div class="scan"></div>
+
+  <footer class="footer">
+    <span>Vol.084 · 新观点 1 · 累计 444 · _mira-vp-index</span>
+    <span>下期 · <b>2026-08-29 06:00</b></span>
+  </footer>
+</div></body></html>
