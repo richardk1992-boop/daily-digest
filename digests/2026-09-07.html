@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>回归涓流:公司即一串 loop,护城河是被发现的 — Vol.088</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.088</span>
+      <span class="chrome">2026-09-07 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>回归涓流:公司即一串 loop,护城河是被发现的</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>连续洪峰过后,24h 窗口重回涓流——count=2,两条都是真·精读(Lenny&#x27;s 播客 + Recomendo 工具周报),0 过滤。唯一深读把『人的残差』主线从个人层推进到组织层:当每个岗位职能都塌缩成一个可被 agent 接管的 loop,公司不再是流程图,而是『一串 loop 的编排』。人的价值退到设计哪些 loop、把哪些 loop 串起来、以及做 model sommelier(为每个 loop 选对模型);护城河不是设计出来的,而是在运行中被发现的,分发正成为新的护城河。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>把你负责的每条业务线画成『输入→模型→输出→反馈』的闭环——哪些 loop 今天就能交给 agent、把人抽出来做编排?哪些因为依赖隐性判断根本不该 loop 化?</li><li>如果护城河是『被发现』而非『被设计』的,你现在投在产品打磨上的资源,是否该有同等一份投到分发上?</li><li>『model sommelier』——为不同 loop(低延迟客服 vs 高准确审核 vs 创意生成)选对模型——在你的团队里是谁的活?有没有被当成一种显性能力去沉淀?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="vp088-1">
+      <span class="tag">组织形态·公司即 loop</span>
+      <h3>Why companies are becoming a series of loops</h3>
+      <div class="src">Anish Acharya (a16z GP) · Lenny&#x27;s Newsletter · <a href="https://www.lennysnewsletter.com/p/why-companies-are-becoming-a-series-of-loops">原文</a></div>
+      <div class="badge">DEEP</div>
+      <div class="claim">公司构建的新单元不是流程、不是组织架构,而是 loop:每个岗位职能都会塌缩成一个『输入→模型→输出→反馈』的自我改进闭环,公司 = 一串 loop 的编排。执行被 agent 接管后,人的价值上移到设计 loop、串联 loop、以及为每个 loop 选对模型(model sommelier);护城河是在运行中被发现的,不是被设计的,而分发正上升为新的护城河。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">『永久底层阶级』的恐惧是错的:价值上移而非消失</p><p class="w">当执行被 AI 接管,人不是被淘汰,而是从『做 loop 里的活』被推到『设计与串联 loop』。这是 V087『划桨→掌舵』在组织层的延续——rowing 交给 agent,steering 留给人。</p></div><div class="pillar"><p class="p">loop 是新的组织单元,取代静态流程图</p><p class="w">凡能被清晰定义输入/输出/成功信号的职能(增长、客服、风控、内容审核),都会被封装成一个可自我改进的闭环并逐步交给 agent。公司随之从『部门/流程』的静态结构,变成『一串 loop 的动态编排』。</p></div><div class="pillar"><p class="p">护城河被发现而非设计,分发成新护城河;model sommelier 是新稀缺</p><p class="w">Acharya 认为 moats are discovered, not designed——事前设计的壁垒往往失效,真正的护城河在运行中显现;而当模型能力商品化,分发(把 loop 送到用户面前)和『为每个 loop 精选模型』的判断力,成为新的差异化。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">『loop 化一切』对输入/输出/成功信号可量化的职能成立,但对依赖隐性判断、跨域协调、政治性拿捏的工作(高管决策、危机公关、模糊战略),强行 loop 化会把噪声当信号去优化。且『护城河被发现而非设计』有幸存者偏差——事后总能把成功叙事成『发现』,却不能反推出『别做设计、等着发现』的行动建议。a16z 的 consumer 视角也天然乐观(投的就是这波),对被 loop 化职能里真实的人的转岗成本一笔带过。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming,这套『公司即 loop』的框架可以直接当组织手术刀用。第一步是对每条业务线做 loop 盘点——把增长实验、客服工单、反作弊对抗、UGC 审核逐个画成『输入→模型→输出→反馈』的闭环;能清晰闭环的先上 agent,把人从『做活』里抽出来,转去做 loop 编排与异常仲裁。第二步是把 model sommelier 设成一种显性能力甚至岗位:低延迟客服、高准确审核、创意生成本就该配不同模型,这个选型判断本身就是护城河,不能散落在各团队里靠感觉。第三步是别只投产品设计、要同等投分发——在模型能力快速商品化的当下,分发是更硬的壁垒。最后,转岗成本必须正视:loop 化会重构岗位,提前规划一条从『做活』到『编排 loop』的能力迁移路径,别只报喜不报忧。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Moats are discovered, not designed.”</p><p class="cn">护城河是被发现的,不是被设计的。</p></div><div class="quote"><p class="en">“Company building will now involve creating a series of loops.”</p><p class="cn">如今做公司,就是在创造一串 loop。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 1 条</h2>
+  <div class="scan"><div class="row"><div class="k">实时 AI 视频</div><div class="c"><div class="t"><a href="https://buttondown.com/recomendo">Infinite Slop:聊天决定下一秒播什么的无限 AI 电视台</a></div><div class="v">Recomendo #531 点到一个新品类——实时 AI 视频生成。Infinite Slop 是一个『观众投票决定下一段生成什么』的 24 小时 AI 视频流,上线一周已有数百万粉丝和广告。信号:当视频能被『边看边生成』,游戏内动态过场、UGC 直播增强会是下一站,但也预示 slop 内容的洪水。</div></div></div></div>
+
+  <footer class="footer">
+    <span>Vol.088 · 新观点 1 · 累计 450 · _mira-vp-index</span>
+    <span>下期 · <b>2026-09-08 06:00</b></span>
+  </footer>
+</div></body></html>
