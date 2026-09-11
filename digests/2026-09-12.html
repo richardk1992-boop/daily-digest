@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>PLG 支持小组:把用户当 lead 去伏击,是增长引擎的慢性自杀 — Vol.093</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.093</span>
+      <span class="chrome">2026-09-12 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>PLG 支持小组:把用户当 lead 去伏击,是增长引擎的慢性自杀</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>空窗与付费墙轮流坐了三天后,24h 窗口回到 1 条,却是自 V089 以来第一篇真·深读:Elena Verna(Lovable 增长负责人)在 Lenny&#x27;s 转载的《你在 PLG 里遇到的销售难题,一点都不新鲜》。2114 词、无付费墙,用一张 bingo card 把 PLG 转企业级过程中反复上演的九句『名言』逐条拆成自毁动作——从『何必要 1 万个 $10 客户,不如一个 $10 万大单』这条原罪,到把 signup 当 lead 去电话轰炸、把自助收入平移进 Enterprise 栏刷 KPI、把用户已在用的功能上移逼单。核心主张只有一句:$10 万大单不是靠新建外呼机器凭空造出来的,它是自助漏斗自然长出来的果实;当你为了做大 Enterprise 而抽干 PLG 引擎,一年后就会开会追问『为什么 enterprise pipeline 干涸了』。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>Elena 说 signup≠lead——『把试用者在体验到价值之前就拦截、收集联系方式、丢给销售,然后惊讶他们转化率极低』。回到 TikTok Gaming:我们有没有类似的动作,把还没体验到核心价值的用户过早推给了商业化/转化漏斗,用短期数字漂亮掩盖了长期激活受损?</li><li>文章最扎心的是『把 $5 万自助收入平移进 Enterprise 栏,Enterprise 就增长了 $5 万』——没有新客、没有扩张、没有 $1 增量,只是换了个列还发了奖金,而且因为多了销售/CSM/合同反而让这笔收入更贵。你所在的团队有没有哪个增长指标,其实是『搬运』而非『创造』?衡量口径本身是否在奖励搬运?</li><li>Elena 的解法之一是给渠道迁移设 ARPA 乘数(账户要长到 2-3 倍才算 sales expansion 成功),本质是用激励设计对齐真实增量。你手上有没有哪个『人们很擅长的动作』,恰恰是因为考核在为错误的东西付钱?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="V093-1">
+      <span class="tag">增长/GTM · Elena Verna via Lenny&#x27;s</span>
+      <h3>Congrats, your sales problems in PLG are completely unoriginal</h3>
+      <div class="src">Elena&#x27;s Growth Scoop(转载于 Lenny&#x27;s Newsletter) · <a href="https://read.readwise.io/read/01m296h54vne6nv32ta18m3e1h">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ●● · 可操作 ●● · 独特 ●● · 时效 ●  ·  9/10</div>
+      <div class="claim">PLG 公司转向企业级时反复踩的坑,本质是同一个错误的九种变体:误以为 $10 万大单可以靠新建一套外呼销售机器凭空生成,于是为了做大 Enterprise 而抽干正是大单来源的自助漏斗——这不是增长战略,是把果树砍了当柴烧。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">『原罪』是一道看似成立、实则偷换了获客动作的算术题:一个 $10 万客户 = 一千个 $100 客户,Excel 确实这么算,但两条收入流的 acquisition motion 完全不同。</p><p class="w">PLG 里长出来的 $10 万客户,往往是从 $25 自助用户起步——有人发现产品、开始用、拉团队、用量在公司里扩散,直到账户大到 security/procurement/IT/Sales 才介入。$10 万合同是底下一整套系统的最终结果。而『招外呼销售 + 建 outbound + roadmap 上移』是从『捕获产品自然生成的企业需求』切换到『凭空生成企业需求』,需要完全不同的渠道、人才、经济模型和一大笔新预算——你不是在优化,你是在换一台引擎。</p></div><div class="pillar"><p class="p">把 signup 当 lead、把用户当外呼名单去伏击,是用短期 lead 量的爆炸换取长期激活的崩塌,还会反噬最忠诚的 power user。</p><p class="w">『注册产品、点了 7 分钟、立刻接到 Gary 打来问你的企业预算』——把还没体验到价值的人拦截、收集信息、丢给销售,然后发现他们转化极差,这本不该是个令人意外的研究结论。真正的 PLS(product-led sales)是用产品行为信号(团队采用、用量扩张、治理需求、触达套餐上限、多部门出现)去识别一个账户何时真正长出了销售能帮上忙的问题,而不是拦截每个人。被轰炸的往往正是原本最愿意替你传播的社区拥护者。</p></div><div class="pillar"><p class="p">『把自助收入平移进 Enterprise 栏』『把用户已在用的功能上移逼单』『新功能默认只进 Enterprise』——这三招共同点是重分类而非创造价值,且系统性地让产品越来越差。</p><p class="w">平移 $5 万自助收入:没有新客、没有扩张、没有 $1 增量,只是换了列还发奖金;更糟的是这笔收入现在配了销售/CSM/高触达支持/合同,反而更贵——你成功地把已有收入变贵了。这是激励问题:如果销售靠『搬运存量』拿 quota credit,他们就会变得极其擅长搬运。功能上移则是主动移除用户已经喜爱的价值;新功能默认锁进 Enterprise,等于让自助产品慢慢变成『两年前所建一切的博物馆』,而所有新价值都被锁去楼上——六个季度后又有人来问自助增长为什么慢了,『我们大概该立项调查一下』。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这是一篇立场极鲜明的檄文,爽感来自把复杂的组织张力压成九句可嘲讽的『名言』,但也因此绕过了几处真实两难:(1)有些功能确实属于 Enterprise(合规、审计、SSO、精细权限),文章给的默认指令是『把价值往下推而非往上拉』,但边界在哪并没有可操作的判据;(2)Elena 的样本高度偏向她自己所在的 Lovable 和顶部 PLG 明星公司,那些真的靠 outbound 起家、PLG 只是补充的 B2B 反例被排除在叙事外;(3)『让客户用他们喜欢的方式成交、别跟自己竞争』在理,但现实里 forecast、quota、董事会目标是真实约束,文章更多是道德劝诫,除了 ARPA 乘数这一条,系统性的组织解法着墨不多。它最大的价值不是给答案,而是给你一面镜子和一套共同语言去指认自毁动作。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">对 TikTok Gaming 而言,这套 PLG 反模式清单几乎可以逐条映射到任何『有大量自然用户、又想做大商业化/大客户/大 IP 合作』的产品线。第一,警惕『大单原罪』的团队版本:当某条业务线开始用『一个大合作/一个头部主播/一个大额充值 = N 个普通用户』的算术来重新分配资源时,要追问这两种规模的获客动作是否真的相同,还是我们正在拿掉正在自然孵化大机会的那台引擎。第二,把 signup≠lead 翻译成我们的语境——任何在用户体验到核心乐趣/价值之前就把他推进转化、推送、商业化漏斗的动作,都可能在刷短期数字的同时损坏长期激活和留存,应该用产品行为信号(而非注册这个事实)去判断介入时机。第三,盯住『搬运 vs 创造』的衡量口径:如果某个增长/营收指标可以通过把存量收入换个归属列、把已有功能重新打包、把免费能力上移逼单来达成,那这个指标就是在奖励重分类,Elena 给的 ARPA 乘数思路(迁移必须带来 2-3 倍增量才算成功扩张)值得借鉴——用激励设计强制指标只认真实增量。第四,最深的一条是关于组织内耗:一旦开始为『谁拿营收 credit』内部竞争,你就不再和竞品竞争,而是在和自己竞争——这对任何跨团队协作的大盘增长都是提醒。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“The $100K contract is the final result of a much larger system underneath.”</p><p class="cn">那份 $10 万合同,是底下一整套更大系统的最终结果。</p></div><div class="quote"><p class="en">“We took people who were trying to use the product, interrupted them before they experienced any value, collected their contact information, routed them to Sales, and then discovered that many of them weren&#x27;t interested in talking to Sales. This should not have been a surprising research finding.”</p><p class="cn">我们把想用产品的人在体验到任何价值之前就打断、收集他们的联系方式、丢给销售,然后发现他们中很多人根本不想和销售聊——这本不该是个令人意外的研究结论。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 0 条</h2>
+  <div class="scan"></div>
+
+  <footer class="footer">
+    <span>Vol.093 · 新观点 1 · 累计 452 · _mira-vp-index</span>
+    <span>下期 · <b>2026-09-13 06:00</b></span>
+  </footer>
+</div></body></html>
