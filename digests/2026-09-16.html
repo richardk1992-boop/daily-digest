@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh"><head>
+<meta charset="utf-8"><title>增长的 alpha 不在买流量:当所有人跑同一套 playbook,注意力只流向没人预料到的东西 — Vol.096</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#111;--warm:#1a1a18;--warm2:#1f1a14;--orange:#e85d26;--soft:#f4a06a;--yellow:#f6d24a;--ink:#f3ede4;--dim:#b4a999;--rule:#2c2823;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans SC',system-ui,sans-serif;margin:0;line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 28px 80px}
+.chrome{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.masthead{border-top:6px solid var(--orange);padding-top:16px;margin-bottom:22px}
+.topline{display:flex;justify-content:space-between}
+.masthead h1{font-family:'Barlow',sans-serif;font-weight:900;font-size:44px;line-height:1.06;margin:12px 0 18px;color:var(--orange);letter-spacing:-.01em}
+.tldr{background:var(--warm2);border-left:4px solid var(--yellow);padding:20px 24px;margin:0 0 18px}
+.tldr .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:.12em;margin:0 0 8px}
+.tldr p{font-family:'Noto Serif SC',serif;font-size:18px;line-height:1.75;margin:0;color:var(--ink)}
+.think{background:rgba(232,93,38,.06);border:1px solid rgba(232,93,38,.25);padding:18px 24px;margin:0 0 38px}
+.think .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.12em;margin:0 0 10px}
+.think ol{margin:0;padding-left:20px}
+.think li{margin:8px 0;font-size:15px;color:var(--ink)}
+.section-head{font-family:'Barlow',sans-serif;font-weight:800;font-size:20px;color:var(--orange);margin:42px 0 18px;border-bottom:2px solid var(--rule);padding-bottom:9px}
+.deep{background:var(--warm);border:1px solid var(--rule);padding:30px 32px;margin:0 0 30px}
+.deep .tag{display:inline-block;background:var(--orange);color:#fff;padding:3px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em}
+.deep h3{font-family:'Barlow',sans-serif;font-weight:800;font-size:28px;line-height:1.18;margin:14px 0 6px;color:var(--ink)}
+.deep .src{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:4px}
+.deep .src a{color:var(--yellow);text-decoration:none}
+.deep .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);letter-spacing:.04em;margin-bottom:20px}
+.claim{font-family:'Noto Serif SC',serif;font-size:19px;line-height:1.6;color:var(--yellow);border-left:3px solid var(--yellow);padding:6px 18px;margin:0 0 24px}
+.lab-inline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--orange);margin:24px 0 12px;text-transform:uppercase}
+.pillar{margin:0 0 16px;padding-left:18px;border-left:2px solid var(--rule)}
+.pillar .p{font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:var(--ink);margin:0 0 5px;line-height:1.4}
+.pillar .w{font-size:14.5px;color:var(--dim);margin:0;line-height:1.7}
+.tension{background:var(--warm2);border-left:3px solid var(--soft);padding:14px 18px;margin:8px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink)}
+.sowhat{background:rgba(246,210,74,.06);border:1px solid rgba(246,210,74,.22);padding:16px 20px;margin:8px 0 0;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.quotes{margin:20px 0 0;border-top:1px dashed var(--rule);padding-top:14px}
+.quote{margin:0 0 14px}
+.quote .en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:15px;color:var(--soft);margin:0 0 3px;line-height:1.55}
+.quote .cn{font-size:13px;color:var(--dim);margin:0;line-height:1.55}
+.scan{border-top:1px solid var(--rule)}
+.scan .row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.scan .k{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft);width:135px;flex-shrink:0;letter-spacing:.04em;line-height:1.5}
+.scan .c{flex:1}
+.scan .t{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.scan .t a{color:var(--yellow);text-decoration:none}
+.scan .v{font-size:13.5px;color:var(--dim);margin-top:2px;line-height:1.6}
+.footer{margin-top:54px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.08em}
+.footer b{color:var(--yellow)}
+@media(max-width:600px){.scan .row{flex-direction:column;gap:4px}.scan .k{width:auto}.masthead h1{font-size:34px}}
+</style></head><body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <span class="chrome">MIRA · Reading Digest · Vol.096</span>
+      <span class="chrome">2026-09-16 · Asia/Shanghai 06:00</span>
+    </div>
+    <h1>增长的 alpha 不在买流量:当所有人跑同一套 playbook,注意力只流向没人预料到的东西</h1>
+  </header>
+
+  <section class="tldr">
+    <p class="lab">本期一句话 · TL;DR</p>
+    <p>24h 窗口 count=2,过滤掉昨天 Vol.095 自己写回的 _mira-vp-index 快照后只剩 1 篇真文章——但它是硬货:Lenny&#x27;s Newsletter 请 Tom Orbach(就是 Vol.095『proof of humanity』那位)把 4 年攒的增长战术浓缩成《60+ 条创意增长点子》,免费段落已放出 40+ 条实测招式。核心反直觉:注意力要『赚』不要『买』,真正的增长 alpha 藏在『没人预料到、且只有你会做』的意外之举里,而不是又一轮同质化投放。</p>
+  </section>
+
+  <section class="think">
+    <p class="lab">带着这 3 个问题读 · 思考题</p>
+    <ol><li>Tom 说『很多人会读这篇,极少有人真去做——这就是你的机会』,执行门槛才是护城河。回到 TikTok Gaming:我们手里有没有一个『看起来不理性、和 KPI 不直接挂钩、但只有我们会做』的增长赌注,正被『先证明 ROI 再做』的流程直接筛掉?</li><li>『把 logo 放进用户会截图的地方』——X 把截图按钮变成 X.com,每次截图都成了品牌广告。我们的玩家每天在产品里高频重复、且晒出来显得体面的那个动作是什么?品牌标识现在在不在那个位置上?</li><li>这份清单本质是 40 张彩票,alpha 会随着被越多人读到而衰减。我们该把它当灵感样本(挑 1-2 条本周就试),还是更该警惕——真正难的不是想出招,而是判断哪一张值得下注、且敢承担『看起来很蠢』的风险?</li></ol>
+  </section>
+
+  <h2 class="section-head">▎ 深度分析 · 1 篇</h2>
+  
+    <article class="deep" id="V096-1">
+      <span class="tag">增长/GTM · Lenny&#x27;s × Tom&#x27;s Marketing Ideas</span>
+      <h3>60+ new creative growth ideas (How to stand out when everyone is running the same playbook)</h3>
+      <div class="src">Lenny&#x27;s Newsletter(客座:Tom Orbach,免费段落 40+ 招) · <a href="https://read.readwise.io/read/01m2jjarv5p24per1yp84csdxc">原文</a></div>
+      <div class="badge">信号 ●● · 颠覆 ● · 可操作 ●● · 独特 ●● · 时效 ●●  ·  9/10</div>
+      <div class="claim">当所有人都在跑同一套增长 playbook(高制作视频发布、付费网红、SEO、社媒、邮件),注意力只会流向『没人预料到的东西』;真正的增长 alpha 不在买流量,而在设计出让用户自愿传播、且只有你会做的意外之举——这是一份 40+ 条实测战术的清单,但底层是一个反直觉的定位:把『出圈』当成设计问题,而非运气或预算问题。</div>
+      <div class="lab-inline">承重论据 · 为什么成立</div>
+      <div class="pillar"><p class="p">注意力要『赚』不要『买』——意外性本身是最便宜的分发渠道。</p><p class="w">开篇 Wiz 的假玩具店案例几乎零成本:给 CISO 卖『panic button』和『给法务团队的眼罩』,在 Reddit 病毒传播,24 小时带来 46000 访客,销售团队拿到数百条 leads(企业安全里单条好 lead 可值七位数)。Tom 的判断很硬:『attention always goes to what people don&#x27;t see coming; the unexpected gets shared for free, remembered for months, and usually costs less than one week of ad spend』。整份清单的共性是 earn attention(靠意外/幽默/公开 stunt 让人自发转发)而非 buy attention(投放)——公开反 AI(Procreate CEO『我真他妈讨厌生成式 AI』视频破千万播放)、给全员同一天改 LinkedIn 头衔(tl;dv 把 50+ 员工同时『升为 CEO』触发上千条动态)都属此类。</p></div><div class="pillar"><p class="p">口碑不是运气,是设计问题——给最开心的用户一个『晒出来会显得体面』的东西,他们就替你做营销。</p><p class="w">实体奖杯(YouTube 的 Play Button 铜牌、OpenAI 给 API 用户寄万亿 token 金属牌)、印大字名字的证书(Wiz 开始做后客户社媒分享量涨 300%)、把 logo 放进用户会截图的地方(X 让截图时按钮变成『X.com』,每张截图都带品牌;Readwise 让用户在推文下公开回复『@readwise save thread』,每次保存都是一条公开广告)。机制统一——人只会分享让自己显得好看的东西(Tom 称之为 word-of-sight marketing),所以把产品里高频重复的动作挪到别人看得见的位置。</p></div><div class="pillar"><p class="p">最好的 leads 藏在你从不当成『渠道』的界面里——404 页、Zoom 挂断设置、签名档、结算页。</p><p class="w">Zoom 有个埋得很深的 post-attendee URL 设置,能在每次通话结束瞬间自动在参会者浏览器里打开你指定的页面——Tom 的团队指向证言页,让每场 demo 都以社会证明收尾;404 页因为 LLM 频繁幻觉出不存在的 URL 反而流量上涨,可挂 lead 捕获表单(TestResults 在 404 送印名字的 AirPods 盒);把『Book a demo』换成『Try it yourself』playground(Linear 的 demo workspace 无需注册就能建工单)。这些 surface 每天被海量触碰却没人当平台经营——洼地即机会。</p></div>
+      <div class="lab-inline">一个张力 · 它没说的</div><div class="tension">这份清单的爽感和它的陷阱是同一个来源:它是 40 张『彩票』,Tom 自己就说『treat them like lottery tickets—most will do nothing, but one can hit big』,每条战术只被一家公司在一个 niche 跑过一次(n=1)。也就是说它给的是灵感样本,不是可复制的因果——假玩具店对 Wiz(卖七位数客单价的企业安全)成立,不代表对高频低客单的消费产品成立;而且『意外性』本身会被稀释:一旦某招被写进这种爆款清单、被 10 万订阅者看到,它的 alpha 就在快速衰减。Tom 用『很多人会读,极少有人去做』来辩护,但这恰恰承认了执行门槛(而非创意本身)才是护城河。更关键的是,这些战术几乎都依赖一次性的人类判断和品牌胆识(chutzpah),无法被 agent 批量生成——你可以把清单喂给 AI 头脑风暴,但真正能出圈的那一个赌注,恰恰是 AI 最难替你下的。</div>
+      <div class="lab-inline">对 TikTok Gaming 意味着什么</div>
+      <div class="sowhat">这份清单和 Vol.095 的 proof of humanity 是同一位作者、同一条主线的两面:当所有竞品都在跑被 AI 优化到同质化的增长 playbook,真正的差异化残差就落在『没人预料到、且只有你会做』的那一步意外之举上。对 TikTok Gaming,可迁移的不是照搬某条战术,而是三个判断。其一,把增长预算的一部分从『买流量』挪到『造意外』——一个自带传播性的 stunt(哪怕和产品本身无关)可能比等额投放更能进入圈层记忆,前提是它足够具体、足够只属于你。其二,把口碑当成设计问题——找到玩家/主播在产品里高频重复、且晒出来显得体面的动作(战绩、赛季里程碑、稀有成就),把品牌标识精准放进那个截图与分享的位置,让每一次自发分享都变成一条免费广告。其三,盘点那些『从不被当成渠道』的界面——结算页、支付失败页、赛季结算、分享卡片、甚至加载页,它们每天被海量触碰却没被当平台经营,是被忽视的转化洼地。但要守住那条张力:这些是彩票不是公式,真正稀缺的不是清单本身(人人可读),而是敢下注、且判断得准哪一张值得下的人类胆识——这正是 AI 替不了的残差,也是 GTM 团队真正的护城河。</div>
+      <div class="quotes"><div class="lab-inline" style="margin-top:0">值得记住的原话</div><div class="quote"><p class="en">“Attention always goes to what people don&#x27;t see coming. The unexpected gets shared for free, remembered for months, and usually costs less than one week of ad spend.”</p><p class="cn">注意力永远流向人们没预料到的东西;意外之举免费被转发、被记住好几个月,成本通常还不到一周广告预算。</p></div><div class="quote"><p class="en">“Many people will read this post; very few will actually do them. This is your opportunity.”</p><p class="cn">很多人会读这篇,但极少有人真去做——这就是你的机会。</p></div></div>
+    </article>
+
+  <h2 class="section-head">▎ 其余值得一扫 · 0 条</h2>
+  <div class="scan"></div>
+
+  <footer class="footer">
+    <span>Vol.096 · 新观点 1 · 累计 454 · _mira-vp-index</span>
+    <span>下期 · <b>2026-09-17 06:00</b></span>
+  </footer>
+</div></body></html>
